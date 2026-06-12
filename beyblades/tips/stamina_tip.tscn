@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://b8eaeyuj64x3m"]
+
+[ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://PROTO/Orange/texture_05.png" id="1_mocwv"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="2_c8xo1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ay5g"]
+albedo_texture = ExtResource("1_mocwv")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbp84"]
+albedo_texture = ExtResource("2_c8xo1")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv80"]
+albedo_texture = ExtResource("2_c8xo1")
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lrnxs"]
+points = PackedVector3Array(0, -0.25, -0.34, -0.24042287, -0.25, -0.24042287, 0, 0.205, 0, 0.2403563, -0.25, -0.24042287, -0.34, -0.25, -6.6548586e-05, 0, -0.25, 0.34, 0.2403563, -0.25, 0.2403563, 0.34, -0.25, 0, -0.24042287, -0.25, 0.2403563)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mocwv"]
+height = 0.25
+radius = 0.1171875
+
+[node name="DefenseTip" type="StaticBody3D" unique_id=426039328]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1205834294]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=918601165]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
+radius = 0.384
+height = 0.5
+sides = 12
+cone = true
+material = SubResource("StandardMaterial3D_1ay5g")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=68168520]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, -2.7319618e-09, 0.09375, 0)
+radius = 0.19873047
+height = 0.1875
+cone = true
+material = SubResource("StandardMaterial3D_1ay5g")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=2002765132]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17, 0.28, 0)
+radius = 0.066344954
+material = SubResource("StandardMaterial3D_qbp84")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=1197956397]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17, 0.28, 0)
+radius = 0.066344954
+material = SubResource("StandardMaterial3D_jbv80")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=1501561039]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.430936e-09, 0.28, -0.17)
+radius = 0.066344954
+material = SubResource("StandardMaterial3D_jbv80")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=1214960199]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.430936e-09, 0.28, 0.17)
+radius = 0.066344954
+material = SubResource("StandardMaterial3D_jbv80")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=949116194]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
+shape = SubResource("ConvexPolygonShape3D_lrnxs")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=230529016]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_mocwv")
+
+[node name="Placement" type="Marker3D" parent="." unique_id=422288485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

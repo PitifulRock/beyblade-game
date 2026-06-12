@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://cfsjdcnjuwa7c"]
+
+[ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_hipbh"]
+[ext_resource type="Script" uid="uid://dyba4me2q563w" path="res://beyblades/bey_data.gd" id="2_u1a6d"]
+[ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://PROTO/Dark/texture_09.png" id="2_xq75s"]
+[ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="4_5pt61"]
+[ext_resource type="Texture2D" uid="uid://dmvh2hpj3l4tw" path="res://PROTO/Light/texture_03.png" id="5_n1s4q"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="6_v4m60"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
+friction = 0.46
+bounce = 0.16
+
+[sub_resource type="Resource" id="Resource_3dcr0"]
+script = ExtResource("2_u1a6d")
+weight = 0.053000000000000005
+spin_speed = 814.665
+stamina = 0.28
+metadata/_custom_type_script = "uid://dyba4me2q563w"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vbegm"]
+albedo_texture = ExtResource("2_xq75s")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_etagj"]
+albedo_texture = ExtResource("4_5pt61")
+uv1_offset = Vector3(0.495, 0, 0.52)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_th7k7"]
+albedo_texture = ExtResource("5_n1s4q")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5xmh8"]
+albedo_texture = ExtResource("6_v4m60")
+uv1_triplanar = true
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3dcr0"]
+points = PackedVector3Array(-0.75, -0.084472656, -0.75, -0.75, 0.08447267, -0.75, 0.75, -0.084472656, -0.75, -0.75, -0.084472656, 0.75, -0.75, 0.08447267, 0.75, 0.75, 0.08447267, -0.75, 0.75, -0.084472656, 0.75, 0.75, 0.08447267, 0.75)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_5pt61"]
+points = PackedVector3Array(-0.75, -0.084472656, -0.75, -0.75, 0.08447267, -0.75, 0.75, -0.084472656, -0.75, -0.75, -0.084472656, 0.75, -0.75, 0.08447267, 0.75, 0.75, 0.08447267, -0.75, 0.75, -0.084472656, 0.75, 0.75, 0.08447267, 0.75)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_n1s4q"]
+points = PackedVector3Array(0.3702713, 0.4882587, 0.3366774, -0.100966305, 0.45453954, -0.4714222, -0.100966305, 0.4882587, -0.4714222, -0.3702713, 0.45453954, 0.3366774, 0.026238391, 0.03845979, 0.026238391, 0.3702713, 0.45453954, -0.3366774, -0.4714222, 0.4882587, -0.100966305, 0.033593908, 0.42086983, 0.4714222, 0.4714222, 0.42086983, 0.033593908, -0.026238391, 0.03845979, -0.026238391, -0.3366774, 0.42086983, -0.3366774, -0.4714222, 0.42086983, -0.033593908, -0.100966305, 0.4882587, 0.4714222, 0.20202489, 0.25252125, -0.2357111, -0.20202489, 0.25252125, 0.2357111, 0.4714222, 0.4882587, -0.100966305, 0.2357111, 0.25252125, 0.20202489, 0.033593908, 0.42086983, -0.4714222, -0.20202489, 0.25252125, -0.2357111, 0.26921272, 0.4882587, -0.40404978, 0.3366774, 0.42086983, 0.3366774, -0.4714222, 0.42086983, 0.033593908, -0.40404978, 0.4882587, 0.26921272, 0.4714222, 0.42086983, -0.033593908, -0.033593908, 0.42086983, 0.4714222, -0.3366774, 0.4882587, -0.3702713, 0.2357111, 0.25252125, -0.20202489, -0.2357111, 0.25252125, 0.20202489, 0.20202489, 0.25252125, 0.2357111, -0.2357111, 0.25252125, -0.20202489, 0.026238391, 0.03845979, -0.026238391, -0.026238391, 0.03845979, 0.026238391)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3dcr0"]
+radius = 0.096723884
+
+[sub_resource type="Curve" id="Curve_5pt61"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.748183, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n1s4q"]
+curve = SubResource("Curve_5pt61")
+
+[sub_resource type="Curve" id="Curve_3dcr0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9956522, 0.52808994), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5pt61"]
+curve = SubResource("Curve_3dcr0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3dcr0"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -161.2
+angle_max = 134.30002
+radial_velocity_min = -2.0000224
+radial_velocity_max = 1.9999776
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_5pt61")
+alpha_curve = SubResource("CurveTexture_n1s4q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pt61"]
+transparency = 1
+vertex_color_use_as_albedo = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n1s4q"]
+material = SubResource("StandardMaterial3D_5pt61")
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[node name="ONE" type="RigidBody3D" unique_id=1627645615]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+mass = 0.07
+physics_material_override = SubResource("PhysicsMaterial_8uh7m")
+center_of_mass_mode = 1
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_hipbh")
+data = SubResource("Resource_3dcr0")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=562933186]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1623997622]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 2.7319619e-08, 0.3125, 0)
+use_collision = true
+radius = 0.603
+height = 0.625
+cone = true
+material = SubResource("StandardMaterial3D_vbegm")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=342326687]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.4991996e-08, 0.7132299, 0)
+use_collision = true
+height = 0.22070313
+sides = 16
+material = SubResource("StandardMaterial3D_etagj")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1590947010]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6264045, 0)
+size = Vector3(1.5, 0.16894531, 1.5)
+material = SubResource("StandardMaterial3D_th7k7")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D" unique_id=268466179]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.6264045, 0)
+size = Vector3(1.5, 0.16894531, 1.5)
+material = SubResource("StandardMaterial3D_5xmh8")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=2043256346]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6264045, 0)
+shape = SubResource("ConvexPolygonShape3D_3dcr0")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1812793070]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.6264045, 0)
+shape = SubResource("ConvexPolygonShape3D_5pt61")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1342335836]
+shape = SubResource("ConvexPolygonShape3D_n1s4q")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=323548665]
+remote_path = NodePath("../Node3D")
+update_rotation = false
+
+[node name="CenterTether" type="RayCast3D" parent="." unique_id=506244053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
+
+[node name="Node3D" type="Node3D" parent="." unique_id=1263016776]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+top_level = true
+
+[node name="Label3D" type="Label3D" parent="Node3D" unique_id=669046389]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000002, 0)
+pixel_size = 0.015
+billboard = 1
+text = "9000"
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=591669735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
+shape = SubResource("SphereShape3D_3dcr0")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1409075367]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
+amount = 232
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_3dcr0")
+draw_pass_1 = SubResource("PlaneMesh_n1s4q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=826193124]

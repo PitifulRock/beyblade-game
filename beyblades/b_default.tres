@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BeyData" format=3 uid="uid://bgrd4ujdloxwy"]
+
+[ext_resource type="Script" uid="uid://dyba4me2q563w" path="res://beyblades/bey_data.gd" id="1_fi2lx"]
+
+[resource]
+script = ExtResource("1_fi2lx")
+weight = 0.10500000000000001
+spin_speed = 334.937
+metadata/_custom_type_script = "uid://dyba4me2q563w"
