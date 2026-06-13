@@ -1,21 +1,48 @@
 extends RigidBody3D
 class_name BeyBlade
 
-@export var data : BeyData = preload("uid://bgrd4ujdloxwy")
+const SPARK_PARTICLE = preload("uid://fbwq5alfemyv")
+
+enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
+
+var spin_speed : float = 500.0
+var stamina : float = 0.6
+
+@export var disc : BeyDisc
+@export var core : BeyCore
+@export var tip : BeyTip
 
 var current_spin : float
 var stored_engine_spin : float
 
+var collision_point : Vector3
+
 func _ready() -> void:
+	Engine.time_scale=1.2
+	_physics_setup()
+
+func _spawned():
+	_bey_setup()
+	_launch()
+
+#region setup
+func _physics_setup():
 	if !contact_monitor: contact_monitor = true
+	continuous_cd = true
 	max_contacts_reported = 4
-	
 	body_entered.connect(_on_collision)
-	
-	current_spin = -data.spin_speed if data.right_spin else data.spin_speed
+
+func _bey_setup():
+	physics_material_override = disc.physics_material
+	mass = (disc.part_weight + core.part_weight + tip.part_weight) * core.weight_mult
+	spin_speed *= tip.spin_mult
+	stamina *= tip.stamina_mult
+
+func _launch():
+	current_spin = -spin_speed if disc.right_spin else spin_speed
 	current_spin *= randf_range(0.8, 1.2)
-	mass = data.weight
 	stored_engine_spin = angular_velocity.y
+#endregion
 
 func _physics_process(_delta: float) -> void:
 	var engine_spin := angular_velocity.y
@@ -29,27 +56,48 @@ func _physics_process(_delta: float) -> void:
 	if stored_engine_spin != engine_spin: 
 		stored_engine_spin = engine_spin
 	
+	var wobble_decrease = clampf(abs(current_spin)/1100, 0.0, 1.0)
+	angular_velocity.z = lerpf(angular_velocity.z, 0, wobble_decrease)
+	angular_velocity.x = lerpf(angular_velocity.x, 0, wobble_decrease)
+	rotation.x = lerpf(rotation.x, 0, wobble_decrease)
+	rotation.z = lerpf(rotation.z, 0, wobble_decrease)
+	
 	$CenterTether.look_at(Vector3.ZERO)
 	apply_central_force(get_orbital_force())
 	apply_central_force(get_center_pull_force())
+	
+	%SpinSound.pitch_scale = clampf(abs(current_spin)/100, 0.7, 1.5)
+	%SpinSound.volume_db = remap(abs(current_spin), 0, 900, -14, -4)
+
+func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
+	if state.get_contact_count() > 0:
+		collision_point = state.get_contact_collider_position(0)
 
 func get_spin_loss(spin_diff : float) -> float:
 	var spin_loss := 0.0004
 	if spin_diff < -1.0: 
 		spin_loss = clampf(-spin_diff/2000.0, 0.0004, 0.01)
-	return (spin_loss / data.stamina) * randf_range(0.9, 1.2)
-
+	return (spin_loss / stamina) * randf_range(0.9, 1.2)
 func get_orbital_force() -> Vector3:
 	var dir = $CenterTether.global_basis.x
 	var force = dir*0.001 * current_spin/global_position.distance_to(Vector3.ZERO)
 	return force * Vector3(1,0,1)
 func get_center_pull_force() -> Vector3:
 	var dir = $CenterTether.global_basis.z
-	var force = dir*-0.0004 * data.spin_speed * global_position.distance_to(Vector3.ZERO) * (data.stamina+1)
+	var force = dir*-0.0015 * spin_speed * global_position.distance_to(Vector3.ZERO) * (stamina+1)
 	return force * Vector3(1,0,1)
 
 func _on_collision(body : Node):
 	if body is BeyBlade:
 		var body_speed = body.linear_velocity.length()
-		if linear_velocity.length() < body_speed:
-			current_spin -= -body_speed if current_spin < 0 else body_speed
+		if linear_velocity.length() > body_speed/1.5:
+			#spin reduction from hitting fast
+			var red = body_speed/1.5
+			current_spin -= -red if current_spin < 0 else red
+			
+			var spark = SPARK_PARTICLE.instantiate()
+			add_sibling(spark)
+			spark.global_position = collision_point
+			
+			%ClashSound.volume_db = remap(body_speed, 0, 20, -6, 0)
+			%ClashSound.play()

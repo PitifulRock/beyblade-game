@@ -4,6 +4,5 @@
 
 [resource]
 script = ExtResource("1_fi2lx")
-weight = 0.10500000000000001
-spin_speed = 334.937
+weight = 0.105
 metadata/_custom_type_script = "uid://dyba4me2q563w"

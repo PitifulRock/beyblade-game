@@ -15,12 +15,16 @@ run/main_scene="uid://elmhrlsm6p2"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[display]
+
+window/size/mode=2
+
 [physics]
 
 3d/physics_engine="Jolt Physics"
 3d/default_gravity=29.4
 3d/default_linear_damp=0.0
-3d/default_angular_damp=0.001
+3d/default_angular_damp=0.005
 3d/solver/solver_iterations=24
 
 [rendering]

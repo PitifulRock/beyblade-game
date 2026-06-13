@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://don4m0xc3m072"]
 
-[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="1_qherh"]
+[ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_prrpm"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="2_jfkw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8t56"]
 albedo_color = Color(0.32694268, 0.8766849, 1, 1)
-albedo_texture = ExtResource("1_qherh")
+albedo_texture = ExtResource("2_jfkw0")
 uv1_triplanar = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vk1a3"]
@@ -17,7 +18,12 @@ radius = 0.34521484
 [sub_resource type="BoxShape3D" id="BoxShape3D_qherh"]
 size = Vector3(0.15, 0.08, 0.1)
 
-[node name="DefenseTip" type="StaticBody3D" unique_id=426039328]
+[node name="AttackTip" type="StaticBody3D" unique_id=957970639]
+script = ExtResource("1_prrpm")
+spin_mult = 1.7000000000000002
+stamina_mult = 0.7
+part_weight = 0.01
+metadata/_custom_type_script = "uid://ijpvs5owt5a5"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1205834294]
 

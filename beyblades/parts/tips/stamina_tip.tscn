@@ -1,18 +1,19 @@
 [gd_scene format=3 uid="uid://b8eaeyuj64x3m"]
 
-[ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://PROTO/Orange/texture_05.png" id="1_mocwv"]
-[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="2_c8xo1"]
+[ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_eisn3"]
+[ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://PROTO/Orange/texture_05.png" id="2_3od2y"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="3_enm0v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ay5g"]
-albedo_texture = ExtResource("1_mocwv")
+albedo_texture = ExtResource("2_3od2y")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qbp84"]
-albedo_texture = ExtResource("2_c8xo1")
+albedo_texture = ExtResource("3_enm0v")
 uv1_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jbv80"]
-albedo_texture = ExtResource("2_c8xo1")
+albedo_texture = ExtResource("3_enm0v")
 uv1_triplanar = true
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lrnxs"]
@@ -22,7 +23,12 @@ points = PackedVector3Array(0, -0.25, -0.34, -0.24042287, -0.25, -0.24042287, 0,
 height = 0.25
 radius = 0.1171875
 
-[node name="DefenseTip" type="StaticBody3D" unique_id=426039328]
+[node name="StaminaTip" type="StaticBody3D" unique_id=308162213]
+script = ExtResource("1_eisn3")
+spin_mult = 0.4
+stamina_mult = 1.8
+part_weight = 0.015
+metadata/_custom_type_script = "uid://ijpvs5owt5a5"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1205834294]
 

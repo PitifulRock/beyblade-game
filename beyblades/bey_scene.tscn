@@ -1,13 +1,19 @@
-[gd_scene format=3 uid="uid://cfsjdcnjuwa7c"]
+[gd_scene format=3 uid="uid://xkw4aloeefna"]
 
-[ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_hipbh"]
-[ext_resource type="PackedScene" uid="uid://don4m0xc3m072" path="res://beyblades/parts/tips/attack_tip.tscn" id="2_xq75s"]
-[ext_resource type="PackedScene" uid="uid://cn5vix3nilj0g" path="res://beyblades/parts/cores/defense_core.tscn" id="3_u1a6d"]
-[ext_resource type="PackedScene" uid="uid://d3qu3u35ga7jv" path="res://beyblades/parts/discs/attack_disc.tscn" id="4_3dcr0"]
+[ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_vt533"]
+[ext_resource type="AudioStream" uid="uid://di6v0hk1ipdi1" path="res://sounds/clash_big.ogg" id="2_a658j"]
+[ext_resource type="AudioStream" uid="uid://mse83pn6rn3a" path="res://sounds/clash_med.ogg" id="3_3xdhn"]
+[ext_resource type="AudioStream" uid="uid://w4sx587dq3q8" path="res://sounds/clash_med_2.ogg" id="4_3kb01"]
+[ext_resource type="AudioStream" uid="uid://bq3fniw1qhtrh" path="res://sounds/clash_small.ogg" id="5_nn1wg"]
+[ext_resource type="AudioStream" uid="uid://b5hn7n10gkoly" path="res://sounds/clash_small_2.ogg" id="6_v6dka"]
+[ext_resource type="AudioStream" uid="uid://bb1xqktlq48po" path="res://sounds/spin_whoosh.ogg" id="7_3xdhn"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
 friction = 0.46
 bounce = 0.16
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3dcr0"]
+radius = 0.096723884
 
 [sub_resource type="Curve" id="Curve_5pt61"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.748183, 0.0, 0, 0]
@@ -49,17 +55,26 @@ material = SubResource("StandardMaterial3D_5pt61")
 size = Vector2(0.1, 0.1)
 orientation = 2
 
-[node name="ONE" type="RigidBody3D" unique_id=1627645615 node_paths=PackedStringArray("disc", "core", "tip")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_manui"]
+random_pitch = 1.2949681
+random_volume_offset_db = 4.16
+streams_count = 5
+stream_0/stream = ExtResource("2_a658j")
+stream_1/stream = ExtResource("3_3xdhn")
+stream_2/stream = ExtResource("4_3kb01")
+stream_3/stream = ExtResource("5_nn1wg")
+stream_3/weight = 1.5
+stream_4/stream = ExtResource("6_v6dka")
+stream_4/weight = 1.1
+
+[node name="Bey" type="RigidBody3D" unique_id=1627645615]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 mass = 0.07
 physics_material_override = SubResource("PhysicsMaterial_8uh7m")
 center_of_mass_mode = 1
 contact_monitor = true
 max_contacts_reported = 4
-script = ExtResource("1_hipbh")
-disc = NodePath("AttackDisc")
-core = NodePath("DefenseCore")
-tip = NodePath("AttackTip")
+script = ExtResource("1_vt533")
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=323548665]
 remote_path = NodePath("../Node3D")
@@ -71,7 +86,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 [node name="Node3D" type="Node3D" parent="." unique_id=1263016776]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 top_level = true
-visible = false
 
 [node name="Label3D" type="Label3D" parent="Node3D" unique_id=669046389]
 unique_name_in_owner = true
@@ -80,6 +94,10 @@ pixel_size = 0.015
 billboard = 1
 text = "9000"
 
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=591669735]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
+shape = SubResource("SphereShape3D_3dcr0")
+
 [node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1409075367]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
 amount = 232
@@ -87,11 +105,17 @@ lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_3dcr0")
 draw_pass_1 = SubResource("PlaneMesh_n1s4q")
 
-[node name="AttackTip" parent="." unique_id=957970639 instance=ExtResource("2_xq75s")]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+[node name="ClashSound" type="AudioStreamPlayer3D" parent="." unique_id=1362967161]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_manui")
+unit_size = 15.0
+max_polyphony = 3
+attenuation_filter_cutoff_hz = 7246.0
 
-[node name="DefenseCore" parent="." unique_id=1826310078 instance=ExtResource("3_u1a6d")]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.5, 0)
-
-[node name="AttackDisc" parent="." unique_id=751202904 instance=ExtResource("4_3dcr0")]
-transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0.65, 0)
+[node name="SpinSound" type="AudioStreamPlayer3D" parent="." unique_id=408877882]
+unique_name_in_owner = true
+stream = ExtResource("7_3xdhn")
+unit_size = 14.0
+autoplay = true
+attenuation_filter_cutoff_hz = 6591.0
+doppler_tracking = 2

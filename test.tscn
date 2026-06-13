@@ -3,8 +3,12 @@
 [ext_resource type="Texture2D" uid="uid://cbcpapjjbvqsx" path="res://PROTO/Green/texture_10.png" id="1_6uqi0"]
 [ext_resource type="Script" uid="uid://ba6s7kap2bki1" path="res://freecam.gd" id="1_ykrsh"]
 [ext_resource type="PhysicsMaterial" uid="uid://c6yxhxo71oqjq" path="res://stadium_mat.tres" id="2_ykrsh"]
-[ext_resource type="PackedScene" uid="uid://bepkhkid6ddad" path="res://beyblades/bey_test.tscn" id="4_ppyta"]
-[ext_resource type="PackedScene" uid="uid://cfsjdcnjuwa7c" path="res://beyblades/bey_test_2.tscn" id="5_ykrsh"]
+[ext_resource type="Script" uid="uid://dttx7yk0j36qi" path="res://beyblades/bey_assembler.gd" id="4_ppyta"]
+[ext_resource type="PackedScene" uid="uid://d3qu3u35ga7jv" path="res://beyblades/parts/discs/attack_disc.tscn" id="5_vbegm"]
+[ext_resource type="PackedScene" uid="uid://cn5vix3nilj0g" path="res://beyblades/parts/cores/defense_core.tscn" id="6_ehkex"]
+[ext_resource type="PackedScene" uid="uid://don4m0xc3m072" path="res://beyblades/parts/tips/attack_tip.tscn" id="7_xersf"]
+[ext_resource type="PackedScene" uid="uid://e81ijemc301w" path="res://beyblades/parts/tips/defense_tip.tscn" id="8_ehkex"]
+[ext_resource type="PackedScene" uid="uid://br18bnql65kv3" path="res://beyblades/parts/discs/defense_disc.tscn" id="8_xersf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6uqi0"]
 sky_top_color = Color(0.46666667, 0.80784315, 1, 1)
@@ -96,8 +100,18 @@ physics_material_override = ExtResource("2_ykrsh")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CSGBakedMeshInstance3D/StaticBody3D" unique_id=649558513]
 shape = SubResource("ConcavePolygonShape3D_g14j6")
 
-[node name="ONE" parent="." unique_id=1627645615 instance=ExtResource("4_ppyta")]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, -0.25, 1, 0)
+[node name="BeyAssembler" type="Node3D" parent="." unique_id=1564939100]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6.25)
+script = ExtResource("4_ppyta")
+disc = ExtResource("5_vbegm")
+core = ExtResource("6_ehkex")
+tip = ExtResource("7_xersf")
+metadata/_custom_type_script = "uid://dttx7yk0j36qi"
 
-[node name="ONE2" parent="." unique_id=374685184 instance=ExtResource("5_ykrsh")]
-transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 3.75, 1, -5.25)
+[node name="BeyAssembler2" type="Node3D" parent="." unique_id=1753875240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
+script = ExtResource("4_ppyta")
+disc = ExtResource("8_xersf")
+core = ExtResource("6_ehkex")
+tip = ExtResource("8_ehkex")
+metadata/_custom_type_script = "uid://dttx7yk0j36qi"

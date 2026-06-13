@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://d3qu3u35ga7jv"]
+
+[ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_jj3pe"]
+[ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="2_lxm2u"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="4_xls65"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
+friction = 0.31
+bounce = 0.41
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxoyd"]
+albedo_texture = ExtResource("2_lxm2u")
+uv1_offset = Vector3(0.495, 0, 0.52)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3gc5"]
+albedo_texture = ExtResource("4_xls65")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jj3pe"]
+size = Vector3(1.5, 0.17, 1.5)
+
+[node name="AttackDisc" type="StaticBody3D" unique_id=751202904]
+script = ExtResource("1_jj3pe")
+physics_material = SubResource("PhysicsMaterial_5glgy")
+metadata/_custom_type_script = "uid://fx305niyx3gv"
+
+[node name="Visual" type="CSGCombiner3D" parent="." unique_id=433355058]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Visual" unique_id=1957208391]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.8150827e-08, 0.1398741, 0)
+use_collision = true
+height = 0.1484375
+sides = 16
+material = SubResource("StandardMaterial3D_hxoyd")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual" unique_id=94870862]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.12376082, 0)
+use_collision = true
+radius = 0.8
+height = 0.11621094
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Visual" unique_id=1494790998]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+size = Vector3(1.5, 0.17, 1.5)
+material = SubResource("StandardMaterial3D_x3gc5")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Visual" unique_id=1497850352]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
+size = Vector3(1.5, 0.17, 1.5)
+material = SubResource("StandardMaterial3D_x3gc5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=978988665]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+shape = SubResource("BoxShape3D_jj3pe")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=89723462]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
+shape = SubResource("BoxShape3D_jj3pe")

@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://cn5vix3nilj0g"]
+
+[ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_i2apk"]
+[ext_resource type="Texture2D" uid="uid://bc40xlgcwii4" path="res://PROTO/Light/texture_09.png" id="2_8oe06"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0p88"]
+albedo_texture = ExtResource("2_8oe06")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y6vqw"]
+height = 0.15
+radius = 0.72265625
+
+[node name="DefenseCore" type="StaticBody3D" unique_id=1826310078]
+script = ExtResource("1_i2apk")
+weight_mult = 1.5
+type = 2
+part_weight = 0.03
+metadata/_custom_type_script = "uid://bhdlota4as0vi"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=522355031]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1510308086]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04384762, 0)
+radius = 0.6
+height = 0.1
+sides = 16
+material = SubResource("StandardMaterial3D_h0p88")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=576136097]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 0.70458984
+height = 0.1
+sides = 16
+material = SubResource("StandardMaterial3D_h0p88")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1925891066]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("CylinderShape3D_y6vqw")
+
+[node name="Placement" type="Marker3D" parent="." unique_id=2042099532]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
