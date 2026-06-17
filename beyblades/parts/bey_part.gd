@@ -1,6 +1,9 @@
 extends Node3D
 class_name BeyPart
 
+enum PART_TYPE{TIP, CORE, DISC}
+
+@export var part_name : String
 @export var type : BeyBlade.TYPE = BeyBlade.TYPE.ATTACK
 @export var part_weight := 0.025
 

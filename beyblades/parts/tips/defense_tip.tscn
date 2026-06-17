@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://e81ijemc301w"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_0rphc"]
-[ext_resource type="Texture2D" uid="uid://jlcgr0r83mi6" path="res://PROTO/Purple/texture_05.png" id="2_tt6fh"]
+[ext_resource type="Texture2D" uid="uid://jlcgr0r83mi6" path="res://textures/PROTO/Purple/texture_05.png" id="2_tt6fh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnyfb"]
 albedo_color = Color(0.446777, 0.44677705, 0.44677705, 1)
@@ -20,6 +20,7 @@ radius = 0.15
 script = ExtResource("1_0rphc")
 spin_mult = 0.7999999999999999
 stamina_mult = 1.1
+part_name = "Dome"
 type = 2
 part_weight = 0.04
 metadata/_custom_type_script = "uid://ijpvs5owt5a5"

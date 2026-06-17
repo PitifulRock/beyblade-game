@@ -1,0 +1,417 @@
+[gd_scene format=3 uid="uid://bc0qxhg451sac"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_845v4"]
+[ext_resource type="PackedScene" uid="uid://don4m0xc3m072" path="res://beyblades/parts/tips/attack_tip.tscn" id="1_apxx0"]
+[ext_resource type="Script" uid="uid://dl8gn7n6fr0di" path="res://ui/bey_picker.gd" id="1_gcl7u"]
+[ext_resource type="PackedScene" uid="uid://bypde2dma35k7" path="res://beyblades/parts/cores/attack_core.tscn" id="2_gcl7u"]
+[ext_resource type="PackedScene" uid="uid://br18bnql65kv3" path="res://beyblades/parts/discs/defense_disc.tscn" id="3_npfxi"]
+[ext_resource type="Texture2D" uid="uid://bj3xhtvqbvqw8" path="res://textures/t_ui/White/1x/forward.png" id="5_npfxi"]
+[ext_resource type="Texture2D" uid="uid://b73evbuse317l" path="res://textures/t_ui/White/1x/backward.png" id="6_ks77f"]
+[ext_resource type="Texture2D" uid="uid://bkogjswam2hv3" path="res://textures/attack_icon.png" id="8_845v4"]
+[ext_resource type="Script" uid="uid://dttx7yk0j36qi" path="res://beyblades/bey_assembler.gd" id="9_dxr7h"]
+
+[sub_resource type="Animation" id="Animation_v7srl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_845v4"]
+resource_name = "spin"
+length = 4.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../CoreDisplay:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../DiscDisplay:rotation:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dxr7h"]
+_data = {
+&"RESET": SubResource("Animation_v7srl"),
+&"spin": SubResource("Animation_845v4")
+}
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_apxx0"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_gcl7u"]
+sky_material = SubResource("ProceduralSkyMaterial_apxx0")
+
+[sub_resource type="Environment" id="Environment_npfxi"]
+background_mode = 2
+sky = SubResource("Sky_gcl7u")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.4
+tonemap_mode = 2
+glow_intensity = 6.4
+glow_strength = 1.47
+glow_bloom = 0.03
+
+[node name="Control" type="Control" unique_id=206773910]
+layout_mode = 3
+anchor_right = 0.3472222
+anchor_bottom = 1.0
+offset_right = 400.0
+theme = ExtResource("1_845v4")
+script = ExtResource("1_gcl7u")
+metadata/_edit_use_anchors_ = true
+
+[node name="Picker" type="Control" parent="." unique_id=1630002720]
+layout_mode = 1
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="Picker" unique_id=751820481]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.06
+anchor_top = 0.074074075
+anchor_right = 0.94
+anchor_bottom = 0.9259259
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BeyPicker" type="SubViewportContainer" parent="Picker" unique_id=1883820856]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="Picker/BeyPicker" unique_id=122530418]
+own_world_3d = true
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(400, 648)
+render_target_update_mode = 4
+
+[node name="Camera3D" type="Camera3D" parent="Picker/BeyPicker/SubViewport" unique_id=268339667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9999999, 4.2000003)
+projection = 1
+fov = 75.93749
+size = 5.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Picker/BeyPicker/SubViewport" unique_id=193349575]
+root_node = NodePath("../TipDisplay")
+libraries/ = SubResource("AnimationLibrary_dxr7h")
+autoplay = &"spin"
+
+[node name="TipDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=1554653866]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.93969256, -0.34202012, 0, 0.3420201, 0.9396926, 0, 0.16076946, 0)
+
+[node name="AttackTip" parent="Picker/BeyPicker/SubViewport/TipDisplay" unique_id=957970639 instance=ExtResource("1_apxx0")]
+
+[node name="CoreDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=739883157]
+unique_name_in_owner = true
+transform = Transform3D(1, -9.26574e-05, -0.00016048733, 0, 0.8660253, -0.49999997, 0.00018531481, 0.49999997, 0.8660253, 0, 1.7, 0)
+
+[node name="AttackCore" parent="Picker/BeyPicker/SubViewport/CoreDisplay" unique_id=1826310078 instance=ExtResource("2_gcl7u")]
+
+[node name="DiscDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=788913094]
+unique_name_in_owner = true
+transform = Transform3D(0.9, -8.3391664e-05, -0.0001444386, 0, 0.7794228, -0.45, 0.00016678333, 0.45, 0.7794228, 0, 3.3, 0)
+
+[node name="DefenseDisc" parent="Picker/BeyPicker/SubViewport/DiscDisplay" unique_id=751202904 instance=ExtResource("3_npfxi")]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Picker/BeyPicker/SubViewport" unique_id=897255691]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+light_energy = 0.5
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Picker/BeyPicker/SubViewport" unique_id=316170846]
+environment = SubResource("Environment_npfxi")
+
+[node name="DiscRight" type="TextureButton" parent="Picker" unique_id=2085488263]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78
+anchor_top = 0.20987654
+anchor_right = 0.9102083
+anchor_bottom = 0.28703701
+offset_right = -0.00012207031
+offset_bottom = 4.5776367e-05
+texture_normal = ExtResource("5_npfxi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DiscLeft" type="TextureButton" parent="Picker" unique_id=1087428631]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.20987654
+anchor_right = 0.225
+anchor_bottom = 0.28703701
+offset_bottom = 4.5776367e-05
+texture_normal = ExtResource("6_ks77f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CoreRight" type="TextureButton" parent="Picker" unique_id=1945202619]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78
+anchor_top = 0.50617284
+anchor_right = 0.9102083
+anchor_bottom = 0.5833333
+offset_right = -0.00012207031
+texture_normal = ExtResource("5_npfxi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CoreLeft" type="TextureButton" parent="Picker" unique_id=344962088]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.50617284
+anchor_right = 0.23020832
+anchor_bottom = 0.5833333
+texture_normal = ExtResource("6_ks77f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TipRight" type="TextureButton" parent="Picker" unique_id=1944258546]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.78
+anchor_top = 0.7515432
+anchor_right = 0.9102083
+anchor_bottom = 0.8287037
+offset_right = -0.00012207031
+offset_bottom = 6.1035156e-05
+texture_normal = ExtResource("5_npfxi")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="TipLeft" type="TextureButton" parent="Picker" unique_id=522633328]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.7515432
+anchor_right = 0.23020832
+anchor_bottom = 0.8287037
+offset_bottom = 6.1035156e-05
+texture_normal = ExtResource("6_ks77f")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="DiscInfo" type="Panel" parent="." unique_id=1630634073]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.108024694
+anchor_right = 0.9625
+anchor_bottom = 0.33333334
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="DiscName" type="RichTextLabel" parent="DiscInfo" unique_id=630673703]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.057057057
+anchor_top = 0.06849315
+anchor_right = 0.963964
+anchor_bottom = 0.36301368
+grow_horizontal = 2
+text = "Attack Disc"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DiscInfo" type="RichTextLabel" parent="DiscInfo" unique_id=321346369]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056756776
+anchor_top = 0.34246576
+anchor_right = 0.94864863
+anchor_bottom = 0.9041096
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 14
+text = "Defense: 0.5x
+Damage: 1.5x
+25g"
+metadata/_edit_use_anchors_ = true
+
+[node name="DiscType" type="TextureRect" parent="DiscInfo" unique_id=791987705]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8648649
+anchor_top = 0.6712329
+anchor_right = 0.972973
+anchor_bottom = 0.94520545
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_845v4")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel2" type="Panel" parent="." unique_id=1338578741]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.38117284
+anchor_right = 0.9625
+anchor_bottom = 0.6064815
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="CoreName" type="RichTextLabel" parent="Panel2" unique_id=1570216866]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.057057057
+anchor_top = 0.06849315
+anchor_right = 0.963964
+anchor_bottom = 0.36301368
+grow_horizontal = 2
+text = "Attack Core"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="CoreInfo" type="RichTextLabel" parent="Panel2" unique_id=1194433383]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056756776
+anchor_top = 0.34246576
+anchor_right = 0.94864863
+anchor_bottom = 0.9041096
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 14
+text = "Weight  mult:  0.6
+30g"
+metadata/_edit_use_anchors_ = true
+
+[node name="CoreType" type="TextureRect" parent="Panel2" unique_id=774299545]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8648649
+anchor_top = 0.6712329
+anchor_right = 0.972973
+anchor_bottom = 0.94520545
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_845v4")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel3" type="Panel" parent="." unique_id=233632311]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.6558642
+anchor_right = 0.9625
+anchor_bottom = 0.88117284
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="TipName" type="RichTextLabel" parent="Panel3" unique_id=1348083633]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.057057057
+anchor_top = 0.06849315
+anchor_right = 0.963964
+anchor_bottom = 0.36301368
+grow_horizontal = 2
+text = "Attack Disc"
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="TipInfo" type="RichTextLabel" parent="Panel3" unique_id=495750222]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.056756776
+anchor_top = 0.34246576
+anchor_right = 0.94864863
+anchor_bottom = 0.9041096
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 14
+text = "Defense: 0.5x
+Damage: 1.5x
+0.15g"
+metadata/_edit_use_anchors_ = true
+
+[node name="TipType" type="TextureRect" parent="Panel3" unique_id=2036463225]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8648649
+anchor_top = 0.6712329
+anchor_right = 0.972973
+anchor_bottom = 0.94520545
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("8_845v4")
+expand_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="BeyAssembler" type="Node3D" parent="." unique_id=1841552178]
+unique_name_in_owner = true
+script = ExtResource("9_dxr7h")
+metadata/_custom_type_script = "uid://dttx7yk0j36qi"
+
+[connection signal="pressed" from="Picker/DiscRight" to="." method="_disc_button_pressed" binds= [true]]
+[connection signal="pressed" from="Picker/DiscLeft" to="." method="_disc_button_pressed" binds= [false]]
+[connection signal="pressed" from="Picker/CoreRight" to="." method="_core_button_pressed" binds= [true]]
+[connection signal="pressed" from="Picker/CoreLeft" to="." method="_core_button_pressed" binds= [false]]
+[connection signal="pressed" from="Picker/TipRight" to="." method="_tip_button_pressed" binds= [true]]
+[connection signal="pressed" from="Picker/TipLeft" to="." method="_tip_button_pressed" binds= [false]]

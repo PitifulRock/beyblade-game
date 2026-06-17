@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://da3f1rx8u2hla"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
+[ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly_menu.gd" id="2_2o5xm"]
+[ext_resource type="PackedScene" uid="uid://bc0qxhg451sac" path="res://ui/bey_picker.tscn" id="3_8prok"]
+
+[node name="AssemblyMenu" type="Control" unique_id=879406890]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_u5isb")
+script = ExtResource("2_2o5xm")
+
+[node name="SelectionContainer" type="GridContainer" parent="." unique_id=1652121061]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.7978395
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" parent="SelectionContainer" unique_id=206773910 instance=ExtResource("3_8prok")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control2" parent="SelectionContainer" unique_id=229823261 instance=ExtResource("3_8prok")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="LaunchButton" type="Button" parent="." unique_id=1521234971]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -552.0
+offset_top = -120.0
+offset_right = -29.0
+offset_bottom = -34.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Launch"

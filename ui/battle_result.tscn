@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://b8ughmecu1wwp"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_bg85u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfvrx"]
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.69803923)
+skew = Vector2(2.385, 0)
+border_width_left = 30
+border_width_bottom = 12
+border_color = Color(1, 1, 1, 0.59607846)
+corner_detail = 3
+
+[node name="BattleResult" type="Control" unique_id=1984682825]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bg85u")
+
+[node name="Panel" type="Panel" parent="." unique_id=224326331]
+clip_contents = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.27006173
+anchor_right = 1.0
+anchor_bottom = 0.7268519
+offset_top = -175.0
+offset_bottom = 176.99997
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxFlat_qfvrx")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel" unique_id=1993477627]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[wave]DESTRUCTION FINISH!
+2 - 0"
+horizontal_alignment = 1
+vertical_alignment = 1

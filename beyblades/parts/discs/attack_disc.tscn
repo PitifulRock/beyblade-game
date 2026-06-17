@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_jj3pe"]
 [ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="2_lxm2u"]
-[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="4_xls65"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="4_xls65"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
 friction = 0.31
@@ -22,7 +22,10 @@ size = Vector3(1.5, 0.17, 1.5)
 
 [node name="AttackDisc" type="StaticBody3D" unique_id=751202904]
 script = ExtResource("1_jj3pe")
+burst_resitance = 0.5
+burst_damage = 1.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
+part_name = "Pee"
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
 [node name="Visual" type="CSGCombiner3D" parent="." unique_id=433355058]

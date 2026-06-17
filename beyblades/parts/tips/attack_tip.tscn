@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://don4m0xc3m072"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_prrpm"]
-[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://PROTO/Dark/texture_04.png" id="2_jfkw0"]
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="2_jfkw0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8t56"]
 albedo_color = Color(0.32694268, 0.8766849, 1, 1)
@@ -22,6 +22,7 @@ size = Vector3(0.15, 0.08, 0.1)
 script = ExtResource("1_prrpm")
 spin_mult = 1.7000000000000002
 stamina_mult = 0.7
+part_name = "Rush"
 part_weight = 0.01
 metadata/_custom_type_script = "uid://ijpvs5owt5a5"
 

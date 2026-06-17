@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cn5vix3nilj0g"]
 
 [ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_i2apk"]
-[ext_resource type="Texture2D" uid="uid://bc40xlgcwii4" path="res://PROTO/Light/texture_09.png" id="2_8oe06"]
+[ext_resource type="Texture2D" uid="uid://bc40xlgcwii4" path="res://textures/PROTO/Light/texture_09.png" id="2_8oe06"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0p88"]
 albedo_texture = ExtResource("2_8oe06")
@@ -12,9 +12,10 @@ radius = 0.72265625
 
 [node name="DefenseCore" type="StaticBody3D" unique_id=1826310078]
 script = ExtResource("1_i2apk")
-weight_mult = 1.5
+weight_mult = 2.0
+part_name = "Le circle"
 type = 2
-part_weight = 0.03
+part_weight = 0.06
 metadata/_custom_type_script = "uid://bhdlota4as0vi"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=522355031]

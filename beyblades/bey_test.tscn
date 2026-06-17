@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://bepkhkid6ddad"]
 
 [ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_t4kek"]
-[ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://PROTO/Dark/texture_09.png" id="2_ir1ik"]
+[ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://textures/PROTO/Dark/texture_09.png" id="2_ir1ik"]
 [ext_resource type="AudioStream" uid="uid://b4h1lwuupcbas" path="res://bey_spin.ogg" id="3_ir1ik"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]

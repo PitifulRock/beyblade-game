@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_vt533"]
 [ext_resource type="AudioStream" uid="uid://di6v0hk1ipdi1" path="res://sounds/clash_big.ogg" id="2_a658j"]
+[ext_resource type="Texture2D" uid="uid://crt5et8roogro" path="res://textures/t_particles/smoke_07.png" id="2_v6dka"]
 [ext_resource type="AudioStream" uid="uid://mse83pn6rn3a" path="res://sounds/clash_med.ogg" id="3_3xdhn"]
 [ext_resource type="AudioStream" uid="uid://w4sx587dq3q8" path="res://sounds/clash_med_2.ogg" id="4_3kb01"]
 [ext_resource type="AudioStream" uid="uid://bq3fniw1qhtrh" path="res://sounds/clash_small.ogg" id="5_nn1wg"]
 [ext_resource type="AudioStream" uid="uid://b5hn7n10gkoly" path="res://sounds/clash_small_2.ogg" id="6_v6dka"]
+[ext_resource type="AudioStream" uid="uid://dmp75g1w3xf7b" path="res://sounds/burst_sound.ogg" id="7_3kb01"]
 [ext_resource type="AudioStream" uid="uid://bb1xqktlq48po" path="res://sounds/spin_whoosh.ogg" id="7_3xdhn"]
+[ext_resource type="PackedScene" uid="uid://b8q44n6dv0vto" path="res://particles/burst_particle.tscn" id="9_nn1wg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
 friction = 0.46
@@ -42,7 +45,10 @@ alpha_curve = SubResource("CurveTexture_n1s4q")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pt61"]
 transparency = 1
+shading_mode = 0
 vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.34509805)
+albedo_texture = ExtResource("2_v6dka")
 billboard_mode = 3
 billboard_keep_scale = true
 particles_anim_h_frames = 1
@@ -52,7 +58,7 @@ grow = true
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_n1s4q"]
 material = SubResource("StandardMaterial3D_5pt61")
-size = Vector2(0.1, 0.1)
+size = Vector2(0.2, 0.2)
 orientation = 2
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_manui"]
@@ -119,3 +125,19 @@ unit_size = 14.0
 autoplay = true
 attenuation_filter_cutoff_hz = 6591.0
 doppler_tracking = 2
+
+[node name="BurstHolder" type="Node3D" parent="." unique_id=1599078067]
+process_mode = 4
+visible = false
+
+[node name="BurstSound" type="AudioStreamPlayer3D" parent="BurstHolder" unique_id=1600172249]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
+stream = ExtResource("7_3kb01")
+unit_size = 15.0
+autoplay = true
+max_polyphony = 3
+attenuation_filter_cutoff_hz = 7246.0
+
+[node name="GPUParticles3D" parent="BurstHolder" unique_id=1826488319 instance=ExtResource("9_nn1wg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6000001, 0)
+emitting = true

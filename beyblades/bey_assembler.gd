@@ -3,14 +3,18 @@ class_name BeyAssembler
 
 const BEY_SCENE = preload("uid://xkw4aloeefna")
 
-@export var disc : PackedScene
-@export var core : PackedScene
-@export var tip : PackedScene
+@export var disc : BeyDisc
+@export var core : BeyCore
+@export var tip : BeyTip
+
+var prev_pos : Vector3
 
 func _ready() -> void:
-	await get_tree().process_frame
-	var bey = BEY_SCENE.instantiate()
-	add_sibling(bey)
+	pass
+
+func launch():
+	var bey : BeyBlade = BEY_SCENE.instantiate()
+	get_tree().current_scene.add_child(bey)
 	bey.global_position = global_position
 	
 	spawn_part(tip, bey)
@@ -19,24 +23,32 @@ func _ready() -> void:
 	
 	bey._spawned()
 
-func spawn_part(part_scene : PackedScene, location : BeyBlade):
-	var inst = part_scene.instantiate()
-	location.add_child(inst)
+func spawn_part(part_node : BeyPart, location : BeyBlade):
+	part_node.reparent(location)
+	part_node.position = Vector3.ZERO
+	part_node.rotation = Vector3.ZERO
 	
-	if inst is BeyDisc: 
-		location.disc = inst
-		inst.global_position = location.core.placement_point.global_position
-	if inst is BeyCore: 
-		location.core = inst
-		inst.global_position = location.tip.placement_point.global_position
-	if inst is BeyTip: 
-		location.tip = inst
-		inst.position = Vector3.ZERO
+	var gib = RigidBody3D.new()
+	location.burst_holder.add_child(gib)
 	
-	for i in inst.get_children():
+	if part_node is BeyDisc: 
+		location.disc = part_node
+		part_node.global_position = location.core.placement_point.global_position
+	if part_node is BeyCore: 
+		location.core = part_node
+		part_node.global_position = location.tip.placement_point.global_position
+	if part_node is BeyTip: 
+		location.tip = part_node
+		part_node.position = Vector3.ZERO
+	
+	for i in part_node.get_children():
 		if i is not Marker3D:
 			var dup = i.duplicate()
 			location.add_child(dup)
 			dup.global_position = i.global_position
-			i.queue_free()
 			
+			var gib_dup = i.duplicate()
+			gib.add_child(gib_dup)
+			gib_dup.global_position = i.global_position
+			
+			i.queue_free()
