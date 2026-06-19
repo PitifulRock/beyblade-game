@@ -75,7 +75,8 @@ func _add_player(id : int = 1):
 		player.name = str(id)
 		current_scene.player_path.call_deferred("add_child", player)
 		Master.player_list[id] = player
-		current_scene.assembly_menu.add_selection_menu(id)
+		
+		current_scene.player_added(id)
 
 func _remove_player(id : int):
 	if !current_scene.player_path.has_node(str(id)):
@@ -84,6 +85,8 @@ func _remove_player(id : int):
 	if Master.player_list.has(id):
 		Master.player_list.erase(id)
 	current_scene.player_path.get_node(str(id)).queue_free()
+	
+	current_scene.player_removed(id)
 
 func remove_from_lobby(_player_id : int):
 	if multiplayer.multiplayer_peer:

@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://da3f1rx8u2hla"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
-[ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly_menu.gd" id="2_2o5xm"]
+[ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly/assembly_menu.gd" id="2_2o5xm"]
 [ext_resource type="Texture2D" uid="uid://b4ru15jy82xl1" path="res://textures/PROTO/Light/texture_04.png" id="3_u5isb"]
 [ext_resource type="Texture2D" uid="uid://cicwfjonq8j0e" path="res://textures/t_ui/White/2x/stop.png" id="4_2o5xm"]
 

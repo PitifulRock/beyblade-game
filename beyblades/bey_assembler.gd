@@ -30,24 +30,29 @@ func launch(bey_owner_id : int):
 	bey._spawned()
 
 func spawn_part(part_node : BeyPart, location : BeyBlade):
-	part_node.reparent(location)
-	part_node.position = Vector3.ZERO
-	part_node.rotation = Vector3.ZERO
+	var part_dup = part_node.duplicate()
+	location.add_child(part_dup)
+	
+	part_dup.name = part_node.name
+	part_dup.position = Vector3.ZERO
+	part_dup.rotation = Vector3.ZERO
 	
 	var gib = RigidBody3D.new()
+	gib.set_collision_layer_value(1, false)
+	gib.set_collision_layer_value(2, true)
 	location.burst_holder.add_child(gib)
 	
-	if part_node is BeyDisc: 
-		location.disc = part_node
-		part_node.global_position = location.core.placement_point.global_position
-	if part_node is BeyCore: 
-		location.core = part_node
-		part_node.global_position = location.tip.placement_point.global_position
-	if part_node is BeyTip: 
-		location.tip = part_node
-		part_node.position = Vector3.ZERO
+	if part_dup is BeyDisc: 
+		location.disc = part_dup
+		part_dup.global_position = location.core.placement_point.global_position
+	if part_dup is BeyCore: 
+		location.core = part_dup
+		part_dup.global_position = location.tip.placement_point.global_position
+	if part_dup is BeyTip: 
+		location.tip = part_dup
+		part_dup.position = Vector3.ZERO
 	
-	for i in part_node.get_children():
+	for i in part_dup.get_children():
 		if i is not Marker3D:
 			var dup = i.duplicate()
 			location.add_child(dup)

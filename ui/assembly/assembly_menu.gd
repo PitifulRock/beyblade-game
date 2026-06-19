@@ -30,6 +30,8 @@ func add_selection_menu(player_id : int):
 	
 	var index = %SelectionContainer.get_children().find(picker)
 	picker.bey_assembler.global_position = spawn_positions[index].global_position
+func remove_selection_menu(player_id : int):
+	%SelectionContainer.get_node(str(player_id)).queue_free()
 
 func _on_ready_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
@@ -59,8 +61,9 @@ func _on_ready_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
 	launch_all_beys.rpc()
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func launch_all_beys():
 	hide()
+	%ReadyButton.button_pressed = false
 	for i in %SelectionContainer.get_children():
 		i.bey_assembler.launch(i.get_multiplayer_authority())

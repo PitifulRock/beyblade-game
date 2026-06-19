@@ -4,6 +4,7 @@ var registry : Dictionary[BeyPart.PART_TYPE, Array] = {
 	BeyPart.PART_TYPE.DISC : [
 		preload("uid://d3qu3u35ga7jv"),
 		preload("uid://br18bnql65kv3"),
+		preload("uid://cir2mlfxmsgvs"),
 	],
 	
 	BeyPart.PART_TYPE.CORE : [

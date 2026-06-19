@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bps6vk6deaxqr"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://bps6vk6deaxqr"]
 
 [ext_resource type="FontFile" uid="uid://bkkc8ggv7evp5" path="res://textures/SpecialGothicExpandedOne-Regular.ttf" id="1_rqugq"]
 
@@ -71,6 +71,21 @@ border_width_bottom = 3
 border_color = Color(0.581033, 0.58103293, 0.5810329, 0.59607846)
 corner_detail = 3
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6lx7k"]
+bg_color = Color(0.10747976, 0.10747973, 0.10747973, 0.7137255)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fgq6"]
+bg_color = Color(0.42366543, 0.7743609, 0.99999994, 1)
+border_width_left = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
 [resource]
 default_font = ExtResource("1_rqugq")
 default_font_size = 24
@@ -97,3 +112,8 @@ Button/styles/hover = SubResource("StyleBoxFlat_ks77f")
 Button/styles/normal = SubResource("StyleBoxFlat_iqtc0")
 Button/styles/pressed = SubResource("StyleBoxFlat_7any1")
 Panel/styles/panel = SubResource("StyleBoxFlat_ks77f")
+ProgressBar/colors/font_color = Color(0.95, 0.95, 0.95, 1)
+ProgressBar/colors/font_outline_color = Color(0, 0, 0, 1)
+ProgressBar/constants/outline_size = 0
+ProgressBar/styles/background = SubResource("StyleBoxFlat_6lx7k")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_3fgq6")

@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddqna4jy4mno4"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_3asek"]
+[ext_resource type="Script" uid="uid://iudcfd8fbbxq" path="res://ui/results/player_score_bar.gd" id="2_i17de"]
+[ext_resource type="Texture2D" uid="uid://l7gh5dfa7y0s" path="res://textures/crown.png" id="3_nd7yc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_68ofe"]
+line_spacing = -8.875
+font_size = 26
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 18
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_i17de"]
+properties/0/path = NodePath("PointBar/PlayerName:text")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Control" type="Control"]
+custom_minimum_size = Vector2(150, 357)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 245.0
+offset_bottom = 397.0
+size_flags_horizontal = 3
+theme = ExtResource("1_3asek")
+script = ExtResource("2_i17de")
+
+[node name="PointBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 256)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.25
+offset_top = -162.875
+offset_right = 96.25
+offset_bottom = 162.875
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 15.0
+fill_mode = 3
+show_percentage = false
+
+[node name="ScoreLabel" type="Label" parent="PointBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.0
+offset_top = -52.5
+offset_right = 126.0
+offset_bottom = 52.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Winner"
+label_settings = SubResource("LabelSettings_68ofe")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerName" type="Label" parent="PointBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -98.5
+offset_top = -37.5
+offset_right = 98.5
+offset_bottom = 35.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "player
+names"
+label_settings = SubResource("LabelSettings_68ofe")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="WinIcon" type="TextureRect" parent="PointBar"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8090909
+anchor_top = -0.1646201
+anchor_right = 0.960791
+anchor_bottom = 0.24591987
+offset_right = 62.95433
+offset_bottom = -32.51802
+rotation = 0.5235988
+texture = ExtResource("3_nd7yc")
+expand_mode = 1
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_i17de")

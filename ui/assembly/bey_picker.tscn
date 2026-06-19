@@ -2,7 +2,7 @@
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_845v4"]
 [ext_resource type="PackedScene" uid="uid://don4m0xc3m072" path="res://beyblades/parts/tips/attack_tip.tscn" id="1_apxx0"]
-[ext_resource type="Script" uid="uid://dl8gn7n6fr0di" path="res://ui/bey_picker.gd" id="1_gcl7u"]
+[ext_resource type="Script" uid="uid://dl8gn7n6fr0di" path="res://ui/assembly/bey_picker.gd" id="1_gcl7u"]
 [ext_resource type="PackedScene" uid="uid://bypde2dma35k7" path="res://beyblades/parts/cores/attack_core.tscn" id="2_gcl7u"]
 [ext_resource type="PackedScene" uid="uid://br18bnql65kv3" path="res://beyblades/parts/discs/defense_disc.tscn" id="3_npfxi"]
 [ext_resource type="Texture2D" uid="uid://bj3xhtvqbvqw8" path="res://textures/t_ui/White/1x/forward.png" id="5_npfxi"]

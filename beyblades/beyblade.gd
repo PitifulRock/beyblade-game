@@ -17,13 +17,17 @@ enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 @export var burst_percentage := 0.0
 @export var burst_damage := 1.0
 @export var can_take_damage := true
+@export var dead := false
 
 @export var current_spin : float
 var stored_engine_spin : float
 
 var collision_point : Vector3
+var last_collided_bey : BeyBlade
+var game_world : World
 
 func _ready() -> void:
+	game_world = Master.game_manager.current_scene
 	_physics_setup()
 
 func _spawned():
@@ -57,44 +61,59 @@ func _launch():
 #endregion
 
 func _physics_process(_delta: float) -> void:
-	var engine_spin := angular_velocity.y
-	var e_spin_diff = engine_spin - stored_engine_spin
-	
-	if abs(current_spin) > 10.0:
-		current_spin = lerpf(current_spin, 0.0, get_spin_loss(e_spin_diff))
-		%SpinSound.pitch_scale = clampf(abs(current_spin)/100, 0.7, 1.5) * Engine.time_scale
-		%SpinSound.volume_db = remap(abs(current_spin), 0, 900, -14, -4)
-	else:
-		current_spin = lerpf(current_spin, 0.0, Manager.lerp_weight(0.2))
-		%SpinSound.volume_db = lerpf(%SpinSound.volume_db, -80, Manager.lerp_weight(0.2))
-	angular_velocity.y = current_spin
+	if Master.is_host:
+		var engine_spin := angular_velocity.y
+		var e_spin_diff = engine_spin - stored_engine_spin
+		
+		if abs(current_spin) > 10.0:
+			current_spin = lerpf(current_spin, 0.0, get_spin_loss(e_spin_diff))
+			%SpinSound.pitch_scale = clampf(abs(current_spin)/100, 0.7, 1.5) * Engine.time_scale
+			%SpinSound.volume_db = remap(abs(current_spin), 0, 900, -14, -4)
+		else:
+			current_spin = lerpf(current_spin, 0.0, Manager.lerp_weight(0.08))
+			%SpinSound.volume_db = lerpf(%SpinSound.volume_db, -80, Manager.lerp_weight(0.08))
+			if !dead: 
+				die(World.POINT_TYPE.STAMINA)
+		angular_velocity.y = current_spin
 
-	%Label3D.text = str(int(abs(current_spin)), ", ", int(burst_percentage))
-	
-	if stored_engine_spin != engine_spin: 
-		stored_engine_spin = engine_spin
-	
-	var wobble_decrease = Manager.lerp_weight(remap(abs(current_spin),0.0, 1100, -0.001, 1.0))
-	angular_velocity.z = lerpf(angular_velocity.z, 0, wobble_decrease)
-	angular_velocity.x = lerpf(angular_velocity.x, 0, wobble_decrease)
-	rotation.x = lerpf(rotation.x, 0, wobble_decrease)
-	rotation.z = lerpf(rotation.z, 0, wobble_decrease)
-	
-	$CenterTether.look_at(Vector3.ZERO)
-	apply_central_force(get_orbital_force())
-	apply_central_force(get_center_pull_force())
-	
-	if burst_percentage >= 100: burst()
+		%Label3D.text = str(int(abs(current_spin)), ", ", int(burst_percentage))
+		
+		if !dead:
+			if stored_engine_spin != engine_spin: 
+				stored_engine_spin = engine_spin
+			
+			var wobble_decrease = Manager.lerp_weight(remap(abs(current_spin),0.0, 1100, -0.001, 1.0))
+			angular_velocity.z = lerpf(angular_velocity.z, 0, wobble_decrease)
+			angular_velocity.x = lerpf(angular_velocity.x, 0, wobble_decrease)
+			rotation.x = lerpf(rotation.x, 0, wobble_decrease)
+			rotation.z = lerpf(rotation.z, 0, wobble_decrease)
+			
+			$CenterTether.look_at(Vector3.ZERO)
+			apply_central_force(get_orbital_force())
+			apply_central_force(get_center_pull_force())
+		
+	if burst_percentage >= 100 and !dead: 
+		die(World.POINT_TYPE.DESTRUCTION)
+		burst()
 
+func die(point_type : World.POINT_TYPE):
+	if !Master.is_host: return
+	var point_winner = last_collided_bey if point_type != World.POINT_TYPE.STAMINA else null
+	var winner_id = point_winner.name.to_int() if point_winner else -1
+	dead = true
+	game_world._bey_death(point_type, winner_id)
+	
+	if point_type == World.POINT_TYPE.DESTRUCTION:
+		burst.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
 func burst():
-	burst_holder.reparent(get_parent())
+	burst_holder.reparent(Master.game_manager.current_scene.particle_path)
 	burst_holder.show()
 	burst_holder.process_mode = Node.PROCESS_MODE_INHERIT
 	for i in burst_holder.get_children():
 		if i is RigidBody3D:
 			i.apply_central_impulse(Vector3(randf_range(-10, 10),randf_range(5, 10),randf_range(-10, 10)))
-	
-	get_parent()._on_bey_burst()
 	
 	hide()
 	process_mode = Node.PROCESS_MODE_DISABLED
@@ -118,8 +137,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if state.get_contact_count() > 0:
 		collision_point = state.get_contact_collider_position(0)
 func _on_collision(body : Node):
-	if body is BeyBlade:
+	if body is BeyBlade and !dead:
 		var body_speed = body.linear_velocity.length()
+		last_collided_bey = body
 		if linear_velocity.length() > body_speed/1.5:
 			#spin reduction from hitting fast
 			var reduction = body_speed/1.5
@@ -135,10 +155,10 @@ func _on_collision(body : Node):
 			await get_tree().create_timer(0.3).timeout
 			can_take_damage = true
 
-@rpc("authority", "call_local", "reliable")
+@rpc("any_peer", "call_local", "reliable")
 func _clash_fx(fx_position : Vector3, body_speed : float):
 	var spark = SPARK_PARTICLE.instantiate()
-	add_sibling(spark)
+	game_world.particle_path.add_child(spark)
 	spark.global_position = fx_position
 	
 	%ClashSound.volume_db = remap(body_speed, 0, 20, -6, 0)
