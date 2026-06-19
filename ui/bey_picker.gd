@@ -5,60 +5,62 @@ const BALANCE_ICON = preload("uid://cbj57nyqrtlm5")
 const DEFENSE_ICON = preload("uid://bhv528cguyywf")
 const STAMINA_ICON = preload("uid://brj7y2jpu6axb")
 
-@export var parts_path := "res://beyblades/parts/"
-var discs_path : String:
-	get(): return str(parts_path, "discs")
-var cores_path : String:
-	get(): return str(parts_path, "cores")
-var tips_path : String:
-	get(): return str(parts_path, "tips")
-
-var current_disc : int = 0
-var current_core : int = 0
-var current_tip : int = 0
+@export var current_disc : int = 0:
+	set(value):
+		current_disc = wrapi(value, 0, %DiscDisplay.get_children().size())
+		_update_visuals()
+@export var current_core : int = 0:
+	set(value):
+		current_core = wrapi(value, 0, %CoreDisplay.get_children().size())
+		_update_visuals()
+@export var current_tip : int = 0:
+	set(value):
+		current_tip = wrapi(value, 0, %TipDisplay.get_children().size())
+		_update_visuals()
 
 @onready var bey_assembler: BeyAssembler = %BeyAssembler
+
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
 	spawn_visuals(BeyPart.PART_TYPE.TIP)
 	spawn_visuals(BeyPart.PART_TYPE.CORE)
 	spawn_visuals(BeyPart.PART_TYPE.DISC)
+	
+	%NameLabel.text = Steam.getPersonaName()
+	if !is_multiplayer_authority():
+		for i in [$Picker/DiscRight, $Picker/DiscLeft, $Picker/CoreRight, $Picker/CoreLeft, $Picker/TipRight, $Picker/TipLeft]:
+			i.hide()
 
 func spawn_visuals(part : BeyPart.PART_TYPE):
-	var folder_path := ""; var spawn_path : Node; var cur_index := 0
+	var spawn_path : Node; var cur_index := 0
 	match part:
 		BeyPart.PART_TYPE.TIP:
-			folder_path = tips_path; spawn_path = %TipDisplay; cur_index = current_tip
+			spawn_path = %TipDisplay; cur_index = current_tip
 		BeyPart.PART_TYPE.CORE:
-			folder_path = cores_path; spawn_path = %CoreDisplay; cur_index = current_core
+			spawn_path = %CoreDisplay; cur_index = current_core
 		BeyPart.PART_TYPE.DISC:
-			folder_path = discs_path; spawn_path = %DiscDisplay; cur_index = current_disc
+			spawn_path = %DiscDisplay; cur_index = current_disc
 	
 	for i in spawn_path.get_children(): i.free()
 	
-	var dir := DirAccess.open(folder_path)
-	if dir == null: return
-	dir.list_dir_begin()
-	for file: String in dir.get_files():
-		var resource := load(dir.get_current_dir() + "/" + file)
-		var inst = resource.instantiate()
+	for file:PackedScene in PartRegistry.registry[part]:
+		var inst = file.instantiate()
 		spawn_path.add_child(inst, true)
 		if spawn_path.get_child(cur_index) != inst:
 			inst.hide()
 	_update_visuals()
 
 func _disc_button_pressed(increase : bool):
+	if !is_multiplayer_authority(): return
 	current_disc += 1 if increase else -1
-	current_disc = wrapi(current_disc, 0, %DiscDisplay.get_children().size())
-	_update_visuals()
 func _core_button_pressed(increase : bool):
+	if !is_multiplayer_authority(): return
 	current_core += 1 if increase else -1
-	current_core = wrapi(current_core, 0, %CoreDisplay.get_children().size())
-	_update_visuals()
 func _tip_button_pressed(increase : bool):
+	if !is_multiplayer_authority(): return
 	current_tip += 1 if increase else -1
-	current_tip = wrapi(current_tip, 0, %TipDisplay.get_children().size())
-	_update_visuals()
 
 func _update_visuals():
 	var disc : BeyDisc = %DiscDisplay.get_child(current_disc)

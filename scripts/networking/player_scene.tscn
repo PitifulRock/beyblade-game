@@ -1,0 +1,163 @@
+[gd_scene load_steps=6 format=3 uid="uid://bk8eovjp50t2s"]
+
+[ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
+[ext_resource type="Texture2D" uid="uid://bkogjswam2hv3" path="res://textures/attack_icon.png" id="2_ssomj"]
+[ext_resource type="Script" uid="uid://ckqxbj2wgigdw" path="res://ui/player_ui.gd" id="3_kjn0h"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ssomj"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("Label3D:text")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+
+[node name="FreeLookCamera" type="Camera3D"]
+script = ExtResource("1_a6s7x")
+metadata/_custom_type_script = "uid://ba6s7kap2bki1"
+
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+pixel_size = 0.003
+billboard = 1
+texture = ExtResource("2_ssomj")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
+pixel_size = 0.01
+billboard = 1
+text = "display name"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ssomj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PlayerUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("2_ebo5w")
+script = ExtResource("3_kjn0h")
+
+[node name="PauseMenu" type="Control" parent="CanvasLayer/PlayerUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="ColorRect" parent="CanvasLayer/PlayerUI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.11764706, 0.11764706, 0.21176471, 0.9372549)
+
+[node name="Name" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu"]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 704.0
+offset_bottom = 122.0
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[wave]game"
+fit_content = true
+
+[node name="LabelID" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+offset_left = 39.0
+offset_top = 122.0
+offset_right = 343.0
+offset_bottom = 154.0
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "Lobby ID: 109775243706805379
+"
+fit_content = true
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI/PauseMenu/LabelID"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -15.0
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.101960786, 0.101960786, 0.101960786, 0.6)
+
+[node name="CopyButton" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/LabelID"]
+layout_mode = 0
+offset_left = 282.0
+offset_top = 3.0
+offset_right = 302.0
+offset_bottom = 22.0
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 184.0
+offset_right = 316.0
+offset_bottom = 676.0
+
+[node name="Resume" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Resume"
+
+[node name="---------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[node name="InviteFriend" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Invite Friend"
+
+[node name="----------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[node name="LeaveLobby" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Leave Lobby"
+
+[node name="--------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/LabelID/CopyButton" to="CanvasLayer/PlayerUI" method="_on_copy_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/Resume" to="CanvasLayer/PlayerUI" method="_on_resume_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/InviteFriend" to="CanvasLayer/PlayerUI" method="_on_invite_friend_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/LeaveLobby" to="CanvasLayer/PlayerUI" method="_on_leave_lobby_pressed"]
+[connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/LeaveLobby" to="CanvasLayer/PlayerUI/PauseMenu" method="_on_leave_lobby_pressed"]

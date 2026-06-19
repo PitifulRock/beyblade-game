@@ -1,10 +1,58 @@
-[gd_scene format=3 uid="uid://da3f1rx8u2hla"]
+[gd_scene load_steps=10 format=3 uid="uid://da3f1rx8u2hla"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
 [ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly_menu.gd" id="2_2o5xm"]
-[ext_resource type="PackedScene" uid="uid://bc0qxhg451sac" path="res://ui/bey_picker.tscn" id="3_8prok"]
+[ext_resource type="Texture2D" uid="uid://b4ru15jy82xl1" path="res://textures/PROTO/Light/texture_04.png" id="3_u5isb"]
+[ext_resource type="Texture2D" uid="uid://cicwfjonq8j0e" path="res://textures/t_ui/White/2x/stop.png" id="4_2o5xm"]
 
-[node name="AssemblyMenu" type="Control" unique_id=879406890]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o5xm"]
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.69803923)
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_detail = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u5isb"]
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+draw_center = false
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.8089983, 0.8089983, 0.8089982, 1)
+corner_detail = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8prok"]
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.101960786, 0.101960786, 0.101960786, 0.23137255)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 1, 1, 1)
+corner_detail = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_2o5xm"]
+font_size = 56
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2o5xm"]
+properties/0/path = NodePath(".:ready_players")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="AssemblyMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +62,7 @@ grow_vertical = 2
 theme = ExtResource("1_u5isb")
 script = ExtResource("2_2o5xm")
 
-[node name="SelectionContainer" type="GridContainer" parent="." unique_id=1652121061]
+[node name="SelectionContainer" type="GridContainer" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -25,17 +73,7 @@ grow_vertical = 2
 columns = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" parent="SelectionContainer" unique_id=206773910 instance=ExtResource("3_8prok")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Control2" parent="SelectionContainer" unique_id=229823261 instance=ExtResource("3_8prok")]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="LaunchButton" type="Button" parent="." unique_id=1521234971]
+[node name="ReadyButton" type="Button" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -45,8 +83,98 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -552.0
 offset_top = -120.0
-offset_right = -29.0
-offset_bottom = -34.0
+offset_right = -32.0
+offset_bottom = -32.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "Launch"
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_2o5xm")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_u5isb")
+theme_override_styles/hover = SubResource("StyleBoxFlat_8prok")
+toggle_mode = true
+text = "Ready"
+
+[node name="ReadyTimerBar" type="TextureProgressBar" parent="ReadyButton"]
+unique_name_in_owner = true
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+nine_patch_stretch = true
+texture_under = ExtResource("3_u5isb")
+texture_progress = ExtResource("3_u5isb")
+tint_under = Color(0.103743516, 0.10374353, 0.103743516, 0.627451)
+tint_progress = Color(7.6046585e-06, 0.9942815, 0.6075115, 0.4745098)
+
+[node name="ReadyIcons" type="HBoxContainer" parent="ReadyButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.83846146
+anchor_top = 0.6363634
+anchor_right = 0.9924291
+anchor_bottom = 0.9545452
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ReadyButton/ReadyIcons"]
+layout_mode = 2
+texture = ExtResource("4_2o5xm")
+expand_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="ReadyButton/ReadyIcons"]
+layout_mode = 2
+texture = ExtResource("4_2o5xm")
+expand_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="ReadyButton/ReadyIcons"]
+layout_mode = 2
+texture = ExtResource("4_2o5xm")
+expand_mode = 2
+
+[node name="TextureRect4" type="TextureRect" parent="ReadyButton/ReadyIcons"]
+layout_mode = 2
+texture = ExtResource("4_2o5xm")
+expand_mode = 2
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+unique_name_in_owner = true
+_spawnable_scenes = PackedStringArray("uid://bc0qxhg451sac")
+spawn_path = NodePath("../SelectionContainer")
+
+[node name="ReadyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+one_shot = true
+ignore_time_scale = true
+
+[node name="ReadyTimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -16.5
+offset_right = 20.0
+offset_bottom = 16.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "10"
+label_settings = SubResource("LabelSettings_2o5xm")
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_2o5xm")
+
+[connection signal="toggled" from="ReadyButton" to="." method="_on_ready_button_toggled"]
+[connection signal="timeout" from="ReadyTimer" to="." method="_on_ready_timer_timeout"]

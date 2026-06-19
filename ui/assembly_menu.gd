@@ -3,16 +3,64 @@ extends Control
 const BEY_PICKER = preload("uid://bc0qxhg451sac")
 
 @export var bey_amount := 2
+@export var ready_players := 0:
+	set(val):
+		ready_players = val
+		_on_ready_players_changed()
 @export var spawn_positions : Array[Marker3D]
 
 func _ready() -> void:
-	#for i in %SelectionContainer.get_children(): i.free()
+	for i in %SelectionContainer.get_children(): i.free()
+	for i in %ReadyIcons.get_children(): i.hide()
+
+func _process(_delta: float) -> void:
+	if !%ReadyTimer.is_stopped():
+		%ReadyTimerBar.value = (%ReadyTimer.wait_time-%ReadyTimer.time_left)/%ReadyTimer.wait_time
+		%ReadyTimerLabel.text = str(ceili(%ReadyTimer.time_left))
+		%ReadyTimerLabel.visible = true
+	else:
+		%ReadyTimerBar.value = 0
+		%ReadyTimerLabel.visible = false
+
+func add_selection_menu(player_id : int):
+	var picker = BEY_PICKER.instantiate()
+	picker.name = str(player_id)
+	%SelectionContainer.call_deferred("add_child", picker)
+	await picker.ready 
 	
-	#for i in bey_amount:
-		#var picker = BEY_PICKER.instantiate()
-		#%SelectionContainer.add_child(picker)
+	var index = %SelectionContainer.get_children().find(picker)
+	picker.bey_assembler.global_position = spawn_positions[index].global_position
+
+func _on_ready_button_toggled(toggled_on: bool) -> void:
+	if toggled_on:
+		%ReadyButton.text = "Unready"
+	else:
+		%ReadyButton.text = "Ready"
+	submit_ready.rpc(toggled_on)
+	
+@rpc("any_peer", "call_local", "reliable")
+func submit_ready(is_ready: bool):
+	if not multiplayer.is_server(): return
+	ready_players += 1 if is_ready else -1
+
+func _on_ready_players_changed():
+	for i in %ReadyIcons.get_children(): i.hide()
+	if ready_players > 0:
+		for i in ready_players:
+			%ReadyIcons.get_child(i).show()
+		if %ReadyTimer.is_stopped(): %ReadyTimer.start()
+		if ready_players == Master.player_list.size():
+			%ReadyTimer.stop()
+			_on_ready_timer_timeout()
+	else:
+		%ReadyTimer.stop()
+
+func _on_ready_timer_timeout() -> void:
+	if not multiplayer.is_server(): return
+	launch_all_beys.rpc()
+
+@rpc("authority", "call_local", "reliable")
+func launch_all_beys():
+	hide()
 	for i in %SelectionContainer.get_children():
-		var index = %SelectionContainer.get_children().find(i)
-		i.bey_assembler.global_position = spawn_positions[index].global_position
-		%LaunchButton.pressed.connect(i.bey_assembler.launch)
-	%LaunchButton.pressed.connect(hide)
+		i.bey_assembler.launch(i.get_multiplayer_authority())

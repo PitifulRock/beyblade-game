@@ -5,19 +5,20 @@ const SPARK_PARTICLE = preload("uid://fbwq5alfemyv")
 
 enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 
-var spin_speed : float = 500.0
-var stamina : float = 0.6
-var burst_resistance := 1.0
-var burst_percentage := 0.0
-var burst_damage := 1.0
-var can_take_damage := true
-
 @onready var burst_holder: Node = $BurstHolder
 @export var disc : BeyDisc
 @export var core : BeyCore
 @export var tip : BeyTip
 
-var current_spin : float
+@export_group("Public Variables")
+@export var spin_speed : float = 500.0
+@export var stamina : float = 0.6
+@export var burst_resistance := 1.0
+@export var burst_percentage := 0.0
+@export var burst_damage := 1.0
+@export var can_take_damage := true
+
+@export var current_spin : float
 var stored_engine_spin : float
 
 var collision_point : Vector3
@@ -26,15 +27,20 @@ func _ready() -> void:
 	_physics_setup()
 
 func _spawned():
+	if !Master.is_host: return
 	_bey_setup()
 	_launch()
 
 #region setup
 func _physics_setup():
-	if !contact_monitor: contact_monitor = true
-	continuous_cd = true
-	max_contacts_reported = 4
-	body_entered.connect(_on_collision)
+	if Master.is_host:
+		if !contact_monitor: contact_monitor = true
+		continuous_cd = true
+		max_contacts_reported = 4
+		body_entered.connect(_on_collision)
+	else:
+		freeze_mode = RigidBody3D.FREEZE_MODE_STATIC
+		freeze = true
 
 func _bey_setup():
 	physics_material_override = disc.physics_material
@@ -119,12 +125,8 @@ func _on_collision(body : Node):
 			var reduction = body_speed/1.5
 			current_spin -= -reduction if current_spin < 0 else reduction
 			
-			var spark = SPARK_PARTICLE.instantiate()
-			add_sibling(spark)
-			spark.global_position = collision_point
+			_clash_fx.rpc(collision_point, body_speed)
 			
-			%ClashSound.volume_db = remap(body_speed, 0, 20, -6, 0)
-			%ClashSound.play()
 		if linear_velocity.length() < body_speed/1.5 and can_take_damage:
 			var incoming_damage = (body_speed*body.burst_damage) * abs(body.current_spin)/550
 			var recieved_damage = incoming_damage/burst_resistance/1.2
@@ -132,4 +134,12 @@ func _on_collision(body : Node):
 			can_take_damage = false
 			await get_tree().create_timer(0.3).timeout
 			can_take_damage = true
-			
+
+@rpc("authority", "call_local", "reliable")
+func _clash_fx(fx_position : Vector3, body_speed : float):
+	var spark = SPARK_PARTICLE.instantiate()
+	add_sibling(spark)
+	spark.global_position = fx_position
+	
+	%ClashSound.volume_db = remap(body_speed, 0, 20, -6, 0)
+	%ClashSound.play()

@@ -12,14 +12,20 @@ var prev_pos : Vector3
 func _ready() -> void:
 	pass
 
-func launch():
+func launch(bey_owner_id : int):
 	var bey : BeyBlade = BEY_SCENE.instantiate()
-	get_tree().current_scene.add_child(bey)
+	var world : World = Master.game_manager.current_scene
+	bey.name = str(bey_owner_id)
+	world.beyblade_path.add_child(bey)
 	bey.global_position = global_position
+	bey.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	spawn_part(tip, bey)
 	spawn_part(core, bey)
 	spawn_part(disc, bey)
+	
+	await get_tree().process_frame
+	bey.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	bey._spawned()
 

@@ -1,0 +1,165 @@
+[gd_scene load_steps=3 format=3 uid="uid://b42uq41g0gs64"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_t7e0r"]
+[ext_resource type="Script" uid="uid://c1xve26ib6yd0" path="res://ui/main_menu.gd" id="2_0dkrt"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_t7e0r")
+script = ExtResource("2_0dkrt")
+
+[node name="BorderR" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -384.0
+offset_right = 171.0
+offset_bottom = 384.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="BorderR"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1195.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="BorderL" type="Control" parent="."]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -171.0
+offset_top = -384.0
+offset_bottom = 384.0
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="BorderL"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1195.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
+
+[node name="Name" type="RichTextLabel" parent="."]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 704.0
+offset_bottom = 122.0
+theme_override_font_sizes/normal_font_size = 56
+bbcode_enabled = true
+text = "[wave]game"
+fit_content = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 152.0
+offset_right = 312.0
+offset_bottom = 644.0
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Host Lobby"
+
+[node name="------------" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[node name="JoinButton" type="Button" parent="VBoxContainer"]
+unique_name_in_owner = true
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Join Lobby"
+
+[node name="EnterLobbyID" type="LineEdit" parent="VBoxContainer/JoinButton"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -22.054993
+offset_right = 272.0
+offset_bottom = 17.945007
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+placeholder_text = "Lobby ID"
+emoji_menu_enabled = false
+select_all_on_focus = true
+caret_blink = true
+
+[node name="EnterID" type="Button" parent="VBoxContainer/JoinButton/EnterLobbyID"]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -20.0
+offset_right = 48.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 26
+disabled = true
+text = ">"
+
+[node name="-------------" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[node name="SingleplayerButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Singleplayer"
+
+[node name="--------------" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 8.66)
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(0, 68.11)
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/JoinButton/EnterLobbyID" to="." method="_on_enter_lobby_id_text_changed"]
+[connection signal="pressed" from="VBoxContainer/JoinButton/EnterLobbyID/EnterID" to="." method="_on_enter_id_pressed"]
+[connection signal="pressed" from="VBoxContainer/SingleplayerButton" to="." method="_on_singleplayer_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

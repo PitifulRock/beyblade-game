@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://xkw4aloeefna"]
+[gd_scene load_steps=22 format=3 uid="uid://xkw4aloeefna"]
 
 [ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_vt533"]
 [ext_resource type="AudioStream" uid="uid://di6v0hk1ipdi1" path="res://sounds/clash_big.ogg" id="2_a658j"]
@@ -73,7 +73,24 @@ stream_3/weight = 1.5
 stream_4/stream = ExtResource("6_v6dka")
 stream_4/weight = 1.1
 
-[node name="Bey" type="RigidBody3D" unique_id=1627645615]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v6dka"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:current_spin")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:burst_percentage")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("Node3D/Label3D:text")
+properties/4/spawn = true
+properties/4/replication_mode = 2
+
+[node name="Bey" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 mass = 0.07
 physics_material_override = SubResource("PhysicsMaterial_8uh7m")
@@ -82,43 +99,43 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_vt533")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=323548665]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 remote_path = NodePath("../Node3D")
 update_rotation = false
 
-[node name="CenterTether" type="RayCast3D" parent="." unique_id=506244053]
+[node name="CenterTether" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=1263016776]
+[node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 top_level = true
 
-[node name="Label3D" type="Label3D" parent="Node3D" unique_id=669046389]
+[node name="Label3D" type="Label3D" parent="Node3D"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000002, 0)
 pixel_size = 0.015
 billboard = 1
 text = "9000"
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=591669735]
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
 shape = SubResource("SphereShape3D_3dcr0")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="." unique_id=1409075367]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
 amount = 232
 lifetime = 0.5
 process_material = SubResource("ParticleProcessMaterial_3dcr0")
 draw_pass_1 = SubResource("PlaneMesh_n1s4q")
 
-[node name="ClashSound" type="AudioStreamPlayer3D" parent="." unique_id=1362967161]
+[node name="ClashSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_manui")
 unit_size = 15.0
 max_polyphony = 3
 attenuation_filter_cutoff_hz = 7246.0
 
-[node name="SpinSound" type="AudioStreamPlayer3D" parent="." unique_id=408877882]
+[node name="SpinSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_3xdhn")
 unit_size = 14.0
@@ -126,11 +143,11 @@ autoplay = true
 attenuation_filter_cutoff_hz = 6591.0
 doppler_tracking = 2
 
-[node name="BurstHolder" type="Node3D" parent="." unique_id=1599078067]
+[node name="BurstHolder" type="Node3D" parent="."]
 process_mode = 4
 visible = false
 
-[node name="BurstSound" type="AudioStreamPlayer3D" parent="BurstHolder" unique_id=1600172249]
+[node name="BurstSound" type="AudioStreamPlayer3D" parent="BurstHolder"]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 stream = ExtResource("7_3kb01")
 unit_size = 15.0
@@ -138,6 +155,9 @@ autoplay = true
 max_polyphony = 3
 attenuation_filter_cutoff_hz = 7246.0
 
-[node name="GPUParticles3D" parent="BurstHolder" unique_id=1826488319 instance=ExtResource("9_nn1wg")]
+[node name="GPUParticles3D" parent="BurstHolder" instance=ExtResource("9_nn1wg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6000001, 0)
 emitting = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v6dka")

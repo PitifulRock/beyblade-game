@@ -8,6 +8,8 @@ const ALT_MULTIPLIER = 1.0 / SHIFT_MULTIPLIER
 
 @export_range(0.0, 1.0) var sensitivity: float = 0.25
 
+var can_use_camera := true
+
 # Mouse state
 var _mouse_position = Vector2(0.0, 0.0)
 var _total_pitch = 0.0
@@ -30,6 +32,7 @@ var _shift = false
 var _alt = false
 
 func _input(event):
+	if !is_multiplayer_authority() or !can_use_camera: return
 	# Receives mouse motion
 	if event is InputEventMouseMotion:
 		_mouse_position = event.relative
@@ -66,6 +69,7 @@ func _input(event):
 
 # Updates mouselook and movement every frame
 func _process(delta):
+	if !is_multiplayer_authority(): return
 	_update_mouselook()
 	_update_movement(delta)
 
