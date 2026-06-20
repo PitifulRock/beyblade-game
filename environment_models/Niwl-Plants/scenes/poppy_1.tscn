@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b6d0m8swg7i2r"]
+
+[ext_resource type="PackedScene" uid="uid://dcxtvordqkgsd" path="res://Niwl-Plants/3D/poppy-1.glb" id="1_rjagp"]
+[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://Niwl-Plants/Material/Mat_plant-1.tres" id="2_nislp"]
+
+[node name="poppy-1" instance=ExtResource("1_rjagp")]
+
+[node name="M3D_poppy-1_LOD0" parent="." index="0"]
+material_override = ExtResource("2_nislp")

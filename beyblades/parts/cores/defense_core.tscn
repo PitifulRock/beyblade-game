@@ -1,16 +1,13 @@
-[gd_scene format=3 uid="uid://cn5vix3nilj0g"]
+[gd_scene load_steps=4 format=3 uid="uid://cn5vix3nilj0g"]
 
 [ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_i2apk"]
-[ext_resource type="Texture2D" uid="uid://bc40xlgcwii4" path="res://textures/PROTO/Light/texture_09.png" id="2_8oe06"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h0p88"]
-albedo_texture = ExtResource("2_8oe06")
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="3_8oe06"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_y6vqw"]
 height = 0.15
 radius = 0.72265625
 
-[node name="DefenseCore" type="StaticBody3D" unique_id=1826310078]
+[node name="DefenseCore" type="StaticBody3D"]
 script = ExtResource("1_i2apk")
 weight_mult = 2.0
 part_name = "Le circle"
@@ -18,25 +15,25 @@ type = 2
 part_weight = 0.06
 metadata/_custom_type_script = "uid://bhdlota4as0vi"
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=522355031]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1510308086]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04384762, 0)
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01837501, 0)
 radius = 0.6
 height = 0.1
 sides = 16
-material = SubResource("StandardMaterial3D_h0p88")
+material = ExtResource("3_8oe06")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=576136097]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 radius = 0.70458984
 height = 0.1
 sides = 16
-material = SubResource("StandardMaterial3D_h0p88")
+material = ExtResource("3_8oe06")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1925891066]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
 shape = SubResource("CylinderShape3D_y6vqw")
 
-[node name="Placement" type="Marker3D" parent="." unique_id=2042099532]
+[node name="Placement" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)

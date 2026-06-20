@@ -1,0 +1,188 @@
+[gd_scene load_steps=23 format=3 uid="uid://elmhrlsm6p2"]
+
+[ext_resource type="Script" uid="uid://bssuxxna2ti8u" path="res://scripts/game_world.gd" id="1_00tp4"]
+[ext_resource type="Resource" uid="uid://duk3llmqijvbq" path="res://ui/default_config.tres" id="2_vbegm"]
+[ext_resource type="PackedScene" uid="uid://bbgn044maydvg" path="res://world_resources/stadiums/testing_stadium.tscn" id="3_f66xl"]
+[ext_resource type="Shader" uid="uid://lit1thbu248c" path="res://shaders/sky.gdshader" id="5_f66xl"]
+[ext_resource type="PackedScene" uid="uid://df7fnm6hxiyhv" path="res://ui/results/results_screen.tscn" id="6_g14j6"]
+[ext_resource type="Texture2D" uid="uid://lnagx4hca0ql" path="res://textures/t_ui/White/2x/star.png" id="6_l4atl"]
+[ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://textures/PROTO/Dark/texture_09.png" id="9_5tkv4"]
+[ext_resource type="Texture2D" uid="uid://cah4f3pbg2mta" path="res://textures/view.png" id="9_xersf"]
+[ext_resource type="Script" uid="uid://dsfjou4mhrrmo" path="res://world_resources/killbox.gd" id="10_h3w03"]
+[ext_resource type="PackedScene" uid="uid://da3f1rx8u2hla" path="res://ui/assembly/assembly_menu.tscn" id="11_77dp3"]
+[ext_resource type="PackedScene" uid="uid://ifje3fm2kd7u" path="res://world_resources/forest_scene.tscn" id="12_l4atl"]
+
+[sub_resource type="Curve" id="Curve_l42vh"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.104, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6965767), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_p012k"]
+curve = SubResource("Curve_l42vh")
+
+[sub_resource type="Gradient" id="Gradient_f66xl"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5h4ts"]
+noise_type = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7y6mw"]
+noise = SubResource("FastNoiseLite_5h4ts")
+color_ramp = SubResource("Gradient_f66xl")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_psu68"]
+shader = ExtResource("5_f66xl")
+shader_parameter/cloud_shape_sampler = SubResource("NoiseTexture2D_7y6mw")
+shader_parameter/cloud_noise_sampler = SubResource("NoiseTexture2D_7y6mw")
+shader_parameter/cloud_curves = SubResource("CurveTexture_p012k")
+shader_parameter/clouds_samples = 32
+shader_parameter/shadow_sample = 4
+shader_parameter/clouds_density = 0.40000000596048
+shader_parameter/clouds_scale = 0.80000000447036
+shader_parameter/clouds_smoothness = 0.02999999932944
+shader_parameter/clouds_light_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_shadow_intensity = 1.5000000223518
+shader_parameter/high_clouds_sampler = SubResource("NoiseTexture2D_7y6mw")
+shader_parameter/high_clouds_density = 0.20000000298024
+shader_parameter/top_color = Color(0.3653434, 0.5644135, 0.8807365, 1)
+shader_parameter/bottom_color = Color(0.28509057, 0.486444, 0.927411, 1)
+shader_parameter/sun_scatter = Color(0.19793725, 0.19793722, 0.19793722, 1)
+shader_parameter/astro_tint = Color(0.65623677, 0.68773526, 0.4594674, 1)
+shader_parameter/astro_sampler = ExtResource("6_l4atl")
+shader_parameter/astro_scale = 9.000000134110799
+shader_parameter/astro_intensity = 3.0
+shader_parameter/stars_intensity = 0.0
+shader_parameter/shooting_stars_intensity = 0.0
+shader_parameter/shooting_star_tint = Color(0, 0, 0, 1)
+
+[sub_resource type="Sky" id="Sky_ppyta"]
+sky_material = SubResource("ShaderMaterial_psu68")
+
+[sub_resource type="Environment" id="Environment_ykrsh"]
+background_mode = 2
+sky = SubResource("Sky_ppyta")
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_sky_contribution = 0.0
+ambient_light_energy = 0.4
+tonemap_exposure = 1.74
+ssao_enabled = true
+ssao_radius = 1.67
+ssao_horizon = 0.0
+ssao_sharpness = 0.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.43137255, 0.68235296, 1, 1)
+fog_light_energy = 0.5
+fog_density = 1.0
+fog_aerial_perspective = 0.449
+fog_sky_affect = 0.0
+fog_depth_curve = 1.9999999
+fog_depth_begin = 0.0
+fog_depth_end = 1602.6
+adjustment_enabled = true
+adjustment_saturation = 1.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0m0f1"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.63375676, 0.6337568, 0.63375676, 1)
+albedo_texture = ExtResource("9_5tkv4")
+roughness = 0.0
+uv1_scale = Vector3(0.1, 0.1, 0.1)
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h3w03"]
+size = Vector3(400, 60, 400)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_vbegm"]
+properties/0/path = NodePath(".:player_scores")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:current_stadium_name")
+properties/1/spawn = true
+properties/1/replication_mode = 2
+
+[node name="MainWorld" type="Node3D" node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path")]
+script = ExtResource("1_00tp4")
+assembly_menu = NodePath("AssemblyMenu")
+results_menu = NodePath("ResultsScreen")
+player_path = NodePath("Players")
+beyblade_path = NodePath("Beyblades")
+particle_path = NodePath("Particles")
+stadium_path = NodePath("Stadium")
+gameplay_config = ExtResource("2_vbegm")
+metadata/_custom_type_script = "uid://bssuxxna2ti8u"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+directional_shadow_mode = 0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ykrsh")
+
+[node name="Particles" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.25, 16.5)
+
+[node name="Beyblades" type="Node3D" parent="."]
+
+[node name="Stadium" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
+
+[node name="Node3D" parent="Stadium" instance=ExtResource("3_f66xl")]
+
+[node name="PlaceCam" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 21, 0)
+projection = 1
+current = true
+size = 30.646
+
+[node name="AssemblyMenu" parent="." node_paths=PackedStringArray("spawn_positions") instance=ExtResource("11_77dp3")]
+spawn_positions = [NodePath("SpawnPos"), NodePath("SpawnPos2")]
+
+[node name="SpawnPos" type="Marker3D" parent="AssemblyMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2, -6.25)
+
+[node name="SpawnPos2" type="Marker3D" parent="AssemblyMenu"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)
+
+[node name="ResultsScreen" parent="." instance=ExtResource("6_g14j6")]
+
+[node name="BG" type="Node3D" parent="."]
+
+[node name="Sprite3D" type="Sprite3D" parent="BG"]
+transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.75, -49)
+pixel_size = 0.0195
+shaded = true
+texture = ExtResource("9_xersf")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BG"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0)
+radius = 15.984
+height = 6.794
+sides = 32
+material = SubResource("StandardMaterial3D_0m0f1")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BG"]
+use_collision = true
+
+[node name="ForestScene" parent="BG" instance=ExtResource("12_l4atl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -4.741968, 0.3)
+
+[node name="KillBox" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.13173, 0)
+script = ExtResource("10_h3w03")
+metadata/_custom_type_script = "uid://dsfjou4mhrrmo"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.807938, 0)
+shape = SubResource("BoxShape3D_h3w03")
+
+[node name="StadiumSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://bbgn044maydvg")
+spawn_path = NodePath("../Stadium")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_vbegm")

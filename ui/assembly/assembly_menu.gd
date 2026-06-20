@@ -12,6 +12,8 @@ const BEY_PICKER = preload("uid://bc0qxhg451sac")
 func _ready() -> void:
 	for i in %SelectionContainer.get_children(): i.free()
 	for i in %ReadyIcons.get_children(): i.hide()
+	%LabelID.text = str("Lobby ID: \n", Master.game_manager.lobby_id)
+	%CopiedNotif.self_modulate.a = 0.0
 
 func _process(_delta: float) -> void:
 	if !%ReadyTimer.is_stopped():
@@ -67,3 +69,10 @@ func launch_all_beys():
 	%ReadyButton.button_pressed = false
 	for i in %SelectionContainer.get_children():
 		i.bey_assembler.launch(i.get_multiplayer_authority())
+
+
+func _on_copy_id_button_pressed() -> void:
+	DisplayServer.clipboard_set(str(Master.game_manager.lobby_id))
+	var t = get_tree().create_tween()
+	%CopiedNotif.self_modulate.a = 1.0
+	t.tween_property(%CopiedNotif, "self_modulate:a", 0.0, 0.8)

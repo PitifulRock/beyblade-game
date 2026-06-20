@@ -1,9 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://da3f1rx8u2hla"]
+[gd_scene load_steps=12 format=3 uid="uid://da3f1rx8u2hla"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
 [ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly/assembly_menu.gd" id="2_2o5xm"]
 [ext_resource type="Texture2D" uid="uid://b4ru15jy82xl1" path="res://textures/PROTO/Light/texture_04.png" id="3_u5isb"]
 [ext_resource type="Texture2D" uid="uid://cicwfjonq8j0e" path="res://textures/t_ui/White/2x/stop.png" id="4_2o5xm"]
+[ext_resource type="Texture2D" uid="uid://6bitx5e7ro1e" path="res://textures/t_ui/clipboard_2.png" id="5_l1eoo"]
+[ext_resource type="Texture2D" uid="uid://chb7l016ckhp5" path="res://textures/t_ui/clipboard.png" id="6_ocy00"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2o5xm"]
 content_margin_top = 0.0
@@ -46,6 +48,8 @@ corner_detail = 3
 font_size = 56
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
+shadow_size = 26
+shadow_color = Color(0, 0, 0, 0.409)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2o5xm"]
 properties/0/path = NodePath(".:ready_players")
@@ -176,5 +180,87 @@ horizontal_alignment = 1
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_2o5xm")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 32.0
+offset_top = 528.0
+offset_right = -684.0
+offset_bottom = -32.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LabelID" type="RichTextLabel" parent="Panel"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -33.0
+offset_right = 203.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lobby ID: 
+109775243706805379
+"
+fit_content = true
+vertical_alignment = 1
+
+[node name="ColorRect" type="Panel" parent="Panel/LabelID"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -50.357147
+offset_top = -23.5
+offset_bottom = 23.5
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="CopyButton" type="TextureButton" parent="Panel/LabelID/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -19.875
+offset_top = -19.75
+offset_right = 19.875
+offset_bottom = 19.75
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("5_l1eoo")
+texture_pressed = ExtResource("5_l1eoo")
+texture_hover = ExtResource("6_ocy00")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CopiedNotif" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_top = -24.0
+offset_right = 139.0
+offset_bottom = -2.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 16
+text = "Copied to clipboard"
+horizontal_alignment = 1
+vertical_alignment = 2
+
 [connection signal="toggled" from="ReadyButton" to="." method="_on_ready_button_toggled"]
 [connection signal="timeout" from="ReadyTimer" to="." method="_on_ready_timer_timeout"]
+[connection signal="pressed" from="Panel/LabelID/ColorRect/CopyButton" to="." method="_on_copy_id_button_pressed"]

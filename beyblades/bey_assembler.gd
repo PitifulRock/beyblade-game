@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func launch(bey_owner_id : int):
 	var bey : BeyBlade = BEY_SCENE.instantiate()
-	var world : World = Master.game_manager.current_scene
+	var world : GameWorld = Master.game_manager.current_scene
 	bey.name = str(bey_owner_id)
 	world.beyblade_path.add_child(bey)
 	bey.global_position = global_position

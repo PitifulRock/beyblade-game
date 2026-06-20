@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://gw53xyjj6vhu"]
+
+[ext_resource type="PackedScene" uid="uid://sqqen7ndtuwx" path="res://Niwl-Plants/3D/bush-1.glb" id="1_jc2cv"]
+[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://Niwl-Plants/Material/Mat_plant-1.tres" id="2_8oiwt"]
+
+[node name="bush-1" instance=ExtResource("1_jc2cv")]
+
+[node name="M3D_bush-1_LOD0" parent="." index="0"]
+material_override = ExtResource("2_8oiwt")

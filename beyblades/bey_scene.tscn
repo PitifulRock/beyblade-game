@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byjhpl3myw1rf" path="res://beyblades/beyblade.gd" id="1_vt533"]
 [ext_resource type="AudioStream" uid="uid://di6v0hk1ipdi1" path="res://sounds/clash_big.ogg" id="2_a658j"]
-[ext_resource type="Texture2D" uid="uid://crt5et8roogro" path="res://textures/t_particles/smoke_07.png" id="2_v6dka"]
+[ext_resource type="Texture2D" uid="uid://dlrhlt1iukyuy" path="res://textures/t_ui/White/1x/cross.png" id="2_v6dka"]
 [ext_resource type="AudioStream" uid="uid://mse83pn6rn3a" path="res://sounds/clash_med.ogg" id="3_3xdhn"]
 [ext_resource type="AudioStream" uid="uid://w4sx587dq3q8" path="res://sounds/clash_med_2.ogg" id="4_3kb01"]
 [ext_resource type="AudioStream" uid="uid://bq3fniw1qhtrh" path="res://sounds/clash_small.ogg" id="5_nn1wg"]
@@ -47,7 +47,7 @@ alpha_curve = SubResource("CurveTexture_n1s4q")
 transparency = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 0.34509805)
+albedo_color = Color(1, 1, 1, 0.6)
 albedo_texture = ExtResource("2_v6dka")
 billboard_mode = 3
 billboard_keep_scale = true
@@ -86,10 +86,10 @@ properties/2/replication_mode = 1
 properties/3/path = NodePath(".:burst_percentage")
 properties/3/spawn = true
 properties/3/replication_mode = 1
-properties/4/path = NodePath("Node3D/Label3D:text")
+properties/4/path = NodePath(".:dead")
 properties/4/spawn = true
 properties/4/replication_mode = 2
-properties/5/path = NodePath(".:dead")
+properties/5/path = NodePath("Node3D/NameTag:text")
 properties/5/spawn = true
 properties/5/replication_mode = 2
 
@@ -98,6 +98,7 @@ transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 mass = 0.07
 physics_material_override = SubResource("PhysicsMaterial_8uh7m")
 center_of_mass_mode = 1
+can_sleep = false
 contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_vt533")
@@ -113,10 +114,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 top_level = true
 
-[node name="Label3D" type="Label3D" parent="Node3D"]
+[node name="NameTag" type="Label3D" parent="Node3D"]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5000002, 0)
-pixel_size = 0.015
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9000002, 0)
+pixel_size = 0.013
 billboard = 1
 text = "9000"
 
@@ -127,7 +128,7 @@ shape = SubResource("SphereShape3D_3dcr0")
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
 amount = 232
-lifetime = 0.5
+lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_3dcr0")
 draw_pass_1 = SubResource("PlaneMesh_n1s4q")
 

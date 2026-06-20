@@ -18,3 +18,7 @@ var registry : Dictionary[BeyPart.PART_TYPE, Array] = {
 		preload("uid://b8eaeyuj64x3m"),
 	]
 }
+
+var stadiums : Dictionary[String, PackedScene] = {
+	"Standard" : preload("uid://bbgn044maydvg"),
+}

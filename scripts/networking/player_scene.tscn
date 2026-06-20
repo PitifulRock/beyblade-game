@@ -1,9 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk8eovjp50t2s"]
+[gd_scene load_steps=9 format=3 uid="uid://bk8eovjp50t2s"]
 
 [ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
-[ext_resource type="Texture2D" uid="uid://bkogjswam2hv3" path="res://textures/attack_icon.png" id="2_ssomj"]
+[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_kjn0h"]
 [ext_resource type="Script" uid="uid://ckqxbj2wgigdw" path="res://ui/player_ui.gd" id="3_kjn0h"]
+[ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="5_kjn0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2hjl"]
+next_pass = ExtResource("2_kjn0h")
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.6599284, 0.6077663, 1, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebo5w"]
+next_pass = ExtResource("2_kjn0h")
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ssomj"]
 properties/0/path = NodePath(".:position")
@@ -14,7 +29,10 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 properties/2/path = NodePath("Label3D:text")
 properties/2/spawn = true
-properties/2/replication_mode = 1
+properties/2/replication_mode = 2
+properties/3/path = NodePath(".:display_name")
+properties/3/spawn = true
+properties/3/replication_mode = 2
 
 [node name="FreeLookCamera" type="Camera3D"]
 script = ExtResource("1_a6s7x")
@@ -22,13 +40,31 @@ metadata/_custom_type_script = "uid://ba6s7kap2bki1"
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-pixel_size = 0.003
-billboard = 1
-texture = ExtResource("2_ssomj")
+[node name="Model" type="Node3D" parent="."]
+unique_name_in_owner = true
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model"]
+radius = 0.8
+radial_segments = 32
+rings = 16
+material = SubResource("StandardMaterial3D_e2hjl")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.083000004, -0.6065163)
+radius = 0.155
+radial_segments = 32
+rings = 16
+material = SubResource("StandardMaterial3D_ebo5w")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.083000004, -0.6065163)
+radius = 0.155
+radial_segments = 32
+rings = 16
+material = SubResource("StandardMaterial3D_ebo5w")
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.90000004, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 pixel_size = 0.01
 billboard = 1
 text = "display name"
@@ -155,6 +191,11 @@ text = "Leave Lobby"
 [node name="--------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 8.66)
 layout_mode = 2
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000014, -4.1)
+billboard = 1
+texture = ExtResource("5_kjn0h")
 
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/LabelID/CopyButton" to="CanvasLayer/PlayerUI" method="_on_copy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/Resume" to="CanvasLayer/PlayerUI" method="_on_resume_pressed"]

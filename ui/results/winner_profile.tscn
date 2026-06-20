@@ -1,0 +1,57 @@
+[gd_scene load_steps=5 format=3 uid="uid://38he62wl8n72"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_78t8x"]
+[ext_resource type="Script" uid="uid://iii0r70kn1my" path="res://ui/results/winner_profile.gd" id="1_omu82"]
+[ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="2_xspe4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_78t8x"]
+font_size = 26
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="WinnerProfile" type="Control"]
+custom_minimum_size = Vector2(245, 357)
+layout_mode = 3
+anchor_right = 0.2126736
+anchor_bottom = 0.5509259
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_78t8x")
+script = ExtResource("1_omu82")
+metadata/_edit_use_anchors_ = true
+
+[node name="Image" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = -98.5
+offset_right = 74.5
+offset_bottom = 50.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xspe4")
+expand_mode = 1
+
+[node name="Name" type="Label" parent="Image"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -105.5
+offset_top = 12.0
+offset_right = 104.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "player name"
+label_settings = SubResource("LabelSettings_78t8x")
+horizontal_alignment = 1
+autowrap_mode = 2

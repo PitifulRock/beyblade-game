@@ -24,10 +24,13 @@ var stored_engine_spin : float
 
 var collision_point : Vector3
 var last_collided_bey : BeyBlade
-var game_world : World
+var game_world : GameWorld
+
+@onready var name_tag: Label3D = %NameTag
 
 func _ready() -> void:
 	game_world = Master.game_manager.current_scene
+	name_tag.text=Master.player_list[name.to_int()].display_name
 	_physics_setup()
 
 func _spawned():
@@ -73,10 +76,10 @@ func _physics_process(_delta: float) -> void:
 			current_spin = lerpf(current_spin, 0.0, Manager.lerp_weight(0.08))
 			%SpinSound.volume_db = lerpf(%SpinSound.volume_db, -80, Manager.lerp_weight(0.08))
 			if !dead: 
-				die(World.POINT_TYPE.STAMINA)
+				die(GameWorld.POINT_TYPE.STAMINA)
 		angular_velocity.y = current_spin
 
-		%Label3D.text = str(int(abs(current_spin)), ", ", int(burst_percentage))
+		#%Label3D.text = str(int(abs(current_spin)), ", ", int(burst_percentage))
 		
 		if !dead:
 			if stored_engine_spin != engine_spin: 
@@ -88,22 +91,22 @@ func _physics_process(_delta: float) -> void:
 			rotation.x = lerpf(rotation.x, 0, wobble_decrease)
 			rotation.z = lerpf(rotation.z, 0, wobble_decrease)
 			
-			$CenterTether.look_at(Vector3.ZERO)
+			$CenterTether.look_at(game_world.stadium_path.global_position)
 			apply_central_force(get_orbital_force())
 			apply_central_force(get_center_pull_force())
 		
 	if burst_percentage >= 100 and !dead: 
-		die(World.POINT_TYPE.DESTRUCTION)
+		die(GameWorld.POINT_TYPE.DESTRUCTION)
 		burst()
 
-func die(point_type : World.POINT_TYPE):
+func die(point_type : GameWorld.POINT_TYPE):
 	if !Master.is_host: return
-	var point_winner = last_collided_bey if point_type != World.POINT_TYPE.STAMINA else null
+	var point_winner = last_collided_bey if point_type != GameWorld.POINT_TYPE.STAMINA else null
 	var winner_id = point_winner.name.to_int() if point_winner else -1
 	dead = true
 	game_world._bey_death(point_type, winner_id)
 	
-	if point_type == World.POINT_TYPE.DESTRUCTION:
+	if point_type == GameWorld.POINT_TYPE.DESTRUCTION:
 		burst.rpc()
 
 @rpc("any_peer", "call_local", "reliable")
@@ -126,11 +129,11 @@ func get_spin_loss(spin_diff : float) -> float:
 	return Manager.lerp_weight(adjusted)
 func get_orbital_force() -> Vector3:
 	var dir = $CenterTether.global_basis.x
-	var force = dir*0.0025 * current_spin/global_position.distance_to(Vector3.ZERO)
+	var force = dir*0.0025 * current_spin/global_position.distance_to(game_world.stadium_path.global_position)
 	return force * Vector3(1,0,1)
 func get_center_pull_force() -> Vector3:
 	var dir = $CenterTether.global_basis.z
-	var force = dir*-0.0015 * spin_speed * global_position.distance_to(Vector3.ZERO) * (stamina+1)
+	var force = dir*-0.0015 * spin_speed * global_position.distance_to(game_world.stadium_path.global_position) * (stamina+1)
 	return force * Vector3(1,0,1)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:

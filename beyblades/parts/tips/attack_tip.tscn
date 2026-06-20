@@ -1,12 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://don4m0xc3m072"]
+[gd_scene load_steps=6 format=3 uid="uid://don4m0xc3m072"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_prrpm"]
-[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="2_jfkw0"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e8t56"]
-albedo_color = Color(0.32694268, 0.8766849, 1, 1)
-albedo_texture = ExtResource("2_jfkw0")
-uv1_triplanar = true
+[ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="2_ljwy2"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vk1a3"]
 points = PackedVector3Array(0, -0.265625, -0.34, -0.24042287, -0.265625, -0.24042287, 0, 0.265625, 0, 0.2403563, -0.265625, -0.24042287, -0.34, -0.265625, -6.6548586e-05, 0, -0.265625, 0.34, 0.2403563, -0.265625, 0.2403563, 0.34, -0.265625, 0, -0.24042287, -0.265625, 0.2403563)
@@ -33,33 +28,35 @@ transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.32
 radius = 0.34
 height = 0.53125
 cone = true
-material = SubResource("StandardMaterial3D_e8t56")
+material = ExtResource("2_ljwy2")
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 3.8893106e-08, 0.2031402, 0)
 radius = 0.25
 height = 0.044
 sides = 6
-material = SubResource("StandardMaterial3D_e8t56")
+material = ExtResource("2_ljwy2")
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 3.8893106e-08, 0.38406116, 0)
 radius = 0.36
 height = 0.044
 sides = 6
-material = SubResource("StandardMaterial3D_e8t56")
+material = ExtResource("2_ljwy2")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
 size = Vector3(0.15, 0.08, 0.1)
-material = SubResource("StandardMaterial3D_e8t56")
+material = ExtResource("2_ljwy2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.3221675e-08, 0.265625, 0)
+visible = false
 shape = SubResource("ConvexPolygonShape3D_vk1a3")
 
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29313195, 0)
+visible = false
 shape = SubResource("CylinderShape3D_83hj3")
 
 [node name="Placement" type="Marker3D" parent="."]
@@ -67,4 +64,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+visible = false
 shape = SubResource("BoxShape3D_qherh")

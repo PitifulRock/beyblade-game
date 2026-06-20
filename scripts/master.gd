@@ -2,11 +2,20 @@ extends Node
 
 signal lobby_closed
 
+var game_manager : GameManager
+
 var local_player : Player
 var is_host := false
+
 var player_list : Dictionary[int, Player] = {}
-var game_manager : GameManager
-var pickup_success := false
+var avatar_cache : Dictionary[int, Texture2D] = {}
+
+func _ready():
+	Steam.avatar_loaded.connect(_on_avatar_loaded)
+
+func get_host_id():
+	if !game_manager or !game_manager.lobby_id: return null
+	return Steam.getLobbyData(game_manager.lobby_id, "host_id").to_int()
 
 @rpc("any_peer", "call_local", "reliable")
 func delete_node(node_path: NodePath):
@@ -38,3 +47,19 @@ func spawn_node_for_peers(scene_path: NodePath, spawn_position:= Vector3.ZERO, s
 		node_path.add_child(scene_inst)
 		if disable_node: scene_inst.process_mode = scene_inst.PROCESS_MODE_DISABLED
 		scene_inst.position = spawn_position
+
+func load_avatar(steam_id):
+	var id = steam_id if steam_id != 1 else get_host_id()
+	Steam.getPlayerAvatar(3, id)
+	Steam.requestUserInformation(id, false)
+	Console._print("Player Caching:  ", id)
+
+func _on_avatar_loaded(avatar_id: int, size: int, data: Array):
+	var avatar_image: Image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, data)
+	if size > 128:
+		avatar_image.resize(128, 128, Image.INTERPOLATE_LANCZOS)
+
+	var avatar_texture: ImageTexture = ImageTexture.create_from_image(avatar_image)
+	
+	avatar_cache[avatar_id] = avatar_texture
+	Console._print(avatar_id, "cached")

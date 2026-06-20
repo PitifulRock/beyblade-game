@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://tnmdki03xsmp"]
+
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_atjnu"]
+[ext_resource type="Script" uid="uid://yc7sj5q8kojl" path="res://scripts/DebugConsole.gd" id="1_k7vlk"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_atjnu"]
+font_size = 12
+
+[node name="Control" type="Control"]
+z_index = 99
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_atjnu")
+script = ExtResource("1_k7vlk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 868.0
+offset_bottom = 420.0
+color = Color(0, 0, 0, 0.5803922)
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -16640.0
+offset_right = 876.0
+offset_bottom = 412.0
+theme_override_font_sizes/font_size = 28
+text = "cunt"
+label_settings = SubResource("LabelSettings_atjnu")
+vertical_alignment = 2
+autowrap_mode = 3
+text_overrun_behavior = 2

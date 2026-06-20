@@ -47,9 +47,11 @@ func _on_lobby_created(result: int, passed_lobby_id:int):
 		multiplayer.peer_connected.connect(_add_player)
 		multiplayer.peer_disconnected.connect(_remove_player)
 		
-		switch_scene(world_scene)
-		await scene_ready
+		await switch_scene(world_scene)
+		
 		_add_player()
+		
+		Steam.setLobbyData(lobby_id, "host_id", str(Steam.getSteamID()))
 		print("Lobby ID: ", lobby_id)
 
 func join_lobby(passed_lobby_id : int):
@@ -64,13 +66,14 @@ func _on_lobby_joined(passed_lobby_id : int, _perms : int, _locked : bool, _resp
 	peer.server_relay = true
 	peer.create_client(Steam.getLobbyOwner(passed_lobby_id))
 	multiplayer.multiplayer_peer = peer
-	switch_scene(world_scene)
+	switch_scene.call_deferred(world_scene)
 	
 	is_joining = false
 
 func _add_player(id : int = 1):
-	if current_scene is not World: return
-	if multiplayer.is_server() and current_scene is World:
+	if current_scene is not GameWorld: 
+		return
+	if multiplayer.is_server():
 		var player = player_scene.instantiate()
 		player.name = str(id)
 		current_scene.player_path.call_deferred("add_child", player)
@@ -99,16 +102,18 @@ func _on_lobby_closed():
 	switch_scene(menu_scene)
 
 func switch_scene(scene : PackedScene):
-	current_scene.queue_free()
-	await get_tree().process_frame
+	if current_scene:
+		current_scene.queue_free()
 	
 	var inst = scene.instantiate()
 	add_child(inst)
 	
-	await get_tree().process_frame
+	if not inst.is_node_ready():
+		await inst.ready
+	
 	current_scene = inst
 	
-	if inst is World:
+	if inst is GameWorld:
 		$MultiplayerSpawner.spawn_path = inst.player_path.get_path()
 	else:
 		$MultiplayerSpawner.spawn_path = inst.get_path()

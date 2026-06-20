@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bd17qqugnkbai"]
+
+[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="1_7b2d8"]
+
+[resource]
+next_pass = ExtResource("1_7b2d8")
+diffuse_mode = 3
+specular_mode = 1
+roughness = 0.0

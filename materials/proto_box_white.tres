@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://d0svm1q5s7khq"]
+
+[ext_resource type="Texture2D" uid="uid://b3l03awbsnmxc" path="res://textures/PROTO/Light/texture_11.png" id="1_kdark"]
+[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_7cs52"]
+
+[resource]
+next_pass = ExtResource("2_7cs52")
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_kdark")
+roughness = 0.0

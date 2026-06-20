@@ -1,0 +1,18 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://csbuagip1ki5s"]
+
+[ext_resource type="Texture2D" uid="uid://btvqpjpeo7uwj" path="res://environment_models/Niwl-Plants/Texture/T_Plants-TreeBranches.png" id="1_ed236"]
+[ext_resource type="Texture2D" uid="uid://b2tdtw3yklqq6" path="res://environment_models/Niwl-Plants/Texture/T_Plants_Roughness.png" id="2_io5d6"]
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.5356666, 0.70692277, 0.5422942, 1)
+albedo_texture = ExtResource("1_ed236")
+roughness = 0.0
+roughness_texture = ExtResource("2_io5d6")
+roughness_texture_channel = 4
+billboard_keep_scale = true

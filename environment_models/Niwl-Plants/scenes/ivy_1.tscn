@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dayxmkcgbntwy"]
+
+[ext_resource type="PackedScene" uid="uid://ckqnxxvmxkp7v" path="res://Niwl-Plants/3D/ivy_1.glb" id="1_f24nq"]
+[ext_resource type="Material" uid="uid://b6uutkp467q1v" path="res://Niwl-Plants/Material/Mat_plant-2.tres" id="2_2qgxf"]
+
+[node name="ivy_1" instance=ExtResource("1_f24nq")]
+
+[node name="M3D_ivy-1_LOD0" parent="." index="0"]
+material_override = ExtResource("2_2qgxf")

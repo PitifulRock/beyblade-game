@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://1rpv2xab6vif"]
+
+[ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://textures/PROTO/Orange/texture_05.png" id="1_vxtuv"]
+[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_7r7fs"]
+
+[resource]
+next_pass = ExtResource("2_7r7fs")
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_vxtuv")
+roughness = 0.0
