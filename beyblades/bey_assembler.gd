@@ -2,20 +2,57 @@ extends Node3D
 class_name BeyAssembler
 
 const BEY_SCENE = preload("uid://xkw4aloeefna")
+const LAUNCH_HEIGHT := 1.0
 
 @export var disc : BeyDisc
 @export var core : BeyCore
 @export var tip : BeyTip
 
+var bey_ready := false
+var placing_launch := false
 var prev_pos : Vector3
 
-func _ready() -> void:
-	pass
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("left_click"):
+		if placing_launch and bey_ready: 
+			lock_in_launch()
 
-func launch(bey_owner_id : int):
+func prepare_launch():
+	show()
+	if !is_multiplayer_authority(): return
+	%LaunchSprite.modulate = Color.LIGHT_GREEN
+	bey_ready = true
+	placing_launch = true
+
+func _process(_delta: float) -> void:
+	if !is_multiplayer_authority(): return
+	if placing_launch: shoot_ray()
+
+func shoot_ray():
+	var cam = get_viewport().get_camera_3d()
+	var mouse_pos = get_viewport().get_mouse_position()
+	var ray_length = 100
+	var space = get_world_3d().direct_space_state
+	var ray_query = PhysicsRayQueryParameters3D.new()
+	ray_query.from = cam.project_ray_origin(mouse_pos)
+	ray_query.to = ray_query.from + cam.project_ray_normal(mouse_pos) * ray_length
+	var ray_result = space.intersect_ray(ray_query)
+	
+	if !ray_result.is_empty(): 
+		if ray_result["collider"].is_in_group("stadium"):
+			global_position = ray_result["position"] + Vector3(0,LAUNCH_HEIGHT,0)
+
+func lock_in_launch():
+	bey_ready = false
+	placing_launch = false
+	Effects.play_ui(&"ButtonPress")
+
+func launch():
+	launch_visuals()
+	
 	var bey : BeyBlade = BEY_SCENE.instantiate()
 	var world : GameWorld = Master.game_manager.current_scene
-	bey.name = str(bey_owner_id)
+	bey.name = str(get_multiplayer_authority())
 	world.beyblade_path.add_child(bey)
 	bey.global_position = global_position
 	bey.process_mode = Node.PROCESS_MODE_DISABLED
@@ -28,6 +65,12 @@ func launch(bey_owner_id : int):
 	bey.process_mode = Node.PROCESS_MODE_INHERIT
 	
 	bey._spawned()
+
+func launch_visuals():
+	%LaunchSound.play()
+	%LaunchParticles.emitting = true
+	await get_tree().create_timer(0.8).timeout
+	hide()
 
 func spawn_part(part_node : BeyPart, location : BeyBlade):
 	var part_dup = part_node.duplicate()

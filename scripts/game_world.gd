@@ -17,8 +17,6 @@ const point_names = {
 	POINT_TYPE.WINNER : "Winner",
 }
 
-@onready var place_cam: Camera3D = $PlaceCam
-
 @export var assembly_menu : Control
 @export var results_menu : Control
 
@@ -46,10 +44,10 @@ func change_game_state(new_state : GAME_STATE):
 			for i in beyblade_path.get_children(): i.queue_free()
 			for i in particle_path.get_children(): i.queue_free()
 		GAME_STATE.PLACEMENT:
+			%PlacementCam.make_current()
 			assembly_menu.hide()
-			place_cam.current = true
 		GAME_STATE.BATTLE:
-			Master.local_player.current = true
+			Master.local_player.make_current()
 		GAME_STATE.RESULTS:
 			results_menu.show()
 			results_menu.start_scoring(round_points)
@@ -106,7 +104,7 @@ func change_stadium():
 		i.queue_free()
 		
 	var stadium_inst = stadium_scene.instantiate()
-	stadium_path.add_child(stadium_inst)
+	stadium_path.add_child(stadium_inst, true)
 
 @rpc("any_peer", "call_local", "reliable")
 func _on_bey_burst():

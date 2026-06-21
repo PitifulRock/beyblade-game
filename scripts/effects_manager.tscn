@@ -1,0 +1,137 @@
+[gd_scene load_steps=17 format=3 uid="uid://ci2b4utqctojq"]
+
+[ext_resource type="Script" uid="uid://bcmnh05ulyqla" path="res://scripts/effects_manager.gd" id="1_55hjv"]
+[ext_resource type="Shader" uid="uid://dm2o2guo1q7bt" path="res://shaders/transitions.gdshader" id="2_2sqwq"]
+[ext_resource type="AudioStream" uid="uid://db0yyis10ugca" path="res://sounds/timer_sound.ogg" id="2_eomv1"]
+[ext_resource type="Script" uid="uid://c04wxnkh6qydk" path="res://scripts/audio_library.gd" id="2_n28ws"]
+[ext_resource type="AudioStream" uid="uid://bqrf451nu44iu" path="res://sounds/score.ogg" id="3_q2dd7"]
+[ext_resource type="AudioStream" uid="uid://r4qjb8stej4g" path="res://sounds/ui_hover.ogg" id="3_qygxe"]
+[ext_resource type="AudioStream" uid="uid://b76kcpmdpj2oo" path="res://sounds/countdown.ogg" id="4_dh1bg"]
+[ext_resource type="AudioStream" uid="uid://c5ljmfe8fd247" path="res://sounds/ui_click.ogg" id="4_eh5va"]
+[ext_resource type="AudioStream" uid="uid://d08dakmmhmif3" path="res://sounds/ui_bubbles.ogg" id="5_eh5va"]
+[ext_resource type="AudioStream" uid="uid://ktx267gtbtx1" path="res://sounds/ui_bubbles_down.ogg" id="6_eomv1"]
+
+[sub_resource type="Resource" id="Resource_eomv1"]
+script = ExtResource("2_n28ws")
+library = Dictionary[StringName, AudioStream]({
+&"Countdown": ExtResource("4_dh1bg"),
+&"Score": ExtResource("3_q2dd7"),
+&"Timer": ExtResource("2_eomv1")
+})
+metadata/_custom_type_script = "uid://c04wxnkh6qydk"
+
+[sub_resource type="Resource" id="Resource_q2dd7"]
+script = ExtResource("2_n28ws")
+library = Dictionary[StringName, AudioStream]({
+&"ButtonHover": ExtResource("3_qygxe"),
+&"ButtonPress": ExtResource("4_eh5va"),
+&"TransitionIn": ExtResource("5_eh5va"),
+&"TransitionOut": ExtResource("6_eomv1")
+})
+metadata/_custom_type_script = "uid://c04wxnkh6qydk"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b2b"]
+shader = ExtResource("2_2sqwq")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 2
+shader_parameter/position = Vector2(0.5, 0.5)
+shader_parameter/invert = true
+shader_parameter/grid_size = Vector2(38.4, 21.6)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/global_x_mirror = false
+shader_parameter/global_y_mirror = false
+shader_parameter/local_x_mirror = false
+shader_parameter/local_y_mirror = false
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/cumulative_stagger_flip = false
+shader_parameter/cumulative_stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 16
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_4yj8n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_5l2jg"]
+resource_name = "transition"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 4.3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yk5ew"]
+_data = {
+&"RESET": SubResource("Animation_4yj8n"),
+&"transition": SubResource("Animation_5l2jg")
+}
+
+[node name="EffectsManager" type="Node"]
+script = ExtResource("1_55hjv")
+sfx_lib = SubResource("Resource_eomv1")
+ui_lib = SubResource("Resource_q2dd7")
+
+[node name="ScreenTransition" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="ScreenTransition"]
+material = SubResource("ShaderMaterial_p2b2b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.06840821, 0.07221983, 0.10211443, 1)
+
+[node name="TransitionAnim" type="AnimationPlayer" parent="ScreenTransition"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_yk5ew")
+}
+
+[node name="MusicStage" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="MusicOverride" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"Music"
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"
+
+[node name="UIPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+bus = &"SFX"

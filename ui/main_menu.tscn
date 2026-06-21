@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b42uq41g0gs64"]
+[gd_scene load_steps=4 format=3 uid="uid://b42uq41g0gs64"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_t7e0r"]
 [ext_resource type="Script" uid="uid://c1xve26ib6yd0" path="res://ui/main_menu.gd" id="2_0dkrt"]
+[ext_resource type="Script" uid="uid://cyep65deu3ol7" path="res://ui/ui_button.gd" id="3_wk0pr"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -13,50 +14,10 @@ grow_vertical = 2
 theme = ExtResource("1_t7e0r")
 script = ExtResource("2_0dkrt")
 
-[node name="BorderR" type="Control" parent="."]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -384.0
-offset_right = 171.0
-offset_bottom = 384.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="TextureRect2" type="TextureRect" parent="BorderR"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1195.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
-
-[node name="BorderL" type="Control" parent="."]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = -171.0
-offset_top = -384.0
-offset_bottom = 384.0
-grow_vertical = 2
-
-[node name="TextureRect" type="TextureRect" parent="BorderL"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1195.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Name" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -66,7 +27,7 @@ offset_right = 704.0
 offset_bottom = 122.0
 theme_override_font_sizes/normal_font_size = 56
 bbcode_enabled = true
-text = "[wave]game"
+text = "gayblade"
 fit_content = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -83,6 +44,7 @@ custom_minimum_size = Vector2(0, 68.11)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Host Lobby"
+script = ExtResource("3_wk0pr")
 
 [node name="------------" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 8.66)
@@ -95,6 +57,7 @@ custom_minimum_size = Vector2(0, 68.11)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Join Lobby"
+script = ExtResource("3_wk0pr")
 
 [node name="EnterLobbyID" type="LineEdit" parent="VBoxContainer/JoinButton"]
 unique_name_in_owner = true
@@ -140,11 +103,13 @@ custom_minimum_size = Vector2(0, 8.66)
 layout_mode = 2
 
 [node name="SingleplayerButton" type="Button" parent="VBoxContainer"]
+visible = false
 texture_filter = 1
 custom_minimum_size = Vector2(0, 68.11)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Singleplayer"
+script = ExtResource("3_wk0pr")
 
 [node name="--------------" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 8.66)
@@ -156,6 +121,7 @@ custom_minimum_size = Vector2(0, 68.11)
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Quit"
+script = ExtResource("3_wk0pr")
 
 [connection signal="pressed" from="VBoxContainer/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/JoinButton" to="." method="_on_join_button_pressed"]

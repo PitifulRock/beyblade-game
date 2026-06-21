@@ -1,4 +1,4 @@
-extends Control
+extends TabContainer
 
 const BEY_PICKER = preload("uid://bc0qxhg451sac")
 
@@ -9,7 +9,12 @@ const BEY_PICKER = preload("uid://bc0qxhg451sac")
 		_on_ready_players_changed()
 @export var spawn_positions : Array[Marker3D]
 
+var ready_count_started := false
+var launch_count_started := false
+
 func _ready() -> void:
+	current_tab = 0
+	hide()
 	for i in %SelectionContainer.get_children(): i.free()
 	for i in %ReadyIcons.get_children(): i.hide()
 	%LabelID.text = str("Lobby ID: \n", Master.game_manager.lobby_id)
@@ -18,11 +23,30 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if !%ReadyTimer.is_stopped():
 		%ReadyTimerBar.value = (%ReadyTimer.wait_time-%ReadyTimer.time_left)/%ReadyTimer.wait_time
-		%ReadyTimerLabel.text = str(ceili(%ReadyTimer.time_left))
-		%ReadyTimerLabel.visible = true
+		if !ready_count_started: ready_countdown()
 	else:
 		%ReadyTimerBar.value = 0
 		%ReadyTimerLabel.visible = false
+
+func ready_countdown():
+	ready_count_started = true
+	%ReadyTimerLabel.visible = true
+	for i in ceili(%ReadyTimer.time_left):
+		if %ReadyTimerLabel.visible == false: break
+		Effects.play_sfx(&"Timer")
+		%ReadyTimerLabel.text = str(int(%ReadyTimer.wait_time - i))
+		await get_tree().create_timer(1.0).timeout
+	ready_count_started = false
+
+func launch_countdown():
+	%PlaceTimer.start()
+	launch_count_started = true
+	for i in ceili(%PlaceTimer.time_left):
+		if %PlaceTimerLabel.visible == false: break
+		Effects.play_sfx(&"Countdown")
+		%PlaceTimerLabel.text = str(int(%PlaceTimer.wait_time - i))
+		await get_tree().create_timer(1.0).timeout
+	launch_count_started = false
 
 func add_selection_menu(player_id : int):
 	var picker = BEY_PICKER.instantiate()
@@ -61,14 +85,15 @@ func _on_ready_players_changed():
 
 func _on_ready_timer_timeout() -> void:
 	if not multiplayer.is_server(): return
-	launch_all_beys.rpc()
+	start_bey_placement.rpc()
 
 @rpc("any_peer", "call_local", "reliable")
-func launch_all_beys():
-	hide()
+func start_bey_placement():
 	%ReadyButton.button_pressed = false
+	current_tab = 1
+	launch_countdown()
 	for i in %SelectionContainer.get_children():
-		i.bey_assembler.launch(i.get_multiplayer_authority())
+		i.bey_assembler.prepare_launch()
 
 
 func _on_copy_id_button_pressed() -> void:
@@ -76,3 +101,16 @@ func _on_copy_id_button_pressed() -> void:
 	var t = get_tree().create_tween()
 	%CopiedNotif.self_modulate.a = 1.0
 	t.tween_property(%CopiedNotif, "self_modulate:a", 0.0, 0.8)
+
+
+func _on_place_timer_timeout() -> void:
+	for i in %SelectionContainer.get_children():
+		i.bey_assembler.launch()
+	
+	%PlaceTip.hide()
+	%PlaceTimerLabel.text = "Launch!"
+	await get_tree().create_timer(0.8).timeout
+	
+	hide()
+	%PlaceTip.show()
+	current_tab = 0

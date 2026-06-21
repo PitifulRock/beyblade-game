@@ -1,6 +1,6 @@
 extends Control
 
-var player_pfp : TextureRect:
+var player_pfp : ImageTexture:
 	set(val):
 		player_pfp = val
 		%Image.texture = val

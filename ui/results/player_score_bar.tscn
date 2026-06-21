@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddqna4jy4mno4"]
+[gd_scene load_steps=7 format=3 uid="uid://ddqna4jy4mno4"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_3asek"]
 [ext_resource type="Script" uid="uid://iudcfd8fbbxq" path="res://ui/results/player_score_bar.gd" id="2_i17de"]
 [ext_resource type="Texture2D" uid="uid://l7gh5dfa7y0s" path="res://textures/crown.png" id="3_nd7yc"]
+[ext_resource type="AudioStream" uid="uid://bqrf451nu44iu" path="res://sounds/score.ogg" id="4_nd7yc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_68ofe"]
 line_spacing = -8.875
@@ -105,3 +106,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_i17de")
+
+[node name="ScoreNoise" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_nd7yc")
+bus = &"SFX"

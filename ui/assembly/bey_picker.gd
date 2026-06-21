@@ -55,12 +55,15 @@ func spawn_visuals(part : BeyPart.PART_TYPE):
 func _disc_button_pressed(increase : bool):
 	if !is_multiplayer_authority(): return
 	current_disc += 1 if increase else -1
+	Effects.play_ui(&"ButtonPress")
 func _core_button_pressed(increase : bool):
 	if !is_multiplayer_authority(): return
 	current_core += 1 if increase else -1
+	Effects.play_ui(&"ButtonPress")
 func _tip_button_pressed(increase : bool):
 	if !is_multiplayer_authority(): return
 	current_tip += 1 if increase else -1
+	Effects.play_ui(&"ButtonPress")
 
 func _update_visuals():
 	var disc : BeyDisc = %DiscDisplay.get_child(current_disc)

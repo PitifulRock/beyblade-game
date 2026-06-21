@@ -1,40 +1,26 @@
-[gd_scene load_steps=13 format=3 uid="uid://df7fnm6hxiyhv"]
+[gd_scene load_steps=11 format=3 uid="uid://df7fnm6hxiyhv"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_g8hds"]
 [ext_resource type="Script" uid="uid://dkp727mi4bl73" path="res://ui/results/results_screen.gd" id="2_gr0du"]
 [ext_resource type="PackedScene" uid="uid://ddqna4jy4mno4" path="res://ui/results/player_score_bar.tscn" id="3_68fd2"]
 [ext_resource type="PackedScene" uid="uid://38he62wl8n72" path="res://ui/results/winner_profile.tscn" id="4_gr0du"]
 
-[sub_resource type="Gradient" id="Gradient_ciowv"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.3, 0.6)
-colors = PackedColorArray(0.09612919, 0.131006, 0.27546638, 1, 0.12946904, 0.16863406, 0.33573282, 1, 0.0959123, 0.103741385, 0.17972016, 1)
-metadata/_snap_enabled = true
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gr0du"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ciowv"]
-noise_type = 2
-frequency = 0.0403
-fractal_octaves = 1
-cellular_return_type = 0
-domain_warp_enabled = true
-domain_warp_type = 2
-domain_warp_frequency = 0.04
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_68ofe"]
-width = 1024
-noise = SubResource("FastNoiseLite_ciowv")
-color_ramp = SubResource("Gradient_ciowv")
-seamless = true
-
-[sub_resource type="LabelSettings" id="LabelSettings_g8hds"]
-font_size = 64
-outline_size = 15
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_gr0du"]
-font_size = 59
-outline_size = 15
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="Animation" id="Animation_68fd2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_gr0du"]
 resource_name = "round_finish"
@@ -52,93 +38,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%MapName:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%Title:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_68fd2"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%MapName:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%Title:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rky4s"]
 _data = {
@@ -146,59 +45,108 @@ _data = {
 &"round_finish": SubResource("Animation_gr0du")
 }
 
-[node name="ResultsScreen" type="Control"]
-layout_mode = 3
+[sub_resource type="LabelSettings" id="LabelSettings_gr0du"]
+font_size = 59
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8hds"]
+font_size = 64
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[node name="ResultsScreen" type="TabContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_g8hds")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gr0du")
+current_tab = 1
+clip_tabs = false
+tabs_visible = false
 script = ExtResource("2_gr0du")
 
-[node name="BG" type="TextureRect" parent="."]
+[node name="ResultsAnim" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../RoundFinish/RoundFinish")
+libraries = {
+&"": SubResource("AnimationLibrary_rky4s")
+}
+
+[node name="RoundFinish" type="Control" parent="."]
 visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 0
+
+[node name="RoundFinish" type="Label" parent="RoundFinish"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("NoiseTexture2D_68ofe")
-stretch_mode = 1
+mouse_filter = 1
+text = "Round Over!"
+label_settings = SubResource("LabelSettings_gr0du")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="ScoresContainer" type="HBoxContainer" parent="."]
+[node name="Scoring" type="Control" parent="."]
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 1
+
+[node name="ScoresContainer" type="HBoxContainer" parent="Scoring"]
 unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.06944445
-anchor_top = 0.28858024
-anchor_right = 0.9305556
-anchor_bottom = 0.90123457
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" parent="ScoresContainer" instance=ExtResource("3_68fd2")]
+[node name="Control" parent="Scoring/ScoresContainer" instance=ExtResource("3_68fd2")]
 layout_mode = 2
 
-[node name="WinnerContainer" type="HBoxContainer" parent="."]
+[node name="ScoringTitle" type="Label" parent="Scoring"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -576.0
+offset_right = 576.0
+offset_bottom = 161.0
+grow_horizontal = 2
+text = "Round  Results"
+label_settings = SubResource("LabelSettings_g8hds")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Winner" type="Control" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 2
+
+[node name="WinnerContainer" type="HBoxContainer" parent="Winner"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 80.0
-offset_top = 187.0
-offset_right = 1072.0
-offset_bottom = 584.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 alignment = 1
 
-[node name="WinnerProfile" parent="WinnerContainer" instance=ExtResource("4_gr0du")]
+[node name="WinnerProfile" parent="Winner/WinnerContainer" instance=ExtResource("4_gr0du")]
 layout_mode = 2
+mouse_filter = 1
 
-[node name="Title" type="Label" parent="."]
+[node name="WinnerTitle" type="Label" parent="Winner"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -207,59 +155,47 @@ offset_left = -576.0
 offset_right = 576.0
 offset_bottom = 179.0
 grow_horizontal = 2
-text = "Round  Results"
+mouse_filter = 1
+text = "Winner!"
 label_settings = SubResource("LabelSettings_g8hds")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MapName" type="Label" parent="."]
-unique_name_in_owner = true
+[node name="MapReveal" type="Control" parent="."]
 visible = false
+layout_mode = 2
+mouse_filter = 1
+metadata/_tab_index = 3
+
+[node name="MapTitle" type="Label" parent="MapReveal"]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
 offset_left = -576.0
-offset_top = -89.5
 offset_right = 576.0
-offset_bottom = 89.5
+offset_bottom = 161.0
+grow_horizontal = 2
+mouse_filter = 1
+text = "Next Map:"
+label_settings = SubResource("LabelSettings_g8hds")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapName" type="Label" parent="MapReveal"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 text = "Standard"
 label_settings = SubResource("LabelSettings_gr0du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="RoundFinish" type="Label" parent="."]
-unique_name_in_owner = true
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -576.0
-offset_top = -89.5
-offset_right = 576.0
-offset_bottom = 89.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Round Over!
-"
-label_settings = SubResource("LabelSettings_gr0du")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ResultsAnim" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-root_node = NodePath("../RoundFinish")
-libraries = {
-&"": SubResource("AnimationLibrary_rky4s")
-}
-
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://ddqna4jy4mno4")
-spawn_path = NodePath("../ScoresContainer")
+spawn_path = NodePath("../Scoring/ScoresContainer")

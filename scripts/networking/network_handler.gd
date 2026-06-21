@@ -102,6 +102,8 @@ func _on_lobby_closed():
 	switch_scene(menu_scene)
 
 func switch_scene(scene : PackedScene):
+	await Effects.transition()
+	
 	if current_scene:
 		current_scene.queue_free()
 	

@@ -1,4 +1,4 @@
-extends Control
+extends TabContainer
 
 const SCORE_BAR = preload("uid://ddqna4jy4mno4")
 const WINNER_PROFILE = preload("uid://38he62wl8n72")
@@ -11,8 +11,8 @@ func _ready() -> void:
 	hide()
 
 func start_scoring(player_points : Dictionary[int, Array]):
-	%ScoresContainer.hide()
-	%WinnerContainer.hide()
+	world = Master.game_manager.current_scene
+	current_tab = 0
 	
 	var round_winner_id : int
 	for player in player_points.keys():
@@ -39,12 +39,7 @@ func start_scoring(player_points : Dictionary[int, Array]):
 	show_scoring(player_points)
 
 func show_scoring(player_points : Dictionary[int, Array]):
-	world = Master.game_manager.current_scene
-	%Title.text = "Round  Results"
-	%Title.show()
-	%ScoresContainer.show()
-	%WinnerContainer.hide()
-	%MapName.hide()
+	current_tab = 1
 	
 	for i in player_points.keys():
 		if player_points[i].has(GameWorld.POINT_TYPE.WINNER): 
@@ -61,7 +56,7 @@ func show_scoring(player_points : Dictionary[int, Array]):
 		if id != longest_score:
 			score_bar.tween_scores(player_points[id])
 	if longest_score != null:
-		await %ScoresContainer.get_node(str(longest_score)).tween_scores(player_points[longest_score])
+		await %ScoresContainer.get_node(str(longest_score)).tween_scores(player_points[longest_score], true)
 	
 	await get_tree().create_timer(0.4).timeout
 	
@@ -74,35 +69,32 @@ func show_scoring(player_points : Dictionary[int, Array]):
 	
 	if !winner_list.is_empty():
 		show_winners(winner_list)
+		for i in %ScoresContainer.get_children():
+			i.reset()
 	else:
 		end_scoring()
 
 func show_winners(winner_list : Array[int]):
 	for i in %WinnerContainer.get_children(): i.queue_free()
-	%ScoresContainer.hide()
-	%WinnerContainer.show()
+	current_tab = 2
 	
-	%Title.text = "Winner!" if winner_list.size() == 1 else "Tie!"
+	%WinnerTitle.text = "Winner!" if winner_list.size() == 1 else "Tie!"
 	for i in winner_list:
 		var inst = WINNER_PROFILE.instantiate()
 		%WinnerContainer.add_child(inst)
 		
-		var id = i if i != 1 else Master.get_host_id()
-		
-		inst.player_pfp = Master.avatar_cache[id]
-		inst.player_name = Steam.getFriendPersonaName(id)
-		Steam.getPlayerAvatar()
-	await get_tree().create_timer(4.5).timeout
-	%WinnerContainer.hide()
+		inst.player_pfp = Master.avatar_cache[i]
+		inst.player_name = Steam.getFriendPersonaName(Master.steam_ids[i])
+	await get_tree().create_timer(4.0).timeout
 	show_next_map()
 
 func show_next_map():
-	%Title.text = "Next  Map:"
+	current_tab = 3
 	world.change_stadium()
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(1.0).timeout
 	%MapName.text = world.current_stadium_name
 	%MapName.show()
-	await get_tree().create_timer(3.0).timeout
+	await get_tree().create_timer(2.5).timeout
 	%MapName.hide()
 	end_scoring()
 

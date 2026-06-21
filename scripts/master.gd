@@ -8,6 +8,7 @@ var local_player : Player
 var is_host := false
 
 var player_list : Dictionary[int, Player] = {}
+var steam_ids : Dictionary[int, int] = {}
 var avatar_cache : Dictionary[int, Texture2D] = {}
 
 func _ready():
@@ -48,11 +49,18 @@ func spawn_node_for_peers(scene_path: NodePath, spawn_position:= Vector3.ZERO, s
 		if disable_node: scene_inst.process_mode = scene_inst.PROCESS_MODE_DISABLED
 		scene_inst.position = spawn_position
 
-func load_avatar(steam_id):
-	var id = steam_id if steam_id != 1 else get_host_id()
+@rpc("any_peer", "call_local", "reliable")
+func register_steam_id(peer_id : int, steam_id: int):
+	Master.steam_ids[peer_id] = steam_id
+	if multiplayer.is_server() and peer_id != 1:
+		sync_steam_ids.rpc_id(peer_id, steam_ids)
+@rpc("authority", "reliable")
+func sync_steam_ids(all_ids: Dictionary):
+	steam_ids = all_ids
+
+func load_avatar(player_id):
+	var id = Master.steam_ids[player_id]
 	Steam.getPlayerAvatar(3, id)
-	Steam.requestUserInformation(id, false)
-	Console._print("Player Caching:  ", id)
 
 func _on_avatar_loaded(avatar_id: int, size: int, data: Array):
 	var avatar_image: Image = Image.create_from_data(size, size, false, Image.FORMAT_RGBA8, data)
@@ -61,5 +69,6 @@ func _on_avatar_loaded(avatar_id: int, size: int, data: Array):
 
 	var avatar_texture: ImageTexture = ImageTexture.create_from_image(avatar_image)
 	
-	avatar_cache[avatar_id] = avatar_texture
-	Console._print(avatar_id, "cached")
+	var avatar_owner_id = steam_ids.find_key(avatar_id)
+	avatar_cache[avatar_owner_id] = avatar_texture
+	Console._print(avatar_owner_id, "avatar cached")

@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bk8eovjp50t2s"]
+[gd_scene load_steps=8 format=3 uid="uid://bk8eovjp50t2s"]
 
 [ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
 [ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_kjn0h"]
 [ext_resource type="Script" uid="uid://ckqxbj2wgigdw" path="res://ui/player_ui.gd" id="3_kjn0h"]
-[ext_resource type="Texture2D" uid="uid://bhq6pfpwun57c" path="res://icon.svg" id="5_kjn0h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2hjl"]
 next_pass = ExtResource("2_kjn0h")
@@ -191,11 +190,6 @@ text = "Leave Lobby"
 [node name="--------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 8.66)
 layout_mode = 2
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10000014, -4.1)
-billboard = 1
-texture = ExtResource("5_kjn0h")
 
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/LabelID/CopyButton" to="CanvasLayer/PlayerUI" method="_on_copy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/Resume" to="CanvasLayer/PlayerUI" method="_on_resume_pressed"]
