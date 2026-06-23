@@ -1,13 +1,13 @@
 extends Node3D
 class_name GameWorld
 
-enum GAME_STATE{NEW_GAME, SELECTION, PLACEMENT, BATTLE, RESULTS, WINNER}
+enum GAME_STATE{SELECTION, PLACEMENT, BATTLE, RESULTS, WINNER}
 enum POINT_TYPE{KNOCKOUT, STAMINA, DESTRUCTION, WINNER}
 
 const point_values = {
 	POINT_TYPE.KNOCKOUT : 1,
 	POINT_TYPE.STAMINA : 1,
-	POINT_TYPE.DESTRUCTION : 2,
+	POINT_TYPE.DESTRUCTION : 1,
 	POINT_TYPE.WINNER : 2,
 }
 const point_names = {
@@ -26,7 +26,6 @@ const point_names = {
 @export var particle_path : Node3D
 @export var stadium_path : Node3D
 
-
 @export_group("Synced Variables")
 @export var gameplay_config : GameplayConfig
 @export var current_state : GAME_STATE = GAME_STATE.SELECTION
@@ -34,8 +33,11 @@ const point_names = {
 @export var round_points : Dictionary[int, Array] = {}
 @export var current_stadium_name := ""
 
+@onready var cheats_timer: Timer = $CheatTimer
+
 @rpc("authority", "call_local", "reliable")
 func change_game_state(new_state : GAME_STATE):
+	current_state = new_state
 	match new_state:
 		GAME_STATE.SELECTION:
 			round_points = {}
@@ -48,21 +50,26 @@ func change_game_state(new_state : GAME_STATE):
 			assembly_menu.hide()
 		GAME_STATE.BATTLE:
 			Master.local_player.make_current()
+			if gameplay_config.cheating_enabled and Master.is_host:
+				cheats_timer.start()
 		GAME_STATE.RESULTS:
+			disable_cheats.rpc()
+			cheats_timer.stop()
+			
 			results_menu.show()
 			results_menu.start_scoring(round_points)
 		GAME_STATE.WINNER:
-			results_menu.hide()
-			
-		GAME_STATE.NEW_GAME:
 			for i in player_scores.keys():
 				player_scores[i] = 0
 
 func _ready() -> void:
 	if Master.is_host:
+		Engine.time_scale = gameplay_config.game_speed
 		change_game_state.rpc(GAME_STATE.SELECTION)
 
 func _bey_death(point_type : POINT_TYPE, point_winner_id : int = -1):
+	if current_state != GAME_STATE.BATTLE: return
+	
 	if point_type == POINT_TYPE.DESTRUCTION: _on_bey_burst.rpc()
 	
 	if point_winner_id > 0:
@@ -88,22 +95,38 @@ func _bey_death(point_type : POINT_TYPE, point_winner_id : int = -1):
 			_set_round_points.rpc(round_points)
 			change_game_state.rpc(GAME_STATE.RESULTS)
 
-@rpc("any_peer", "call_remote", "reliable")
-func _set_round_points(updated_round_points:Dictionary[int, Array]):
-	round_points = updated_round_points
-
 func change_stadium():
 	if !Master.is_host: return
 	
-	var stadium_scene : PackedScene
-	var rand_ind = PartRegistry.stadiums.keys().pick_random()
-	stadium_scene = PartRegistry.stadiums[rand_ind]
-	current_stadium_name = rand_ind
+	var rand_ind = Registry.stadiums.keys().pick_random()
+	while rand_ind == current_stadium_name:
+		rand_ind = Registry.stadiums.keys().pick_random()
 	
+	replace_stadium_scene.rpc(rand_ind)
+
+@rpc("any_peer", "call_remote", "reliable")
+func _set_round_points(updated_round_points:Dictionary[int, Array]):
+	round_points = updated_round_points
+@rpc("any_peer", "call_remote", "reliable")
+func _set_game_config(points_to_win : int, game_speed : float, cheating_enabled : bool):
+	Engine.time_scale = game_speed
+	
+	if !Master.is_host:
+		gameplay_config = GameplayConfig.new()
+		gameplay_config.points_to_win = points_to_win
+		gameplay_config.game_speed = game_speed
+		gameplay_config.cheating_enabled = cheating_enabled
+
+@rpc("authority", "call_local", "reliable")
+func replace_stadium_scene(new_stadium : String):
+	current_stadium_name = new_stadium
 	for i in stadium_path.get_children(): 
 		i.queue_free()
-		
+	
+	var stadium_scene : PackedScene
+	stadium_scene = Registry.stadiums[new_stadium]
 	var stadium_inst = stadium_scene.instantiate()
+	
 	stadium_path.add_child(stadium_inst, true)
 
 @rpc("any_peer", "call_local", "reliable")
@@ -120,9 +143,25 @@ func player_added(id : int):
 	player_scores[id] = 0
 	round_points[id] = []
 	
-	if Master.is_host: change_game_state.rpc_id(id, current_state)
+	if Master.is_host and id != 1: 
+		change_game_state.rpc_id(id, current_state)
+		_set_game_config.rpc_id(id, gameplay_config.points_to_win, gameplay_config.game_speed, gameplay_config.cheating_enabled)
 func player_removed(id : int):
 	assembly_menu.remove_selection_menu(id)
 	results_menu.remove_player_bar(id)
 	player_scores.erase(id)
 	round_points.erase(id)
+
+func _on_cheat_timer_timeout() -> void:
+	if gameplay_config.cheating_enabled and current_state == GAME_STATE.BATTLE and Master.is_host:
+		enable_cheats.rpc()
+
+@rpc("any_peer", "call_local", "reliable")
+func enable_cheats():
+	Master.local_player.enable_cheats()
+@rpc("any_peer", "call_local", "reliable")
+func disable_cheats():
+	Master.local_player.disable_cheats()
+func reset_cheat_timer():
+	cheats_timer.stop()
+	cheats_timer.start()

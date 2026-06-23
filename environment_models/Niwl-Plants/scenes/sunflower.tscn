@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c44d7esriivkx"]
-
-[ext_resource type="PackedScene" uid="uid://bye2m0kalxe2n" path="res://Niwl-Plants/3D/sunflower.glb" id="1_66knw"]
-[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://Niwl-Plants/Material/Mat_plant-1.tres" id="2_sdanf"]
-
-[node name="sunflower" instance=ExtResource("1_66knw")]
-
-[node name="M3D_sunflower-1_LOD0" parent="." index="0"]
-material_override = ExtResource("2_sdanf")

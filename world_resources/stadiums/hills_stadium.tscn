@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://i8iqhyap2e6r"]
+
+[ext_resource type="Script" uid="uid://b6q28jicl32th" path="res://world_resources/stadiums/stadium.gd" id="1_k3cf8"]
+[ext_resource type="Texture2D" uid="uid://ixthtuy7vf8a" path="res://textures/rock.jpg" id="2_k3cf8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_apts8"]
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0, 0.79929423, 0.51677334, 1)
+albedo_texture = ExtResource("2_k3cf8")
+roughness = 0.0
+uv1_scale = Vector3(1.35, 1.35, 1.35)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_k3cf8")
+metadata/_custom_type_script = "uid://b6q28jicl32th"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.3784732, 0, 0, 0, 1, 0, 5.779682, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83333397, 0)
+radius = 15.979
+radial_segments = 32
+rings = 32
+material = SubResource("StandardMaterial3D_apts8")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="CSGCombiner3D/CSGSphere3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9576144, 0, 0, 0, 1, 0, 0, 0)
+operation = 2
+radius = 15.6
+radial_segments = 32
+rings = 32
+material = SubResource("StandardMaterial3D_apts8")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -26.246588, 0)
+operation = 1
+size = Vector3(400, 32.07, 400)
+material = SubResource("StandardMaterial3D_apts8")
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="."]

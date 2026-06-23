@@ -12,8 +12,8 @@
 [ext_resource type="PackedScene" uid="uid://b8q44n6dv0vto" path="res://particles/burst_particle.tscn" id="9_nn1wg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
-friction = 0.46
-bounce = 0.16
+friction = 0.31
+bounce = 0.15
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3dcr0"]
 radius = 0.096723884
@@ -110,6 +110,10 @@ update_rotation = false
 [node name="CenterTether" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 
+[node name="FloorCheck" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+target_position = Vector3(0, -0.4, 0)
+
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 top_level = true
@@ -119,6 +123,8 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9000002, 0)
 pixel_size = 0.013
 billboard = 1
+render_priority = 1
+outline_render_priority = 0
 text = "9000"
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]

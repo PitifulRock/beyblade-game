@@ -73,10 +73,14 @@ func submit_ready(is_ready: bool):
 
 func _on_ready_players_changed():
 	for i in %ReadyIcons.get_children(): i.hide()
+	
+	var ready_threshold = ceili(float(Master.player_list.size())/2)
 	if ready_players > 0:
 		for i in ready_players:
 			%ReadyIcons.get_child(i).show()
-		if %ReadyTimer.is_stopped(): %ReadyTimer.start()
+		
+		if ready_players > ready_threshold:
+			if %ReadyTimer.is_stopped(): %ReadyTimer.start()
 		if ready_players == Master.player_list.size():
 			%ReadyTimer.stop()
 			_on_ready_timer_timeout()
@@ -106,6 +110,8 @@ func _on_copy_id_button_pressed() -> void:
 func _on_place_timer_timeout() -> void:
 	for i in %SelectionContainer.get_children():
 		i.bey_assembler.launch()
+	if Master.is_host:
+		Master.game_manager.current_scene.change_game_state.rpc(GameWorld.GAME_STATE.BATTLE)
 	
 	%PlaceTip.hide()
 	%PlaceTimerLabel.text = "Launch!"

@@ -15,6 +15,7 @@ radius = 0.1171875
 script = ExtResource("1_eisn3")
 spin_mult = 0.4
 stamina_mult = 1.8
+center_tether = 0.9
 part_name = "Drill"
 type = 1
 part_weight = 0.015

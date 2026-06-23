@@ -9,7 +9,7 @@ radius = 0.72265625
 
 [node name="DefenseCore" type="StaticBody3D"]
 script = ExtResource("1_i2apk")
-weight_mult = 2.0
+weight_mult = 1.7000000000000002
 part_name = "Le circle"
 type = 2
 part_weight = 0.06

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgnqpb5dyxtl0"]
+
+[ext_resource type="PackedScene" uid="uid://cygqigplwbnll" path="res://world_resources/environment_models/Niwl-Plants/3D/fern-2.glb" id="1_xfeq5"]
+[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_plant-1.tres" id="2_m1ob2"]
+
+[node name="fern-2" instance=ExtResource("1_xfeq5")]
+
+[node name="M3D_fern-2_LOD0" parent="." index="0"]
+material_override = ExtResource("2_m1ob2")

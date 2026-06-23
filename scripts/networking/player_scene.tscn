@@ -1,22 +1,24 @@
-[gd_scene load_steps=8 format=3 uid="uid://bk8eovjp50t2s"]
+[gd_scene load_steps=28 format=3 uid="uid://bk8eovjp50t2s"]
 
 [ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
-[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_kjn0h"]
+[ext_resource type="PackedScene" uid="uid://sx6xfsuypgfb" path="res://particles/throwables/rock_1.tscn" id="2_u27t7"]
+[ext_resource type="PackedScene" uid="uid://brcmlne5nrcqk" path="res://particles/throwables/rock_2.tscn" id="3_g8f7b"]
 [ext_resource type="Script" uid="uid://ckqxbj2wgigdw" path="res://ui/player_ui.gd" id="3_kjn0h"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2hjl"]
-next_pass = ExtResource("2_kjn0h")
-diffuse_mode = 3
-specular_mode = 2
-albedo_color = Color(0.6599284, 0.6077663, 1, 1)
-roughness = 0.0
+[ext_resource type="AudioStream" uid="uid://57uik7r6o3vb" path="res://sounds/blow1.ogg" id="5_e2hjl"]
+[ext_resource type="Shader" uid="uid://sqhbjl0dvjeo" path="res://shaders/screen_outline.gdshader" id="5_kjn0h"]
+[ext_resource type="AudioStream" uid="uid://btjnwohdc1ih0" path="res://sounds/blow2.ogg" id="6_8cyye"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebo5w"]
-next_pass = ExtResource("2_kjn0h")
 diffuse_mode = 3
 specular_mode = 1
 albedo_color = Color(0, 0, 0, 1)
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2hjl"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.6599284, 0.6077663, 1, 1)
 roughness = 0.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ssomj"]
@@ -33,8 +35,182 @@ properties/3/path = NodePath(".:display_name")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
+[sub_resource type="LabelSettings" id="LabelSettings_u27t7"]
+font_size = 22
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_g8f7b"]
+font_size = 22
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e2hjl"]
+render_priority = -1
+shader = ExtResource("5_kjn0h")
+shader_parameter/sensitivity = 2.999999932944
+shader_parameter/outline_thickness = 0.999999977648
+shader_parameter/step_threshold = 0.1999999955296
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ebo5w"]
+material = SubResource("ShaderMaterial_e2hjl")
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ebo5w"]
+height = 4.0
+radius = 1.09
+
+[sub_resource type="Animation" id="Animation_kjn0h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Model/Mouth:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -0.183, -0.533)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:gravity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlowParticle:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ebo5w"]
+resource_name = "blow"
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%Model/Mouth:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06, 0.49),
+"transitions": PackedFloat32Array(1, 2.0000005, 1),
+"update": 0,
+"values": [Vector3(0, -0.183, -0.533), Vector3(0, -0.18300003, -0.6434732), Vector3(0, -0.183, -0.533)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:gravity")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.61),
+"transitions": PackedFloat32Array(1, 6.0628557, 1),
+"update": 0,
+"values": [0.0, 28.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BlowSound")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BlowParticle:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.39),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kjn0h"]
+_data = {
+&"RESET": SubResource("Animation_kjn0h"),
+&"blow": SubResource("Animation_ebo5w")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_e2hjl"]
+playback_mode = 1
+random_pitch = 1.1
+random_volume_offset_db = 1.0
+streams_count = 2
+stream_0/stream = ExtResource("5_e2hjl")
+stream_1/stream = ExtResource("6_8cyye")
+stream_1/weight = 0.2
+
+[sub_resource type="Curve" id="Curve_8cyye"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_u27t7"]
+curve = SubResource("Curve_8cyye")
+
+[sub_resource type="Curve" id="Curve_e2hjl"]
+_data = [Vector2(0, 0.4365751), 0.0, 0.0, 0, 0, Vector2(0.42276424, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.2991544), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_8cyye"]
+curve = SubResource("Curve_e2hjl")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e2hjl"]
+emission_shape = 1
+emission_sphere_radius = 0.4
+direction = Vector3(0, 0, -1)
+spread = 6.0
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 2)
+scale_curve = SubResource("CurveTexture_8cyye")
+alpha_curve = SubResource("CurveTexture_u27t7")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8cyye"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.39200002)
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_u27t7"]
+material = SubResource("StandardMaterial3D_8cyye")
+size = Vector2(0.7, 0.05)
+orientation = 0
+
 [node name="FreeLookCamera" type="Camera3D"]
 script = ExtResource("1_a6s7x")
+throwables = Array[PackedScene]([ExtResource("2_u27t7"), ExtResource("3_g8f7b")])
 metadata/_custom_type_script = "uid://ba6s7kap2bki1"
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
@@ -42,21 +218,29 @@ metadata/_custom_type_script = "uid://ba6s7kap2bki1"
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
 
+[node name="Mouth" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183, -0.533)
+radius = 0.155
+radial_segments = 32
+rings = 16
+material = SubResource("StandardMaterial3D_ebo5w")
+
 [node name="CSGSphere3D" type="CSGSphere3D" parent="Model"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 radius = 0.8
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_e2hjl")
 
 [node name="CSGSphere3D2" type="CSGSphere3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, -0.083000004, -0.6065163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.117, -0.6065163)
 radius = 0.155
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_ebo5w")
 
 [node name="CSGSphere3D3" type="CSGSphere3D" parent="Model"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.083000004, -0.6065163)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.117, -0.6065163)
 radius = 0.155
 radial_segments = 32
 rings = 16
@@ -66,6 +250,8 @@ material = SubResource("StandardMaterial3D_ebo5w")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 pixel_size = 0.01
 billboard = 1
+render_priority = 1
+outline_render_priority = 0
 text = "display name"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -190,6 +376,92 @@ text = "Leave Lobby"
 [node name="--------------" type="Control" parent="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer"]
 custom_minimum_size = Vector2(0, 8.66)
 layout_mode = 2
+
+[node name="CheatsScreen" type="Control" parent="CanvasLayer/PlayerUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CheatsNotifier" type="Label" parent="CanvasLayer/PlayerUI/CheatsScreen"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = -15.0
+offset_right = 176.5
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Too boring, cheats enabled!"
+label_settings = SubResource("LabelSettings_u27t7")
+
+[node name="CheatsTooltip" type="Label" parent="CanvasLayer/PlayerUI/CheatsScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.017361112
+anchor_top = 0.87191355
+anchor_right = 0.2404514
+anchor_bottom = 0.9691358
+grow_vertical = 0
+text = "[F] Blow
+[Space] Throw item"
+label_settings = SubResource("LabelSettings_g8f7b")
+metadata/_edit_use_anchors_ = true
+
+[node name="OutlineShader" type="MeshInstance3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("QuadMesh_ebo5w")
+
+[node name="BlowArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -1.1)
+gravity_space_override = 1
+gravity_point = true
+gravity_point_center = Vector3(0, 0, -10)
+gravity_direction = Vector3(0, 0, -10)
+gravity = 0.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlowArea"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.20000005, -1.3499998)
+shape = SubResource("CylinderShape3D_ebo5w")
+
+[node name="BlowAnim" type="AnimationPlayer" parent="BlowArea"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_kjn0h")
+}
+
+[node name="BlowSound" type="AudioStreamPlayer3D" parent="BlowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.29999995)
+stream = SubResource("AudioStreamRandomizer_e2hjl")
+pitch_scale = 1.3
+
+[node name="BlowParticle" type="GPUParticles3D" parent="BlowArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099999994, 0.5)
+emitting = false
+amount = 30
+speed_scale = 2.0
+explosiveness = 0.16
+process_material = SubResource("ParticleProcessMaterial_e2hjl")
+draw_pass_1 = SubResource("PlaneMesh_u27t7")
+
+[node name="ThrowPoint" type="Marker3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -1.2)
+
+[node name="ThrowTimer" type="Timer" parent="ThrowPoint"]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
 
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/LabelID/CopyButton" to="CanvasLayer/PlayerUI" method="_on_copy_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/VBoxContainer/Resume" to="CanvasLayer/PlayerUI" method="_on_resume_pressed"]

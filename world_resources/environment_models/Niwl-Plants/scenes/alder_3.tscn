@@ -1,0 +1,13 @@
+[gd_scene load_steps=0 format=3 uid="uid://hfo5i62316e8"]
+
+[ext_resource type="PackedScene" uid="uid://1b7pov1g5t2w" path="res://world_resources/environment_models/Niwl-Plants/3D/alder_3.glb" id="1_ufnmn"]
+[ext_resource type="Material" uid="uid://djrvkylkbs21b" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_tree-w-trunk.tres" id="2_thmqe"]
+[ext_resource type="Material" uid="uid://csbuagip1ki5s" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_Leaves_Branches.tres" id="2_ufnmn"]
+
+[node name="alder_3" unique_id=1908321150 instance=ExtResource("1_ufnmn")]
+
+[node name="M3D_alder-3_L" parent="." index="0" unique_id=1148602768]
+material_override = ExtResource("2_ufnmn")
+
+[node name="M3D_alder-3" parent="." index="1" unique_id=180388384]
+material_override = ExtResource("2_thmqe")

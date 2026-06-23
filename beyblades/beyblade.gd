@@ -11,20 +11,23 @@ enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 @export var tip : BeyTip
 
 @export_group("Public Variables")
-@export var spin_speed : float = 500.0
-@export var stamina : float = 0.6
-@export var burst_resistance := 1.0
 @export var burst_percentage := 0.0
-@export var burst_damage := 1.0
-@export var can_take_damage := true
 @export var dead := false
-
 @export var current_spin : float
+
+var spin_speed : float = 500.0
+var stamina : float = 0.6
+var burst_resistance := 1.0
+var burst_damage := 1.0
+var center_tether := 1.0
+
+var can_take_damage := true
 var stored_engine_spin : float
 
 var collision_point : Vector3
 var last_collided_bey : BeyBlade
 var game_world : GameWorld
+var recoil := 1.0
 
 @onready var name_tag: Label3D = %NameTag
 
@@ -90,10 +93,12 @@ func _physics_process(_delta: float) -> void:
 			angular_velocity.x = lerpf(angular_velocity.x, 0, wobble_decrease)
 			rotation.x = lerpf(rotation.x, 0, wobble_decrease)
 			rotation.z = lerpf(rotation.z, 0, wobble_decrease)
+			recoil = lerpf(recoil, 1.0, Manager.lerp_weight(0.05))
 			
 			$CenterTether.look_at(game_world.stadium_path.global_position)
 			apply_central_force(get_orbital_force())
-			apply_central_force(get_center_pull_force())
+			apply_central_force(get_center_pull_force() * center_tether/recoil)
+			if !%FloorCheck.is_colliding(): linear_velocity.y -= get_added_gravity()
 		
 	if burst_percentage >= 100 and !dead: 
 		die(GameWorld.POINT_TYPE.DESTRUCTION)
@@ -129,12 +134,18 @@ func get_spin_loss(spin_diff : float) -> float:
 	return Manager.lerp_weight(adjusted)
 func get_orbital_force() -> Vector3:
 	var dir = $CenterTether.global_basis.x
-	var force = dir*0.0025 * current_spin/global_position.distance_to(game_world.stadium_path.global_position)
+	var distance = global_position.distance_to(game_world.stadium_path.global_position)
+	var force = dir*0.0035 * current_spin/(distance/1.1)
 	return force * Vector3(1,0,1)
 func get_center_pull_force() -> Vector3:
 	var dir = $CenterTether.global_basis.z
-	var force = dir*-0.0015 * spin_speed * global_position.distance_to(game_world.stadium_path.global_position) * (stamina+1)
+	var distance = global_position.distance_to(game_world.stadium_path.global_position)
+	var force = (dir*-0.0016) * spin_speed * (distance/1.2) * ((stamina+1)/1.8)
 	return force * Vector3(1,0,1)
+func get_added_gravity() -> float:
+	var distance = global_position.distance_to(game_world.stadium_path.global_position)
+	var force = distance/10.0
+	return abs(force)
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if state.get_contact_count() > 0:
@@ -143,6 +154,7 @@ func _on_collision(body : Node):
 	if body is BeyBlade and !dead:
 		var body_speed = body.linear_velocity.length()
 		last_collided_bey = body
+		recoil += 0.5
 		if linear_velocity.length() > body_speed/1.5:
 			#spin reduction from hitting fast
 			var reduction = body_speed/1.5
@@ -157,6 +169,7 @@ func _on_collision(body : Node):
 			can_take_damage = false
 			await get_tree().create_timer(0.3).timeout
 			can_take_damage = true
+		game_world.reset_cheat_timer()
 
 @rpc("any_peer", "call_local", "reliable")
 func _clash_fx(fx_position : Vector3, body_speed : float):

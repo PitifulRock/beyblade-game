@@ -1,9 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cmrbuawgygeo0"]
-
-[ext_resource type="Texture2D" uid="uid://bx4awnvv23fvh" path="res://environment_models/Niwl-Plants/Texture/T_birch_bark.png" id="1_xqm5l"]
-
-[resource]
-diffuse_mode = 3
-specular_mode = 2
-albedo_texture = ExtResource("1_xqm5l")
-roughness = 0.0

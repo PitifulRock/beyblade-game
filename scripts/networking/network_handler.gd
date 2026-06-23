@@ -24,6 +24,7 @@ func _ready() -> void:
 	
 	if not Steam.isSteamRunning():
 		push_error("Steam not running")
+		OS.alert("Steam is not running", "Alert")
 		return
 	
 	Steam.lobby_created.connect(_on_lobby_created)

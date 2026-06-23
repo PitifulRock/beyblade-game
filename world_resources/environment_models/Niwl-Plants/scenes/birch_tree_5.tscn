@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://56dyl02doc4w"]
+
+[ext_resource type="PackedScene" uid="uid://rpqau5wlbtdk" path="res://world_resources/environment_models/Niwl-Plants/3D/birch-tree-5.glb" id="1_oh0fu"]
+[ext_resource type="Material" uid="uid://cmrbuawgygeo0" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_tree-b-trunk.tres" id="2_re2mv"]
+[ext_resource type="Material" uid="uid://bp1250ey37oeb" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_Leaves_lowpoly.tres" id="3_re2mv"]
+
+[node name="birch-tree-5" instance=ExtResource("1_oh0fu")]
+
+[node name="M3D_birch-tree-2_LOD0" parent="." index="0"]
+material_override = ExtResource("2_re2mv")
+
+[node name="M3D_birch-2-Leaves" parent="." index="1"]
+material_override = ExtResource("3_re2mv")

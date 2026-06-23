@@ -45,7 +45,7 @@ func spawn_visuals(part : BeyPart.PART_TYPE):
 	
 	for i in spawn_path.get_children(): i.free()
 	
-	for file:PackedScene in PartRegistry.registry[part]:
+	for file:PackedScene in Registry.registry[part]:
 		var inst = file.instantiate()
 		spawn_path.add_child(inst, true)
 		if spawn_path.get_child(cur_index) != inst:
@@ -90,23 +90,22 @@ func _update_visuals():
 			BeyBlade.TYPE.STAMINA: type_icon.texture = STAMINA_ICON
 			BeyBlade.TYPE.BALANCE: type_icon.texture = BALANCE_ICON
 	
-	%DiscName.text = disc.part_name
+	%DiscName.text = str(disc.part_name, "  (", disc.part_weight*100,"g)")
 	%DiscInfo.text = str(
 		"Defense: ", disc.burst_resitance, "x\n",
 		"Damage:  ",disc.burst_damage, "x\n",
-		disc.part_weight*100,"g"
 	)
 	
-	%CoreName.text = core.part_name
+	%CoreName.text = str(core.part_name, "  (", core.part_weight*100,"g)")
 	%CoreInfo.text = str(
 		"Weight Mult:  ", core.weight_mult, "x\n",
 		disc.part_weight*100,"g"
 	)
 	
-	%TipName.text = tip.part_name
+	%TipName.text = str(tip.part_name, "  (", tip.part_weight*100,"g)")
 	%TipInfo.text = str(
 		"Spin Speed:  ", tip.spin_mult, "x\n",
-		"Stamina:  ", tip.stamina_mult*10, "x\n",
+		"Stamina:  ", tip.stamina_mult*10, "\n",
 		disc.part_weight*100,"g"
 	)
 	

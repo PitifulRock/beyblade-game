@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b6uutkp467q1v"]
+
+[ext_resource type="Texture2D" uid="uid://brjxex5l5isv6" path="res://world_resources/environment_models/Niwl-Plants/Texture/T_Plants_General_Bunch.png" id="1_8yhm6"]
+[ext_resource type="Texture2D" uid="uid://b2tdtw3yklqq6" path="res://world_resources/environment_models/Niwl-Plants/Texture/T_Plants_Roughness.png" id="2_hrcis"]
+
+[resource]
+transparency = 4
+cull_mode = 2
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_8yhm6")
+roughness = 0.0
+roughness_texture = ExtResource("2_hrcis")
+roughness_texture_channel = 4
+billboard_keep_scale = true

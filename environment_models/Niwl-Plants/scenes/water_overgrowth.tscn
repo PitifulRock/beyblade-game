@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0ahws8u7k0d"]
-
-[ext_resource type="PackedScene" uid="uid://bo4js5expl471" path="res://Niwl-Plants/3D/water-overgrowth.glb" id="1_2f8gl"]
-[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://Niwl-Plants/Material/Mat_plant-1.tres" id="2_d2mxc"]
-
-[node name="water-overgrowth" instance=ExtResource("1_2f8gl")]
-
-[node name="M3D_water-overgrowth_LOD0" parent="." index="0"]
-material_override = ExtResource("2_d2mxc")

@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://blmj1mrec1x8"]
-
-[ext_resource type="PackedScene" uid="uid://cclx3k8536up3" path="res://Niwl-Plants/3D/leaves-lowpoly.glb" id="1_22h8s"]
-[ext_resource type="Material" uid="uid://dl33f8ell340a" path="res://Niwl-Plants/Material/Mat_Leaves.tres" id="2_dbw8s"]
-
-[node name="leaves-lowpoly" instance=ExtResource("1_22h8s")]
-
-[node name="lowpoly_view_002" parent="." index="0"]
-material_override = ExtResource("2_dbw8s")

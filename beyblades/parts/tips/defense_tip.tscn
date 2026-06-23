@@ -1,11 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://e81ijemc301w"]
+[gd_scene load_steps=6 format=3 uid="uid://e81ijemc301w"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_0rphc"]
-[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_6hbu5"]
 [ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="3_tt6fh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tt6fh"]
-next_pass = ExtResource("2_6hbu5")
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0.42365062, 0.42365065, 0.42365062, 1)

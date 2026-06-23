@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://jhb8p5m4qj65"]
-
-[ext_resource type="PackedScene" uid="uid://ba4gr31oguont" path="res://Niwl-Plants/3D/grass_patch_3.glb" id="1_v7cy4"]
-[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://Niwl-Plants/Material/Mat_plant-1.tres" id="2_x402q"]
-
-[node name="grass_patch_3" instance=ExtResource("1_v7cy4")]
-
-[node name="M3D_grass-3_LOD0" parent="." index="0"]
-material_override = ExtResource("2_x402q")

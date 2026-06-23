@@ -20,9 +20,11 @@ func _ready() -> void:
 	if is_multiplayer_authority():
 		name_label.text = Steam.getPersonaName()
 
-func tween_scores(scores : Array, longest_score := false):
+func prepare():
+	%WinIcon.hide()
 	%ScoreLabel.self_modulate.a = 0.0
 	%ScoreLabel.text = ""
+func tween_scores(scores : Array, longest_score := false):
 	var world : GameWorld = Master.game_manager.current_scene
 	var tweened_score = current_score
 	current_score = world.player_scores[name.to_int()]

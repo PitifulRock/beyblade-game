@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct1kfa8a3r74m"]
+
+[ext_resource type="PackedScene" uid="uid://n8eqmv0shf7t" path="res://world_resources/environment_models/Niwl-Plants/3D/grass_patch_5.glb" id="1_yd8vf"]
+[ext_resource type="Material" uid="uid://cxl5fq6lh2t7r" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_plant-1.tres" id="2_o7r54"]
+
+[node name="grass_patch_5" instance=ExtResource("1_yd8vf")]
+
+[node name="M3D_grass-5_LOD0" parent="." index="0"]
+material_override = ExtResource("2_o7r54")

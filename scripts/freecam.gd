@@ -5,7 +5,6 @@ class_name FreeLookCamera
 const SHIFT_MULTIPLIER = 2.5
 const ALT_MULTIPLIER = 1.0 / SHIFT_MULTIPLIER
 
-
 @export_range(0.0, 1.0) var sensitivity: float = 0.25
 
 var can_use_camera := true
@@ -30,6 +29,11 @@ var _q = false
 var _e = false
 var _shift = false
 var _alt = false
+
+func unlock_mouse():
+	pass
+func lock_mouse():
+	pass
 
 func _input(event):
 	if !is_multiplayer_authority() or !can_use_camera: return

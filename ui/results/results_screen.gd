@@ -41,11 +41,11 @@ func start_scoring(player_points : Dictionary[int, Array]):
 func show_scoring(player_points : Dictionary[int, Array]):
 	current_tab = 1
 	
+	for i in %ScoresContainer.get_children():
+		i.prepare()
 	for i in player_points.keys():
 		if player_points[i].has(GameWorld.POINT_TYPE.WINNER): 
 			%ScoresContainer.get_node(str(i)).win_icon.show()
-		else:
-			%ScoresContainer.get_node(str(i)).win_icon.hide()
 	
 	var score_lengths := {}
 	for i in player_points.keys():
@@ -75,6 +75,8 @@ func show_scoring(player_points : Dictionary[int, Array]):
 		end_scoring()
 
 func show_winners(winner_list : Array[int]):
+	if Master.is_host:
+		Master.game_manager.current_scene.change_game_state.rpc(GameWorld.GAME_STATE.WINNER)
 	for i in %WinnerContainer.get_children(): i.queue_free()
 	current_tab = 2
 	

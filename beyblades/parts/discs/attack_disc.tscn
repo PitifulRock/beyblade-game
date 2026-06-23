@@ -1,22 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3qu3u35ga7jv"]
+[gd_scene load_steps=7 format=3 uid="uid://d3qu3u35ga7jv"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_jj3pe"]
-[ext_resource type="Shader" uid="uid://deajw2xajie5r" path="res://shaders/outline.gdshader" id="3_jj3pe"]
 [ext_resource type="Material" uid="uid://bd17qqugnkbai" path="res://materials/white.tres" id="4_lxm2u"]
 [ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="4_xls65"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
 friction = 0.31
-bounce = 0.41
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_duaf2"]
-render_priority = 0
-shader = ExtResource("3_jj3pe")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/size = 1.0399999991059201
+bounce = 0.26
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x3gc5"]
-next_pass = SubResource("ShaderMaterial_duaf2")
 diffuse_mode = 3
 specular_mode = 2
 albedo_texture = ExtResource("4_xls65")
@@ -31,7 +23,7 @@ script = ExtResource("1_jj3pe")
 burst_resitance = 0.5
 burst_damage = 1.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
-part_name = "Pee"
+part_name = "Star"
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
 [node name="Visual" type="CSGCombiner3D" parent="."]

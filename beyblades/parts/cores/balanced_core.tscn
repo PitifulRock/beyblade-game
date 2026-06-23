@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://csagck7ipt2dk"]
+
+[ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_2sg4l"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_ytdwg"]
+[ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="3_ytdwg"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ytdwg"]
+height = 0.225
+radius = 0.663
+
+[node name="DefenseCore" type="StaticBody3D"]
+script = ExtResource("1_2sg4l")
+weight_mult = 1.1
+part_name = "Clover"
+type = 3
+part_weight = 0.06
+metadata/_custom_type_script = "uid://bhdlota4as0vi"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.034671467, 0)
+radius = 0.497
+height = 0.1
+sides = 16
+material = ExtResource("2_ytdwg")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.137126, 0)
+radius = 0.6
+height = 0.12
+sides = 16
+material = ExtResource("2_ytdwg")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+radius = 0.3
+height = 0.1
+sides = 16
+material = ExtResource("3_ytdwg")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.40000007, 0, 0)
+radius = 0.3
+height = 0.1
+sides = 16
+material = ExtResource("3_ytdwg")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D2"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -5.1658017e-08, 0, 0.4)
+radius = 0.3
+height = 0.1
+sides = 16
+material = ExtResource("3_ytdwg")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="CSGCombiner3D/CSGCylinder3D2"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -7.946628e-09, 0, -0.4)
+radius = 0.3
+height = 0.1
+sides = 16
+material = ExtResource("3_ytdwg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.09112309, 0)
+shape = SubResource("CylinderShape3D_ytdwg")
+
+[node name="Placement" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19483149, 0)

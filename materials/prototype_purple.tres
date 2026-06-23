@@ -1,10 +1,8 @@
-[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cyt7iijjpb1wm"]
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cyt7iijjpb1wm"]
 
 [ext_resource type="Texture2D" uid="uid://jlcgr0r83mi6" path="res://textures/PROTO/Purple/texture_05.png" id="1_vx770"]
-[ext_resource type="Material" uid="uid://db475qf7paoyp" path="res://materials/outline.tres" id="2_ylprc"]
 
 [resource]
-next_pass = ExtResource("2_ylprc")
 diffuse_mode = 3
 specular_mode = 2
 albedo_texture = ExtResource("1_vx770")

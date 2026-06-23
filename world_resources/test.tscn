@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bssuxxna2ti8u" path="res://scripts/game_world.gd" id="1_00tp4"]
 [ext_resource type="Resource" uid="uid://duk3llmqijvbq" path="res://ui/default_config.tres" id="2_vbegm"]
-[ext_resource type="PackedScene" uid="uid://bbgn044maydvg" path="res://world_resources/stadiums/testing_stadium.tscn" id="3_f66xl"]
+[ext_resource type="PackedScene" uid="uid://bbgn044maydvg" path="res://world_resources/stadiums/standard_stadium.tscn" id="3_f66xl"]
 [ext_resource type="Shader" uid="uid://lit1thbu248c" path="res://shaders/sky.gdshader" id="5_f66xl"]
 [ext_resource type="PackedScene" uid="uid://df7fnm6hxiyhv" path="res://ui/results/results_screen.tscn" id="6_g14j6"]
 [ext_resource type="Texture2D" uid="uid://lnagx4hca0ql" path="res://textures/t_ui/White/2x/star.png" id="6_l4atl"]
@@ -98,9 +98,6 @@ size = Vector3(400, 60, 400)
 properties/0/path = NodePath(".:player_scores")
 properties/0/spawn = true
 properties/0/replication_mode = 2
-properties/1/path = NodePath(".:current_stadium_name")
-properties/1/spawn = true
-properties/1/replication_mode = 2
 
 [node name="MainWorld" type="Node3D" node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path")]
 script = ExtResource("1_00tp4")
@@ -163,6 +160,10 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 
 
 [node name="ResultsScreen" parent="." instance=ExtResource("6_g14j6")]
 
+[node name="CheatTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="BG" type="Node3D" parent="."]
 
 [node name="Sprite3D" type="Sprite3D" parent="BG"]
@@ -190,7 +191,7 @@ script = ExtResource("10_h3w03")
 metadata/_custom_type_script = "uid://dsfjou4mhrrmo"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.807938, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.907936, 0)
 shape = SubResource("BoxShape3D_h3w03")
 
 [node name="StadiumSpawner" type="MultiplayerSpawner" parent="."]
@@ -199,3 +200,5 @@ spawn_path = NodePath("../Stadium")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vbegm")
+
+[connection signal="timeout" from="CheatTimer" to="." method="_on_cheat_timer_timeout"]

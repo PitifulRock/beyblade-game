@@ -1,7 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://da3f1rx8u2hla"]
+[gd_scene load_steps=15 format=3 uid="uid://da3f1rx8u2hla"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
 [ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly/assembly_menu.gd" id="2_2o5xm"]
+[ext_resource type="PackedScene" uid="uid://bc0qxhg451sac" path="res://ui/assembly/bey_picker.tscn" id="3_sfkfw"]
 [ext_resource type="Texture2D" uid="uid://b4ru15jy82xl1" path="res://textures/PROTO/Light/texture_04.png" id="3_u5isb"]
 [ext_resource type="Texture2D" uid="uid://cicwfjonq8j0e" path="res://textures/t_ui/White/2x/stop.png" id="4_2o5xm"]
 [ext_resource type="Script" uid="uid://cyep65deu3ol7" path="res://ui/ui_button.gd" id="4_ocy00"]
@@ -84,6 +85,15 @@ anchor_right = 1.0
 anchor_bottom = 0.7777778
 columns = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="Control" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+layout_mode = 2
+
+[node name="Control2" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+layout_mode = 2
+
+[node name="Control3" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+layout_mode = 2
 
 [node name="LobbyID" type="Panel" parent="PickerScreen"]
 layout_mode = 1
@@ -172,6 +182,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 
 [node name="ReadyButton" type="Button" parent="PickerScreen/ReadyUp"]

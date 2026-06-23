@@ -13,9 +13,9 @@ radius = 0.6635742
 
 [node name="AttatckCore" type="StaticBody3D"]
 script = ExtResource("1_uhe7o")
-weight_mult = 0.6
+weight_mult = 1.2000000000000002
 part_name = "Tri Spike"
-part_weight = 0.3
+part_weight = 0.05
 metadata/_custom_type_script = "uid://bhdlota4as0vi"
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]

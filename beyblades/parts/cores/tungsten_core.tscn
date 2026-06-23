@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccxb1tme31sjq"]
+
+[ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_adq8p"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_8bpsr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_y6vqw"]
+height = 0.15
+radius = 0.72265625
+
+[node name="TungstenCore" type="StaticBody3D"]
+script = ExtResource("1_adq8p")
+weight_mult = 3.0
+part_name = "Tungsten"
+type = 2
+part_weight = 0.06
+metadata/_custom_type_script = "uid://bhdlota4as0vi"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01837501, 0)
+radius = 0.6
+height = 0.1
+sides = 16
+material = ExtResource("2_8bpsr")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+radius = 0.70458984
+height = 0.1
+sides = 16
+material = ExtResource("2_8bpsr")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.16837502, 0)
+radius = 0.77
+height = 0.1
+sides = 16
+material = ExtResource("2_8bpsr")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+radius = 0.70458984
+height = 0.1
+sides = 16
+material = ExtResource("2_8bpsr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.075, 0)
+shape = SubResource("CylinderShape3D_y6vqw")
+
+[node name="Placement" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
