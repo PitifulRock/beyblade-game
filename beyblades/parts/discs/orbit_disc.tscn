@@ -1,0 +1,161 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8v033j11us8u"]
+
+[ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_wq2tv"]
+[ext_resource type="Texture2D" uid="uid://ixthtuy7vf8a" path="res://textures/rock.jpg" id="2_oic0f"]
+[ext_resource type="Script" uid="uid://b727mabrntbvy" path="res://beyblades/parts/discs/part_remote.gd" id="4_ut0hn"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_j743d"]
+friction = 0.01
+bounce = 0.21
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wq2tv"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.36005497, 0.3837782, 0.69067895, 1)
+albedo_texture = ExtResource("2_oic0f")
+roughness = 0.0
+uv1_scale = Vector3(0.34, 0.34, 0.34)
+uv1_offset = Vector3(0.285, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j743d"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.97769564, 0.9678225, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.9159468, 0.87253296, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c4lff"]
+height = 0.27
+radius = 0.605
+
+[sub_resource type="Animation" id="Animation_c4lff"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D:rotation:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_7smag"]
+resource_name = "orbit"
+length = 6.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [0.08726646, -0.035, 0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ut0hn"]
+_data = {
+&"RESET": SubResource("Animation_c4lff"),
+&"orbit": SubResource("Animation_7smag")
+}
+
+[node name="OrbitDisc" type="StaticBody3D"]
+script = ExtResource("1_wq2tv")
+burst_resitance = 0.7
+physics_material = SubResource("PhysicsMaterial_j743d")
+part_name = "Orbit"
+type = 1
+part_weight = 0.035
+metadata/_custom_type_script = "uid://fx305niyx3gv"
+
+[node name="Visual" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual"]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.10587999, 0)
+use_collision = true
+radius = 0.9
+height = 0.21
+sides = 12
+material = SubResource("StandardMaterial3D_wq2tv")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGCylinder3D3"]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.27, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+radius = 1.0
+radial_segments = 7
+material = SubResource("StandardMaterial3D_j743d")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
+shape = SubResource("CylinderShape3D_c4lff")
+
+[node name="Planets" type="Node3D" parent="."]
+top_level = true
+
+[node name="Node3D" type="Node3D" parent="Planets"]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0.14813663, 0)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Planets/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 7.450581e-09, 0, 1.4901161e-08, 1, 0, -0.013073355, -1.0994292)
+use_collision = true
+radius = 0.175
+material = SubResource("StandardMaterial3D_j743d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Planets"]
+libraries = {
+&"": SubResource("AnimationLibrary_ut0hn")
+}
+autoplay = "orbit"
+speed_scale = 3.0
+
+[node name="OrbitRemote" type="RemoteTransform3D" parent="."]
+remote_path = NodePath("../Planets")
+update_rotation = false
+script = ExtResource("4_ut0hn")
+target_name = "Planets"

@@ -62,7 +62,7 @@ func _bey_setup():
 
 func _launch():
 	current_spin = -spin_speed if disc.right_spin else spin_speed
-	current_spin *= randf_range(0.8, 1.2)
+	current_spin *= randf_range(0.9, 1.0)
 	stored_engine_spin = angular_velocity.y
 #endregion
 

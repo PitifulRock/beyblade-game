@@ -2,11 +2,16 @@ extends Control
 
 
 func _ready() -> void:
+	%TabContainer.current_tab = 0
 	%EnterLobbyID.visible = false
+	if not Steam.isSteamRunning():
+		%HostButton.disabled = true
+		%JoinButton.disabled = true
 
 func _on_host_button_pressed() -> void:
-	Master.game_manager.host_server()
 	Effects.play_ui(&"ButtonPress")
+	await Effects.transition()
+	%TabContainer.current_tab = 1
 func _on_join_button_pressed() -> void:
 	%EnterLobbyID.visible = true
 	Effects.play_ui(&"ButtonPress")
@@ -15,8 +20,8 @@ func _on_enter_lobby_id_text_changed(new_text: String) -> void:
 	Effects.play_ui(&"ButtonPress")
 func _on_enter_id_pressed() -> void:
 	Master.game_manager.join_lobby(%EnterLobbyID.text.to_int())
-	await Steam.lobby_joined
 	Effects.play_ui(&"ButtonPress")
+	await Steam.lobby_joined
 	#queue_free()
 
 func _on_singleplayer_button_pressed() -> void:
@@ -32,3 +37,30 @@ func hide_menu():
 func show_menu():
 	$PauseMenu.visible = true
 	$PauseMenu.process_mode = Node.PROCESS_MODE_INHERIT
+
+
+
+
+func _on_start_pressed() -> void:
+	Master.game_manager.host_server()
+	Effects.play_ui(&"ButtonPress")
+
+func _on_points_to_win_value_changed(value: float) -> void:
+	Settings.gameplay_config.points_to_win = value
+	%PointsLabel.text = str("Points to win:  ", int(value))
+	Effects.play_ui(&"ButtonHover")
+func _on_cheats_toggle_toggled(toggled_on: bool) -> void:
+	Settings.gameplay_config.cheating_enabled = toggled_on
+	%CheatsLabel.text = str("Cheats:  ", "Enabled" if toggled_on else "Disabled")
+	Effects.play_ui(&"ButtonPress")
+func _on_game_speed_value_changed(value: float) -> void:
+	Settings.gameplay_config.game_speed = value
+	%SpeedLabel.text = str("Game Speed:  ", value, "x")
+	Effects.play_ui(&"ButtonHover")
+
+
+func _on_return_pressed() -> void:
+	Effects.play_ui(&"ButtonPress")
+	await Effects.transition()
+	%TabContainer.current_tab = 0
+	

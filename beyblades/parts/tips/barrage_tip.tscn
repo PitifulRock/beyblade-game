@@ -1,0 +1,131 @@
+[gd_scene load_steps=11 format=3 uid="uid://cxuwkutmag0dv"]
+
+[ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_0hypo"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_0hypo"]
+[ext_resource type="Material" uid="uid://1rpv2xab6vif" path="res://materials/prototype_orange.tres" id="3_iclau"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vk1a3"]
+points = PackedVector3Array(0, -0.265625, -0.34, -0.24042287, -0.265625, -0.24042287, 0, 0.265625, 0, 0.2403563, -0.265625, -0.24042287, -0.34, -0.265625, -6.6548586e-05, 0, -0.265625, 0.34, 0.2403563, -0.265625, 0.2403563, 0.34, -0.265625, 0, -0.24042287, -0.265625, 0.2403563)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_83hj3"]
+height = 0.21032524
+radius = 0.34521484
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qherh"]
+size = Vector3(0.15, 0.08, 0.1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0hypo"]
+height = 1.0
+radius = 0.948
+
+[sub_resource type="Animation" id="Animation_0hypo"]
+resource_name = "new_animation"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:gravity_direction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-1, 0, 0), Vector3(1, 0, -1), Vector3(0, 0, 1), Vector3(0, 0, -1)]
+}
+
+[sub_resource type="Animation" id="Animation_iclau"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:gravity_direction")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qe7ab"]
+_data = {
+&"RESET": SubResource("Animation_iclau"),
+&"new_animation": SubResource("Animation_0hypo")
+}
+
+[node name="OneShotTip" type="StaticBody3D"]
+script = ExtResource("1_0hypo")
+spin_mult = 1.2000000000000002
+stamina_mult = 0.7999999999999999
+center_tether = 7.0
+part_name = "Barrage"
+part_weight = 0.02
+metadata/_custom_type_script = "uid://ijpvs5owt5a5"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 1.6621255e-08, 0.22762246, 0)
+radius = 0.34
+height = 0.451
+cone = true
+material = ExtResource("2_0hypo")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 3.5078394e-09, 0.07762246, 0)
+radius = 0.133
+height = 0.151
+material = ExtResource("3_iclau")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 1.3577852e-08, 0.19280997, 0)
+radius = 0.411
+height = 0.358
+cone = true
+material = ExtResource("3_iclau")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 7.021143e-09, 0.117809966, 0)
+radius = 0.386
+height = 0.23137501
+cone = true
+material = ExtResource("2_0hypo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.3221675e-08, 0.265625, 0)
+visible = false
+shape = SubResource("ConvexPolygonShape3D_vk1a3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29313195, 0)
+visible = false
+shape = SubResource("CylinderShape3D_83hj3")
+
+[node name="Placement" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.44999996, 0)
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+visible = false
+shape = SubResource("BoxShape3D_qherh")
+
+[node name="Area3D" type="Area3D" parent="."]
+gravity_space_override = 1
+gravity_point_center = Vector3(1, 0, 1)
+gravity_direction = Vector3(1, 0, 1)
+gravity = 24.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("CylinderShape3D_0hypo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_qe7ab")
+}
+autoplay = "new_animation"
+speed_scale = 0.9

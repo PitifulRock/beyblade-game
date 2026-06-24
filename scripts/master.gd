@@ -4,6 +4,8 @@ signal lobby_closed
 
 var game_manager : GameManager
 
+var is_online = false
+
 var local_player : Player
 var is_host := false
 

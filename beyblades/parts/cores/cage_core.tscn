@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://b00yrmi5tfoas"]
+
+[ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_10hn4"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_dvxpk"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_hp5do"]
+size = Vector3(0.785, 0.275, 0.205)
+
+[node name="CageCore" type="StaticBody3D"]
+script = ExtResource("1_10hn4")
+weight_mult = 1.1
+part_name = "Cage"
+type = 3
+part_weight = 0.035
+metadata/_custom_type_script = "uid://bhdlota4as0vi"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10562907, 0)
+radius = 0.6
+height = 0.21000001
+sides = 16
+material = ExtResource("2_dvxpk")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+radius = 0.8
+height = 0.306
+material = ExtResource("2_dvxpk")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+operation = 2
+radius = 0.595
+height = 0.419
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, -0.30000004, 0)
+size = Vector3(0.305, 1, 1.135)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/CSGCylinder3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, -0.30000004, 0)
+size = Vector3(0.305, 1, 1.135)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/CSGCylinder3D3"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -2.1855694e-08, -0.30000004, 0.5)
+size = Vector3(0.305, 1, 1.135)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/CSGCylinder3D3"]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.1855694e-08, -0.30000004, -0.5)
+size = Vector3(0.305, 1, 1.135)
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.037834696, 0.71249664)
+shape = SubResource("BoxShape3D_hp5do")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.038, -0.712)
+shape = SubResource("BoxShape3D_hp5do")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.7122483, 0.037834696, 0.0002482818)
+shape = SubResource("BoxShape3D_hp5do")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.7122483, 0.038, 0.0002483441)
+shape = SubResource("BoxShape3D_hp5do")
+
+[node name="Placement" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19483149, 0)

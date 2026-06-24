@@ -97,7 +97,7 @@ func spawn_part(part_node : BeyPart, location : BeyBlade):
 	
 	for i in part_dup.get_children():
 		if i is not Marker3D:
-			var dup = i.duplicate()
+			var dup : Node = i.duplicate()
 			location.add_child(dup)
 			if i is Node3D:
 				dup.global_position = i.global_position

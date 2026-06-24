@@ -35,6 +35,8 @@ const point_names = {
 
 @onready var cheats_timer: Timer = $CheatTimer
 
+var round_count := 0
+
 @rpc("authority", "call_local", "reliable")
 func change_game_state(new_state : GAME_STATE):
 	current_state = new_state
@@ -64,6 +66,8 @@ func change_game_state(new_state : GAME_STATE):
 
 func _ready() -> void:
 	if Master.is_host:
+		gameplay_config = Settings.gameplay_config
+		
 		Engine.time_scale = gameplay_config.game_speed
 		change_game_state.rpc(GAME_STATE.SELECTION)
 
@@ -98,11 +102,10 @@ func _bey_death(point_type : POINT_TYPE, point_winner_id : int = -1):
 func change_stadium():
 	if !Master.is_host: return
 	
-	var rand_ind = Registry.stadiums.keys().pick_random()
-	while rand_ind == current_stadium_name:
-		rand_ind = Registry.stadiums.keys().pick_random()
+	round_count += 1
+	var next := Registry.get_next_stadium_name(round_count)
 	
-	replace_stadium_scene.rpc(rand_ind)
+	replace_stadium_scene.rpc(next)
 
 @rpc("any_peer", "call_remote", "reliable")
 func _set_round_points(updated_round_points:Dictionary[int, Array]):
@@ -118,7 +121,7 @@ func _set_game_config(points_to_win : int, game_speed : float, cheating_enabled 
 		gameplay_config.cheating_enabled = cheating_enabled
 
 @rpc("authority", "call_local", "reliable")
-func replace_stadium_scene(new_stadium : String):
+func replace_stadium_scene(new_stadium : StringName):
 	current_stadium_name = new_stadium
 	for i in stadium_path.get_children(): 
 		i.queue_free()

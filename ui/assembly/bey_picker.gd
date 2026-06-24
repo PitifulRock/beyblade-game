@@ -45,7 +45,7 @@ func spawn_visuals(part : BeyPart.PART_TYPE):
 	
 	for i in spawn_path.get_children(): i.free()
 	
-	for file:PackedScene in Registry.registry[part]:
+	for file:PackedScene in Registry.part_registry[part]:
 		var inst = file.instantiate()
 		spawn_path.add_child(inst, true)
 		if spawn_path.get_child(cur_index) != inst:
@@ -99,14 +99,12 @@ func _update_visuals():
 	%CoreName.text = str(core.part_name, "  (", core.part_weight*100,"g)")
 	%CoreInfo.text = str(
 		"Weight Mult:  ", core.weight_mult, "x\n",
-		disc.part_weight*100,"g"
 	)
 	
 	%TipName.text = str(tip.part_name, "  (", tip.part_weight*100,"g)")
 	%TipInfo.text = str(
 		"Spin Speed:  ", tip.spin_mult, "x\n",
 		"Stamina:  ", tip.stamina_mult*10, "\n",
-		disc.part_weight*100,"g"
 	)
 	
 	%BeyAssembler.disc = disc

@@ -25,14 +25,17 @@ func _ready() -> void:
 	if not Steam.isSteamRunning():
 		push_error("Steam not running")
 		OS.alert("Steam is not running", "Alert")
+		Master.is_online = false
 		return
+	else:
+		Master.is_online = true
 	
 	Steam.lobby_created.connect(_on_lobby_created)
 	Steam.lobby_joined.connect(_on_lobby_joined)
 	multiplayer.server_disconnected.connect(_on_lobby_closed)
 
 func host_server() -> void:
-	Steam.createLobby(Steam.LobbyType.LOBBY_TYPE_PUBLIC, 16)
+	Steam.createLobby(Steam.LobbyType.LOBBY_TYPE_PUBLIC, 4)
 	Master.is_host = true
 	is_host = true
 

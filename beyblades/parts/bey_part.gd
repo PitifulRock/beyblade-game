@@ -1,4 +1,4 @@
-extends Node3D
+extends StaticBody3D
 class_name BeyPart
 
 enum PART_TYPE{TIP, CORE, DISC}

@@ -1,18 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://557pdyn50028"]
+[gd_scene load_steps=6 format=3 uid="uid://557pdyn50028"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_dhsfl"]
 [ext_resource type="Material" uid="uid://blgp51ggs4pcm" path="res://materials/prototype_red.tres" id="2_dhsfl"]
 [ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="2_ouy3w"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vk1a3"]
-points = PackedVector3Array(0, -0.265625, -0.34, -0.24042287, -0.265625, -0.24042287, 0, 0.265625, 0, 0.2403563, -0.265625, -0.24042287, -0.34, -0.265625, -6.6548586e-05, 0, -0.265625, 0.34, 0.2403563, -0.265625, 0.2403563, 0.34, -0.265625, 0, -0.24042287, -0.265625, 0.2403563)
-
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_83hj3"]
 height = 0.21032524
 radius = 0.34521484
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_qherh"]
-size = Vector3(0.15, 0.08, 0.1)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ouy3w"]
+data = PackedVector3Array(-0.24041632, -0.301, -0.24041629, -0.34, -0.301, -2.9723743e-08, 0, -0.301, 0, -0.34, -0.301, -2.9723743e-08, -0.24041632, -0.301, -0.24041629, 0, 0.301, 0, 4.0544594e-09, -0.301, -0.34, -0.24041632, -0.301, -0.24041629, 0, -0.301, 0, -0.24041632, -0.301, -0.24041629, 4.0544594e-09, -0.301, -0.34, 0, 0.301, 0, -0.34, -0.301, -2.9723743e-08, -0.2404163, -0.301, 0.2404163, 0, -0.301, 0, -0.2404163, -0.301, 0.2404163, -0.34, -0.301, -2.9723743e-08, 0, 0.301, 0, -0.2404163, -0.301, 0.2404163, -1.4861872e-08, -0.301, 0.34, 0, -0.301, 0, -1.4861872e-08, -0.301, 0.34, -0.2404163, -0.301, 0.2404163, 0, 0.301, 0, 0.24041626, -0.301, -0.24041635, 4.0544594e-09, -0.301, -0.34, 0, -0.301, 0, 4.0544594e-09, -0.301, -0.34, 0.24041626, -0.301, -0.24041635, 0, 0.301, 0, 0.34, -0.301, 0, 0.24041626, -0.301, -0.24041635, 0, -0.301, 0, 0.24041626, -0.301, -0.24041635, 0.34, -0.301, 0, 0, 0.301, 0, -1.4861872e-08, -0.301, 0.34, 0.2404163, -0.301, 0.2404163, 0, -0.301, 0, 0.2404163, -0.301, 0.2404163, -1.4861872e-08, -0.301, 0.34, 0, 0.301, 0, 0.2404163, -0.301, 0.2404163, 0.34, -0.301, 0, 0, -0.301, 0, 0.34, -0.301, 0, 0.2404163, -0.301, 0.2404163, 0, 0.301, 0)
 
 [node name="OneShotTip" type="StaticBody3D"]
 script = ExtResource("1_dhsfl")
@@ -42,7 +39,7 @@ material = ExtResource("2_dhsfl")
 [node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D/CSGCylinder3D3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.233812e-09, 0.09418382, 0)
 operation = 2
-inner_radius = 0.001
+inner_radius = 0.01
 outer_radius = 0.364
 material = ExtResource("2_dhsfl")
 
@@ -56,24 +53,17 @@ material = ExtResource("2_dhsfl")
 [node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D/CSGCylinder3D4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.23381e-09, 0.09418382, 0)
 operation = 2
-inner_radius = 0.001
+inner_radius = 0.01
 outer_radius = 0.412
 material = ExtResource("2_dhsfl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.3221675e-08, 0.265625, 0)
-visible = false
-shape = SubResource("ConvexPolygonShape3D_vk1a3")
-
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.29313195, 0)
-visible = false
 shape = SubResource("CylinderShape3D_83hj3")
 
-[node name="Placement" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.59999996, 0)
+[node name="CSGBakedCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(-1, -1.509958e-07, 0, 1.509958e-07, -1, 0, 0, 0, 1, 2.3221675e-08, 0.30312246, 0)
+shape = SubResource("ConcavePolygonShape3D_ouy3w")
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
-visible = false
-shape = SubResource("BoxShape3D_qherh")
+[node name="Placement" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
