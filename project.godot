@@ -110,7 +110,7 @@ throw={
 3d/default_gravity=24.5
 3d/default_linear_damp=0.0
 3d/default_angular_damp=0.005
-3d/solver/solver_iterations=32
+3d/solver/solver_iterations=24
 
 [rendering]
 

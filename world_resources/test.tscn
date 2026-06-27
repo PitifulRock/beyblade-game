@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://elmhrlsm6p2"]
+[gd_scene load_steps=27 format=3 uid="uid://elmhrlsm6p2"]
 
 [ext_resource type="Script" uid="uid://bssuxxna2ti8u" path="res://scripts/game_world.gd" id="1_00tp4"]
 [ext_resource type="Resource" uid="uid://duk3llmqijvbq" path="res://ui/default_config.tres" id="2_vbegm"]
@@ -7,10 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://df7fnm6hxiyhv" path="res://ui/results/results_screen.tscn" id="6_g14j6"]
 [ext_resource type="Texture2D" uid="uid://lnagx4hca0ql" path="res://textures/t_ui/White/2x/star.png" id="6_l4atl"]
 [ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://textures/PROTO/Dark/texture_09.png" id="9_5tkv4"]
-[ext_resource type="Texture2D" uid="uid://cah4f3pbg2mta" path="res://textures/view.png" id="9_xersf"]
 [ext_resource type="Script" uid="uid://dsfjou4mhrrmo" path="res://world_resources/killbox.gd" id="10_h3w03"]
 [ext_resource type="PackedScene" uid="uid://da3f1rx8u2hla" path="res://ui/assembly/assembly_menu.tscn" id="11_77dp3"]
-[ext_resource type="PackedScene" uid="uid://ifje3fm2kd7u" path="res://world_resources/forest_scene.tscn" id="12_l4atl"]
+[ext_resource type="FontFile" uid="uid://bkkc8ggv7evp5" path="res://textures/SpecialGothicExpandedOne-Regular.ttf" id="13_l42vh"]
+[ext_resource type="AudioStream" uid="uid://b1p3nvxuygswj" path="res://sounds/warning.ogg" id="14_p012k"]
 
 [sub_resource type="Curve" id="Curve_l42vh"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.104, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.6965767), 0.0, 0.0, 0, 0]
@@ -76,13 +76,15 @@ fog_light_energy = 0.5
 fog_density = 1.0
 fog_aerial_perspective = 0.449
 fog_sky_affect = 0.0
-fog_depth_curve = 1.9999999
+fog_depth_curve = 1.4142139
 fog_depth_begin = 0.0
-fog_depth_end = 1602.6
+fog_depth_end = 711.6
+volumetric_fog_density = 0.0
 adjustment_enabled = true
 adjustment_saturation = 1.1
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0m0f1"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f66xl"]
+render_priority = 1
 diffuse_mode = 3
 specular_mode = 2
 albedo_color = Color(0.63375676, 0.6337568, 0.63375676, 1)
@@ -99,7 +101,74 @@ properties/0/path = NodePath(".:player_scores")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="MainWorld" type="Node3D" node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path")]
+[sub_resource type="LabelSettings" id="LabelSettings_p012k"]
+font = ExtResource("13_l42vh")
+font_size = 50
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_5h4ts"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisasterSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_p012k"]
+resource_name = "warning"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.26666668, 0.53333336, 1.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 2.3784142, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0.558), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DisasterSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7y6mw"]
+_data = {
+&"RESET": SubResource("Animation_5h4ts"),
+&"warning": SubResource("Animation_p012k")
+}
+
+[node name="MainWorld" type="Node3D" node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path", "disaster_path")]
 script = ExtResource("1_00tp4")
 assembly_menu = NodePath("AssemblyMenu")
 results_menu = NodePath("ResultsScreen")
@@ -107,6 +176,7 @@ player_path = NodePath("Players")
 beyblade_path = NodePath("Beyblades")
 particle_path = NodePath("Particles")
 stadium_path = NodePath("Stadium")
+disaster_path = NodePath("Disasters")
 gameplay_config = ExtResource("2_vbegm")
 metadata/_custom_type_script = "uid://bssuxxna2ti8u"
 
@@ -130,15 +200,10 @@ transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
 [node name="Node3D" parent="Stadium" instance=ExtResource("3_f66xl")]
 
+[node name="Disasters" type="Node3D" parent="."]
+
 [node name="DefaultCam" type="Camera3D" parent="."]
 transform = Transform3D(0.83370644, 0.20659183, 0.5121069, 0.006052263, 0.92390627, -0.3825711, -0.5521748, 0.32205138, 0.76901627, 46.1, -3.3, 38.899998)
-current = true
-fov = 48.2
-size = 30.646
-
-[node name="PlacementCam" type="Camera3D" parent="."]
-unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 51.5, 0)
 current = true
 fov = 48.2
 size = 30.646
@@ -160,30 +225,18 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 
 
 [node name="ResultsScreen" parent="." instance=ExtResource("6_g14j6")]
 
-[node name="CheatTimer" type="Timer" parent="."]
+[node name="DisasterTimer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 
 [node name="BG" type="Node3D" parent="."]
 
-[node name="Sprite3D" type="Sprite3D" parent="BG"]
-transform = Transform3D(1.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.75, -49)
-pixel_size = 0.0195
-shaded = true
-texture = ExtResource("9_xersf")
-
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="BG"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -727.0515, 0)
 radius = 15.984
-height = 6.794
+height = 1450.397
 sides = 32
-material = SubResource("StandardMaterial3D_0m0f1")
-
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="BG"]
-use_collision = true
-
-[node name="ForestScene" parent="BG" instance=ExtResource("12_l4atl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -4.741968, 0.3)
+material = SubResource("StandardMaterial3D_f66xl")
 
 [node name="KillBox" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.13173, 0)
@@ -201,4 +254,26 @@ spawn_path = NodePath("../Stadium")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_vbegm")
 
-[connection signal="timeout" from="CheatTimer" to="." method="_on_cheat_timer_timeout"]
+[node name="DisasterWarning" type="Label" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Disaster incoming!"
+label_settings = SubResource("LabelSettings_p012k")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DisasterAnim" type="AnimationPlayer" parent="DisasterWarning"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_7y6mw")
+}
+
+[node name="DisasterSound" type="AudioStreamPlayer" parent="DisasterWarning"]
+stream = ExtResource("14_p012k")
+bus = &"SFX"
+
+[connection signal="timeout" from="DisasterTimer" to="." method="_on_disaster_timer_timeout"]

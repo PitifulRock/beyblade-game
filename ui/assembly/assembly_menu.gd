@@ -1,6 +1,7 @@
 extends TabContainer
 
 const BEY_PICKER = preload("uid://bc0qxhg451sac")
+const BEY_ASSEMBLER = preload("uid://vcysantvrkhb")
 
 @export var bey_amount := 2
 @export var ready_players := 0:
@@ -93,23 +94,29 @@ func _on_ready_timer_timeout() -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func start_bey_placement():
+	Master.local_player.set_movement(true)
 	%ReadyButton.button_pressed = false
 	current_tab = 1
 	launch_countdown()
 	for i in %SelectionContainer.get_children():
 		i.bey_assembler.prepare_launch()
+	if Master.is_host:
+		for i in Settings.gameplay_config.npc_count:
+			var npc_name = str(randi_range(-99999, -1))
+			spawn_npc_assembler.rpc(npc_name)
 
-
-func _on_copy_id_button_pressed() -> void:
-	DisplayServer.clipboard_set(str(Master.game_manager.lobby_id))
-	var t = get_tree().create_tween()
-	%CopiedNotif.self_modulate.a = 1.0
-	t.tween_property(%CopiedNotif, "self_modulate:a", 0.0, 0.8)
-
+@rpc("any_peer", "call_local", "reliable")
+func spawn_npc_assembler(npc_name : String):
+	var inst = BEY_ASSEMBLER.instantiate()
+	inst.name = npc_name
+	%NPCAssemblers.add_child(inst)
+	inst.prepare_launch(true, npc_name)
 
 func _on_place_timer_timeout() -> void:
 	for i in %SelectionContainer.get_children():
 		i.bey_assembler.launch()
+	for i in %NPCAssemblers.get_children():
+		i.launch()
 	if Master.is_host:
 		Master.game_manager.current_scene.change_game_state.rpc(GameWorld.GAME_STATE.BATTLE)
 	
@@ -120,3 +127,10 @@ func _on_place_timer_timeout() -> void:
 	hide()
 	%PlaceTip.show()
 	current_tab = 0
+
+
+func _on_copy_id_button_pressed() -> void:
+	DisplayServer.clipboard_set(str(Master.game_manager.lobby_id))
+	var t = get_tree().create_tween()
+	%CopiedNotif.self_modulate.a = 1.0
+	t.tween_property(%CopiedNotif, "self_modulate:a", 0.0, 0.8)

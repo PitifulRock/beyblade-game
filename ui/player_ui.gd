@@ -8,15 +8,12 @@ func _input(_event: InputEvent) -> void:
 		%PauseMenu.visible = !%PauseMenu.visible
 
 func _ready() -> void:
-	%LabelID.text = str("Lobby ID: ", Master.game_manager.lobby_id)
 	%PauseMenu.hide()
 	#await get_tree().process_frame
 	#player.game_unpaused.connect(save_settings)
 	#
 	#load_settings()
 
-func _on_copy_button_pressed() -> void:
-	DisplayServer.clipboard_set(str(Master.game_manager.lobby_id))
 func _on_leave_lobby_pressed() -> void:
 	Master.game_manager.remove_from_lobby(player_id)
 func _on_quit_button_pressed() -> void:

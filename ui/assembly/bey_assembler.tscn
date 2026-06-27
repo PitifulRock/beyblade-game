@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://vcysantvrkhb"]
+
+[ext_resource type="Script" uid="uid://dttx7yk0j36qi" path="res://beyblades/bey_assembler.gd" id="1_auall"]
+[ext_resource type="AudioStream" uid="uid://klfo25f4n2j2" path="res://sounds/launch.ogg" id="2_xxd6d"]
+[ext_resource type="Texture2D" uid="uid://o6xymq0ue8rn" path="res://textures/t_particles/star_09.png" id="3_u2rfc"]
+[ext_resource type="Texture2D" uid="uid://bmyjjuwrnc5mb" path="res://textures/t_ui/White/2x/gear.png" id="4_poxqr"]
+
+[sub_resource type="Curve" id="Curve_odugb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.8563686, 0), -0.9308333, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_kmefx"]
+curve = SubResource("Curve_odugb")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_erfmm"]
+inherit_velocity_ratio = 1.0
+direction = Vector3(1, 1, 0)
+spread = 113.744
+initial_velocity_min = 2.45
+initial_velocity_max = 19.65
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_kmefx")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_erfmm"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.8422741, 0.7075732, 0, 1)
+albedo_texture = ExtResource("3_u2rfc")
+billboard_mode = 1
+grow = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_oi50h"]
+material = SubResource("StandardMaterial3D_erfmm")
+orientation = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmefx"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 1, 1, 0.21000001)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_erfmm"]
+material = SubResource("StandardMaterial3D_kmefx")
+top_radius = 0.1
+bottom_radius = 0.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_auall"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[node name="BeyAssembler" type="Node3D"]
+visible = false
+script = ExtResource("1_auall")
+metadata/_custom_type_script = "uid://dttx7yk0j36qi"
+
+[node name="LaunchSound" type="AudioStreamPlayer3D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_xxd6d")
+unit_size = 20.0
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 11197.0
+
+[node name="LaunchParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+emitting = false
+amount = 16
+lifetime = 0.24
+one_shot = true
+explosiveness = 0.87
+process_material = SubResource("ParticleProcessMaterial_erfmm")
+draw_pass_1 = SubResource("PlaneMesh_oi50h")
+
+[node name="LaunchSprite" type="Sprite3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+pixel_size = 0.02
+billboard = 1
+texture_filter = 0
+texture = ExtResource("4_poxqr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_erfmm")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_auall")

@@ -1,0 +1,397 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh65itkejjihg"]
+
+[ext_resource type="Script" uid="uid://b84qcyxnjga2n" path="res://ui/pause_menu.gd" id="1_ejwgg"]
+[ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_fob5h"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_myx47"]
+color = Color(1, 1, 1, 1)
+
+[node name="PauseMenu" type="Node"]
+script = ExtResource("1_ejwgg")
+
+[node name="MainPanel" type="Panel" parent="."]
+self_modulate = Color(0, 0, 0, 0.796078)
+offset_left = 156.0
+offset_top = 118.0
+offset_right = 508.0
+offset_bottom = 924.0
+theme = ExtResource("2_fob5h")
+
+[node name="ButtonContainer" type="VBoxContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = 26.0
+offset_right = -28.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_fob5h")
+theme_override_constants/separation = 19
+
+[node name="PausedLabel" type="RichTextLabel" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 69.785)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Resume" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Return"
+
+[node name="Options" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Video"
+
+[node name="Options2" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Audio
+"
+
+[node name="Options3" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Sound"
+
+[node name="Options4" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Leave  Lobby"
+
+[node name="QuitGame" type="Button" parent="MainPanel/ButtonContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Quit to desktop
+"
+
+[node name="TabContainer" type="TabContainer" parent="MainPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.1079545
+anchor_right = 4.596591
+anchor_bottom = 1.0
+grow_vertical = 2
+current_tab = 0
+tabs_visible = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Video" type="Panel" parent="MainPanel/TabContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_fob5h")
+metadata/_tab_index = 0
+
+[node name="MenuContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Video"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 256.0
+offset_bottom = 584.0
+
+[node name="Label" type="RichTextLabel" parent="MainPanel/TabContainer/Video/MenuContainer"]
+custom_minimum_size = Vector2(0, 69.785)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "VIDEO"
+vertical_alignment = 1
+
+[node name="Spacer3" type="MarginContainer" parent="MainPanel/TabContainer/Video/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MainPanel/TabContainer/Video/MenuContainer/Spacer3"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_myx47")
+
+[node name="FullScreen" type="RichTextLabel" parent="MainPanel/TabContainer/Video/MenuContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Enable Fullscreen"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CheckBox" type="CheckBox" parent="MainPanel/TabContainer/Video/MenuContainer/FullScreen"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -6.0
+offset_right = 38.0
+offset_bottom = 18.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Spacer4" type="MarginContainer" parent="MainPanel/TabContainer/Video/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="ShadowLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Video/MenuContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Shadow Quality"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Shadow" type="MenuButton" parent="MainPanel/TabContainer/Video/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = " Low"
+alignment = 0
+item_count = 3
+popup/item_0/text = "Low"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+popup/item_2/text = "High"
+popup/item_2/id = 2
+
+[node name="Panel" type="Panel" parent="MainPanel/TabContainer/Video/MenuContainer/Shadow"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0652174
+anchor_right = 0.892857
+anchor_bottom = 1.15217
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Spacer5" type="MarginContainer" parent="MainPanel/TabContainer/Video/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="fovLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Video/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Field of View:"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="FovSlider" type="HSlider" parent="MainPanel/TabContainer/Video/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 40.0
+value = 75.0
+
+[node name="Spacer6" type="MarginContainer" parent="MainPanel/TabContainer/Video/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="AALabel" type="RichTextLabel" parent="MainPanel/TabContainer/Video/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Anti-Aliasing"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="AA" type="MenuButton" parent="MainPanel/TabContainer/Video/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Disabled"
+alignment = 0
+item_count = 4
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "2x"
+popup/item_1/id = 1
+popup/item_2/text = "4x"
+popup/item_2/id = 2
+popup/item_3/text = "8x"
+popup/item_3/id = 3
+
+[node name="Panel" type="Panel" parent="MainPanel/TabContainer/Video/MenuContainer/AA"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.0652174
+anchor_right = 0.892857
+anchor_bottom = 1.15217
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Audio" type="Panel" parent="MainPanel/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("2_fob5h")
+metadata/_tab_index = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Audio"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 352.0
+offset_bottom = 584.0
+
+[node name="Label" type="RichTextLabel" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+custom_minimum_size = Vector2(0, 69.785)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "AUDIO"
+vertical_alignment = 1
+
+[node name="Spacer3" type="MarginContainer" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MainPanel/TabContainer/Audio/MenuContainer/Spacer3"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_myx47")
+
+[node name="MasterLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Master Volume: 12"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MasterVol" type="HSlider" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = -100.0
+
+[node name="Spacer5" type="MarginContainer" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="MusicLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Music Volume: gay"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="MusicVol" type="HSlider" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="Spacer6" type="MarginContainer" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="SFXLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(128.605, 60)
+layout_mode = 2
+text = "SFX Volume: 12"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="SFXVol" type="HSlider" parent="MainPanel/TabContainer/Audio/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+value = 100.0
+
+[node name="Controls" type="Panel" parent="MainPanel/TabContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme = ExtResource("2_fob5h")
+metadata/_tab_index = 2
+
+[node name="MenuContainer" type="VBoxContainer" parent="MainPanel/TabContainer/Controls"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 352.0
+offset_bottom = 584.0
+
+[node name="Label" type="RichTextLabel" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+custom_minimum_size = Vector2(0, 69.785)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 48
+text = "CONTROLS"
+vertical_alignment = 1
+
+[node name="Spacer3" type="MarginContainer" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="MainPanel/TabContainer/Controls/MenuContainer/Spacer3"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxLine_myx47")
+
+[node name="SensLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Camera Sensitivity: 12"
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="Sensitivity" type="HSlider" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+step = 0.1
+value = 4.0
+
+[node name="Spacer5" type="MarginContainer" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
+
+[node name="CamDelayLabel" type="RichTextLabel" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+unique_name_in_owner = true
+clip_contents = false
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+text = "Camera delay/smooth: "
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="CamDelay" type="HSlider" parent="MainPanel/TabContainer/Controls/MenuContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 20.0
+step = 0.1
+value = 5.0
+
+[connection signal="pressed" from="MainPanel/ButtonContainer/Resume" to="." method="close"]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options" to="." method="hide_menus"]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options" to="MainPanel/TabContainer/Video" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options2" to="." method="hide_menus"]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options2" to="MainPanel/TabContainer/Controls" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options3" to="." method="hide_menus"]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options3" to="MainPanel/TabContainer/Audio" method="set_visible" binds= [true]]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options4" to="." method="hide_menus"]
+[connection signal="pressed" from="MainPanel/ButtonContainer/Options4" to="MainPanel/TabContainer/Audio" method="set_visible" binds= [true]]
+[connection signal="toggled" from="MainPanel/TabContainer/Video/MenuContainer/FullScreen/CheckBox" to="." method="update_fullscreen"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Video/MenuContainer/FovSlider" to="." method="update_fov"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Audio/MenuContainer/MasterVol" to="." method="update_master_volume"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Audio/MenuContainer/MusicVol" to="." method="update_music_volume"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Audio/MenuContainer/SFXVol" to="." method="update_sfx_volume"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Controls/MenuContainer/Sensitivity" to="." method="update_mouse_sens"]
+[connection signal="value_changed" from="MainPanel/TabContainer/Controls/MenuContainer/CamDelay" to="." method="update_cam_delay"]

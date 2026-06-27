@@ -42,8 +42,17 @@ var stadiums : Dictionary[StringName, PackedScene] = {
 	"Elevator" : preload("uid://8br8n6rcj3os"),
 	"Invasion" :preload("uid://ctg2a6iawxmt0"),
 	"Mountains" :preload("uid://i8iqhyap2e6r"),
-	
+	"Spikes" :preload("uid://bg0hce42w5sid"),
+	"UFO" :preload("uid://crshblwnm08nc"),
+	"Fractured" :preload("uid://cumag18d15u2b"),
+	"Farm" :preload("uid://cf68t08axsdph"),
 }
+
+var disasters : Array[PackedScene] = [
+	preload("uid://j85u7ce8mk35")
+	,preload("uid://6titwrw7r26j")
+	,preload("uid://bkko7pq28y3oo")
+]
 
 func _ready() -> void:
 	current_stadium_order = get_shuffled_stadium_names()

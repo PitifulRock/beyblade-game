@@ -15,7 +15,7 @@ enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 @export var dead := false
 @export var current_spin : float
 
-var spin_speed : float = 500.0
+var spin_speed : float = 200.0
 var stamina : float = 0.6
 var burst_resistance := 1.0
 var burst_damage := 1.0
@@ -28,15 +28,17 @@ var collision_point : Vector3
 var last_collided_bey : BeyBlade
 var game_world : GameWorld
 var recoil := 1.0
+var is_npc := false
 
 @onready var name_tag: Label3D = %NameTag
 
 func _ready() -> void:
 	game_world = Master.game_manager.current_scene
-	name_tag.text=Master.player_list[name.to_int()].display_name
 	_physics_setup()
 
-func _spawned():
+func _spawned(as_npc := false):
+	is_npc = as_npc
+	name_tag.text=Master.player_list[name.to_int()].display_name if !is_npc else ""
 	if !Master.is_host: return
 	_bey_setup()
 	_launch()
@@ -67,6 +69,10 @@ func _launch():
 #endregion
 
 func _physics_process(_delta: float) -> void:
+	if current_spin <= 10:
+		%SpinParticles.emitting = false
+	%BurstTag.text = str(int(burst_percentage), "%")
+	
 	if Master.is_host:
 		var engine_spin := angular_velocity.y
 		var e_spin_diff = engine_spin - stored_engine_spin
@@ -81,6 +87,7 @@ func _physics_process(_delta: float) -> void:
 			if !dead: 
 				die(GameWorld.POINT_TYPE.STAMINA)
 		angular_velocity.y = current_spin
+		
 
 		#%Label3D.text = str(int(abs(current_spin)), ", ", int(burst_percentage))
 		
@@ -97,7 +104,7 @@ func _physics_process(_delta: float) -> void:
 			
 			$CenterTether.look_at(game_world.stadium_path.global_position)
 			apply_central_force(get_orbital_force())
-			apply_central_force(get_center_pull_force() * center_tether/recoil)
+			apply_central_force(get_center_pull_force() * (center_tether/recoil))
 			if !%FloorCheck.is_colliding(): linear_velocity.y -= get_added_gravity()
 		
 	if burst_percentage >= 100 and !dead: 
@@ -127,7 +134,7 @@ func burst():
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func get_spin_loss(spin_diff : float) -> float:
-	var spin_loss := 0.0004
+	var spin_loss := 0.00015
 	if spin_diff < -1.0: 
 		spin_loss = clampf(-spin_diff/2000.0, 0.0004, 0.01)
 	var adjusted := (spin_loss / stamina) * randf_range(0.9, 1.2)
@@ -135,12 +142,12 @@ func get_spin_loss(spin_diff : float) -> float:
 func get_orbital_force() -> Vector3:
 	var dir = $CenterTether.global_basis.x
 	var distance = global_position.distance_to(game_world.stadium_path.global_position)
-	var force = dir*0.0035 * current_spin/(distance/1.1)
+	var force = dir*0.0038 * current_spin/(distance)
 	return force * Vector3(1,0,1)
 func get_center_pull_force() -> Vector3:
 	var dir = $CenterTether.global_basis.z
 	var distance = global_position.distance_to(game_world.stadium_path.global_position)
-	var force = (dir*-0.0016) * spin_speed * (distance/1.2) * ((stamina+1)/1.8)
+	var force = (dir*-0.0018) * spin_speed * (distance/1.2) * ((stamina+1)/1.8)
 	return force * Vector3(1,0,1)
 func get_added_gravity() -> float:
 	var distance = global_position.distance_to(game_world.stadium_path.global_position)
@@ -153,7 +160,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func _on_collision(body : Node):
 	if body is BeyBlade and !dead:
 		var body_speed = body.linear_velocity.length()
-		last_collided_bey = body
+		last_collided_bey = body if !body.is_npc else null
 		recoil += 0.5
 		if linear_velocity.length() > body_speed/1.5:
 			#spin reduction from hitting fast
@@ -162,14 +169,14 @@ func _on_collision(body : Node):
 			
 			_clash_fx.rpc(collision_point, body_speed)
 			
-		if linear_velocity.length() < body_speed/1.5 and can_take_damage:
-			var incoming_damage = (body_speed*body.burst_damage) * abs(body.current_spin)/550
-			var recieved_damage = incoming_damage/burst_resistance/1.2
-			burst_percentage += clampf(recieved_damage, 0.0, 50.0)
+		if linear_velocity.length() < body_speed*1.2*Settings.gameplay_config.game_speed and can_take_damage:
+			var incoming_damage = (body_speed*body.burst_damage) * body_speed/25
+			var recieved_damage = incoming_damage/(burst_resistance)
+			burst_percentage += clampf(recieved_damage, 0.0, 40.0)
 			can_take_damage = false
-			await get_tree().create_timer(0.3).timeout
+			await get_tree().create_timer(0.2).timeout
 			can_take_damage = true
-		game_world.reset_cheat_timer()
+		game_world.reset_disaster_timer()
 
 @rpc("any_peer", "call_local", "reliable")
 func _clash_fx(fx_position : Vector3, body_speed : float):

@@ -46,14 +46,9 @@ func _ready() -> void:
 func enable_cheats():
 	cheats_enabled = true
 	%CheatsScreen.show()
-	var t = get_tree().create_tween()
-	t.tween_property(%CheatsNotifier, "self_modulate:a", 1.0, 0.3)
-	t.tween_interval(0.7)
-	t.tween_property(%CheatsNotifier, "self_modulate:a", 0.0, 0.6)
 func disable_cheats():
 	cheats_enabled = false
 	%CheatsScreen.hide()
-	%CheatsNotifier.self_modulate.a = 0.0
 
 @rpc("any_peer", "call_local")
 func blow():

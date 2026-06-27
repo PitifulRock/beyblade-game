@@ -11,21 +11,41 @@ const LAUNCH_HEIGHT := 1.0
 var bey_ready := false
 var placing_launch := false
 var prev_pos : Vector3
+var is_npc := false
+var npc_name := ""
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		if placing_launch and bey_ready: 
 			lock_in_launch()
 
-func prepare_launch():
+func prepare_launch(npc_bey := false, passed_npc_name : String = ""):
 	show()
-	if !is_multiplayer_authority(): return
-	%LaunchSprite.modulate = Color.LIGHT_GREEN
-	bey_ready = true
-	placing_launch = true
+	if !npc_bey:
+		if !is_multiplayer_authority(): return
+		%LaunchSprite.modulate = Color.LIGHT_GREEN
+		bey_ready = true
+		placing_launch = true
+	else:
+		is_npc = true
+		
+		if Master.is_host:
+			var disc_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.DISC].size()-1)
+			var core_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.CORE].size()-1)
+			var tip_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.TIP].size()-1)
+			
+			prepare_npc.rpc(passed_npc_name, disc_id, core_id, tip_id)
+			set_random_position()
+
+@rpc("any_peer", "call_local", "reliable")
+func prepare_npc(new_name:String, disc_id:int, core_id:int, tip_id:int):
+	npc_name = new_name
+	disc = Registry.part_registry[BeyPart.PART_TYPE.DISC][disc_id].instantiate()
+	core = Registry.part_registry[BeyPart.PART_TYPE.CORE][core_id].instantiate()
+	tip = Registry.part_registry[BeyPart.PART_TYPE.TIP][tip_id].instantiate()
 
 func _process(_delta: float) -> void:
-	if !is_multiplayer_authority(): return
+	if !is_multiplayer_authority() or is_npc: return
 	if placing_launch: shoot_ray()
 
 func shoot_ray():
@@ -52,7 +72,11 @@ func launch():
 	
 	var bey : BeyBlade = BEY_SCENE.instantiate()
 	var world : GameWorld = Master.game_manager.current_scene
-	bey.name = str(get_multiplayer_authority())
+	
+	if !is_npc: 
+		bey.name = str(get_multiplayer_authority())
+	else:
+		bey.name = npc_name
 	world.beyblade_path.add_child(bey)
 	bey.global_position = global_position
 	bey.process_mode = Node.PROCESS_MODE_DISABLED
@@ -64,7 +88,9 @@ func launch():
 	await get_tree().process_frame
 	bey.process_mode = Node.PROCESS_MODE_INHERIT
 	
-	bey._spawned()
+	bey._spawned(is_npc)
+	
+	if is_npc: queue_free()
 
 func launch_visuals():
 	%LaunchSound.play()
@@ -108,3 +134,15 @@ func spawn_part(part_node : BeyPart, location : BeyBlade):
 				gib_dup.global_position = i.global_position
 			
 			i.queue_free()
+
+func set_random_position():
+	var world : GameWorld = Master.game_manager.current_scene
+	var stadium : Stadium = world.stadium_path.get_child(0)
+
+	var radius : float = stadium.npc_spawn_area.shape.radius
+	var angle := randf_range(10, TAU)
+	
+	var random_radius : float = radius * sqrt(randf())
+
+	var offset := Vector3(cos(angle), 0, sin(angle)) * random_radius
+	global_position = stadium.npc_spawn_area.global_position + offset

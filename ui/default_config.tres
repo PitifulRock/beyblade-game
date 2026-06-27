@@ -4,5 +4,6 @@
 
 [resource]
 script = ExtResource("1_myhmo")
-points_to_win = 6
+points_to_win = 5
+cheating_enabled = false
 metadata/_custom_type_script = "uid://c703s0801no0y"

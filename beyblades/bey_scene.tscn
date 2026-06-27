@@ -112,6 +112,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 
 [node name="FloorCheck" type="RayCast3D" parent="."]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12239136, 0)
 target_position = Vector3(0, -0.4, 0)
 
 [node name="Node3D" type="Node3D" parent="."]
@@ -127,11 +128,21 @@ render_priority = 1
 outline_render_priority = 0
 text = "9000"
 
+[node name="BurstTag" type="Label3D" parent="Node3D"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6000001, 0)
+pixel_size = 0.013
+billboard = 1
+render_priority = 1
+outline_render_priority = 0
+text = "9000"
+
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
 shape = SubResource("SphereShape3D_3dcr0")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="SpinParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
 amount = 232
 lifetime = 0.3
@@ -141,16 +152,16 @@ draw_pass_1 = SubResource("PlaneMesh_n1s4q")
 [node name="ClashSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_manui")
-unit_size = 15.0
+unit_size = 20.0
 max_polyphony = 3
-attenuation_filter_cutoff_hz = 7246.0
+attenuation_filter_cutoff_hz = 14398.0
 
 [node name="SpinSound" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("7_3xdhn")
-unit_size = 14.0
+unit_size = 16.0
 autoplay = true
-attenuation_filter_cutoff_hz = 6591.0
+attenuation_filter_cutoff_hz = 9070.0
 doppler_tracking = 2
 
 [node name="BurstHolder" type="Node3D" parent="."]
@@ -160,10 +171,10 @@ visible = false
 [node name="BurstSound" type="AudioStreamPlayer3D" parent="BurstHolder"]
 transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0)
 stream = ExtResource("7_3kb01")
-unit_size = 15.0
+unit_size = 20.0
 autoplay = true
 max_polyphony = 3
-attenuation_filter_cutoff_hz = 7246.0
+attenuation_filter_cutoff_hz = 11496.0
 
 [node name="GPUParticles3D" parent="BurstHolder" instance=ExtResource("9_nn1wg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6000001, 0)

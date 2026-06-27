@@ -39,8 +39,6 @@ func show_menu():
 	$PauseMenu.process_mode = Node.PROCESS_MODE_INHERIT
 
 
-
-
 func _on_start_pressed() -> void:
 	Master.game_manager.host_server()
 	Effects.play_ui(&"ButtonPress")
@@ -57,10 +55,18 @@ func _on_game_speed_value_changed(value: float) -> void:
 	Settings.gameplay_config.game_speed = value
 	%SpeedLabel.text = str("Game Speed:  ", value, "x")
 	Effects.play_ui(&"ButtonHover")
-
+func _on_disasters_toggle_toggled(toggled_on: bool) -> void:
+	Settings.gameplay_config.disasters_enabled = toggled_on
+	%DisastersLabel.text = str("Natural Disasters:  ", "Enabled" if toggled_on else "Disabled")
+	Effects.play_ui(&"ButtonPress")
+func _on_npc_number_value_changed(value: float) -> void:
+	Settings.gameplay_config.npc_count = value
+	Effects.play_ui(&"ButtonPress")
+func _on_npc_win_toggle_toggled(toggled_on: bool) -> void:
+	Settings.gameplay_config.wait_for_npcs = toggled_on
+	Effects.play_ui(&"ButtonPress")
 
 func _on_return_pressed() -> void:
 	Effects.play_ui(&"ButtonPress")
 	await Effects.transition()
 	%TabContainer.current_tab = 0
-	

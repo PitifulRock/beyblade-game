@@ -2,6 +2,8 @@
 extends Node3D
 class_name Stadium
 
+@export var npc_spawn_area : CollisionShape3D
+
 @export_tool_button("Setup Staticbody") var setup = setup_stadium_body
 
 @export var stadium_body : StaticBody3D
@@ -17,5 +19,3 @@ func setup_stadium_body():
 	stadium_body.add_to_group("stadium", true)
 	
 	stadium_body.notify_property_list_changed()
-	if Engine.is_editor_hint():
-		EditorInterface.mark_scene_as_unsaved()

@@ -99,6 +99,8 @@ func remove_from_lobby(_player_id : int):
 	if multiplayer.multiplayer_peer:
 		multiplayer.multiplayer_peer.close()
 	Steam.leaveLobby(lobby_id)
+	Master.avatar_cache.clear()
+	Master.player_list.clear()
 	
 func _on_lobby_closed():
 	multiplayer.multiplayer_peer.close()

@@ -25,6 +25,7 @@ const point_names = {
 @export var beyblade_path : Node3D
 @export var particle_path : Node3D
 @export var stadium_path : Node3D
+@export var disaster_path : Node3D
 
 @export_group("Synced Variables")
 @export var gameplay_config : GameplayConfig
@@ -33,7 +34,7 @@ const point_names = {
 @export var round_points : Dictionary[int, Array] = {}
 @export var current_stadium_name := ""
 
-@onready var cheats_timer: Timer = $CheatTimer
+@onready var disaster_timer: Timer = $DisasterTimer
 
 var round_count := 0
 
@@ -42,25 +43,31 @@ func change_game_state(new_state : GAME_STATE):
 	current_state = new_state
 	match new_state:
 		GAME_STATE.SELECTION:
+			Master.local_player.set_movement(false)
 			round_points = {}
 			results_menu.hide()
 			assembly_menu.show()
+			if gameplay_config.cheating_enabled and Master.is_host and Master.local_player:
+				disable_cheats.rpc()
 			for i in beyblade_path.get_children(): i.queue_free()
 			for i in particle_path.get_children(): i.queue_free()
-		GAME_STATE.PLACEMENT:
-			%PlacementCam.make_current()
-			assembly_menu.hide()
 		GAME_STATE.BATTLE:
+			Master.local_player.set_movement(true)
 			Master.local_player.make_current()
+			if gameplay_config.disasters_enabled and Master.is_host:
+				disaster_timer.start()
 			if gameplay_config.cheating_enabled and Master.is_host:
-				cheats_timer.start()
+				enable_cheats.rpc()
 		GAME_STATE.RESULTS:
+			Master.local_player.set_movement(true)
 			disable_cheats.rpc()
-			cheats_timer.stop()
+			clear_disasters.rpc()
+			disaster_timer.stop()
 			
 			results_menu.show()
 			results_menu.start_scoring(round_points)
 		GAME_STATE.WINNER:
+			Master.local_player.set_movement(true)
 			for i in player_scores.keys():
 				player_scores[i] = 0
 
@@ -69,6 +76,7 @@ func _ready() -> void:
 		gameplay_config = Settings.gameplay_config
 		
 		Engine.time_scale = gameplay_config.game_speed
+		await get_tree().process_frame
 		change_game_state.rpc(GAME_STATE.SELECTION)
 
 func _bey_death(point_type : POINT_TYPE, point_winner_id : int = -1):
@@ -84,12 +92,17 @@ func _bey_death(point_type : POINT_TYPE, point_winner_id : int = -1):
 	
 	var alive_count := 0
 	for i:BeyBlade in beyblade_path.get_children():
-		if i.dead == false: alive_count += 1
+		var alive_condition : bool
+		if Settings.gameplay_config.wait_for_npcs:
+			alive_condition = (i.dead==false)
+		else:
+			alive_condition = (i.dead==false and !i.is_npc)
+		if alive_condition: alive_count += 1
 	
 	if alive_count <= 1:
 		if alive_count == 1:
 			for i:BeyBlade in beyblade_path.get_children():
-				if i.dead == false:
+				if i.dead == false and !i.is_npc:
 					if round_points.keys().has(i.name.to_int()):
 						round_points[i.name.to_int()].append(POINT_TYPE.WINNER)
 					else:
@@ -111,7 +124,7 @@ func change_stadium():
 func _set_round_points(updated_round_points:Dictionary[int, Array]):
 	round_points = updated_round_points
 @rpc("any_peer", "call_remote", "reliable")
-func _set_game_config(points_to_win : int, game_speed : float, cheating_enabled : bool):
+func _set_game_config(points_to_win : int, game_speed : float, cheating_enabled : bool, npc_count : int = 0):
 	Engine.time_scale = game_speed
 	
 	if !Master.is_host:
@@ -119,6 +132,7 @@ func _set_game_config(points_to_win : int, game_speed : float, cheating_enabled 
 		gameplay_config.points_to_win = points_to_win
 		gameplay_config.game_speed = game_speed
 		gameplay_config.cheating_enabled = cheating_enabled
+		gameplay_config.npc_count = npc_count
 
 @rpc("authority", "call_local", "reliable")
 func replace_stadium_scene(new_stadium : StringName):
@@ -143,8 +157,10 @@ func _on_bey_burst():
 func player_added(id : int):
 	assembly_menu.add_selection_menu(id)
 	results_menu.add_player_bar(id)
-	player_scores[id] = 0
-	round_points[id] = []
+	
+	if id>0:
+		player_scores[id] = 0
+		round_points[id] = []
 	
 	if Master.is_host and id != 1: 
 		change_game_state.rpc_id(id, current_state)
@@ -155,9 +171,20 @@ func player_removed(id : int):
 	player_scores.erase(id)
 	round_points.erase(id)
 
-func _on_cheat_timer_timeout() -> void:
-	if gameplay_config.cheating_enabled and current_state == GAME_STATE.BATTLE and Master.is_host:
-		enable_cheats.rpc()
+func _on_disaster_timer_timeout() -> void:
+	if gameplay_config.disasters_enabled and current_state == GAME_STATE.BATTLE and Master.is_host:
+		var disaster_index := randi_range(0, Registry.disasters.size()-1)
+		start_disaster.rpc(disaster_index)
+
+@rpc("any_peer", "call_local", "reliable")
+func start_disaster(index : int):
+	%DisasterAnim.play("warning")
+	var inst = Registry.disasters[index].instantiate()
+	disaster_path.add_child(inst)
+@rpc("any_peer", "call_local", "reliable")
+func clear_disasters():
+	for i in disaster_path.get_children():
+		i.queue_free()
 
 @rpc("any_peer", "call_local", "reliable")
 func enable_cheats():
@@ -165,6 +192,6 @@ func enable_cheats():
 @rpc("any_peer", "call_local", "reliable")
 func disable_cheats():
 	Master.local_player.disable_cheats()
-func reset_cheat_timer():
-	cheats_timer.stop()
-	cheats_timer.start()
+func reset_disaster_timer():
+	disaster_timer.stop()
+	disaster_timer.start()

@@ -28,8 +28,8 @@ size = Vector3(0.43, 0.294, 0.725)
 
 [node name="SwordDisc" type="StaticBody3D"]
 script = ExtResource("1_ko62k")
-burst_resitance = 0.5
-burst_damage = 2.3
+burst_resitance = 0.7
+burst_damage = 2.1
 physics_material = SubResource("PhysicsMaterial_ko62k")
 part_name = "Sword"
 part_weight = 0.04

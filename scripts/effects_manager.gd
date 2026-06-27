@@ -6,8 +6,9 @@ var ui_stream: AudioStreamPolyphonic
 
 @export var sfx_lib: AudioLibrary
 @export var ui_lib: AudioLibrary
+@export var music_lib: Array[AudioStreamSynchronized]
 
-@onready var _music_stage: AudioStreamPlayer = %MusicStage
+@onready var _music_stage: AudioStreamPlayer = %MusicPlayer
 @onready var _music_override: AudioStreamPlayer = %MusicOverride
 @onready var _sfx_player: AudioStreamPlayer = %SFXPlayer
 @onready var _ui_player: AudioStreamPlayer = %UIPlayer
@@ -155,3 +156,20 @@ func make_tween(parent: Node, tween: Tween,parallel:= false) -> Tween:
 	if parallel:
 		tween.set_parallel(true)
 	return tween
+
+func set_sync_music(random := true):
+	%MusicPlayer.stop()
+	if random:
+		var picked_stream = music_lib.pick_random()
+		
+		%MusicPlayer.stream = picked_stream
+		%MusicPlayer.play()
+
+func fade_drum_track(drums_on : bool):
+	var tween := get_tree().create_tween()
+	var music_stream : AudioStreamSynchronized = %MusicPlayer.stream
+	
+	if drums_on:
+		tween.tween_property(music_stream.get_sync_stream(1), "volume", 1.0, 0.8)
+	else:
+		tween.tween_property(music_stream.get_sync_stream(1), "volume", 0.0, 0.8)

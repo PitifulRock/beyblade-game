@@ -340,6 +340,9 @@ spawn_path = NodePath("../PickerScreen/SelectionContainer")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_2o5xm")
 
+[node name="NPCAssemblers" type="Node" parent="."]
+unique_name_in_owner = true
+
 [connection signal="pressed" from="PickerScreen/LobbyID/LabelID/ColorRect/CopyButton" to="." method="_on_copy_id_button_pressed"]
 [connection signal="toggled" from="PickerScreen/ReadyUp/ReadyButton" to="." method="_on_ready_button_toggled"]
 [connection signal="timeout" from="PickerScreen/ReadyUp/ReadyTimer" to="." method="_on_ready_timer_timeout"]

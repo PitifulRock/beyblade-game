@@ -17,10 +17,11 @@ func start_scoring(player_points : Dictionary[int, Array]):
 	var round_winner_id : int
 	for player in player_points.keys():
 		if round_winner_id: break
-		for point in player_points[player]:
-			if point == GameWorld.POINT_TYPE.WINNER:
-				round_winner_id = player
-				break
+		if player > 0: #check if npc
+			for point in player_points[player]:
+				if point == GameWorld.POINT_TYPE.WINNER:
+					round_winner_id = player
+					break
 	
 	if round_winner_id:
 		%RoundFinish.text = str(
@@ -44,7 +45,7 @@ func show_scoring(player_points : Dictionary[int, Array]):
 	for i in %ScoresContainer.get_children():
 		i.prepare()
 	for i in player_points.keys():
-		if player_points[i].has(GameWorld.POINT_TYPE.WINNER): 
+		if player_points[i].has(GameWorld.POINT_TYPE.WINNER) and i > 0: 
 			%ScoresContainer.get_node(str(i)).win_icon.show()
 	
 	var score_lengths := {}
@@ -52,9 +53,10 @@ func show_scoring(player_points : Dictionary[int, Array]):
 		score_lengths[i] = player_points[i].size()
 	var longest_score = score_lengths.find_key(score_lengths.values().max())
 	for id in player_points.keys():
-		var score_bar = %ScoresContainer.get_node(str(id))
-		if id != longest_score:
-			score_bar.tween_scores(player_points[id])
+		if id > 0:
+			var score_bar = %ScoresContainer.get_node(str(id))
+			if id != longest_score:
+				score_bar.tween_scores(player_points[id])
 	if longest_score != null:
 		await %ScoresContainer.get_node(str(longest_score)).tween_scores(player_points[longest_score], true)
 	
