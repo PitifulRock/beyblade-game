@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bobt0c1vx23jc"
 path.s3tc="res://.godot/imported/T_Plants_General_LowPoly.png-5d263b8cdd938c83e984c4b6cda2cef6.s3tc.ctex"
+path.etc2="res://.godot/imported/T_Plants_General_LowPoly.png-5d263b8cdd938c83e984c4b6cda2cef6.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://world_resources/environment_models/Niwl-Plants/Texture/T_Plants_General_LowPoly.png"
-dest_files=["res://.godot/imported/T_Plants_General_LowPoly.png-5d263b8cdd938c83e984c4b6cda2cef6.s3tc.ctex"]
+dest_files=["res://.godot/imported/T_Plants_General_LowPoly.png-5d263b8cdd938c83e984c4b6cda2cef6.s3tc.ctex", "res://.godot/imported/T_Plants_General_LowPoly.png-5d263b8cdd938c83e984c4b6cda2cef6.etc2.ctex"]
 
 [params]
 

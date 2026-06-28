@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://byrwt3fjm0tec"]
+
+[ext_resource type="Script" uid="uid://y6kujmfdw805" path="res://beyblades/beyblade_dummy.gd" id="1_k82p7"]
+[ext_resource type="Texture2D" uid="uid://dlrhlt1iukyuy" path="res://textures/t_ui/White/1x/cross.png" id="2_v0v8v"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
+friction = 0.31
+bounce = 0.15
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3dcr0"]
+radius = 0.096723884
+
+[sub_resource type="Curve" id="Curve_5pt61"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.748183, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n1s4q"]
+curve = SubResource("Curve_5pt61")
+
+[sub_resource type="Curve" id="Curve_3dcr0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.9956522, 0.52808994), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5pt61"]
+curve = SubResource("Curve_3dcr0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_k82p7"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+angle_min = -161.2
+angle_max = 134.30002
+radial_velocity_min = -2.0000224
+radial_velocity_max = 1.9999776
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_5pt61")
+alpha_curve = SubResource("CurveTexture_n1s4q")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5pt61"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 0.6)
+albedo_texture = ExtResource("2_v0v8v")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+grow = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_n1s4q"]
+material = SubResource("StandardMaterial3D_5pt61")
+size = Vector2(0.2, 0.2)
+orientation = 2
+
+[node name="Bey" type="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
+mass = 0.07
+physics_material_override = SubResource("PhysicsMaterial_8uh7m")
+center_of_mass_mode = 1
+can_sleep = false
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_k82p7")
+
+[node name="CenterTether" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
+
+[node name="FloorCheck" type="RayCast3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12239136, 0)
+target_position = Vector3(0, -0.4, 0)
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
+shape = SubResource("SphereShape3D_3dcr0")
+
+[node name="SpinParticles" type="GPUParticles3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
+amount = 130
+lifetime = 0.3
+process_material = SubResource("ParticleProcessMaterial_k82p7")
+draw_pass_1 = SubResource("PlaneMesh_n1s4q")

@@ -1,7 +1,10 @@
 extends Control
 
+@export var menu_music : AudioStreamSynchronized
 
 func _ready() -> void:
+	Effects.set_sync_music(false, false, menu_music)
+	Settings.gameplay_config = GameplayConfig.new()
 	%TabContainer.current_tab = 0
 	%EnterLobbyID.visible = false
 	if not Steam.isSteamRunning():
@@ -70,3 +73,8 @@ func _on_return_pressed() -> void:
 	Effects.play_ui(&"ButtonPress")
 	await Effects.transition()
 	%TabContainer.current_tab = 0
+
+
+func _on_settings_button_pressed() -> void:
+	Effects.play_ui(&"ButtonPress")
+	%TabContainer.current_tab = 2

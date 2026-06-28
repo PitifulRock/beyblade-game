@@ -94,7 +94,7 @@ func _on_ready_timer_timeout() -> void:
 
 @rpc("any_peer", "call_local", "reliable")
 func start_bey_placement():
-	Master.local_player.set_movement(true)
+	Master.game_manager.current_scene.change_game_state.rpc(GameWorld.GAME_STATE.PLACEMENT)
 	%ReadyButton.button_pressed = false
 	current_tab = 1
 	launch_countdown()

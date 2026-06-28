@@ -5,7 +5,7 @@ class_name FreeLookCamera
 const SHIFT_MULTIPLIER = 2.0
 const ALT_MULTIPLIER = 1.0 / SHIFT_MULTIPLIER
 
-@export_range(0.0, 1.0) var sensitivity: float = 0.25
+@export_range(0.0, 1.0) var sensitivity: float = 0.2
 
 var can_use_camera := true
 
@@ -18,7 +18,7 @@ var _direction = Vector3(0.0, 0.0, 0.0)
 var _velocity = Vector3(0.0, 0.0, 0.0)
 var _acceleration = 30
 var _deceleration = -10
-var _vel_multiplier = 4
+var _vel_multiplier = 6
 
 # Keyboard state
 var _w = false

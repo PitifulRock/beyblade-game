@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://m3ci8dgjwtyn"
 path.s3tc="res://.godot/imported/cow_cutout.png-d1c1252542194f50ea2bdb9c9bb8c941.s3tc.ctex"
+path.etc2="res://.godot/imported/cow_cutout.png-d1c1252542194f50ea2bdb9c9bb8c941.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/cow_cutout.png"
-dest_files=["res://.godot/imported/cow_cutout.png-d1c1252542194f50ea2bdb9c9bb8c941.s3tc.ctex"]
+dest_files=["res://.godot/imported/cow_cutout.png-d1c1252542194f50ea2bdb9c9bb8c941.s3tc.ctex", "res://.godot/imported/cow_cutout.png-d1c1252542194f50ea2bdb9c9bb8c941.etc2.ctex"]
 
 [params]
 

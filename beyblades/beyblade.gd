@@ -5,7 +5,7 @@ const SPARK_PARTICLE = preload("uid://fbwq5alfemyv")
 
 enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 
-@onready var burst_holder: Node = $BurstHolder
+var burst_holder: Node
 @export var disc : BeyDisc
 @export var core : BeyCore
 @export var tip : BeyTip
@@ -30,10 +30,12 @@ var game_world : GameWorld
 var recoil := 1.0
 var is_npc := false
 
-@onready var name_tag: Label3D = %NameTag
+var name_tag: Label3D
 
 func _ready() -> void:
 	game_world = Master.game_manager.current_scene
+	burst_holder = $BurstHolder
+	name_tag = %NameTag
 	_physics_setup()
 
 func _spawned(as_npc := false):

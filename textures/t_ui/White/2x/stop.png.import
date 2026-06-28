@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cicwfjonq8j0e"
 path.s3tc="res://.godot/imported/stop.png-8eb556e69838929f15b5a3273e8ba8bc.s3tc.ctex"
+path.etc2="res://.godot/imported/stop.png-8eb556e69838929f15b5a3273e8ba8bc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/t_ui/White/2x/stop.png"
-dest_files=["res://.godot/imported/stop.png-8eb556e69838929f15b5a3273e8ba8bc.s3tc.ctex"]
+dest_files=["res://.godot/imported/stop.png-8eb556e69838929f15b5a3273e8ba8bc.s3tc.ctex", "res://.godot/imported/stop.png-8eb556e69838929f15b5a3273e8ba8bc.etc2.ctex"]
 
 [params]
 

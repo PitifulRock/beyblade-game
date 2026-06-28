@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ci2b4utqctojq"]
+[gd_scene load_steps=27 format=3 uid="uid://ci2b4utqctojq"]
 
 [ext_resource type="Script" uid="uid://bcmnh05ulyqla" path="res://scripts/effects_manager.gd" id="1_55hjv"]
 [ext_resource type="Shader" uid="uid://dm2o2guo1q7bt" path="res://shaders/transitions.gdshader" id="2_2sqwq"]
@@ -14,6 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://c5c7g32sw4r8d" path="res://sounds/music/beyblades drumtrack.ogg" id="11_4f6oq"]
 [ext_resource type="AudioStream" uid="uid://cktpabtyqo5xw" path="res://sounds/music/trrack1_inst.ogg" id="12_01453"]
 [ext_resource type="AudioStream" uid="uid://b44dqxleo3iy0" path="res://sounds/music/trrack1_drums.ogg" id="13_ubect"]
+[ext_resource type="AudioStream" uid="uid://b5dvalgmjqj6e" path="res://sounds/music/menu_inst.ogg" id="14_0qrbe"]
+[ext_resource type="AudioStream" uid="uid://d0nvnl3y33d14" path="res://sounds/music/menu_drums.ogg" id="15_odq1j"]
 
 [sub_resource type="Resource" id="Resource_eomv1"]
 script = ExtResource("2_n28ws")
@@ -46,6 +48,13 @@ stream_count = 2
 stream_0/stream = ExtResource("12_01453")
 stream_0/volume = 0.0
 stream_1/stream = ExtResource("13_ubect")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_nlclb"]
+stream_count = 2
+stream_0/stream = ExtResource("14_0qrbe")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("15_odq1j")
 stream_1/volume = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b2b"]
@@ -123,7 +132,7 @@ stream_1/volume = 0.0
 script = ExtResource("1_55hjv")
 sfx_lib = SubResource("Resource_eomv1")
 ui_lib = SubResource("Resource_q2dd7")
-music_lib = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_01453"), SubResource("AudioStreamSynchronized_0qrbe")])
+music_lib = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_01453"), SubResource("AudioStreamSynchronized_0qrbe"), SubResource("AudioStreamSynchronized_nlclb")])
 
 [node name="ScreenTransition" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -160,3 +169,5 @@ bus = &"SFX"
 [node name="UIPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 bus = &"SFX"
+
+[connection signal="finished" from="MusicPlayer" to="." method="_on_music_player_finished"]

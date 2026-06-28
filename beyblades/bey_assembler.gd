@@ -2,7 +2,13 @@ extends Node3D
 class_name BeyAssembler
 
 const BEY_SCENE = preload("uid://xkw4aloeefna")
+const DUMMY_SCENE = preload("uid://byrwt3fjm0tec")
 const LAUNCH_HEIGHT := 1.0
+
+@export var random_dummy := false
+@export var spawn_area_override : CollisionShape3D
+@export var stadium_override : Node3D
+
 
 @export var disc : BeyDisc
 @export var core : BeyCore
@@ -13,6 +19,15 @@ var placing_launch := false
 var prev_pos : Vector3
 var is_npc := false
 var npc_name := ""
+
+func _ready() -> void:
+	if random_dummy:
+		#var disc_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.DISC].size()-1)
+		#var core_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.CORE].size()-1)
+		#var tip_id := randi_range(0, Registry.part_registry[BeyPart.PART_TYPE.TIP].size()-1)
+		#
+		#prepare_npc(str(randi_range(-10,-9999)), disc_id, core_id, tip_id)
+		set_random_position(spawn_area_override)
 
 func _input(_event: InputEvent) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -77,6 +92,7 @@ func launch():
 		bey.name = str(get_multiplayer_authority())
 	else:
 		bey.name = npc_name
+	
 	world.beyblade_path.add_child(bey)
 	bey.global_position = global_position
 	bey.process_mode = Node.PROCESS_MODE_DISABLED
@@ -92,13 +108,31 @@ func launch():
 	
 	if is_npc: queue_free()
 
+func launch_dummy():
+	var bey : BeyBladeDummy = DUMMY_SCENE.instantiate()
+	
+	add_sibling(bey)
+	bey.global_position = global_position
+	bey.process_mode = Node.PROCESS_MODE_DISABLED
+	
+	spawn_part(tip, bey)
+	spawn_part(core, bey)
+	spawn_part(disc, bey)
+	
+	await get_tree().process_frame
+	bey.stadium = stadium_override
+	bey.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	bey._spawned()
+	queue_free()
+
 func launch_visuals():
 	%LaunchSound.play()
 	%LaunchParticles.emitting = true
 	await get_tree().create_timer(0.8).timeout
 	hide()
 
-func spawn_part(part_node : BeyPart, location : BeyBlade):
+func spawn_part(part_node : BeyPart, location):
 	var part_dup = part_node.duplicate()
 	location.add_child(part_dup)
 	
@@ -106,10 +140,12 @@ func spawn_part(part_node : BeyPart, location : BeyBlade):
 	part_dup.position = Vector3.ZERO
 	part_dup.rotation = Vector3.ZERO
 	
-	var gib = RigidBody3D.new()
-	gib.set_collision_layer_value(1, false)
-	gib.set_collision_layer_value(2, true)
-	location.burst_holder.add_child(gib)
+	var gib : RigidBody3D
+	if !random_dummy:
+		gib = RigidBody3D.new()
+		gib.set_collision_layer_value(1, false)
+		gib.set_collision_layer_value(2, true)
+		location.burst_holder.add_child(gib)
 	
 	if part_dup is BeyDisc: 
 		location.disc = part_dup
@@ -128,21 +164,24 @@ func spawn_part(part_node : BeyPart, location : BeyBlade):
 			if i is Node3D:
 				dup.global_position = i.global_position
 			
-			var gib_dup = i.duplicate()
-			gib.add_child(gib_dup)
-			if i is Node3D:
-				gib_dup.global_position = i.global_position
+			if !random_dummy:
+				var gib_dup = i.duplicate()
+				gib.add_child(gib_dup)
+				if i is Node3D:
+					gib_dup.global_position = i.global_position
 			
 			i.queue_free()
 
-func set_random_position():
-	var world : GameWorld = Master.game_manager.current_scene
-	var stadium : Stadium = world.stadium_path.get_child(0)
-
-	var radius : float = stadium.npc_spawn_area.shape.radius
+func set_random_position(spawn_area : CollisionShape3D = null):
+	if spawn_area == null:
+		var world : GameWorld = Master.game_manager.current_scene
+		var stadium : Stadium = world.stadium_path.get_child(0)
+		spawn_area = stadium.npc_spawn_area
+	
+	var radius : float = spawn_area.shape.radius
 	var angle := randf_range(10, TAU)
 	
 	var random_radius : float = radius * sqrt(randf())
 
 	var offset := Vector3(cos(angle), 0, sin(angle)) * random_radius
-	global_position = stadium.npc_spawn_area.global_position + offset
+	global_position = spawn_area.global_position + offset

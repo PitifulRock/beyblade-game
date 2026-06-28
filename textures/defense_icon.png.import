@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bhv528cguyywf"
 path.s3tc="res://.godot/imported/defense_icon.png-9d304fd61bcbf2b93d7f955c19dc53c8.s3tc.ctex"
+path.etc2="res://.godot/imported/defense_icon.png-9d304fd61bcbf2b93d7f955c19dc53c8.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/defense_icon.png"
-dest_files=["res://.godot/imported/defense_icon.png-9d304fd61bcbf2b93d7f955c19dc53c8.s3tc.ctex"]
+dest_files=["res://.godot/imported/defense_icon.png-9d304fd61bcbf2b93d7f955c19dc53c8.s3tc.ctex", "res://.godot/imported/defense_icon.png-9d304fd61bcbf2b93d7f955c19dc53c8.etc2.ctex"]
 
 [params]
 

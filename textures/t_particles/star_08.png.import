@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://jimcvyh0f4on"
 path.s3tc="res://.godot/imported/star_08.png-cb143a8f037992c56dd8d9a19d75d454.s3tc.ctex"
+path.etc2="res://.godot/imported/star_08.png-cb143a8f037992c56dd8d9a19d75d454.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://textures/t_particles/star_08.png"
-dest_files=["res://.godot/imported/star_08.png-cb143a8f037992c56dd8d9a19d75d454.s3tc.ctex"]
+dest_files=["res://.godot/imported/star_08.png-cb143a8f037992c56dd8d9a19d75d454.s3tc.ctex", "res://.godot/imported/star_08.png-cb143a8f037992c56dd8d9a19d75d454.etc2.ctex"]
 
 [params]
 

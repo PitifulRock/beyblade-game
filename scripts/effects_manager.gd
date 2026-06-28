@@ -157,19 +157,57 @@ func make_tween(parent: Node, tween: Tween,parallel:= false) -> Tween:
 		tween.set_parallel(true)
 	return tween
 
-func set_sync_music(random := true):
+func set_sync_music(do_fade := true, random := true, new_stream : AudioStreamSynchronized = null):
+	if do_fade:
+		var out_tween := get_tree().create_tween()
+		out_tween.tween_property(%MusicPlayer, "volume_db", -80.0, 0.5)
+		await out_tween.finished
+	
 	%MusicPlayer.stop()
+	
 	if random:
+		var previous_stream = %MusicPlayer.stream
 		var picked_stream = music_lib.pick_random()
+		
+		while picked_stream == previous_stream:
+			picked_stream = music_lib.pick_random()
 		
 		%MusicPlayer.stream = picked_stream
 		%MusicPlayer.play()
+	else:
+		%MusicPlayer.stream = new_stream
+		%MusicPlayer.play()
+	
+	var in_tween := get_tree().create_tween()
+	in_tween.tween_property(%MusicPlayer, "volume_db", 0.0, 0.2)
 
-func fade_drum_track(drums_on : bool):
+func fade_drum_track(drums_on : bool, skip_fade := false):
+	if skip_fade:
+		set_drums_volume(drums_on as float)
+		return
+	
 	var tween := get_tree().create_tween()
-	var music_stream : AudioStreamSynchronized = %MusicPlayer.stream
 	
 	if drums_on:
-		tween.tween_property(music_stream.get_sync_stream(1), "volume", 1.0, 0.8)
+		tween.tween_method(
+			set_drums_volume,
+			0.0,
+			1.0,
+			0.4
+		)
 	else:
-		tween.tween_property(music_stream.get_sync_stream(1), "volume", 0.0, 0.8)
+		tween.tween_method(
+			set_drums_volume,
+			1.0,
+			0.0,
+			1.3
+		)
+
+func set_drums_volume(vol : float):
+	var music_stream : AudioStreamSynchronized = %MusicPlayer.stream
+	music_stream.set_sync_stream_volume(1, linear_to_db(vol))
+
+
+func _on_music_player_finished() -> void:
+	if Master.game_manager.current_scene is GameWorld:
+		set_sync_music()

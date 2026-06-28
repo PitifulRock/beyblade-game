@@ -43,6 +43,7 @@ func change_game_state(new_state : GAME_STATE):
 	current_state = new_state
 	match new_state:
 		GAME_STATE.SELECTION:
+			Effects.fade_drum_track(false)
 			Master.local_player.set_movement(false)
 			round_points = {}
 			results_menu.hide()
@@ -51,9 +52,12 @@ func change_game_state(new_state : GAME_STATE):
 				disable_cheats.rpc()
 			for i in beyblade_path.get_children(): i.queue_free()
 			for i in particle_path.get_children(): i.queue_free()
-		GAME_STATE.BATTLE:
+		GAME_STATE.PLACEMENT:
+			Effects.fade_drum_track(true)
 			Master.local_player.set_movement(true)
-			Master.local_player.make_current()
+		GAME_STATE.BATTLE:
+			Effects.fade_drum_track(true)
+			Master.local_player.set_movement(true)
 			if gameplay_config.disasters_enabled and Master.is_host:
 				disaster_timer.start()
 			if gameplay_config.cheating_enabled and Master.is_host:
@@ -72,6 +76,8 @@ func change_game_state(new_state : GAME_STATE):
 				player_scores[i] = 0
 
 func _ready() -> void:
+	Effects.set_sync_music()
+	Effects.fade_drum_track(false, true)
 	if Master.is_host:
 		gameplay_config = Settings.gameplay_config
 		
@@ -165,6 +171,10 @@ func player_added(id : int):
 	if Master.is_host and id != 1: 
 		change_game_state.rpc_id(id, current_state)
 		_set_game_config.rpc_id(id, gameplay_config.points_to_win, gameplay_config.game_speed, gameplay_config.cheating_enabled)
+		
+		for i in Master.player_list:
+			pass
+
 func player_removed(id : int):
 	assembly_menu.remove_selection_menu(id)
 	results_menu.remove_player_bar(id)

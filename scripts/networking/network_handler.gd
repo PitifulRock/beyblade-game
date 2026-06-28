@@ -48,8 +48,9 @@ func _on_lobby_created(result: int, passed_lobby_id:int):
 		peer.create_host()
 		
 		multiplayer.multiplayer_peer = peer
-		multiplayer.peer_connected.connect(_add_player)
-		multiplayer.peer_disconnected.connect(_remove_player)
+		if !multiplayer.peer_connected.is_connected(_add_player):
+			multiplayer.peer_connected.connect(_add_player)
+			multiplayer.peer_disconnected.connect(_remove_player)
 		
 		await switch_scene(world_scene)
 		
@@ -64,6 +65,10 @@ func join_lobby(passed_lobby_id : int):
 
 func _on_lobby_joined(passed_lobby_id : int, _perms : int, _locked : bool, _response : int):
 	if !is_joining: return
+	
+	if _response != Steam.CHAT_ROOM_ENTER_RESPONSE_SUCCESS:
+		is_joining = false
+		return
 	
 	lobby_id = passed_lobby_id
 	peer = SteamMultiplayerPeer.new()
