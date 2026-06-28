@@ -501,6 +501,32 @@ anchor_bottom = 1.15217
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="FullScreen" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2"]
+clip_contents = false
+custom_minimum_size = Vector2(0, 85.24)
+layout_mode = 2
+text = "Outlines"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+vertical_alignment = 1
+
+[node name="OutlineToggle" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(27.105, 20)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+texture_normal = ExtResource("7_gvtvr")
+texture_pressed = ExtResource("8_eq0n8")
+ignore_texture_size = true
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
 [node name="Audio" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer"]
 unique_name_in_owner = true
 visible = false
@@ -673,6 +699,7 @@ one_shot = true
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer/Options" to="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video" method="set_visible" binds= [true]]
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer/Options4" to="CanvasLayer/PlayerUI" method="_on_leave_lobby_pressed"]
 [connection signal="toggled" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer/FullScreenToggle" to="CanvasLayer/PlayerUI/PauseMenu" method="update_fullscreen"]
+[connection signal="toggled" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2/OutlineToggle" to="CanvasLayer/PlayerUI/PauseMenu" method="update_outlines"]
 [connection signal="value_changed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer/MasterVol" to="CanvasLayer/PlayerUI/PauseMenu" method="update_master_volume"]
 [connection signal="value_changed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer/MusicVol" to="CanvasLayer/PlayerUI/PauseMenu" method="update_music_volume"]
 [connection signal="value_changed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer/SFXVol" to="CanvasLayer/PlayerUI/PauseMenu" method="update_sfx_volume"]

@@ -7,13 +7,14 @@ const SETTINGS_PATH = "user://settings.ini"
 
 func _ready() -> void:
 	if !FileAccess.file_exists(SETTINGS_PATH):
-		config.set_value("audio", "sfx_volume", 0.7)
-		config.set_value("audio", "music_volume", 0.25)
-		config.set_value("audio", "master_volume", 0.8)
+		config.set_value("audio", "sfx_volume", 70.0)
+		config.set_value("audio", "music_volume", 25.0)
+		config.set_value("audio", "master_volume", 80.0)
 		
 		config.set_value("video", "fullscreen", 1)
 		config.set_value("video", "anti_aliasing", 1)
 		config.set_value("video", "shadow_quality", 1)
+		config.set_value("video", "outlines", 1)
 		
 		config.set_value("player", "FOV", 75.0)
 		config.set_value("player", "sensitivity", 0.2)

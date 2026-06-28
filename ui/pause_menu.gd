@@ -49,6 +49,9 @@ func load_settings():
 					0: %FullScreenToggle.button_pressed = false
 					1: %FullScreenToggle.button_pressed = true
 				update_fullscreen(value, true)
+			"outlines":
+				%OutlineToggle.button_pressed = value as bool
+				update_outlines(value as bool)
 
 func update_shadow(id : int, init := false):
 	if !init: Effects.play_ui(&"ButtonPress")
@@ -105,6 +108,9 @@ func update_mouse_sens(value, init := false):
 	if Master.local_player:
 		Master.local_player.sensitivity = value
 	if !init: Effects.play_ui(&"ButtonHover")
+func update_outlines(toggled_on: bool, init := false) -> void:
+	if !init: Effects.play_ui(&"ButtonPress")
+	if Master.local_player: Master.local_player.set_outlines(toggled_on)
 
 func save_settings():
 	Settings.save_audio_setting("sfx_volume", %SFXVol.value)
@@ -114,6 +120,7 @@ func save_settings():
 	Settings.save_video_setting("anti_aliasing", aa_value)
 	Settings.save_video_setting("shadow_quality", shadow_value)
 	Settings.save_video_setting("fullscreen", DisplayServer.window_get_mode())
+	Settings.save_video_setting("outlines", %OutlineToggle.button_pressed as int)
 	
 	Settings.save_player_setting("sensitivity", %Sensitivity.value)
 	Settings.save_player_setting("FOV", %FovSlider.value)

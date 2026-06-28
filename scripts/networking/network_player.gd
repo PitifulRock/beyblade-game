@@ -50,6 +50,9 @@ func disable_cheats():
 	cheats_enabled = false
 	%CheatsScreen.hide()
 
+func set_outlines(enabled:bool):
+	%OutlineShader.visible=enabled
+
 @rpc("any_peer", "call_local")
 func blow():
 	%BlowAnim.play("blow")
