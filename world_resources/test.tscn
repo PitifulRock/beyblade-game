@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bssuxxna2ti8u" path="res://scripts/game_world.gd" id="1_00tp4"]
 [ext_resource type="Resource" uid="uid://duk3llmqijvbq" path="res://ui/default_config.tres" id="2_vbegm"]
-[ext_resource type="PackedScene" uid="uid://bbgn044maydvg" path="res://world_resources/stadiums/standard_stadium.tscn" id="3_f66xl"]
 [ext_resource type="Shader" uid="uid://lit1thbu248c" path="res://shaders/sky.gdshader" id="5_f66xl"]
+[ext_resource type="PackedScene" uid="uid://cf68t08axsdph" path="res://world_resources/stadiums/cows_stadium.tscn" id="5_l4atl"]
 [ext_resource type="PackedScene" uid="uid://df7fnm6hxiyhv" path="res://ui/results/results_screen.tscn" id="6_g14j6"]
 [ext_resource type="Texture2D" uid="uid://lnagx4hca0ql" path="res://textures/t_ui/White/2x/star.png" id="6_l4atl"]
 [ext_resource type="Texture2D" uid="uid://dcbv178nxrde0" path="res://textures/PROTO/Dark/texture_09.png" id="9_5tkv4"]
@@ -198,7 +198,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.25, 16.5)
 [node name="Stadium" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Node3D" parent="Stadium" instance=ExtResource("3_f66xl")]
+[node name="Node3D" parent="Stadium" instance=ExtResource("5_l4atl")]
 
 [node name="Disasters" type="Node3D" parent="."]
 

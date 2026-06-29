@@ -158,12 +158,11 @@ func make_tween(parent: Node, tween: Tween,parallel:= false) -> Tween:
 	return tween
 
 func set_sync_music(do_fade := true, random := true, new_stream : AudioStreamSynchronized = null):
+	%MusicPlayer.stop()
 	if do_fade:
 		var out_tween := get_tree().create_tween()
 		out_tween.tween_property(%MusicPlayer, "volume_db", -80.0, 0.5)
 		await out_tween.finished
-	
-	%MusicPlayer.stop()
 	
 	if random:
 		var previous_stream = %MusicPlayer.stream

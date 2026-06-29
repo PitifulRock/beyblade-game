@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://ci2b4utqctojq"]
+[gd_scene load_steps=33 format=3 uid="uid://ci2b4utqctojq"]
 
 [ext_resource type="Script" uid="uid://bcmnh05ulyqla" path="res://scripts/effects_manager.gd" id="1_55hjv"]
 [ext_resource type="Shader" uid="uid://dm2o2guo1q7bt" path="res://shaders/transitions.gdshader" id="2_2sqwq"]
@@ -16,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://b44dqxleo3iy0" path="res://sounds/music/trrack1_drums.ogg" id="13_ubect"]
 [ext_resource type="AudioStream" uid="uid://b5dvalgmjqj6e" path="res://sounds/music/menu_inst.ogg" id="14_0qrbe"]
 [ext_resource type="AudioStream" uid="uid://d0nvnl3y33d14" path="res://sounds/music/menu_drums.ogg" id="15_odq1j"]
+[ext_resource type="AudioStream" uid="uid://txfb8wqga57u" path="res://sounds/music/track2_inst.ogg" id="16_nlclb"]
+[ext_resource type="AudioStream" uid="uid://cyjbumy5l845" path="res://sounds/music/track2_drums.ogg" id="17_g4r0c"]
+[ext_resource type="AudioStream" uid="uid://c8yqrwc2qxyn8" path="res://sounds/music/track3_inst.ogg" id="18_k0wi4"]
+[ext_resource type="AudioStream" uid="uid://mrl1v08aqkxi" path="res://sounds/music/track3_drums.ogg" id="19_16dd4"]
 
 [sub_resource type="Resource" id="Resource_eomv1"]
 script = ExtResource("2_n28ws")
@@ -55,6 +59,20 @@ stream_count = 2
 stream_0/stream = ExtResource("14_0qrbe")
 stream_0/volume = 0.0
 stream_1/stream = ExtResource("15_odq1j")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_k0wi4"]
+stream_count = 2
+stream_0/stream = ExtResource("16_nlclb")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("17_g4r0c")
+stream_1/volume = 0.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_74uf4"]
+stream_count = 2
+stream_0/stream = ExtResource("18_k0wi4")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("19_16dd4")
 stream_1/volume = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p2b2b"]
@@ -132,7 +150,7 @@ stream_1/volume = 0.0
 script = ExtResource("1_55hjv")
 sfx_lib = SubResource("Resource_eomv1")
 ui_lib = SubResource("Resource_q2dd7")
-music_lib = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_01453"), SubResource("AudioStreamSynchronized_0qrbe"), SubResource("AudioStreamSynchronized_nlclb")])
+music_lib = Array[AudioStreamSynchronized]([SubResource("AudioStreamSynchronized_01453"), SubResource("AudioStreamSynchronized_0qrbe"), SubResource("AudioStreamSynchronized_nlclb"), SubResource("AudioStreamSynchronized_k0wi4"), SubResource("AudioStreamSynchronized_74uf4")])
 
 [node name="ScreenTransition" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
