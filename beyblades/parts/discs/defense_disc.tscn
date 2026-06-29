@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="3_71lh7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
-friction = 0.2
+friction = 0.15
 rough = true
 bounce = 0.4
 absorbent = true
@@ -16,12 +16,12 @@ radius = 0.9741211
 
 [node name="DefenseDisc" type="StaticBody3D"]
 script = ExtResource("1_71lh7")
-burst_resitance = 3.0
+burst_resitance = 2.6
 burst_damage = 0.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
-part_name = "Pee 2"
+part_name = "Rounded"
 type = 2
-part_weight = 0.045
+part_weight = 0.035
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
 [node name="Visual" type="CSGCombiner3D" parent="."]

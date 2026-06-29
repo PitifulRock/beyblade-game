@@ -3,6 +3,10 @@ extends Control
 @export var menu_music : AudioStreamSynchronized
 
 func _ready() -> void:
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Master.avatar_cache.clear()
+	Master.local_player = null
+	Master.player_list.clear()
 	Effects.set_sync_music(false, false, menu_music)
 	Settings.gameplay_config = GameplayConfig.new()
 	%TabContainer.current_tab = 0
@@ -71,6 +75,7 @@ func _on_npc_win_toggle_toggled(toggled_on: bool) -> void:
 
 func _on_return_pressed() -> void:
 	Effects.play_ui(&"ButtonPress")
+	%OptionsMenu.save_settings()
 	await Effects.transition()
 	%TabContainer.current_tab = 0
 
