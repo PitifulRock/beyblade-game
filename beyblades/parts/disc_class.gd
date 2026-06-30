@@ -5,3 +5,4 @@ class_name BeyDisc
 @export_range(0.1, 4.0) var burst_resitance := 1.0
 @export_range(0.5, 2.5) var burst_damage := 1.0
 @export var physics_material : PhysicsMaterial
+@export var ability_data : AbilityData

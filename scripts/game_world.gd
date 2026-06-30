@@ -156,9 +156,9 @@ func replace_stadium_scene(new_stadium : StringName):
 func _on_bey_burst():
 	var tween = get_tree().create_tween()
 	tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	tween.tween_property(Engine,"time_scale", 0.3, 0.8)
-	tween.tween_interval(0.3)
-	tween.tween_property(Engine,"time_scale", gameplay_config.game_speed, 0.8)
+	tween.tween_property(Engine,"time_scale", 0.5, 0.2)
+	tween.tween_interval(0.2)
+	tween.tween_property(Engine,"time_scale", gameplay_config.game_speed, 0.4)
 
 func player_added(id : int):
 	assembly_menu.add_selection_menu(id)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bk8eovjp50t2s"]
+[gd_scene load_steps=44 format=3 uid="uid://bk8eovjp50t2s"]
 
 [ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
@@ -12,6 +12,9 @@
 [ext_resource type="Script" uid="uid://cyep65deu3ol7" path="res://ui/ui_button.gd" id="7_eq0n8"]
 [ext_resource type="Texture2D" uid="uid://c1trvnme3ew80" path="res://textures/ui_pack/Grey/Double/check_square_color_cross.png" id="7_gvtvr"]
 [ext_resource type="Texture2D" uid="uid://iq1fn583mbr2" path="res://textures/ui_pack/Grey/Double/check_square_color_checkmark.png" id="8_eq0n8"]
+[ext_resource type="Texture2D" uid="uid://dy72kdl37rfct" path="res://textures/spin_outline.png" id="10_duvb4"]
+[ext_resource type="Texture2D" uid="uid://d2trjdr66e2pg" path="res://textures/spin_inner.png" id="11_nqyr0"]
+[ext_resource type="Texture2D" uid="uid://bih6bf2xsq0ts" path="res://textures/ui_pack/Extra/Double/button_square_depth_line.png" id="12_nqyr0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ebo5w"]
 diffuse_mode = 3
@@ -45,6 +48,84 @@ outline_size = 6
 outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avurv"]
+
+[sub_resource type="Animation" id="Animation_duvb4"]
+resource_name = "speed_spinner"
+length = 0.5
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185307179586]
+}
+
+[sub_resource type="Animation" id="Animation_nqyr0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l7bv0"]
+_data = {
+&"RESET": SubResource("Animation_nqyr0"),
+&"speed_spinner": SubResource("Animation_duvb4")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duvb4"]
+bg_color = Color(0.37371236, 0.84754175, 0.46155018, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nqyr0"]
+font_size = 24
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nqyr0"]
+bg_color = Color(0.10747976, 0.10747973, 0.10747973, 0.7137255)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7bv0"]
+bg_color = Color(0.42366543, 0.7743609, 0.99999994, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_l7bv0"]
+line_spacing = -16.945
+font_size = 32
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jcjjd"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_e2hjl"]
 render_priority = -1
@@ -215,6 +296,7 @@ throwables = Array[PackedScene]([ExtResource("2_u27t7"), ExtResource("3_g8f7b")]
 metadata/_custom_type_script = "uid://ba6s7kap2bki1"
 
 [node name="AudioListener3D" type="AudioListener3D" parent="."]
+unique_name_in_owner = true
 
 [node name="Model" type="Node3D" parent="."]
 unique_name_in_owner = true
@@ -261,6 +343,7 @@ replication_config = SubResource("SceneReplicationConfig_ssomj")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="PlayerUI" type="Control" parent="CanvasLayer"]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -283,10 +366,10 @@ grow_vertical = 2
 [node name="CheatsTooltip" type="Label" parent="CanvasLayer/PlayerUI/CheatsScreen"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.017361112
-anchor_top = 0.87191355
-anchor_right = 0.2404514
-anchor_bottom = 0.9691358
+anchor_left = 0.015104166
+anchor_top = 0.036111113
+anchor_right = 0.23819445
+anchor_bottom = 0.13333334
 grow_vertical = 0
 text = "[F] Blow
 [RMB] Throw item"
@@ -295,12 +378,14 @@ metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" type="Control" parent="CanvasLayer/PlayerUI"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("6_yqtyn")
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI/PauseMenu"]
@@ -310,6 +395,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.03876, 0.050708726, 0.07016479, 0.165)
 
 [node name="MainPanel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu"]
@@ -332,6 +418,7 @@ offset_top = 26.0
 offset_right = -28.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 0
 theme = ExtResource("2_ebo5w")
 theme_override_constants/separation = 19
 
@@ -381,6 +468,7 @@ anchor_left = 1.1079545
 anchor_right = 2.1931818
 anchor_bottom = 1.0
 grow_vertical = 2
+mouse_filter = 0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_avurv")
 current_tab = 2
 tabs_visible = false
@@ -646,6 +734,176 @@ unique_name_in_owner = true
 layout_mode = 2
 min_value = 40.0
 value = 75.0
+
+[node name="GameUI" type="Control" parent="CanvasLayer/PlayerUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SpeedSpinner" type="Control" parent="CanvasLayer/PlayerUI/GameUI"]
+modulate = Color(1, 1, 1, 0.70000005)
+layout_mode = 1
+anchor_left = 0.9916667
+anchor_top = 0.9851852
+anchor_right = 0.9916667
+anchor_bottom = 0.9851852
+grow_horizontal = 0
+grow_vertical = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="SpinOutline" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_duvb4")
+expand_mode = 1
+
+[node name="SpinInner" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+modulate = Color(0.3574912, 0.38410568, 0.42754805, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_nqyr0")
+expand_mode = 1
+
+[node name="SpinnerAnim" type="AnimationPlayer" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_l7bv0")
+}
+
+[node name="SpinBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -112.0
+offset_top = -280.0
+offset_right = -32.0
+offset_bottom = -32.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/fill = SubResource("StyleBoxFlat_duvb4")
+max_value = 222.0
+value = 222.0
+fill_mode = 3
+show_percentage = false
+
+[node name="SpinLabel" type="Label" parent="CanvasLayer/PlayerUI/GameUI/SpinBar"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -41.0
+offset_top = -29.0
+offset_right = 41.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "222  m/s"
+label_settings = SubResource("LabelSettings_nqyr0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AbilityBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.020833334
+anchor_top = 0.8096297
+anchor_right = 0.111250006
+anchor_bottom = 0.97037035
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_nqyr0")
+theme_override_styles/fill = SubResource("StyleBoxFlat_l7bv0")
+value = 40.1
+fill_mode = 3
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Key" type="NinePatchRect" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar"]
+self_modulate = Color(0.2509804, 0.26666668, 0.33333334, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7619048
+anchor_top = 0.7695852
+anchor_right = 1.0773809
+anchor_bottom = 1.0748848
+offset_right = 1.5258789e-05
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("12_nqyr0")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/Key"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="AbilityName" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Reboot
+card"
+label_settings = SubResource("LabelSettings_l7bv0")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="AbilityBody" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Gain a rapid speed boost and penis peni"
+label_settings = SubResource("LabelSettings_jcjjd")
+horizontal_alignment = 1
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="OutlineShader" type="MeshInstance3D" parent="."]
 unique_name_in_owner = true

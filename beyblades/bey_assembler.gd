@@ -163,6 +163,9 @@ func spawn_part(part_node : BeyPart, location):
 			location.add_child(dup)
 			if i is Node3D:
 				dup.global_position = i.global_position
+				
+				if i is BeyAbility:
+					i.beyblade = location
 			
 			if !random_dummy:
 				var gib_dup = i.duplicate()

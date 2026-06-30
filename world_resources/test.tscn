@@ -226,7 +226,7 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 
 [node name="ResultsScreen" parent="." instance=ExtResource("6_g14j6")]
 
 [node name="DisasterTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
 one_shot = true
 
 [node name="BG" type="Node3D" parent="."]

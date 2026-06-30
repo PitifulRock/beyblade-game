@@ -4,6 +4,7 @@ const ATTACK_ICON = preload("uid://bkogjswam2hv3")
 const BALANCE_ICON = preload("uid://cbj57nyqrtlm5")
 const DEFENSE_ICON = preload("uid://bhv528cguyywf")
 const STAMINA_ICON = preload("uid://brj7y2jpu6axb")
+const ABILITY_ICON = "uid://6i6xbo5hrnyi"
 
 @export var current_disc : int = 0:
 	set(value):
@@ -95,6 +96,12 @@ func _update_visuals():
 		"Defense: ", disc.burst_resitance, "x\n",
 		"Damage:  ",disc.burst_damage, "x\n",
 	)
+	if disc.ability_data:
+		%DiscInfo.text += str(
+			"\n [img=28x28]", ABILITY_ICON, "[/img]",
+			"[font_size=14]",
+			disc.ability_data.ability_name
+		)
 	
 	%CoreName.text = str(core.part_name, "  (", core.part_weight*100,"g)")
 	%CoreInfo.text = str(

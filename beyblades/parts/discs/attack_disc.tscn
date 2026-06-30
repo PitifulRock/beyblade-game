@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3qu3u35ga7jv"]
+[gd_scene load_steps=9 format=3 uid="uid://d3qu3u35ga7jv"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_jj3pe"]
+[ext_resource type="Resource" uid="uid://ba165nfuqqvoo" path="res://beyblades/parts/abilities/a_reboot/reboot.tres" id="2_jj3pe"]
 [ext_resource type="Material" uid="uid://bd17qqugnkbai" path="res://materials/white.tres" id="4_lxm2u"]
 [ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="4_xls65"]
+[ext_resource type="PackedScene" uid="uid://c01vkrbpwce4d" path="res://beyblades/parts/abilities/a_reboot/reboot.tscn" id="5_lxm2u"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
 friction = 0.31
@@ -20,9 +22,10 @@ size = Vector3(1.5, 0.17, 1.5)
 
 [node name="AttackDisc" type="StaticBody3D"]
 script = ExtResource("1_jj3pe")
-burst_resitance = 0.5
+burst_resitance = 0.7999999999999999
 burst_damage = 1.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
+ability_data = ExtResource("2_jj3pe")
 part_name = "Star"
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
@@ -59,3 +62,5 @@ shape = SubResource("BoxShape3D_jj3pe")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
 shape = SubResource("BoxShape3D_jj3pe")
+
+[node name="Reboot" parent="." instance=ExtResource("5_lxm2u")]

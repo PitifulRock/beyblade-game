@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://br18bnql65kv3"]
+[gd_scene load_steps=8 format=3 uid="uid://br18bnql65kv3"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_71lh7"]
+[ext_resource type="Resource" uid="uid://csjvbr64442vi" path="res://beyblades/parts/abilities/a_barrier/barrier.tres" id="2_jg0o8"]
 [ext_resource type="Material" uid="uid://bd17qqugnkbai" path="res://materials/white.tres" id="3_3ht3a"]
 [ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="3_71lh7"]
+[ext_resource type="PackedScene" uid="uid://bpwn6japotqt1" path="res://beyblades/parts/abilities/a_barrier/barrier.tscn" id="5_kiyux"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
 friction = 0.15
@@ -19,6 +21,7 @@ script = ExtResource("1_71lh7")
 burst_resitance = 2.6
 burst_damage = 0.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
+ability_data = ExtResource("2_jg0o8")
 part_name = "Rounded"
 type = 2
 part_weight = 0.035
@@ -51,3 +54,5 @@ material = ExtResource("3_71lh7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("CylinderShape3D_71lh7")
+
+[node name="Barrier" parent="." instance=ExtResource("5_kiyux")]

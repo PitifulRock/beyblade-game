@@ -9,6 +9,7 @@ var burst_holder: Node
 @export var disc : BeyDisc
 @export var core : BeyCore
 @export var tip : BeyTip
+var ability_node : BeyAbility
 
 @export_group("Public Variables")
 @export var burst_percentage := 0.0
@@ -32,6 +33,9 @@ var is_npc := false
 
 var name_tag: Label3D
 
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+
 func _ready() -> void:
 	game_world = Master.game_manager.current_scene
 	burst_holder = $BurstHolder
@@ -41,6 +45,10 @@ func _ready() -> void:
 func _spawned(as_npc := false):
 	is_npc = as_npc
 	name_tag.text=Master.player_list[name.to_int()].display_name if !is_npc else ""
+	for i in get_children(): 
+		if i is BeyAbility: 
+			i.beyblade = self
+			i._setup()
 	if !Master.is_host: return
 	_bey_setup()
 	_launch()
@@ -63,6 +71,9 @@ func _bey_setup():
 	stamina *= tip.stamina_mult
 	burst_resistance = disc.burst_resitance
 	burst_damage = disc.burst_damage
+	
+	if is_multiplayer_authority():
+		Master.local_player._bey_enter(self)
 
 func _launch():
 	current_spin = -spin_speed if disc.right_spin else spin_speed
@@ -74,6 +85,14 @@ func _physics_process(_delta: float) -> void:
 	if current_spin <= 10:
 		%SpinParticles.emitting = false
 	%BurstTag.text = str(int(burst_percentage), "%")
+	if burst_percentage > 80.0:
+		%BurstTag.modulate = Color(0.891, 0.0, 0.0, 1.0)
+	elif burst_percentage > 50.0:
+		%BurstTag.modulate = Color(0.979, 0.484, 0.0, 1.0)
+	elif burst_percentage > 25:
+		%BurstTag.modulate = Color(1.0, 0.887, 0.467, 1.0)
+	else:
+		%BurstTag.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	
 	if Master.is_host:
 		var engine_spin := angular_velocity.y
@@ -114,6 +133,8 @@ func _physics_process(_delta: float) -> void:
 		burst()
 
 func die(point_type : GameWorld.POINT_TYPE):
+	if is_multiplayer_authority():
+		Master.local_player._bey_exit()
 	if !Master.is_host: return
 	var point_winner = last_collided_bey if point_type != GameWorld.POINT_TYPE.STAMINA else null
 	var winner_id = point_winner.name.to_int() if point_winner else -1
@@ -122,6 +143,10 @@ func die(point_type : GameWorld.POINT_TYPE):
 	
 	if point_type == GameWorld.POINT_TYPE.DESTRUCTION:
 		burst.rpc()
+
+func _exit_tree() -> void:
+	if is_multiplayer_authority() and Master.local_player:
+		Master.local_player._bey_exit()
 
 @rpc("any_peer", "call_local", "reliable")
 func burst():
@@ -164,13 +189,20 @@ func _on_collision(body : Node):
 		var body_speed = body.linear_velocity.length()
 		last_collided_bey = body if !body.is_npc else null
 		recoil += 0.5
+		
+		if ability_node:
+			if get_multiplayer_authority() == 1 or get_multiplayer_authority() < 0:
+				ability_node._charge_hit(body_speed)
+			else:
+				ability_node._charge_hit.rpc_id(get_multiplayer_authority(), body_speed)
+		
 		if linear_velocity.length() > body_speed/1.5:
 			#spin reduction from hitting fast
 			var reduction = body_speed/1.5
 			current_spin -= -reduction if current_spin < 0 else reduction
 			
 			_clash_fx.rpc(collision_point, body_speed)
-			
+		
 		if linear_velocity.length() < body_speed*1.2*Settings.gameplay_config.game_speed and can_take_damage:
 			var incoming_damage = (body_speed*body.burst_damage) * body_speed/25
 			var recieved_damage = incoming_damage/(burst_resistance)
@@ -178,7 +210,7 @@ func _on_collision(body : Node):
 			can_take_damage = false
 			await get_tree().create_timer(0.2).timeout
 			can_take_damage = true
-		game_world.reset_disaster_timer()
+		#game_world.reset_disaster_timer()
 
 @rpc("any_peer", "call_local", "reliable")
 func _clash_fx(fx_position : Vector3, body_speed : float):

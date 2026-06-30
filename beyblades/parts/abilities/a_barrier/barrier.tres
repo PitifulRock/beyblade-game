@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://csjvbr64442vi"]
+
+[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_6xl3a"]
+
+[resource]
+script = ExtResource("1_6xl3a")
+ability_name = "Barrier"
+ability_description = "Gain a temporary shield that deflects attacks"
+metadata/_custom_type_script = "uid://cp3m11krq7y64"

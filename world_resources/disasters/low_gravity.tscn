@@ -34,9 +34,37 @@ render_priority = 0
 shader = ExtResource("1_qxixs")
 shader_parameter/displacement_texture = SubResource("NoiseTexture2D_lwepg")
 shader_parameter/height_scale = 4.1890001989775
+shader_parameter/offset = 4.5090002141775
 shader_parameter/alpha_scale = 1.0
 shader_parameter/albedo_texture = SubResource("NoiseTexture2D_0ywvx")
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_l8ism"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LowGravity/CSGSphere3D:material:shader_parameter/alpha_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OmniLight3D:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
 
 [sub_resource type="Animation" id="Animation_qxixs"]
 resource_name = "start"
@@ -66,33 +94,6 @@ tracks/1/keys = {
 "values": [0.0, 5.0]
 }
 
-[sub_resource type="Animation" id="Animation_l8ism"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LowGravity/CSGSphere3D:material:shader_parameter/alpha_scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OmniLight3D:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [5.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwepg"]
 _data = {
 &"RESET": SubResource("Animation_l8ism"),
@@ -103,10 +104,10 @@ _data = {
 
 [node name="LowGravity" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-gravity_space_override = 3
+gravity_space_override = 1
 gravity_point_center = Vector3(0, 1, 0)
 gravity_direction = Vector3(0, 1, 0)
-gravity = 24.0
+gravity = 40.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LowGravity"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 25, 0)

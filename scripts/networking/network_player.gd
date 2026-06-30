@@ -26,7 +26,8 @@ func _input(_event):
 func _ready() -> void:
 	disable_cheats()
 	if is_multiplayer_authority():
-		%OutlineShader.show()
+		%OutlineShader.visible = Settings.get_video_settings()["outlines"] as bool
+		%AudioListener3D.make_current()
 		Master.register_steam_id.rpc(name.to_int(), Steam.getSteamID())
 		
 		for i in Master.game_manager.current_scene.player_path.get_children():
@@ -72,3 +73,8 @@ func _await_steam_id() -> int:
 	while not Master.steam_ids.has(name.to_int()):
 		await get_tree().process_frame
 	return Master.steam_ids[name.to_int()]
+
+func _bey_enter(linked_beyblade : BeyBlade):
+	%PlayerUI.show_game_ui(linked_beyblade)
+func _bey_exit():
+	%PlayerUI.hide_game_ui()
