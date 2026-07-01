@@ -18,7 +18,7 @@ radius = 0.9741211
 
 [node name="DefenseDisc" type="StaticBody3D"]
 script = ExtResource("1_71lh7")
-burst_resitance = 2.6
+burst_resitance = 2.0
 burst_damage = 0.5
 physics_material = SubResource("PhysicsMaterial_5glgy")
 ability_data = ExtResource("2_jg0o8")

@@ -115,7 +115,6 @@ _surfaces = [{
 [node name="Barrier" type="Node3D"]
 script = ExtResource("1_f7ifa")
 ability_data = ExtResource("2_cpanr")
-charge_multiplier = 2.0
 metadata/_custom_type_script = "uid://oljfchpj8bfx"
 
 [node name="Particles" type="GPUParticles3D" parent="."]

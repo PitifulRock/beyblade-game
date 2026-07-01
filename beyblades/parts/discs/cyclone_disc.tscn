@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bdtcnn433hps0"]
+[gd_scene load_steps=10 format=3 uid="uid://bdtcnn433hps0"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_ej4bf"]
+[ext_resource type="Resource" uid="uid://cnpgthglldklu" path="res://beyblades/parts/abilities/a_misdirection/misdirection.tres" id="2_6xmck"]
 [ext_resource type="Texture2D" uid="uid://cbcpapjjbvqsx" path="res://textures/PROTO/Green/texture_10.png" id="2_qkr8h"]
 [ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="3_6xmck"]
 [ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="4_ej4bf"]
+[ext_resource type="PackedScene" uid="uid://bg5snnbob5bc6" path="res://beyblades/parts/abilities/a_misdirection/misdirection.tscn" id="6_dyoy0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_huacq"]
 friction = 0.05
@@ -24,6 +26,7 @@ right_spin = false
 burst_resitance = 0.7999999999999999
 burst_damage = 1.4
 physics_material = SubResource("PhysicsMaterial_huacq")
+ability_data = ExtResource("2_6xmck")
 part_name = "Cyclone (L)"
 type = 3
 metadata/_custom_type_script = "uid://fx305niyx3gv"
@@ -111,3 +114,5 @@ material = ExtResource("3_6xmck")
 [node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
 shape = SubResource("BoxShape3D_jj3pe")
+
+[node name="Misdirection" parent="." instance=ExtResource("6_dyoy0")]

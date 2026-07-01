@@ -14,7 +14,7 @@ radius = 0.1171875
 [node name="StaminaTip" type="StaticBody3D"]
 script = ExtResource("1_eisn3")
 spin_mult = 0.4
-stamina_mult = 1.8
+stamina_mult = 1.7000000000000002
 center_tether = 0.9
 part_name = "Drill"
 type = 1

@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cir2mlfxmsgvs"]
+[gd_scene load_steps=11 format=3 uid="uid://cir2mlfxmsgvs"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_2qogx"]
+[ext_resource type="Resource" uid="uid://7dp53phso4uj" path="res://beyblades/parts/abilities/a_respin/re_spin.tres" id="2_3hhak"]
 [ext_resource type="Material" uid="uid://1rpv2xab6vif" path="res://materials/prototype_orange.tres" id="2_35v55"]
 [ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://textures/PROTO/Orange/texture_05.png" id="3_2qogx"]
 [ext_resource type="Material" uid="uid://bd17qqugnkbai" path="res://materials/white.tres" id="3_107xe"]
+[ext_resource type="PackedScene" uid="uid://c8ilf4abifhr8" path="res://beyblades/parts/abilities/a_respin/re_spin.tscn" id="6_vxwdb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5glgy"]
 friction = 0.2
@@ -31,6 +33,7 @@ radius = 0.879
 script = ExtResource("1_2qogx")
 burst_resitance = 0.7
 physics_material = SubResource("PhysicsMaterial_5glgy")
+ability_data = ExtResource("2_3hhak")
 part_name = "Stamina Gay"
 type = 1
 part_weight = 0.03
@@ -96,3 +99,5 @@ material = ExtResource("2_35v55")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("CylinderShape3D_2qogx")
+
+[node name="ReSpin" parent="." instance=ExtResource("6_vxwdb")]
