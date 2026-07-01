@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://dlwviv722ox7d"]
+
+[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_dmm6p"]
+
+[resource]
+script = ExtResource("1_dmm6p")
+ability_name = "Center Break"
+ability_description = "Shoot towards the center of the stadium"
+metadata/_custom_type_script = "uid://cp3m11krq7y64"

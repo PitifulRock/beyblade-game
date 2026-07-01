@@ -1,11 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdtcnn433hps0"]
+[gd_scene format=3 uid="uid://bdtcnn433hps0"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_ej4bf"]
-[ext_resource type="Resource" uid="uid://cnpgthglldklu" path="res://beyblades/parts/abilities/a_misdirection/misdirection.tres" id="2_6xmck"]
+[ext_resource type="Resource" uid="uid://cnpgthglldklu" path="res://beyblades/parts/abilities/a_homing/homing.tres" id="2_6xmck"]
 [ext_resource type="Texture2D" uid="uid://cbcpapjjbvqsx" path="res://textures/PROTO/Green/texture_10.png" id="2_qkr8h"]
 [ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="3_6xmck"]
 [ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="4_ej4bf"]
-[ext_resource type="PackedScene" uid="uid://bg5snnbob5bc6" path="res://beyblades/parts/abilities/a_misdirection/misdirection.tscn" id="6_dyoy0"]
+[ext_resource type="PackedScene" uid="uid://bg5snnbob5bc6" path="res://beyblades/parts/abilities/a_homing/homing.tscn" id="6_dyoy0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_huacq"]
 friction = 0.05
@@ -20,7 +20,7 @@ roughness = 0.0
 [sub_resource type="BoxShape3D" id="BoxShape3D_jj3pe"]
 size = Vector3(1.7, 0.17, 1.7)
 
-[node name="CycloneDisc" type="StaticBody3D"]
+[node name="CycloneDisc" type="StaticBody3D" unique_id=1810129693]
 script = ExtResource("1_ej4bf")
 right_spin = false
 burst_resitance = 0.7999999999999999
@@ -31,73 +31,73 @@ part_name = "Cyclone (L)"
 type = 3
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
-[node name="Visual" type="CSGCombiner3D" parent="."]
+[node name="Visual" type="CSGCombiner3D" parent="." unique_id=2130623523]
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Visual"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Visual" unique_id=1344258055]
 
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=1015671637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.90000004)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=1585294189]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.9)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D4" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=687333010]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.9, 0.1, 9.537928e-09)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D5" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=536983108]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.9, 0.1, -6.914257e-08)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D6" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=1096648001]
 transform = Transform3D(0.7000534, 0, -0.5273376, 0, 1, 0, 0.7000534, 0, 0.5273376, 0.51548076, 0.1, -0.51548076)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D7" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=1671857675]
 transform = Transform3D(0.7000534, 0, -0.5273376, 0, 1, 0, 0.7000534, 0, 0.5273376, -0.51548076, 0.1, 0.51548076)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D8" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D8" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=774581486]
 transform = Transform3D(-0.70005333, 0, -0.5273376, 0, 1, 0, 0.7000532, 0, -0.5273377, 0.51548076, 0.1, 0.51548076)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D9" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D9" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=316100066]
 transform = Transform3D(-0.70005333, 0, -0.5273376, 0, 1, 0, 0.7000532, 0, -0.5273377, -0.51548076, 0.1, -0.51548076)
 radius = 0.3
 radial_segments = 4
 rings = 2
 material = SubResource("StandardMaterial3D_yyykh")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGCombiner3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGCombiner3D" unique_id=20585664]
 transform = Transform3D(1, 0, 0, 0, 0.14399998, 0, 0, 0, 1, 0, 0.1, 0)
 operation = 1
 radius = 1.3
 material = ExtResource("3_6xmck")
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual"]
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual" unique_id=102690426]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.10587999, 0)
 use_collision = true
 radius = 1.093
@@ -105,14 +105,14 @@ height = 0.21
 sides = 12
 material = ExtResource("4_ej4bf")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGCylinder3D3"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGCylinder3D3" unique_id=2005994631]
 transform = Transform3D(0.99999994, 0, 0, 0, 0.27, 0, 0, 0, 1, 0, 0, 0)
 operation = 1
 radius = 0.9
 material = ExtResource("3_6xmck")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1809251400]
 transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
 shape = SubResource("BoxShape3D_jj3pe")
 
-[node name="Misdirection" parent="." instance=ExtResource("6_dyoy0")]
+[node name="Misdirection" parent="." unique_id=1703673030 instance=ExtResource("6_dyoy0")]

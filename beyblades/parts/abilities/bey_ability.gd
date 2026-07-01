@@ -43,3 +43,20 @@ func _charge_hit(amount):
 @rpc("any_peer", "call_local")
 func activate():
 	pass
+
+func _get_alive_beys(include_self := false) -> Array[BeyBlade]:
+	var bey_array := []
+	for bey:BeyBlade in beyblade.game_world.beyblade_path.get_children():
+		if !bey.dead:
+			if include_self:
+				bey_array.append(bey)
+			else:
+				if bey != beyblade:
+					bey_array.append(bey)
+	return bey_array
+
+func _get_nearest_bey() -> BeyBlade:
+	var bey_distances : Dictionary[BeyBlade, float]
+	for bey in _get_alive_beys():
+		bey_distances[bey] = beyblade.global_position.distance_to(bey.global_position)
+	return bey_distances.find_key(bey_distances.values().min())

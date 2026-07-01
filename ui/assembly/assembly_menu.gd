@@ -52,6 +52,7 @@ func launch_countdown():
 func add_selection_menu(player_id : int):
 	var picker = BEY_PICKER.instantiate()
 	picker.name = str(player_id)
+	picker.set_multiplayer_authority(player_id)
 	%SelectionContainer.call_deferred("add_child", picker)
 	await picker.ready 
 	

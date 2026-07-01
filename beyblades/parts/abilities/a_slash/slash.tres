@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://bgisg7lmg3aye"]
+
+[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_yhwka"]
+
+[resource]
+script = ExtResource("1_yhwka")
+ability_name = "Slash"
+ability_description = "Swings a sword that damages opponents"
+metadata/_custom_type_script = "uid://cp3m11krq7y64"

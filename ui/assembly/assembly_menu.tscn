@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://da3f1rx8u2hla"]
+[gd_scene format=3 uid="uid://da3f1rx8u2hla"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_u5isb"]
 [ext_resource type="Script" uid="uid://g153ja0yyrdf" path="res://ui/assembly/assembly_menu.gd" id="2_2o5xm"]
@@ -60,7 +60,7 @@ properties/0/path = NodePath(".:ready_players")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="AssemblyMenu" type="TabContainer"]
+[node name="AssemblyMenu" type="TabContainer" unique_id=1771414090]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -73,11 +73,11 @@ clip_tabs = false
 tabs_visible = false
 script = ExtResource("2_2o5xm")
 
-[node name="PickerScreen" type="Control" parent="."]
+[node name="PickerScreen" type="Control" parent="." unique_id=1910926848]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="SelectionContainer" type="GridContainer" parent="PickerScreen"]
+[node name="SelectionContainer" type="GridContainer" parent="PickerScreen" unique_id=1173083833]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -86,16 +86,16 @@ anchor_bottom = 0.7777778
 columns = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+[node name="Control" parent="PickerScreen/SelectionContainer" unique_id=286846267 instance=ExtResource("3_sfkfw")]
 layout_mode = 2
 
-[node name="Control2" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+[node name="Control2" parent="PickerScreen/SelectionContainer" unique_id=1523138344 instance=ExtResource("3_sfkfw")]
 layout_mode = 2
 
-[node name="Control3" parent="PickerScreen/SelectionContainer" instance=ExtResource("3_sfkfw")]
+[node name="Control3" parent="PickerScreen/SelectionContainer" unique_id=969326139 instance=ExtResource("3_sfkfw")]
 layout_mode = 2
 
-[node name="LobbyID" type="Panel" parent="PickerScreen"]
+[node name="LobbyID" type="Panel" parent="PickerScreen" unique_id=723716463]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025173612
@@ -106,7 +106,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="LabelID" type="RichTextLabel" parent="PickerScreen/LobbyID"]
+[node name="LabelID" type="RichTextLabel" parent="PickerScreen/LobbyID" unique_id=372750395]
 unique_name_in_owner = true
 clip_contents = false
 layout_mode = 1
@@ -127,7 +127,7 @@ text = "Lobby ID:
 fit_content = true
 vertical_alignment = 1
 
-[node name="ColorRect" type="Panel" parent="PickerScreen/LobbyID/LabelID"]
+[node name="ColorRect" type="Panel" parent="PickerScreen/LobbyID/LabelID" unique_id=213455628]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -140,7 +140,7 @@ offset_bottom = 23.5
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="CopyButton" type="TextureButton" parent="PickerScreen/LobbyID/LabelID/ColorRect"]
+[node name="CopyButton" type="TextureButton" parent="PickerScreen/LobbyID/LabelID/ColorRect" unique_id=1259884226]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -161,7 +161,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("4_ocy00")
 
-[node name="CopiedNotif" type="Label" parent="PickerScreen/LobbyID"]
+[node name="CopiedNotif" type="Label" parent="PickerScreen/LobbyID" unique_id=170614848]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
@@ -177,7 +177,7 @@ text = "Copied to clipboard"
 horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ReadyUp" type="Control" parent="PickerScreen"]
+[node name="ReadyUp" type="Control" parent="PickerScreen" unique_id=1281596218]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -186,7 +186,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="ReadyButton" type="Button" parent="PickerScreen/ReadyUp"]
+[node name="ReadyButton" type="Button" parent="PickerScreen/ReadyUp" unique_id=1933742561]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -209,7 +209,7 @@ toggle_mode = true
 text = "Ready"
 script = ExtResource("4_ocy00")
 
-[node name="ReadyTimerBar" type="TextureProgressBar" parent="PickerScreen/ReadyUp/ReadyButton"]
+[node name="ReadyTimerBar" type="TextureProgressBar" parent="PickerScreen/ReadyUp/ReadyButton" unique_id=232473128]
 unique_name_in_owner = true
 show_behind_parent = true
 layout_mode = 1
@@ -226,7 +226,7 @@ texture_progress = ExtResource("3_u5isb")
 tint_under = Color(0.16862746, 0.1882353, 0.24705882, 1)
 tint_progress = Color(7.6046585e-06, 0.9942815, 0.6075115, 0.4745098)
 
-[node name="ReadyIcons" type="HBoxContainer" parent="PickerScreen/ReadyUp/ReadyButton"]
+[node name="ReadyIcons" type="HBoxContainer" parent="PickerScreen/ReadyUp/ReadyButton" unique_id=6201198]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -239,27 +239,27 @@ grow_vertical = 0
 alignment = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextureRect" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons"]
+[node name="TextureRect" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons" unique_id=242534122]
 layout_mode = 2
 texture = ExtResource("4_2o5xm")
 expand_mode = 2
 
-[node name="TextureRect2" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons"]
+[node name="TextureRect2" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons" unique_id=281054475]
 layout_mode = 2
 texture = ExtResource("4_2o5xm")
 expand_mode = 2
 
-[node name="TextureRect3" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons"]
+[node name="TextureRect3" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons" unique_id=1122720312]
 layout_mode = 2
 texture = ExtResource("4_2o5xm")
 expand_mode = 2
 
-[node name="TextureRect4" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons"]
+[node name="TextureRect4" type="TextureRect" parent="PickerScreen/ReadyUp/ReadyButton/ReadyIcons" unique_id=1106214983]
 layout_mode = 2
 texture = ExtResource("4_2o5xm")
 expand_mode = 2
 
-[node name="ReadyTimerLabel" type="Label" parent="PickerScreen/ReadyUp"]
+[node name="ReadyTimerLabel" type="Label" parent="PickerScreen/ReadyUp" unique_id=1109144994]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -273,22 +273,22 @@ offset_right = 39.0
 offset_bottom = 37.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "10"
+text = "7"
 label_settings = SubResource("LabelSettings_2o5xm")
 horizontal_alignment = 1
 
-[node name="ReadyTimer" type="Timer" parent="PickerScreen/ReadyUp"]
+[node name="ReadyTimer" type="Timer" parent="PickerScreen/ReadyUp" unique_id=913746647]
 unique_name_in_owner = true
 wait_time = 7.0
 one_shot = true
 ignore_time_scale = true
 
-[node name="PlacementScreen" type="Control" parent="."]
+[node name="PlacementScreen" type="Control" parent="." unique_id=609887081]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="PlaceTimerLabel" type="Label" parent="PlacementScreen"]
+[node name="PlaceTimerLabel" type="Label" parent="PlacementScreen" unique_id=23450246]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -306,12 +306,12 @@ text = "5"
 label_settings = SubResource("LabelSettings_2o5xm")
 horizontal_alignment = 1
 
-[node name="PlaceTimer" type="Timer" parent="PlacementScreen"]
+[node name="PlaceTimer" type="Timer" parent="PlacementScreen" unique_id=674128246]
 unique_name_in_owner = true
 wait_time = 5.0
 one_shot = true
 
-[node name="PlaceTip" type="RichTextLabel" parent="PlacementScreen"]
+[node name="PlaceTip" type="RichTextLabel" parent="PlacementScreen" unique_id=1205849167]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -332,18 +332,18 @@ text = "[pulse freq=1.8]Place your launcher"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=329291191]
 unique_name_in_owner = true
 _spawnable_scenes = PackedStringArray("uid://bc0qxhg451sac")
 spawn_path = NodePath("../PickerScreen/SelectionContainer")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=486866899]
 replication_config = SubResource("SceneReplicationConfig_2o5xm")
 
-[node name="NPCSpawner" type="MultiplayerSpawner" parent="."]
+[node name="NPCSpawner" type="MultiplayerSpawner" parent="." unique_id=2045240514]
 spawn_path = NodePath("../NPCAssemblers")
 
-[node name="NPCAssemblers" type="Node" parent="."]
+[node name="NPCAssemblers" type="Node" parent="." unique_id=1597205277]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="PickerScreen/LobbyID/LabelID/ColorRect/CopyButton" to="." method="_on_copy_id_button_pressed"]

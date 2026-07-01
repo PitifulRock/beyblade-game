@@ -37,6 +37,7 @@ func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
+	Console._print(name, " ", get_multiplayer_authority())
 	game_world = Master.game_manager.current_scene
 	burst_holder = $BurstHolder
 	name_tag = %NameTag

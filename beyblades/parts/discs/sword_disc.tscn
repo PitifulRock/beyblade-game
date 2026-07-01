@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cg71nf4fq4wod"]
+[gd_scene format=3 uid="uid://cg71nf4fq4wod"]
 
 [ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_ko62k"]
+[ext_resource type="Resource" uid="uid://bgisg7lmg3aye" path="res://beyblades/parts/abilities/a_slash/slash.tres" id="2_l586f"]
 [ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_r5x1q"]
 [ext_resource type="Material" uid="uid://blgp51ggs4pcm" path="res://materials/prototype_red.tres" id="3_1ybu3"]
 [ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="3_l586f"]
+[ext_resource type="PackedScene" uid="uid://4qrctjyoivb4" path="res://beyblades/parts/abilities/a_slash/slash.tscn" id="6_n543c"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ko62k"]
 friction = 0.22
@@ -26,18 +28,19 @@ radius = 0.64
 [sub_resource type="BoxShape3D" id="BoxShape3D_1ybu3"]
 size = Vector3(0.43, 0.294, 0.725)
 
-[node name="SwordDisc" type="StaticBody3D"]
+[node name="SwordDisc" type="StaticBody3D" unique_id=1093186262]
 script = ExtResource("1_ko62k")
 burst_resitance = 0.7
 burst_damage = 2.1
 physics_material = SubResource("PhysicsMaterial_ko62k")
+ability_data = ExtResource("2_l586f")
 part_name = "Sword"
 part_weight = 0.04
 metadata/_custom_type_script = "uid://fx305niyx3gv"
 
-[node name="Visual" type="CSGCombiner3D" parent="."]
+[node name="Visual" type="CSGCombiner3D" parent="." unique_id=1517204108]
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual"]
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Visual" unique_id=226747543]
 transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 5.152651e-08, 0.118797086, 0)
 use_collision = true
 radius = 0.65
@@ -45,66 +48,68 @@ height = 0.255
 sides = 12
 material = ExtResource("2_r5x1q")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visual/CSGCylinder3D3"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Visual/CSGCylinder3D3" unique_id=465793367]
 transform = Transform3D(0.49999997, 4.3711385e-08, 0.8660253, 4.3711392e-08, 1, -7.5710325e-08, -0.8660253, 7.571034e-08, 0.49999997, 2.1316282e-14, 5.2154064e-08, 0)
 size = Vector3(1.2, 0.2, 1.2)
 material = ExtResource("3_1ybu3")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Visual/CSGCylinder3D3"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Visual/CSGCylinder3D3" unique_id=1995482393]
 transform = Transform3D(0.8660255, 1.1712437e-08, 0.5, 1.171243e-08, 1, -4.3711374e-08, -0.5, 4.371138e-08, 0.8660255, 2.1316282e-14, 5.2154064e-08, 0)
 size = Vector3(1.2, 0.2, 1.2)
 material = ExtResource("3_1ybu3")
 
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Visual/CSGCylinder3D3"]
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Visual/CSGCylinder3D3" unique_id=413654540]
 transform = Transform3D(-1.1, -2.6381986e-08, 0, 1.6609539e-07, -0.17472002, 0, 0, 0, 1.1, 4.8798665e-08, -0.03120292, 0.0075000226)
 operation = 1
 radius = 0.81
 material = ExtResource("3_l586f")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visual"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Visual" unique_id=742814022]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.15750003)
 size = Vector3(0.41, 0.22, 1.95)
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Visual/CSGBox3D"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Visual/CSGBox3D" unique_id=362268725]
 transform = Transform3D(0.95710677, 0, 0.95710677, 0, 1, 0, -0.95710677, 0, 0.95710677, 0, 0, 0)
 operation = 1
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Visual/CSGBox3D"]
+[node name="CSGBox3D2" type="CSGBox3D" parent="Visual/CSGBox3D" unique_id=1184994994]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1551831, 0, -0.75)
 operation = 2
 size = Vector3(0.12, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGBox3D3" type="CSGBox3D" parent="Visual/CSGBox3D"]
+[node name="CSGBox3D3" type="CSGBox3D" parent="Visual/CSGBox3D" unique_id=1249875171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15246671, 0, -0.75)
 operation = 2
 size = Vector3(0.12, 0.3, 0.3)
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="Visual/CSGBox3D"]
+[node name="CSGBox3D4" type="CSGBox3D" parent="Visual/CSGBox3D" unique_id=561808157]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17263046, 0, 0.25000003)
 operation = 2
 size = Vector3(0.075, 0.3, 1.51)
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGBox3D5" type="CSGBox3D" parent="Visual/CSGBox3D"]
+[node name="CSGBox3D5" type="CSGBox3D" parent="Visual/CSGBox3D" unique_id=428285702]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17995745, 0, 0.25000003)
 operation = 2
 size = Vector3(0.075, 0.3, 1.51)
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGBox3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Visual/CSGBox3D" unique_id=364766548]
 transform = Transform3D(0.39999998, 0, 0, 0, 0.13999999, 0, 0, 0, 1.1, 0, 0, -0.15)
 operation = 1
 radius = 1.0
 material = SubResource("StandardMaterial3D_1ybu3")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1555585333]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
 shape = SubResource("CylinderShape3D_1ybu3")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1421785481]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1377832, 0.8)
 shape = SubResource("BoxShape3D_1ybu3")
+
+[node name="Slash" parent="." unique_id=1739611243 instance=ExtResource("6_n543c")]

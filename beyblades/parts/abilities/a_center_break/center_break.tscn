@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://7bi0ncsbpfjk"]
+
+[ext_resource type="Script" uid="uid://dk4jfhe8dbxa6" path="res://beyblades/parts/abilities/a_center_break/center_break.gd" id="1_fxc8d"]
+[ext_resource type="Resource" uid="uid://dlwviv722ox7d" path="res://beyblades/parts/abilities/a_center_break/center_break.tres" id="2_fxc8d"]
+
+[node name="CenterBreak" type="Node3D" unique_id=389359189]
+script = ExtResource("1_fxc8d")
+ability_data = ExtResource("2_fxc8d")
+charge_multiplier = 0.6
+charge_over_time = true
+charge_time_speed = 20.0
+metadata/_custom_type_script = "uid://oljfchpj8bfx"

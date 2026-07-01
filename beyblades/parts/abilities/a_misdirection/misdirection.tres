@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://cnpgthglldklu"]
-
-[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_fwk1o"]
-
-[resource]
-script = ExtResource("1_fwk1o")
-ability_name = "Misdirection"
-ability_description = "Dash in a random direction"
-metadata/_custom_type_script = "uid://cp3m11krq7y64"

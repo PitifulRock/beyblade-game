@@ -44,7 +44,7 @@ func change_game_state(new_state : GAME_STATE):
 	match new_state:
 		GAME_STATE.SELECTION:
 			Effects.fade_drum_track(false)
-			Master.local_player.set_movement(false)
+			if Master.local_player: Master.local_player.set_movement(false)
 			round_points = {}
 			results_menu.hide()
 			assembly_menu.show()
