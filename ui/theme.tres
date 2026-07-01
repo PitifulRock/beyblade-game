@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=28 format=3 uid="uid://bps6vk6deaxqr"]
+[gd_resource type="Theme" format=3 uid="uid://bps6vk6deaxqr"]
 
 [ext_resource type="Texture2D" uid="uid://1gqrh6ej1s20" path="res://textures/ui_pack/Grey/Double/button_rectangle_depth_gradient.png" id="1_6lx7k"]
 [ext_resource type="FontFile" uid="uid://bkkc8ggv7evp5" path="res://textures/SpecialGothicExpandedOne-Regular.ttf" id="1_rqugq"]
