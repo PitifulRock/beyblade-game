@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://elmhrlsm6p2"]
+[gd_scene format=3 uid="uid://elmhrlsm6p2"]
 
 [ext_resource type="Script" uid="uid://bssuxxna2ti8u" path="res://scripts/game_world.gd" id="1_00tp4"]
 [ext_resource type="Resource" uid="uid://duk3llmqijvbq" path="res://ui/default_config.tres" id="2_vbegm"]
@@ -168,7 +168,7 @@ _data = {
 &"warning": SubResource("Animation_p012k")
 }
 
-[node name="MainWorld" type="Node3D" node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path", "disaster_path")]
+[node name="MainWorld" type="Node3D" unique_id=1416153692 node_paths=PackedStringArray("assembly_menu", "results_menu", "player_path", "beyblade_path", "particle_path", "stadium_path", "disaster_path")]
 script = ExtResource("1_00tp4")
 assembly_menu = NodePath("AssemblyMenu")
 results_menu = NodePath("ResultsScreen")
@@ -180,81 +180,81 @@ disaster_path = NodePath("Disasters")
 gameplay_config = ExtResource("2_vbegm")
 metadata/_custom_type_script = "uid://bssuxxna2ti8u"
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1489186204]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 directional_shadow_mode = 0
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=980621488]
 environment = SubResource("Environment_ykrsh")
 
-[node name="Particles" type="Node3D" parent="."]
+[node name="Particles" type="Node3D" parent="." unique_id=207203810]
 
-[node name="Players" type="Node3D" parent="."]
+[node name="Players" type="Node3D" parent="." unique_id=630206125]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.25, 16.5)
 
-[node name="Beyblades" type="Node3D" parent="."]
+[node name="Beyblades" type="Node3D" parent="." unique_id=638908438]
 
-[node name="Stadium" type="Node3D" parent="."]
+[node name="Stadium" type="Node3D" parent="." unique_id=1812299111]
 transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0)
 
-[node name="Node3D" parent="Stadium" instance=ExtResource("3_f66xl")]
+[node name="Node3D" parent="Stadium" unique_id=1938727854 instance=ExtResource("3_f66xl")]
 
-[node name="Disasters" type="Node3D" parent="."]
+[node name="Disasters" type="Node3D" parent="." unique_id=1708381104]
 
-[node name="DefaultCam" type="Camera3D" parent="."]
+[node name="DefaultCam" type="Camera3D" parent="." unique_id=1409880519]
 transform = Transform3D(0.83370644, 0.20659183, 0.5121069, 0.006052263, 0.92390627, -0.3825711, -0.5521748, 0.32205138, 0.76901627, 46.1, -3.3, 38.899998)
 current = true
 fov = 48.2
 size = 30.646
 
-[node name="AssemblyMenu" parent="." node_paths=PackedStringArray("spawn_positions") instance=ExtResource("11_77dp3")]
+[node name="AssemblyMenu" parent="." unique_id=978060390 node_paths=PackedStringArray("spawn_positions") instance=ExtResource("11_77dp3")]
 spawn_positions = [NodePath("SpawnPos"), NodePath("SpawnPos2"), NodePath("SpawnPos3"), NodePath("SpawnPos4")]
 
-[node name="SpawnPos" type="Marker3D" parent="AssemblyMenu"]
+[node name="SpawnPos" type="Marker3D" parent="AssemblyMenu" unique_id=1700815253]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -6)
 
-[node name="SpawnPos2" type="Marker3D" parent="AssemblyMenu"]
+[node name="SpawnPos2" type="Marker3D" parent="AssemblyMenu" unique_id=623671765]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 6)
 
-[node name="SpawnPos3" type="Marker3D" parent="AssemblyMenu"]
+[node name="SpawnPos3" type="Marker3D" parent="AssemblyMenu" unique_id=71882064]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 6, 2, 2.6226832e-07)
 
-[node name="SpawnPos4" type="Marker3D" parent="AssemblyMenu"]
+[node name="SpawnPos4" type="Marker3D" parent="AssemblyMenu" unique_id=992799664]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -6, 2, -2.6226832e-07)
 
-[node name="ResultsScreen" parent="." instance=ExtResource("6_g14j6")]
+[node name="ResultsScreen" parent="." unique_id=150402479 instance=ExtResource("6_g14j6")]
 
-[node name="DisasterTimer" type="Timer" parent="."]
+[node name="DisasterTimer" type="Timer" parent="." unique_id=320874822]
 wait_time = 30.0
 one_shot = true
 
-[node name="BG" type="Node3D" parent="."]
+[node name="BG" type="Node3D" parent="." unique_id=1810829110]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BG"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="BG" unique_id=105626969]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -727.0515, 0)
 radius = 15.984
 height = 1450.397
 sides = 32
 material = SubResource("StandardMaterial3D_f66xl")
 
-[node name="KillBox" type="Area3D" parent="."]
+[node name="KillBox" type="Area3D" parent="." unique_id=2008449208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.13173, 0)
 script = ExtResource("10_h3w03")
 metadata/_custom_type_script = "uid://dsfjou4mhrrmo"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="KillBox" unique_id=1752575036]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.907936, 0)
 shape = SubResource("BoxShape3D_h3w03")
 
-[node name="StadiumSpawner" type="MultiplayerSpawner" parent="."]
+[node name="StadiumSpawner" type="MultiplayerSpawner" parent="." unique_id=726316037]
 _spawnable_scenes = PackedStringArray("uid://bbgn044maydvg")
 spawn_path = NodePath("../Stadium")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=182722709]
 replication_config = SubResource("SceneReplicationConfig_vbegm")
 
-[node name="DisasterWarning" type="Label" parent="."]
+[node name="DisasterWarning" type="Label" parent="." unique_id=196184069]
 self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -266,13 +266,11 @@ label_settings = SubResource("LabelSettings_p012k")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DisasterAnim" type="AnimationPlayer" parent="DisasterWarning"]
+[node name="DisasterAnim" type="AnimationPlayer" parent="DisasterWarning" unique_id=360563158]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_7y6mw")
-}
+libraries/ = SubResource("AnimationLibrary_7y6mw")
 
-[node name="DisasterSound" type="AudioStreamPlayer" parent="DisasterWarning"]
+[node name="DisasterSound" type="AudioStreamPlayer" parent="DisasterWarning" unique_id=624358187]
 stream = ExtResource("14_p012k")
 bus = &"SFX"
 

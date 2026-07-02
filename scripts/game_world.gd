@@ -180,6 +180,7 @@ func player_removed(id : int):
 	results_menu.remove_player_bar(id)
 	player_scores.erase(id)
 	round_points.erase(id)
+	Master.steam_ids.erase(id)
 
 func _on_disaster_timer_timeout() -> void:
 	if gameplay_config.disasters_enabled and current_state == GAME_STATE.BATTLE and Master.is_host:

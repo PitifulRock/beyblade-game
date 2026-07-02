@@ -7,6 +7,8 @@ func _ready() -> void:
 	Master.avatar_cache.clear()
 	Master.local_player = null
 	Master.player_list.clear()
+	Master.steam_ids.clear()
+	
 	Effects.set_sync_music(false, false, menu_music)
 	Settings.gameplay_config = GameplayConfig.new()
 	%TabContainer.current_tab = 0

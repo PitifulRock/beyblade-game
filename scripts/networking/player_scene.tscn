@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bk8eovjp50t2s"]
+[gd_scene format=3 uid="uid://bk8eovjp50t2s"]
 
 [ext_resource type="Script" uid="uid://opqw5ygpbjhq" path="res://scripts/networking/network_player.gd" id="1_a6s7x"]
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="2_ebo5w"]
@@ -49,6 +49,21 @@ outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avurv"]
 
+[sub_resource type="Animation" id="Animation_nqyr0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="Animation" id="Animation_duvb4"]
 resource_name = "speed_spinner"
 length = 0.5
@@ -65,21 +80,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 6.283185307179586]
-}
-
-[sub_resource type="Animation" id="Animation_nqyr0"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_l7bv0"]
@@ -290,46 +290,46 @@ material = SubResource("StandardMaterial3D_u5utn")
 size = Vector2(0.7, 0.05)
 orientation = 0
 
-[node name="FreeLookCamera" type="Camera3D"]
+[node name="FreeLookCamera" type="Camera3D" unique_id=429872956]
 script = ExtResource("1_a6s7x")
 throwables = Array[PackedScene]([ExtResource("2_u27t7"), ExtResource("3_g8f7b")])
 metadata/_custom_type_script = "uid://ba6s7kap2bki1"
 
-[node name="AudioListener3D" type="AudioListener3D" parent="."]
+[node name="AudioListener3D" type="AudioListener3D" parent="." unique_id=1387451519]
 unique_name_in_owner = true
 
-[node name="Model" type="Node3D" parent="."]
+[node name="Model" type="Node3D" parent="." unique_id=111170747]
 unique_name_in_owner = true
 
-[node name="Mouth" type="CSGSphere3D" parent="Model"]
+[node name="Mouth" type="CSGSphere3D" parent="Model" unique_id=1096930115]
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183, -0.533)
 radius = 0.155
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_ebo5w")
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="Model"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Model" unique_id=1107767698]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 radius = 0.8
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_e2hjl")
 
-[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model"]
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="Model" unique_id=1163542913]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 0.117, -0.6065163)
 radius = 0.155
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_ebo5w")
 
-[node name="CSGSphere3D3" type="CSGSphere3D" parent="Model"]
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="Model" unique_id=1003713363]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.117, -0.6065163)
 radius = 0.155
 radial_segments = 32
 rings = 16
 material = SubResource("StandardMaterial3D_ebo5w")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=873427921]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 pixel_size = 0.01
 billboard = 1
@@ -337,12 +337,12 @@ render_priority = 1
 outline_render_priority = 0
 text = "display name"
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=346240010]
 replication_config = SubResource("SceneReplicationConfig_ssomj")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1713330533]
 
-[node name="PlayerUI" type="Control" parent="CanvasLayer"]
+[node name="PlayerUI" type="Control" parent="CanvasLayer" unique_id=986910783]
 unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 15
@@ -354,7 +354,7 @@ mouse_filter = 2
 theme = ExtResource("2_ebo5w")
 script = ExtResource("3_kjn0h")
 
-[node name="CheatsScreen" type="Control" parent="CanvasLayer/PlayerUI"]
+[node name="CheatsScreen" type="Control" parent="CanvasLayer/PlayerUI" unique_id=197150066]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -363,7 +363,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="CheatsTooltip" type="Label" parent="CanvasLayer/PlayerUI/CheatsScreen"]
+[node name="CheatsTooltip" type="Label" parent="CanvasLayer/PlayerUI/CheatsScreen" unique_id=1167529523]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.015104166
@@ -376,7 +376,7 @@ text = "[F] Blow
 label_settings = SubResource("LabelSettings_g8f7b")
 metadata/_edit_use_anchors_ = true
 
-[node name="PauseMenu" type="Control" parent="CanvasLayer/PlayerUI"]
+[node name="PauseMenu" type="Control" parent="CanvasLayer/PlayerUI" unique_id=1159655676]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -388,7 +388,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("6_yqtyn")
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI/PauseMenu"]
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/PlayerUI/PauseMenu" unique_id=310496375]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -398,7 +398,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.03876, 0.050708726, 0.07016479, 0.165)
 
-[node name="MainPanel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu"]
+[node name="MainPanel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu" unique_id=1413107614]
 self_modulate = Color(0.8117647, 0.8117647, 0.8117647, 1)
 layout_mode = 0
 anchor_left = 0.30416667
@@ -408,7 +408,7 @@ anchor_bottom = 0.72037035
 theme = ExtResource("2_ebo5w")
 metadata/_edit_use_anchors_ = true
 
-[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel"]
+[node name="ButtonContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel" unique_id=767464674]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,7 +422,7 @@ mouse_filter = 0
 theme = ExtResource("2_ebo5w")
 theme_override_constants/separation = 19
 
-[node name="PausedLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="PausedLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=2144445645]
 custom_minimum_size = Vector2(0, 69.785)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
@@ -430,38 +430,38 @@ text = "OPTIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Resume" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="Resume" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=1151176102]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Resume"
 script = ExtResource("7_eq0n8")
 
-[node name="Options3" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="Options3" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=809475092]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "General"
 script = ExtResource("7_eq0n8")
 
-[node name="Options2" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="Options2" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=586775477]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Audio
 "
 script = ExtResource("7_eq0n8")
 
-[node name="Options" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="Options" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=1853522131]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Video"
 script = ExtResource("7_eq0n8")
 
-[node name="Options4" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer"]
+[node name="Options4" type="Button" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer" unique_id=1275995786]
 custom_minimum_size = Vector2(0, 60)
 layout_mode = 2
 text = "Leave  Lobby"
 script = ExtResource("7_eq0n8")
 
-[node name="TabContainer" type="TabContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel"]
+[node name="TabContainer" type="TabContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel" unique_id=809290786]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.1079545
@@ -474,7 +474,7 @@ current_tab = 2
 tabs_visible = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Video" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer"]
+[node name="Video" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer" unique_id=1881672616]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.8132577, 0.8132577, 0.81325763, 1)
@@ -482,27 +482,27 @@ layout_mode = 2
 theme = ExtResource("2_ebo5w")
 metadata/_tab_index = 0
 
-[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video"]
+[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video" unique_id=1667646056]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 256.0
 offset_bottom = 584.0
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=2019021324]
 custom_minimum_size = Vector2(0, 69.785)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "VIDEO"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=472823532]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="FullScreen" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer"]
-clip_contents = false
+[node name="FullScreen" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer" unique_id=807417115]
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Enable Fullscreen"
 fit_content = true
@@ -510,7 +510,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="FullScreenToggle" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer"]
+[node name="FullScreenToggle" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer" unique_id=1566173266]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(27.105, 20)
 layout_mode = 2
@@ -522,16 +522,16 @@ ignore_texture_size = true
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="ShadowLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
-clip_contents = false
+[node name="ShadowLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=204370838]
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Shadow Quality"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Shadow" type="MenuButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="Shadow" type="MenuButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=1092277687]
 unique_name_in_owner = true
 layout_mode = 2
 text = " Low"
@@ -544,7 +544,7 @@ popup/item_1/id = 1
 popup/item_2/text = "High"
 popup/item_2/id = 2
 
-[node name="Panel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/Shadow"]
+[node name="Panel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/Shadow" unique_id=775787603]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -554,17 +554,17 @@ anchor_bottom = 1.15217
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="AALabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="AALabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=759389019]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Anti-Aliasing"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="AA" type="MenuButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="AA" type="MenuButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=1178459862]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Disabled"
@@ -579,7 +579,7 @@ popup/item_2/id = 2
 popup/item_3/text = "8x"
 popup/item_3/id = 3
 
-[node name="Panel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/AA"]
+[node name="Panel" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/AA" unique_id=1286415088]
 show_behind_parent = true
 layout_mode = 1
 anchors_preset = -1
@@ -589,13 +589,13 @@ anchor_bottom = 1.15217
 mouse_filter = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer" unique_id=621533965]
 layout_mode = 2
 theme_override_constants/separation = 14
 
-[node name="FullScreen" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2"]
-clip_contents = false
+[node name="FullScreen" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2" unique_id=1701363548]
 custom_minimum_size = Vector2(0, 85.24)
+clip_contents = false
 layout_mode = 2
 text = "Outlines"
 fit_content = true
@@ -603,7 +603,7 @@ scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="OutlineToggle" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2"]
+[node name="OutlineToggle" type="TextureButton" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Video/MenuContainer/HBoxContainer2" unique_id=914134232]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(27.105, 20)
 layout_mode = 2
@@ -615,127 +615,127 @@ ignore_texture_size = true
 stretch_mode = 5
 metadata/_edit_use_anchors_ = true
 
-[node name="Audio" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer"]
+[node name="Audio" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer" unique_id=2108388838]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.8132577, 0.8132577, 0.81325763, 1)
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio"]
+[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio" unique_id=41274472]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 352.0
 offset_bottom = 584.0
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=841330290]
 custom_minimum_size = Vector2(0, 69.785)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "AUDIO"
 vertical_alignment = 1
 
-[node name="MasterLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="MasterLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=957951081]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Master Volume: 12"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="MasterVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="MasterVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=700101472]
 unique_name_in_owner = true
 layout_mode = 2
 value = 75.0
 
-[node name="MusicLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="MusicLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=510596916]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Music Volume: gay"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="MusicVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="MusicVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=1547911197]
 unique_name_in_owner = true
 layout_mode = 2
 value = 100.0
 
-[node name="SFXLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="SFXLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=1451903864]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(128.605, 60)
+clip_contents = false
 layout_mode = 2
 text = "SFX Volume: 12"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="SFXVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer"]
+[node name="SFXVol" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Audio/MenuContainer" unique_id=1327785284]
 unique_name_in_owner = true
 layout_mode = 2
 value = 100.0
 
-[node name="Controls" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer"]
+[node name="Controls" type="Panel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer" unique_id=1110122]
 unique_name_in_owner = true
 self_modulate = Color(0.8132577, 0.8132577, 0.81325763, 1)
 layout_mode = 2
 theme = ExtResource("2_ebo5w")
 metadata/_tab_index = 2
 
-[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls"]
+[node name="MenuContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls" unique_id=1127076742]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
 offset_right = 352.0
 offset_bottom = 584.0
 
-[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer"]
+[node name="Label" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer" unique_id=2094282584]
 custom_minimum_size = Vector2(0, 69.785)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 48
 text = "GENERAL"
 vertical_alignment = 1
 
-[node name="SensLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer"]
+[node name="SensLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer" unique_id=1415279169]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Camera Sensitivity: 12"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="Sensitivity" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer"]
+[node name="Sensitivity" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer" unique_id=2005562015]
 unique_name_in_owner = true
 layout_mode = 2
 max_value = 1.0
 step = 0.01
 value = 0.2
 
-[node name="fovLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer"]
+[node name="fovLabel" type="RichTextLabel" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer" unique_id=131599196]
 unique_name_in_owner = true
-clip_contents = false
 custom_minimum_size = Vector2(0, 60)
+clip_contents = false
 layout_mode = 2
 text = "Field of View:"
 scroll_active = false
 autowrap_mode = 0
 vertical_alignment = 1
 
-[node name="FovSlider" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer"]
+[node name="FovSlider" type="HSlider" parent="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls/MenuContainer" unique_id=239882999]
 unique_name_in_owner = true
 layout_mode = 2
 min_value = 40.0
 value = 75.0
 
-[node name="GameUI" type="Control" parent="CanvasLayer/PlayerUI"]
+[node name="GameUI" type="Control" parent="CanvasLayer/PlayerUI" unique_id=774618520]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -745,7 +745,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="SpeedSpinner" type="Control" parent="CanvasLayer/PlayerUI/GameUI"]
+[node name="SpeedSpinner" type="Control" parent="CanvasLayer/PlayerUI/GameUI" unique_id=978124677]
 modulate = Color(1, 1, 1, 0.70000005)
 layout_mode = 1
 anchor_left = 0.9916667
@@ -756,7 +756,7 @@ grow_horizontal = 0
 grow_vertical = 0
 metadata/_edit_use_anchors_ = true
 
-[node name="SpinOutline" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+[node name="SpinOutline" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner" unique_id=167411961]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -772,7 +772,7 @@ grow_vertical = 2
 texture = ExtResource("10_duvb4")
 expand_mode = 1
 
-[node name="SpinInner" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+[node name="SpinInner" type="TextureRect" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner" unique_id=407479627]
 modulate = Color(0.3574912, 0.38410568, 0.42754805, 1)
 layout_mode = 1
 anchors_preset = 8
@@ -789,13 +789,11 @@ grow_vertical = 2
 texture = ExtResource("11_nqyr0")
 expand_mode = 1
 
-[node name="SpinnerAnim" type="AnimationPlayer" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner"]
+[node name="SpinnerAnim" type="AnimationPlayer" parent="CanvasLayer/PlayerUI/GameUI/SpeedSpinner" unique_id=1996383276]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_l7bv0")
-}
+libraries/ = SubResource("AnimationLibrary_l7bv0")
 
-[node name="SpinBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI"]
+[node name="SpinBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI" unique_id=1720100538]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
@@ -815,7 +813,7 @@ value = 222.0
 fill_mode = 3
 show_percentage = false
 
-[node name="SpinLabel" type="Label" parent="CanvasLayer/PlayerUI/GameUI/SpinBar"]
+[node name="SpinLabel" type="Label" parent="CanvasLayer/PlayerUI/GameUI/SpinBar" unique_id=812621168]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 7
@@ -834,7 +832,7 @@ label_settings = SubResource("LabelSettings_nqyr0")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AbilityBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI"]
+[node name="AbilityBar" type="ProgressBar" parent="CanvasLayer/PlayerUI/GameUI" unique_id=1535156578]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -851,7 +849,7 @@ fill_mode = 3
 show_percentage = false
 metadata/_edit_use_anchors_ = true
 
-[node name="Key" type="NinePatchRect" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar"]
+[node name="Key" type="NinePatchRect" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar" unique_id=705724073]
 self_modulate = Color(0.2509804, 0.26666668, 0.33333334, 1)
 layout_mode = 1
 anchors_preset = -1
@@ -865,7 +863,7 @@ grow_vertical = 0
 texture = ExtResource("12_nqyr0")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/Key"]
+[node name="Label" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/Key" unique_id=2034992158]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -876,7 +874,7 @@ text = "E"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar" unique_id=1438551892]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -885,7 +883,7 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="AbilityName" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer"]
+[node name="AbilityName" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer" unique_id=380451596]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Reboot
@@ -896,7 +894,7 @@ vertical_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="AbilityBody" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer"]
+[node name="AbilityBody" type="Label" parent="CanvasLayer/PlayerUI/GameUI/AbilityBar/VBoxContainer" unique_id=1174294506]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Gain a rapid speed boost and penis peni"
@@ -905,12 +903,12 @@ horizontal_alignment = 1
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="OutlineShader" type="MeshInstance3D" parent="."]
+[node name="OutlineShader" type="MeshInstance3D" parent="." unique_id=531519534]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
 mesh = SubResource("QuadMesh_ebo5w")
 
-[node name="BlowArea" type="Area3D" parent="."]
+[node name="BlowArea" type="Area3D" parent="." unique_id=845430434]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, -1.1)
 gravity_space_override = 1
 gravity_point = true
@@ -918,22 +916,20 @@ gravity_point_center = Vector3(0, 0, -10)
 gravity_direction = Vector3(0, 0, -10)
 gravity = 0.0
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="BlowArea"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlowArea" unique_id=294058571]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0.20000005, -1.3499998)
 shape = SubResource("CylinderShape3D_ebo5w")
 
-[node name="BlowAnim" type="AnimationPlayer" parent="BlowArea"]
+[node name="BlowAnim" type="AnimationPlayer" parent="BlowArea" unique_id=240849543]
 unique_name_in_owner = true
-libraries = {
-&"": SubResource("AnimationLibrary_kjn0h")
-}
+libraries/ = SubResource("AnimationLibrary_kjn0h")
 
-[node name="BlowSound" type="AudioStreamPlayer3D" parent="BlowArea"]
+[node name="BlowSound" type="AudioStreamPlayer3D" parent="BlowArea" unique_id=1517624739]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.29999995)
 stream = SubResource("AudioStreamRandomizer_e2hjl")
 pitch_scale = 1.3
 
-[node name="BlowParticle" type="GPUParticles3D" parent="BlowArea"]
+[node name="BlowParticle" type="GPUParticles3D" parent="BlowArea" unique_id=2012275510]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099999994, 0.5)
 emitting = false
 amount = 30
@@ -942,14 +938,18 @@ explosiveness = 0.16
 process_material = SubResource("ParticleProcessMaterial_e2hjl")
 draw_pass_1 = SubResource("PlaneMesh_u27t7")
 
-[node name="ThrowPoint" type="Marker3D" parent="."]
+[node name="ThrowPoint" type="Marker3D" parent="." unique_id=877437518]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, -1.2)
 
-[node name="ThrowTimer" type="Timer" parent="ThrowPoint"]
+[node name="ThrowTimer" type="Timer" parent="ThrowPoint" unique_id=358940160]
 unique_name_in_owner = true
 wait_time = 0.5
 one_shot = true
+
+[node name="PlacementRay" type="RayCast3D" parent="." unique_id=401681668]
+unique_name_in_owner = true
+target_position = Vector3(0, 0, -150)
 
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer/Resume" to="CanvasLayer/PlayerUI" method="_on_resume_pressed"]
 [connection signal="pressed" from="CanvasLayer/PlayerUI/PauseMenu/MainPanel/ButtonContainer/Options3" to="CanvasLayer/PlayerUI/PauseMenu/MainPanel/TabContainer/Controls" method="set_visible" binds= [true]]

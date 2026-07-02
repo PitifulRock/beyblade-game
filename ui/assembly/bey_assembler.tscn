@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://vcysantvrkhb"]
+[gd_scene format=3 uid="uid://vcysantvrkhb"]
 
 [ext_resource type="Script" uid="uid://dttx7yk0j36qi" path="res://beyblades/bey_assembler.gd" id="1_auall"]
 [ext_resource type="AudioStream" uid="uid://klfo25f4n2j2" path="res://sounds/launch.ogg" id="2_xxd6d"]
@@ -50,19 +50,19 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="BeyAssembler" type="Node3D"]
+[node name="BeyAssembler" type="Node3D" unique_id=580044606]
 visible = false
 script = ExtResource("1_auall")
 metadata/_custom_type_script = "uid://dttx7yk0j36qi"
 
-[node name="LaunchSound" type="AudioStreamPlayer3D" parent="."]
+[node name="LaunchSound" type="AudioStreamPlayer3D" parent="." unique_id=387474045]
 unique_name_in_owner = true
 stream = ExtResource("2_xxd6d")
 unit_size = 20.0
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 11197.0
 
-[node name="LaunchParticles" type="GPUParticles3D" parent="."]
+[node name="LaunchParticles" type="GPUParticles3D" parent="." unique_id=1571884409]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 emitting = false
@@ -73,7 +73,7 @@ explosiveness = 0.87
 process_material = SubResource("ParticleProcessMaterial_erfmm")
 draw_pass_1 = SubResource("PlaneMesh_oi50h")
 
-[node name="LaunchSprite" type="Sprite3D" parent="."]
+[node name="LaunchSprite" type="Sprite3D" parent="." unique_id=658349614]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 pixel_size = 0.02
@@ -81,8 +81,8 @@ billboard = 1
 texture_filter = 0
 texture = ExtResource("4_poxqr")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1454710925]
 mesh = SubResource("CylinderMesh_erfmm")
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=1911149696]
 replication_config = SubResource("SceneReplicationConfig_auall")

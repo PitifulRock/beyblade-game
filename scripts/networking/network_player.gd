@@ -8,8 +8,9 @@ var steam_id : int
 	set(val):
 		display_name = val
 var beyblade_node : BeyBlade = null
-
+@onready var placement_ray : RayCast3D = %PlacementRay
 var cheats_enabled := false
+
 
 func _enter_tree() -> void:
 	set_multiplayer_authority(name.to_int())

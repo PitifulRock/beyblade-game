@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bc0qxhg451sac"]
+[gd_scene format=3 uid="uid://bc0qxhg451sac"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_845v4"]
 [ext_resource type="PackedScene" uid="uid://don4m0xc3m072" path="res://beyblades/parts/tips/attack_tip.tscn" id="1_apxx0"]
@@ -135,7 +135,7 @@ properties/3/path = NodePath("Picker/NameLabel:text")
 properties/3/spawn = true
 properties/3/replication_mode = 2
 
-[node name="Control" type="Control"]
+[node name="Control" type="Control" unique_id=779789126]
 layout_mode = 3
 anchor_top = -0.024691358
 anchor_right = 0.3472222
@@ -147,7 +147,7 @@ theme = ExtResource("1_845v4")
 script = ExtResource("1_gcl7u")
 metadata/_edit_use_anchors_ = true
 
-[node name="Picker" type="Control" parent="."]
+[node name="Picker" type="Control" parent="." unique_id=791449242]
 layout_mode = 1
 anchor_right = 0.5
 anchor_bottom = 1.0617284
@@ -155,7 +155,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="Picker"]
+[node name="Panel" type="Panel" parent="Picker" unique_id=1201688823]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.06
@@ -165,7 +165,7 @@ anchor_bottom = 0.9259259
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BeyPicker" type="SubViewportContainer" parent="Picker"]
+[node name="BeyPicker" type="SubViewportContainer" parent="Picker" unique_id=384903051]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -174,52 +174,50 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="Picker/BeyPicker"]
+[node name="SubViewport" type="SubViewport" parent="Picker/BeyPicker" unique_id=1967919346]
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(533, 1174)
 render_target_update_mode = 4
 
-[node name="Camera3D" type="Camera3D" parent="Picker/BeyPicker/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Picker/BeyPicker/SubViewport" unique_id=118383462]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9999999, 4.2000003)
 projection = 1
 fov = 75.93749
 size = 5.5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Picker/BeyPicker/SubViewport"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Picker/BeyPicker/SubViewport" unique_id=533286437]
 root_node = NodePath("../TipDisplay")
-libraries = {
-&"": SubResource("AnimationLibrary_pqavx")
-}
-autoplay = "spin"
+libraries/ = SubResource("AnimationLibrary_pqavx")
+autoplay = &"spin"
 
-[node name="TipDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport"]
+[node name="TipDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=698740802]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 0.93969256, -0.34202012, 0, 0.34202012, 0.93969256, 0, 0.16076946, 0)
 
-[node name="AttackTip" parent="Picker/BeyPicker/SubViewport/TipDisplay" instance=ExtResource("1_apxx0")]
+[node name="AttackTip" parent="Picker/BeyPicker/SubViewport/TipDisplay" unique_id=1538693492 instance=ExtResource("1_apxx0")]
 
-[node name="CoreDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport"]
+[node name="CoreDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=1949187156]
 unique_name_in_owner = true
 transform = Transform3D(1, -9.26574e-05, -0.00016048733, 0, 0.8660253, -0.49999997, 0.00018531481, 0.49999997, 0.8660253, 0, 1.7, 0)
 
-[node name="AttackCore" parent="Picker/BeyPicker/SubViewport/CoreDisplay" instance=ExtResource("2_gcl7u")]
+[node name="AttackCore" parent="Picker/BeyPicker/SubViewport/CoreDisplay" unique_id=1534638870 instance=ExtResource("2_gcl7u")]
 
-[node name="DiscDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport"]
+[node name="DiscDisplay" type="Marker3D" parent="Picker/BeyPicker/SubViewport" unique_id=1841775324]
 unique_name_in_owner = true
 transform = Transform3D(0.9, -8.3391664e-05, -0.0001444386, 0, 0.7794228, -0.45, 0.00016678333, 0.45, 0.7794228, 0, 3.3, 0)
 
-[node name="DefenseDisc" parent="Picker/BeyPicker/SubViewport/DiscDisplay" instance=ExtResource("3_npfxi")]
+[node name="DefenseDisc" parent="Picker/BeyPicker/SubViewport/DiscDisplay" unique_id=97814135 instance=ExtResource("3_npfxi")]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Picker/BeyPicker/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Picker/BeyPicker/SubViewport" unique_id=1472208844]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 light_energy = 0.5
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="Picker/BeyPicker/SubViewport"]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Picker/BeyPicker/SubViewport" unique_id=582638096]
 environment = SubResource("Environment_npfxi")
 
-[node name="DiscRight" type="TextureButton" parent="Picker"]
+[node name="DiscRight" type="TextureButton" parent="Picker" unique_id=1534813435]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.78
@@ -233,7 +231,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="DiscLeft" type="TextureButton" parent="Picker"]
+[node name="DiscLeft" type="TextureButton" parent="Picker" unique_id=278929219]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -246,7 +244,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="CoreRight" type="TextureButton" parent="Picker"]
+[node name="CoreRight" type="TextureButton" parent="Picker" unique_id=66913074]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.78
@@ -259,7 +257,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="CoreLeft" type="TextureButton" parent="Picker"]
+[node name="CoreLeft" type="TextureButton" parent="Picker" unique_id=1884918997]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -271,7 +269,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="TipRight" type="TextureButton" parent="Picker"]
+[node name="TipRight" type="TextureButton" parent="Picker" unique_id=232959638]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.78
@@ -285,7 +283,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="TipLeft" type="TextureButton" parent="Picker"]
+[node name="TipLeft" type="TextureButton" parent="Picker" unique_id=897877969]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.1
@@ -298,7 +296,7 @@ ignore_texture_size = true
 stretch_mode = 0
 script = ExtResource("7_chlu7")
 
-[node name="NameLabel" type="Label" parent="Picker"]
+[node name="NameLabel" type="Label" parent="Picker" unique_id=1451716982]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -312,7 +310,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="DiscInfo" type="Panel" parent="."]
+[node name="DiscInfo" type="Panel" parent="." unique_id=593764560]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -321,7 +319,7 @@ anchor_right = 0.9625
 anchor_bottom = 0.34567901
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DiscInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DiscInfo" unique_id=4580573]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.043243244
@@ -332,7 +330,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="DiscName" type="RichTextLabel" parent="DiscInfo/VBoxContainer"]
+[node name="DiscName" type="RichTextLabel" parent="DiscInfo/VBoxContainer" unique_id=360900562]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -342,7 +340,7 @@ scroll_active = false
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="DiscInfo" type="RichTextLabel" parent="DiscInfo/VBoxContainer"]
+[node name="DiscInfo" type="RichTextLabel" parent="DiscInfo/VBoxContainer" unique_id=718318793]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 10
@@ -353,7 +351,7 @@ Damage: 1.5x
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="DiscType" type="TextureRect" parent="DiscInfo"]
+[node name="DiscType" type="TextureRect" parent="DiscInfo" unique_id=1550541790]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -367,7 +365,7 @@ texture = ExtResource("8_845v4")
 expand_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="CoreInfo" type="Panel" parent="."]
+[node name="CoreInfo" type="Panel" parent="." unique_id=534642061]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -376,7 +374,7 @@ anchor_right = 0.9625
 anchor_bottom = 0.6645657
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CoreInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CoreInfo" unique_id=1992970633]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.043243244
@@ -387,7 +385,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="CoreName" type="RichTextLabel" parent="CoreInfo/VBoxContainer"]
+[node name="CoreName" type="RichTextLabel" parent="CoreInfo/VBoxContainer" unique_id=841717263]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -397,7 +395,7 @@ scroll_active = false
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="CoreInfo" type="RichTextLabel" parent="CoreInfo/VBoxContainer"]
+[node name="CoreInfo" type="RichTextLabel" parent="CoreInfo/VBoxContainer" unique_id=1800403531]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 10
@@ -406,7 +404,7 @@ Damage: 1.5x"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="CoreType" type="TextureRect" parent="CoreInfo"]
+[node name="CoreType" type="TextureRect" parent="CoreInfo" unique_id=1957028957]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -420,7 +418,7 @@ texture = ExtResource("8_845v4")
 expand_mode = 4
 metadata/_edit_use_anchors_ = true
 
-[node name="TipInfo" type="Panel" parent="."]
+[node name="TipInfo" type="Panel" parent="." unique_id=558419270]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -429,7 +427,7 @@ anchor_right = 0.9625
 anchor_bottom = 0.97781867
 metadata/_edit_use_anchors_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TipInfo"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TipInfo" unique_id=1270016373]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.043243244
@@ -440,7 +438,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TipName" type="RichTextLabel" parent="TipInfo/VBoxContainer"]
+[node name="TipName" type="RichTextLabel" parent="TipInfo/VBoxContainer" unique_id=807567957]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 20
@@ -450,7 +448,7 @@ scroll_active = false
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="TipInfo" type="RichTextLabel" parent="TipInfo/VBoxContainer"]
+[node name="TipInfo" type="RichTextLabel" parent="TipInfo/VBoxContainer" unique_id=910563916]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 10
@@ -459,7 +457,7 @@ Damage: 1.5x"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="TipType" type="TextureRect" parent="TipInfo"]
+[node name="TipType" type="TextureRect" parent="TipInfo" unique_id=394964340]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
@@ -472,10 +470,10 @@ grow_vertical = 0
 texture = ExtResource("8_845v4")
 expand_mode = 4
 
-[node name="BeyAssembler" parent="." instance=ExtResource("10_chlu7")]
+[node name="BeyAssembler" parent="." unique_id=221882066 instance=ExtResource("10_chlu7")]
 unique_name_in_owner = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=83392665]
 replication_config = SubResource("SceneReplicationConfig_dxr7h")
 
 [connection signal="pressed" from="Picker/DiscRight" to="." method="_disc_button_pressed" binds= [true]]

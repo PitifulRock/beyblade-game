@@ -33,8 +33,8 @@ var is_npc := false
 
 var name_tag: Label3D
 
-func _enter_tree() -> void:
-	set_multiplayer_authority(name.to_int())
+#func _enter_tree() -> void:
+	#set_multiplayer_authority(name.to_int())
 
 func _ready() -> void:
 	Console._print(name, " ", get_multiplayer_authority())

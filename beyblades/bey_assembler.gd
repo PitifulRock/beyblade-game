@@ -60,22 +60,27 @@ func prepare_npc(new_name:String, disc_id:int, core_id:int, tip_id:int):
 	tip = Registry.part_registry[BeyPart.PART_TYPE.TIP][tip_id].instantiate()
 
 func _process(_delta: float) -> void:
+	Console._print(is_multiplayer_authority())
 	if !is_multiplayer_authority() or is_npc: return
 	if placing_launch: shoot_ray()
 
 func shoot_ray():
-	var cam = get_viewport().get_camera_3d()
-	var mouse_pos = get_viewport().get_mouse_position()
-	var ray_length = 100
-	var space = get_world_3d().direct_space_state
-	var ray_query = PhysicsRayQueryParameters3D.new()
-	ray_query.from = cam.project_ray_origin(mouse_pos)
-	ray_query.to = ray_query.from + cam.project_ray_normal(mouse_pos) * ray_length
-	var ray_result = space.intersect_ray(ray_query)
-	
-	if !ray_result.is_empty(): 
-		if ray_result["collider"].is_in_group("stadium"):
-			global_position = ray_result["position"] + Vector3(0,LAUNCH_HEIGHT,0)
+	if Master.local_player.placement_ray.is_colliding():
+		if !Master.local_player.placement_ray.get_collider().is_in_group("stadium"): return
+		global_position = Master.local_player.placement_ray.get_collision_point() + Vector3(0,LAUNCH_HEIGHT,0)
+	#
+	#var cam = get_viewport().get_camera_3d()
+	#var mouse_pos = get_viewport().get_mouse_position()
+	#var ray_length = 100
+	#var space = get_world_3d().direct_space_state
+	#var ray_query = PhysicsRayQueryParameters3D.new()
+	#ray_query.from = cam.project_ray_origin(mouse_pos)
+	#ray_query.to = ray_query.from + cam.project_ray_normal(mouse_pos) * ray_length
+	#var ray_result = space.intersect_ray(ray_query)
+	#
+	#if !ray_result.is_empty(): 
+		#if ray_result["collider"].is_in_group("stadium"):
+			#global_position = ray_result["position"] + Vector3(0,LAUNCH_HEIGHT,0)
 
 func lock_in_launch():
 	bey_ready = false
