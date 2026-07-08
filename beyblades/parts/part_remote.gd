@@ -4,6 +4,7 @@ extends RemoteTransform3D
 @export var set_top_level := true
 
 func _ready() -> void:
+	if not is_inside_tree(): return
 	await get_tree().process_frame
 	var target_node := get_parent().get_node_or_null(target_name)
 	if target_node != null:

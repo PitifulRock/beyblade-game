@@ -14,6 +14,7 @@ func activate():
 	%SwordArea.monitoring = true
 	
 	%ArrowAnim.play("swing")
+	%Sound.play()
 	active = true
 	await %ArrowAnim.animation_finished
 	active = false

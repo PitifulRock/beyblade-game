@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://bqcxp3opeagvc"]
+
+[ext_resource type="Script" uid="uid://dcf0tj7yrr7h7" path="res://beyblades/parts/abilities/a_orbital_strike/orbital_strike.gd" id="1_aqmxe"]
+[ext_resource type="Shader" uid="uid://dwlb34jjhiqrd" path="res://addons/GPUTrail/shaders/trail.gdshader" id="2_0p2qo"]
+[ext_resource type="Resource" uid="uid://nbnibjqpfrnx" path="res://beyblades/parts/abilities/a_orbital_strike/orbit_strike.tres" id="2_voe0m"]
+[ext_resource type="Shader" uid="uid://c01bfwcjfst22" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="3_voe0m"]
+[ext_resource type="Script" uid="uid://bag8lbtdqxu2d" path="res://addons/GPUTrail/GPUTrail3D.gd" id="4_3a12x"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="5_3a12x"]
+[ext_resource type="AudioStream" uid="uid://bb1xqktlq48po" path="res://sounds/spin_whoosh.ogg" id="7_50xrn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_otxs0"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.97769564, 0.9678225, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.9159468, 0.87253296, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50xrn"]
+shader = ExtResource("2_0p2qo")
+
+[sub_resource type="Gradient" id="Gradient_hpk06"]
+colors = PackedColorArray(0.9725085, 0.89976037, 2.3102762e-06, 1, 0.601124, 0.25785688, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6cvbn"]
+gradient = SubResource("Gradient_hpk06")
+
+[sub_resource type="Curve" id="Curve_af82t"]
+bake_resolution = 16
+_data = [Vector2(0, 0.11235964), 0.0, 0.0, 0, 0, Vector2(0.5669782, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d1qg0"]
+curve = SubResource("Curve_af82t")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hvomp"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_voe0m")
+shader_parameter/tex = ExtResource("5_3a12x")
+shader_parameter/mask_strength = 1.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/color_ramp = SubResource("GradientTexture1D_6cvbn")
+shader_parameter/curve = SubResource("CurveTexture_d1qg0")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+
+[sub_resource type="QuadMesh" id="QuadMesh_d24vu"]
+material = SubResource("ShaderMaterial_hvomp")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8wsmn"]
+radius = 0.23876953
+height = 0.6980957
+
+[sub_resource type="Animation" id="Animation_c4lff"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:rotation:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Node3D:rotation:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.08726646]
+}
+
+[sub_resource type="Animation" id="Animation_7smag"]
+resource_name = "orbit"
+length = 6.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Node3D:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Node3D:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [0.08726646, -0.035, 0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l302s"]
+_data = {
+&"RESET": SubResource("Animation_c4lff"),
+&"orbit": SubResource("Animation_7smag")
+}
+
+[node name="OrbitalStrikeAbility" type="Node3D" unique_id=308351258]
+script = ExtResource("1_aqmxe")
+ability_data = ExtResource("2_voe0m")
+metadata/_custom_type_script = "uid://oljfchpj8bfx"
+
+[node name="Transform" type="Node3D" parent="." unique_id=701524884]
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Transform" unique_id=114849372]
+remote_path = NodePath("../Planets")
+update_rotation = false
+
+[node name="Planets" type="Node3D" parent="Transform" unique_id=2115840255]
+top_level = true
+
+[node name="Node3D" type="Node3D" parent="Transform/Planets" unique_id=80100425]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0.14813663, 0)
+
+[node name="Planet" type="StaticBody3D" parent="Transform/Planets/Node3D" unique_id=710998801]
+transform = Transform3D(0.9999998, 0, 0, 0, 1, 0, 0, 0, 0.9999998, 0, 0, -1.1)
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="Transform/Planets/Node3D/Planet" unique_id=325002957]
+transform = Transform3D(1, 0, 0, 0, 1, 7.450581e-09, 0, 1.4901161e-08, 1, 0, -0.013073355, 0.0005708933)
+radius = 0.175
+material = SubResource("StandardMaterial3D_otxs0")
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="Transform/Planets/Node3D/Planet/CSGSphere3D" unique_id=706559346]
+amount = 100
+lifetime = 100.0
+explosiveness = 1.0
+fixed_fps = 240
+process_material = SubResource("ShaderMaterial_50xrn")
+draw_pass_1 = SubResource("QuadMesh_d24vu")
+script = ExtResource("4_3a12x")
+length_seconds = 0.4166666666666667
+color_ramp = SubResource("GradientTexture1D_6cvbn")
+curve = SubResource("CurveTexture_d1qg0")
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://bag8lbtdqxu2d"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Transform/Planets/Node3D/Planet" unique_id=669598439]
+transform = Transform3D(1.9106855e-15, -4.371139e-08, 1, -1, -4.371139e-08, 0, 4.371139e-08, -1, -4.371139e-08, -6.60473e-09, 0.058932096, -0.07336819)
+shape = SubResource("CapsuleShape3D_8wsmn")
+
+[node name="OrbitAnim" type="AnimationPlayer" parent="Transform/Planets" unique_id=77423809]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_l302s")
+autoplay = &"orbit"
+speed_scale = 3.0
+
+[node name="OrbitTimer" type="Timer" parent="." unique_id=690104198]
+wait_time = 7.0
+one_shot = true
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=2020380406]
+unique_name_in_owner = true
+stream = ExtResource("7_50xrn")
+volume_db = 2.0
+unit_size = 20.0
+pitch_scale = 4.0
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 20500.0
+parameters/looping = true
+
+[connection signal="timeout" from="OrbitTimer" to="." method="_on_orbit_timer_timeout"]

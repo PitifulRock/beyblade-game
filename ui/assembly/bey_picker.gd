@@ -46,11 +46,22 @@ func spawn_visuals(part : BeyPart.PART_TYPE):
 	
 	for i in spawn_path.get_children(): i.free()
 	
-	for file:PackedScene in Registry.part_registry[part]:
-		var inst = file.instantiate()
-		spawn_path.add_child(inst, true)
-		if spawn_path.get_child(cur_index) != inst:
-			inst.hide()
+	for packed_part:PackedScene in Registry.part_registry[part]:
+		var part_inst = packed_part.instantiate()
+		spawn_path.add_child(part_inst, true)
+		
+		for i in part_inst.get_children():
+			
+			if i is not CSGShape3D and\
+			i is not MeshInstance3D and\
+			i is not AnimationPlayer and\
+			i is not RemoteTransform3D and\
+			not i.is_in_group("part visual"):
+				
+				i.free()
+		
+		if spawn_path.get_child(cur_index) != part_inst:
+			part_inst.hide()
 	_update_visuals()
 
 func _disc_button_pressed(increase : bool):

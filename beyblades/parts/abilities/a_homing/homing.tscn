@@ -93,8 +93,7 @@ _data = {
 script = ExtResource("1_oildq")
 ability_data = ExtResource("2_owdwk")
 charge_multiplier = 1.2
-charge_over_time = true
-charge_time_speed = 15.0
+charge_time_speed = 1.0
 metadata/_custom_type_script = "uid://oljfchpj8bfx"
 
 [node name="ArrowPivot" type="Node3D" parent="." unique_id=1314852599]

@@ -161,8 +161,9 @@ func _on_bey_burst():
 	tween.tween_property(Engine,"time_scale", gameplay_config.game_speed, 0.4)
 
 func player_added(id : int):
-	assembly_menu.add_selection_menu(id)
-	results_menu.add_player_bar(id)
+	if Master.is_host:
+		assembly_menu.add_selection_menu(id)
+		results_menu.add_player_bar(id)
 	
 	if id>0:
 		player_scores[id] = 0

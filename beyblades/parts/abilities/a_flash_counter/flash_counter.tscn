@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://dn2mn15shhlkt"]
+
+[ext_resource type="Script" uid="uid://pc48nii3n3fj" path="res://beyblades/parts/abilities/a_flash_counter/flash_counter.gd" id="1_smchd"]
+[ext_resource type="Resource" uid="uid://dy0e1u8fojrt" path="res://beyblades/parts/abilities/a_flash_counter/flash_counter.tres" id="2_smchd"]
+[ext_resource type="AudioStream" uid="uid://dvf1d3pv7cji" path="res://sounds/wind.ogg" id="3_kiyvr"]
+
+[sub_resource type="Curve" id="Curve_0dca2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.31092438, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_hwy4v"]
+curve = SubResource("Curve_0dca2")
+
+[sub_resource type="Curve" id="Curve_6ge1j"]
+_limits = [-2.0, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uib44"]
+curve = SubResource("Curve_6ge1j")
+
+[sub_resource type="Curve" id="Curve_3qn1c"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 13.259674), 0.0, -108.53279, 0, 0, Vector2(1, 200), -25.705183, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_v8ayo"]
+curve = SubResource("Curve_3qn1c")
+
+[sub_resource type="Curve" id="Curve_xqk06"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 140.48935), 0.0, -488.39783, 0, 0, Vector2(0.99789906, 2.9992218), -25.705183, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nxv77"]
+curve = SubResource("Curve_xqk06")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufrgx"]
+particle_flag_align_y = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 1, 0)
+emission_ring_height = 1.0
+emission_ring_radius = 1.25
+emission_ring_inner_radius = 1.1
+emission_ring_cone_angle = 90.0
+direction = Vector3(0, 0, 0)
+orbit_velocity_curve = SubResource("CurveTexture_uib44")
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -0.6000022
+radial_accel_max = -0.6000022
+radial_accel_curve = SubResource("CurveTexture_v8ayo")
+tangential_accel_min = 0.59999776
+tangential_accel_max = 0.59999776
+tangential_accel_curve = SubResource("CurveTexture_nxv77")
+color = Color(0.9999998, 0.92054653, 0.33038008, 1)
+alpha_curve = SubResource("CurveTexture_hwy4v")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v8ayo"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+billboard_keep_scale = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ousu3"]
+material = SubResource("StandardMaterial3D_v8ayo")
+size = Vector2(0.05, 0.4)
+orientation = 2
+
+[node name="FlashCounterAbility" type="Node3D" unique_id=1107356651]
+script = ExtResource("1_smchd")
+ability_data = ExtResource("2_smchd")
+charge_time_speed = 4.0
+metadata/_custom_type_script = "uid://oljfchpj8bfx"
+
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=572310334]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11702621, 0)
+emitting = false
+amount = 75
+lifetime = 0.6
+one_shot = true
+speed_scale = 1.2
+explosiveness = 0.44
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_ufrgx")
+draw_pass_1 = SubResource("PlaneMesh_ousu3")
+
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=79101461]
+unique_name_in_owner = true
+stream = ExtResource("3_kiyvr")
+unit_size = 20.0
+pitch_scale = 2.07
+bus = &"SFX"
+attenuation_filter_cutoff_hz = 17040.0

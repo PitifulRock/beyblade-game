@@ -29,16 +29,22 @@ func _ready() -> void:
 		#prepare_npc(str(randi_range(-10,-9999)), disc_id, core_id, tip_id)
 		set_random_position(spawn_area_override)
 
-func _input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("left_click"):
-		if placing_launch and bey_ready: 
+func _unhandled_input(event: InputEvent) -> void:
+	if !is_multiplayer_authority(): return
+	if event.is_action_pressed("left_click"):
+		if placing_launch and bey_ready:
 			lock_in_launch()
+			get_viewport().set_input_as_handled()
 
 func prepare_launch(npc_bey := false, passed_npc_name : String = ""):
 	show()
 	if !npc_bey:
 		if !is_multiplayer_authority(): return
 		%LaunchSprite.modulate = Color.LIGHT_GREEN
+		is_npc = false
+		global_position = Vector3(0, LAUNCH_HEIGHT, 0)
+		
+		await get_tree().process_frame
 		bey_ready = true
 		placing_launch = true
 	else:
@@ -60,12 +66,11 @@ func prepare_npc(new_name:String, disc_id:int, core_id:int, tip_id:int):
 	tip = Registry.part_registry[BeyPart.PART_TYPE.TIP][tip_id].instantiate()
 
 func _process(_delta: float) -> void:
-	Console._print(is_multiplayer_authority())
 	if !is_multiplayer_authority() or is_npc: return
 	if placing_launch: shoot_ray()
 
 func shoot_ray():
-	if Master.local_player.placement_ray.is_colliding():
+	if Master.local_player and Master.local_player.placement_ray.is_colliding():
 		if !Master.local_player.placement_ray.get_collider().is_in_group("stadium"): return
 		global_position = Master.local_player.placement_ray.get_collision_point() + Vector3(0,LAUNCH_HEIGHT,0)
 	#
@@ -83,6 +88,7 @@ func shoot_ray():
 			#global_position = ray_result["position"] + Vector3(0,LAUNCH_HEIGHT,0)
 
 func lock_in_launch():
+	if !is_multiplayer_authority(): return
 	bey_ready = false
 	placing_launch = false
 	Effects.play_ui(&"ButtonPress")
@@ -141,6 +147,8 @@ func spawn_part(part_node : BeyPart, location):
 	var part_dup = part_node.duplicate()
 	location.add_child(part_dup)
 	
+	if !part_dup.is_node_ready(): await part_dup.ready
+	
 	part_dup.name = part_node.name
 	part_dup.position = Vector3.ZERO
 	part_dup.rotation = Vector3.ZERO
@@ -170,7 +178,7 @@ func spawn_part(part_node : BeyPart, location):
 				dup.global_position = i.global_position
 				
 				if i is BeyAbility:
-					i.beyblade = location
+					dup.beyblade = location
 			
 			if !random_dummy:
 				var gib_dup = i.duplicate()
@@ -178,6 +186,9 @@ func spawn_part(part_node : BeyPart, location):
 				if i is Node3D:
 					gib_dup.global_position = i.global_position
 			
+	for i in part_dup.get_children():
+		if i is not Marker3D:
+			part_dup.remove_child(i)
 			i.queue_free()
 
 func set_random_position(spawn_area : CollisionShape3D = null):

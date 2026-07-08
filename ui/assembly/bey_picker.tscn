@@ -178,7 +178,7 @@ stretch = true
 own_world_3d = true
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(533, 1174)
+size = Vector2i(366, 587)
 render_target_update_mode = 4
 
 [node name="Camera3D" type="Camera3D" parent="Picker/BeyPicker/SubViewport" unique_id=118383462]

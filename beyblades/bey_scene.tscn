@@ -5,15 +5,105 @@
 [ext_resource type="Texture2D" uid="uid://dlrhlt1iukyuy" path="res://textures/t_ui/White/1x/cross.png" id="2_v6dka"]
 [ext_resource type="AudioStream" uid="uid://mse83pn6rn3a" path="res://sounds/clash_med.ogg" id="3_3xdhn"]
 [ext_resource type="AudioStream" uid="uid://w4sx587dq3q8" path="res://sounds/clash_med_2.ogg" id="4_3kb01"]
+[ext_resource type="Texture2D" uid="uid://crk6pkb7e5rwc" path="res://addons/GPUTrail/defaults/texture.tres" id="4_pi0tu"]
 [ext_resource type="AudioStream" uid="uid://bq3fniw1qhtrh" path="res://sounds/clash_small.ogg" id="5_nn1wg"]
 [ext_resource type="AudioStream" uid="uid://b5hn7n10gkoly" path="res://sounds/clash_small_2.ogg" id="6_v6dka"]
 [ext_resource type="AudioStream" uid="uid://dmp75g1w3xf7b" path="res://sounds/burst_sound.ogg" id="7_3kb01"]
 [ext_resource type="AudioStream" uid="uid://bb1xqktlq48po" path="res://sounds/spin_whoosh.ogg" id="7_3xdhn"]
 [ext_resource type="PackedScene" uid="uid://b8q44n6dv0vto" path="res://particles/burst_particle.tscn" id="9_nn1wg"]
+[ext_resource type="Shader" uid="uid://dwlb34jjhiqrd" path="res://addons/GPUTrail/shaders/trail.gdshader" id="11_jrc4r"]
+[ext_resource type="Shader" uid="uid://c01bfwcjfst22" path="res://addons/GPUTrail/shaders/trail_draw_pass.gdshader" id="12_pi0tu"]
+[ext_resource type="Script" uid="uid://bag8lbtdqxu2d" path="res://addons/GPUTrail/GPUTrail3D.gd" id="13_5d3uo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8uh7m"]
 friction = 0.31
 bounce = 0.15
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ce1li"]
+shader = ExtResource("11_jrc4r")
+
+[sub_resource type="Gradient" id="Gradient_duhwr"]
+colors = PackedColorArray(1, 1, 1, 0.42200002, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s2pgq"]
+gradient = SubResource("Gradient_duhwr")
+
+[sub_resource type="Curve" id="Curve_gsma6"]
+bake_resolution = 16
+_data = [Vector2(0, 0.49438208), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nq4eo"]
+curve = SubResource("Curve_gsma6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h5556"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("12_pi0tu")
+shader_parameter/tex = ExtResource("4_pi0tu")
+shader_parameter/mask_strength = 1.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/color_ramp = SubResource("GradientTexture1D_s2pgq")
+shader_parameter/curve = SubResource("CurveTexture_nq4eo")
+shader_parameter/emmission_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+shader_parameter/flags = 40
+
+[sub_resource type="QuadMesh" id="QuadMesh_4e6gt"]
+material = SubResource("ShaderMaterial_h5556")
+
+[sub_resource type="Gradient" id="Gradient_8wsmn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.4, 0.7, 0.8)
+colors = PackedColorArray(0, 0, 0, 1, 0.39308554, 0.3930855, 0.39308548, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kdr21"]
+noise_type = 2
+frequency = 0.0237
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_a8gtg"]
+noise = SubResource("FastNoiseLite_kdr21")
+color_ramp = SubResource("Gradient_8wsmn")
+
+[sub_resource type="Animation" id="Animation_jrc4r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpinTrail:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pi0tu"]
+resource_name = "spin"
+length = 36.0
+loop_mode = 1
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpinTrail:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 36),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5d3uo"]
+_data = {
+&"RESET": SubResource("Animation_jrc4r"),
+&"spin": SubResource("Animation_pi0tu")
+}
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3dcr0"]
 radius = 0.096723884
@@ -103,10 +193,6 @@ contact_monitor = true
 max_contacts_reported = 4
 script = ExtResource("1_vt533")
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1087461640]
-remote_path = NodePath("../Node3D")
-update_rotation = false
-
 [node name="CenterTether" type="RayCast3D" parent="." unique_id=1905882424]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7500001, 0)
 
@@ -115,11 +201,15 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.12239136, 0)
 target_position = Vector3(0, -0.4, 0)
 
-[node name="Node3D" type="Node3D" parent="." unique_id=1247827245]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=1087461640]
+remote_path = NodePath("../Remote")
+update_rotation = false
+
+[node name="Remote" type="Node3D" parent="." unique_id=1247827245]
 transform = Transform3D(1, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0)
 top_level = true
 
-[node name="NameTag" type="Label3D" parent="Node3D" unique_id=1291153888]
+[node name="NameTag" type="Label3D" parent="Remote" unique_id=1291153888]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5000002, 0)
 pixel_size = 0.013
@@ -128,7 +218,7 @@ render_priority = 1
 outline_render_priority = 0
 text = "9000"
 
-[node name="BurstTag" type="Label3D" parent="Node3D" unique_id=1768612719]
+[node name="BurstTag" type="Label3D" parent="Remote" unique_id=1768612719]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8000001, 0)
 pixel_size = 0.013
@@ -136,6 +226,32 @@ billboard = 1
 render_priority = 1
 outline_render_priority = 0
 text = "9000"
+
+[node name="SpinTrail" type="Node3D" parent="Remote" unique_id=1573356531]
+
+[node name="GPUTrail3D" type="GPUParticles3D" parent="Remote/SpinTrail" unique_id=1651541974]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, 0, 0, 1, -0.8986232, 0.4000001, 0.016536325)
+amount = 60
+lifetime = 60.0
+explosiveness = 1.0
+fixed_fps = 240
+process_material = SubResource("ShaderMaterial_ce1li")
+draw_pass_1 = SubResource("QuadMesh_4e6gt")
+script = ExtResource("13_5d3uo")
+length = 60
+length_seconds = 0.25
+mask = SubResource("NoiseTexture3D_a8gtg")
+color_ramp = SubResource("GradientTexture1D_s2pgq")
+curve = SubResource("CurveTexture_nq4eo")
+_defaults_have_been_set = true
+metadata/_custom_type_script = "uid://bag8lbtdqxu2d"
+
+[node name="SpinTrail" type="AnimationPlayer" parent="Remote/SpinTrail" unique_id=61217657]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_5d3uo")
+autoplay = &"spin"
+speed_scale = 500.0
 
 [node name="CollisionShape3D4" type="CollisionShape3D" parent="." unique_id=674973893]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08764706, 0)
@@ -146,6 +262,7 @@ unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07853276, 0)
 amount = 232
 lifetime = 0.3
+visibility_aabb = AABB(-0.7987223, -0.8370322, -0.7547998, 1.5472226, 1.645978, 1.522299)
 process_material = SubResource("ParticleProcessMaterial_3dcr0")
 draw_pass_1 = SubResource("PlaneMesh_n1s4q")
 
@@ -155,15 +272,15 @@ stream = SubResource("AudioStreamRandomizer_manui")
 unit_size = 20.0
 max_polyphony = 3
 bus = &"SFX"
-attenuation_filter_cutoff_hz = 14398.0
+attenuation_filter_cutoff_hz = 18498.0
 
 [node name="SpinSound" type="AudioStreamPlayer3D" parent="." unique_id=1460161610]
 unique_name_in_owner = true
 stream = ExtResource("7_3xdhn")
-unit_size = 16.0
+unit_size = 18.0
 autoplay = true
 bus = &"SFX"
-attenuation_filter_cutoff_hz = 9070.0
+attenuation_filter_cutoff_hz = 16773.0
 doppler_tracking = 2
 
 [node name="BurstHolder" type="Node3D" parent="." unique_id=1070293839]

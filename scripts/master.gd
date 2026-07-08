@@ -74,3 +74,10 @@ func _on_avatar_loaded(avatar_id: int, size: int, data: Array):
 	var avatar_owner_id = steam_ids.find_key(avatar_id)
 	avatar_cache[avatar_owner_id] = avatar_texture
 	Console._print(avatar_owner_id, "avatar cached")
+
+func clear_game_cache():
+	Master.avatar_cache.clear()
+	Master.local_player = null
+	Master.player_list.clear()
+	Master.steam_ids.clear()
+	Master.is_host = false

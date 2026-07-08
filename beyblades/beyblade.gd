@@ -1,14 +1,19 @@
 extends RigidBody3D
 class_name BeyBlade
 
-const SPARK_PARTICLE = preload("uid://fbwq5alfemyv")
-
 enum TYPE{ATTACK, STAMINA, DEFENSE, BALANCE}
 
-var burst_holder: Node
+const GLOBAL_BURST_MULT = 0.3
+const GLOBAL_SPIN_LOSS = 0.00013
+const SPARK_PARTICLE = preload("uid://fbwq5alfemyv")
+
+
 @export var disc : BeyDisc
 @export var core : BeyCore
 @export var tip : BeyTip
+var spin_trail: AnimationPlayer
+var synchronizer: MultiplayerSynchronizer
+var burst_holder: Node
 var ability_node : BeyAbility
 
 @export_group("Public Variables")
@@ -33,14 +38,16 @@ var is_npc := false
 
 var name_tag: Label3D
 
-#func _enter_tree() -> void:
-	#set_multiplayer_authority(name.to_int())
+func _enter_tree() -> void:
+	set_multiplayer_authority(name.to_int())
+	synchronizer = get_node_or_null("MultiplayerSynchronizer")
+	if synchronizer: synchronizer.set_multiplayer_authority(1)
 
 func _ready() -> void:
-	Console._print(name, " ", get_multiplayer_authority())
 	game_world = Master.game_manager.current_scene
 	burst_holder = $BurstHolder
 	name_tag = %NameTag
+	spin_trail = get_node_or_null("%SpinTrail")
 	_physics_setup()
 
 func _spawned(as_npc := false):
@@ -50,7 +57,7 @@ func _spawned(as_npc := false):
 		if i is BeyAbility: 
 			i.beyblade = self
 			i._setup()
-	if !Master.is_host: return
+	#if !Master.is_host: return
 	_bey_setup()
 	_launch()
 
@@ -78,9 +85,12 @@ func _bey_setup():
 
 func _launch():
 	current_spin = -spin_speed if disc.right_spin else spin_speed
-	current_spin *= randf_range(0.9, 1.0)
 	stored_engine_spin = angular_velocity.y
 #endregion
+
+func _process(delta: float) -> void:
+	if spin_trail:
+		spin_trail.speed_scale = current_spin*2.0
 
 func _physics_process(_delta: float) -> void:
 	if current_spin <= 10:
@@ -162,10 +172,10 @@ func burst():
 	process_mode = Node.PROCESS_MODE_DISABLED
 
 func get_spin_loss(spin_diff : float) -> float:
-	var spin_loss := 0.00015
+	var spin_loss := GLOBAL_SPIN_LOSS
 	if spin_diff < -1.0: 
-		spin_loss = clampf(-spin_diff/2000.0, 0.0004, 0.01)
-	var adjusted := (spin_loss / stamina) * randf_range(0.9, 1.2)
+		spin_loss = clampf(-spin_diff/2000.0, 0.00004, 0.01)
+	var adjusted := spin_loss / stamina
 	return Manager.lerp_weight(adjusted)
 func get_orbital_force() -> Vector3:
 	var dir = $CenterTether.global_basis.x
@@ -199,13 +209,14 @@ func _on_collision(body : Node):
 		
 		if linear_velocity.length() > body_speed/1.5:
 			#spin reduction from hitting fast
-			var reduction = body_speed/1.5
+			var reduction = body_speed/2.5
 			current_spin -= -reduction if current_spin < 0 else reduction
 			
 			_clash_fx.rpc(collision_point, body_speed)
 		
-		if linear_velocity.length() < body_speed*1.2*Settings.gameplay_config.game_speed and can_take_damage:
-			var incoming_damage = (body_speed*body.burst_damage) * body_speed/25
+		## BURST DAMAGE
+		if linear_velocity.length() < body_speed*Settings.gameplay_config.game_speed and can_take_damage:
+			var incoming_damage = (body_speed * body.burst_damage * GLOBAL_BURST_MULT)
 			var recieved_damage = incoming_damage/(burst_resistance)
 			burst_percentage += clampf(recieved_damage, 0.0, 40.0)
 			can_take_damage = false

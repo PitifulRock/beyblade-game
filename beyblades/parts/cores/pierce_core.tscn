@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://dfh2uy4ahdou2"]
+
+[ext_resource type="Script" uid="uid://bhdlota4as0vi" path="res://beyblades/parts/core_class.gd" id="1_le8ld"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="2_hlspf"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kdr21"]
+size = Vector3(0.4, 0.2, 0.4)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kdr21"]
+height = 0.20000002
+radius = 0.6611328
+
+[node name="PierceCore" type="StaticBody3D" unique_id=778006982]
+script = ExtResource("1_le8ld")
+weight_mult = 1.25
+part_name = "Pierce"
+part_weight = 0.05
+metadata/_custom_type_script = "uid://bhdlota4as0vi"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1077306388]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1016733991]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10073242, 0)
+radius = 0.70458984
+height = 0.2
+sides = 6
+material = ExtResource("2_hlspf")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=440265842]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 0, 0.09452486, 0.3)
+radius = 0.7
+height = 0.15107422
+sides = 3
+material = ExtResource("2_hlspf")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=970865628]
+transform = Transform3D(-0.8660253, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660253, 0, 0.09452486, -0.3)
+radius = 0.7
+height = 0.15107422
+sides = 3
+material = ExtResource("2_hlspf")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D" unique_id=548422568]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.099999994, -2.9802322e-08)
+size = Vector3(1.2, 0.2, 0.8)
+material = ExtResource("2_hlspf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1653905592]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0.099999994, 0.7242641)
+shape = SubResource("BoxShape3D_kdr21")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=647884815]
+transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 0, 0.1, -0.724)
+shape = SubResource("BoxShape3D_kdr21")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=1055465096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0)
+shape = SubResource("CylinderShape3D_kdr21")
+
+[node name="Placement" type="Marker3D" parent="." unique_id=441003161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)

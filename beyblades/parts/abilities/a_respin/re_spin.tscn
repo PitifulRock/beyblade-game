@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8ilf4abifhr8"]
+[gd_scene format=3 uid="uid://c8ilf4abifhr8"]
 
 [ext_resource type="Script" uid="uid://cdia2in4hkm30" path="res://beyblades/parts/abilities/a_respin/re_spin.gd" id="1_ik13o"]
 [ext_resource type="Resource" uid="uid://7dp53phso4uj" path="res://beyblades/parts/abilities/a_respin/re_spin.tres" id="2_ippig"]
@@ -66,15 +66,14 @@ material = SubResource("StandardMaterial3D_v8ayo")
 size = Vector2(0.05, 0.4)
 orientation = 2
 
-[node name="ReSpin" type="Node3D"]
+[node name="ReSpin" type="Node3D" unique_id=496560929]
 script = ExtResource("1_ik13o")
 ability_data = ExtResource("2_ippig")
 charge_multiplier = 0.7
-charge_over_time = true
 charge_time_speed = 5.0
 metadata/_custom_type_script = "uid://oljfchpj8bfx"
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=300742400]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.11702621, 0)
 emitting = false
@@ -87,7 +86,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_uib44")
 draw_pass_1 = SubResource("PlaneMesh_nxv77")
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=950679489]
 unique_name_in_owner = true
 stream = ExtResource("3_ik13o")
 unit_size = 20.0

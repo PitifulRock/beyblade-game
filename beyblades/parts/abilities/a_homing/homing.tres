@@ -6,4 +6,5 @@
 script = ExtResource("1_r37gb")
 ability_name = "Homing"
 ability_description = "Dash towards the nearest opponent"
+time_charge_speed = 3.5
 metadata/_custom_type_script = "uid://cp3m11krq7y64"

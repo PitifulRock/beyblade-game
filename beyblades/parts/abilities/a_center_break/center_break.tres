@@ -6,4 +6,6 @@
 script = ExtResource("1_dmm6p")
 ability_name = "Center Break"
 ability_description = "Shoot towards the center of the stadium"
+charge_multiplier = 0.4
+time_charge_speed = 5.0
 metadata/_custom_type_script = "uid://cp3m11krq7y64"

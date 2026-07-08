@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://t44p4hh1hxtg"]
+
+[ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_8u3it"]
+[ext_resource type="Texture2D" uid="uid://b3l03awbsnmxc" path="res://textures/PROTO/Light/texture_11.png" id="2_8u3it"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="3_lmnkn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yjnrw"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(1, 0.8467512, 0.95516616, 1)
+albedo_texture = ExtResource("2_8u3it")
+roughness = 0.0
+uv1_scale = Vector3(2, 2, 2)
+uv1_offset = Vector3(-0.03, 0, 0)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kdr21"]
+height = 0.101074204
+radius = 0.25195313
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8u3it"]
+height = 0.17500001
+radius = 0.06542969
+
+[node name="StaminaTip" type="StaticBody3D" unique_id=338702169]
+script = ExtResource("1_8u3it")
+spin_mult = 0.9
+stamina_mult = 1.4500000000000002
+center_tether = 4.0
+part_name = "Pirouette"
+type = 1
+part_weight = 0.018
+metadata/_custom_type_script = "uid://ijpvs5owt5a5"
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1646495495]
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1945958429]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.513405e-08, 0.28750002, 0)
+radius = 0.4
+height = 0.57500005
+sides = 12
+cone = true
+material = SubResource("StandardMaterial3D_yjnrw")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1967670625]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 1.912373e-09, 0.146875, 0)
+radius = 0.3
+height = 0.29375
+cone = true
+material = ExtResource("3_lmnkn")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=28920468]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.20000002, 0.29613647, 0)
+radius = 0.24853516
+height = 0.1
+material = ExtResource("3_lmnkn")
+
+[node name="Placement" type="Marker3D" parent="." unique_id=574161777]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57703376, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1170331528]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, -0.20819367, 0.28088588, -0.0005371645)
+shape = SubResource("CylinderShape3D_kdr21")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1809341854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3843658, 0)
+shape = SubResource("CylinderShape3D_8u3it")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=125876058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.087500006, 0)
+shape = SubResource("CylinderShape3D_8u3it")

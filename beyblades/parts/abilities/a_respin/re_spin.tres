@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://7dp53phso4uj"]
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://7dp53phso4uj"]
 
 [ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_ychfx"]
 
@@ -6,4 +6,6 @@
 script = ExtResource("1_ychfx")
 ability_name = "Re-Spin"
 ability_description = "Sacrifice weight to regain spin"
+charge_multiplier = 0.55
+time_charge_speed = 3.5
 metadata/_custom_type_script = "uid://cp3m11krq7y64"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://e81ijemc301w"]
+[gd_scene format=3 uid="uid://e81ijemc301w"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_0rphc"]
 [ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="3_tt6fh"]
@@ -15,7 +15,7 @@ points = PackedVector3Array(0, -0.25, -0.34, -0.24042287, -0.25, -0.24042287, 0,
 [sub_resource type="SphereShape3D" id="SphereShape3D_2lmlv"]
 radius = 0.15
 
-[node name="DefenseTip" type="StaticBody3D"]
+[node name="DefenseTip" type="StaticBody3D" unique_id=1736248366]
 script = ExtResource("1_0rphc")
 spin_mult = 0.7999999999999999
 stamina_mult = 1.1
@@ -24,21 +24,21 @@ type = 2
 part_weight = 0.04
 metadata/_custom_type_script = "uid://ijpvs5owt5a5"
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1721463025]
 
-[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D"]
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=1389729667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 radius = 0.15
 material = SubResource("StandardMaterial3D_tt6fh")
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=619638550]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
 radius = 0.34
 height = 0.5
 cone = true
 material = ExtResource("3_tt6fh")
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D" unique_id=1930066402]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19311747, 0)
 inner_radius = 0.1257292
 outer_radius = 0.22055648
@@ -46,13 +46,13 @@ sides = 12
 ring_sides = 8
 material = ExtResource("3_tt6fh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1807212706]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
 shape = SubResource("ConvexPolygonShape3D_lrnxs")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=388335250]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 shape = SubResource("SphereShape3D_2lmlv")
 
-[node name="Placement" type="Marker3D" parent="."]
+[node name="Placement" type="Marker3D" parent="." unique_id=1813737587]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

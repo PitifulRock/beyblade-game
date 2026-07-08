@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://bpwn6japotqt1"]
+[gd_scene format=4 uid="uid://bpwn6japotqt1"]
 
 [ext_resource type="Script" uid="uid://dkg7ap368a6jx" path="res://beyblades/parts/abilities/a_barrier/barrier.gd" id="1_f7ifa"]
 [ext_resource type="Texture2D" uid="uid://3w4wvv1ykl1j" path="res://textures/t_ui/White/1x/plus.png" id="2_44wmf"]
@@ -112,12 +112,12 @@ _surfaces = [{
 "vertex_data": PackedByteArray("qWKnvwAAgL+tR0G/rEdBvwAAgD+pYqe/rEdBvwAAgL+pYqe/rkfBvwAAgL8xvg20qWKnvwAAgD+tR0G/qWKnvwAAgL+tR0G/rEdBvwAAgL+pYqe/3qyaMgAAgD+uR8G/3qyaMgAAgL+uR8G/qWKnvwAAgL+wR0E/rkfBvwAAgD8xvg20rkfBvwAAgL8xvg20sEdBvwAAgL+pYqc/qWKnvwAAgD+wR0E/qWKnvwAAgL+wR0E/Mb6NswAAgL+uR8E/sEdBvwAAgD+pYqc/sEdBvwAAgL+pYqc/rEdBvwAAgD+pYqe/qWKnvwAAgL+tR0G/qWKnvwAAgD+tR0G/rkfBvwAAgL8xvg20rkfBvwAAgD8xvg20qWKnvwAAgD+tR0G/3qyaMgAAgD+uR8G/rEdBvwAAgL+pYqe/rEdBvwAAgD+pYqe/rkfBvwAAgD8xvg20qWKnvwAAgL+wR0E/qWKnvwAAgD+wR0E/sEdBvwAAgL+pYqc/sEdBvwAAgD+pYqc/qWKnvwAAgD+wR0E/Mb6NswAAgL+uR8E/Mb6NswAAgD+uR8E/sEdBvwAAgD+pYqc/3qyaMgAAgL+uR8G/rEdBPwAAgD+pYqe/rEdBPwAAgL+pYqe/rEdBPwAAgL+pYqe/q2KnPwAAgD+oR0G/q2KnPwAAgL+oR0G/q2KnPwAAgL+oR0G/rkfBPwAAgD8AAAAArkfBPwAAgL8AAAAAMb6NswAAgL+uR8E/rUdBPwAAgL+pYqc/Mb6NswAAgD+uR8E/rkfBPwAAgL8AAAAAqWKnPwAAgD+uR0E/qWKnPwAAgL+uR0E/qWKnPwAAgL+uR0E/rUdBPwAAgD+pYqc/rUdBPwAAgL+pYqc/3qyaMgAAgL+uR8G/3qyaMgAAgD+uR8G/rEdBPwAAgD+pYqe/rEdBPwAAgL+pYqe/rEdBPwAAgD+pYqe/q2KnPwAAgD+oR0G/q2KnPwAAgL+oR0G/q2KnPwAAgD+oR0G/rkfBPwAAgD8AAAAArUdBPwAAgL+pYqc/rUdBPwAAgD+pYqc/Mb6NswAAgD+uR8E/rkfBPwAAgL8AAAAArkfBPwAAgD8AAAAAqWKnPwAAgD+uR0E/qWKnPwAAgL+uR0E/qWKnPwAAgD+uR0E/rUdBPwAAgD+pYqc/Kcv/f///ahrUtP9///+VJZKo/3///7YrgPX/f///PwVs1/9///9JFCnL/3///2oakqj/f///tit+iv9////AOoB1/3+A9f8///+SqAAASRT//36KAAA/BYD1/3///z8F//8pywAAlSX//9S0AABqGv//kqgAAEkU//+A9QAAwDr//2zXAAC2K///KcsAAJUl1LT/f///lSUpy/9///9qGmzX/3///0kUgPX/f///PwX//36KAAA/BWzX/3///0kUfor/f///wDqSqP9///+2K9S0/3///5Ul//9+igAAPwX//5KoAABJFP//1LQAAGoa//8pywAAlSX//2zXAAC2K///1LQAAGoa//+A9QAAwDoAAID1fgr/P///bNcAALYrgHX/f4D1/z9sV/9/bNf/PypL/38py/8/Kkv/fynL/z/VNP9/1LT/P5Io/3+SqP8/kij/fwAAtet+Cv9/AAC/+gAAfor//7/6//+A9QAAwDoAAGzXkij/PwAAgPV+Cv8/AAB+ioB1/z8AAJKobFf/PwAA1LQqS/8/AADUtCpL/z8AACnL1TT/PwAAbNeSKP8/gHX/f4D1/z9+iv9////AOmxX/39s1/8/Kkv/fynL/z9sV/9/bNf/P9U0/3/UtP8/kij/fwAAtevVNP9/AACU5X4K/38AAL/6AABs15Io/z8AACnL1TT/PwAAgPV+Cv8/AAB+ioB1/z9+Cv9/for/PwAAkqhsV/8/AADUtCpL/z8AAJKobFf/PwAAKcvVNP8/")
 }]
 
-[node name="Barrier" type="Node3D"]
+[node name="Barrier" type="Node3D" unique_id=717001683]
 script = ExtResource("1_f7ifa")
 ability_data = ExtResource("2_cpanr")
 metadata/_custom_type_script = "uid://oljfchpj8bfx"
 
-[node name="Particles" type="GPUParticles3D" parent="."]
+[node name="Particles" type="GPUParticles3D" parent="." unique_id=92633123]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.495534, 0)
 emitting = false
@@ -130,7 +130,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_5hh2p")
 draw_pass_1 = SubResource("PlaneMesh_cpanr")
 
-[node name="Audio" type="AudioStreamPlayer3D" parent="."]
+[node name="Audio" type="AudioStreamPlayer3D" parent="." unique_id=1102531265]
 unique_name_in_owner = true
 stream = ExtResource("4_f7ifa")
 volume_db = 12.0
@@ -139,13 +139,13 @@ pitch_scale = 1.5
 bus = &"SFX"
 attenuation_filter_cutoff_hz = 17040.0
 
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="." unique_id=391346195]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 remote_path = NodePath("../ShieldBody")
 update_rotation = false
 update_scale = false
 
-[node name="ShieldCSG" type="CSGCylinder3D" parent="."]
+[node name="ShieldCSG" type="CSGCylinder3D" parent="." unique_id=427004622]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3571739, 0)
 top_level = true
 visible = false
@@ -153,26 +153,26 @@ radius = 1.846
 sides = 12
 material = SubResource("ShaderMaterial_lpfg7")
 
-[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="ShieldCSG"]
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="ShieldCSG" unique_id=1116729813]
 operation = 2
 radius = 1.51
 height = 4.468
 sides = 12
 material = SubResource("StandardMaterial3D_y70as")
 
-[node name="ShieldBody" type="StaticBody3D" parent="."]
+[node name="ShieldBody" type="StaticBody3D" parent="." unique_id=863957623]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
 collision_mask = 0
 
-[node name="ShieldCollision" type="CollisionShape3D" parent="ShieldBody"]
+[node name="ShieldCollision" type="CollisionShape3D" parent="ShieldBody" unique_id=252886900]
 unique_name_in_owner = true
 shape = SubResource("ConcavePolygonShape3D_55n26")
 
-[node name="ShieldMesh" type="MeshInstance3D" parent="ShieldBody"]
+[node name="ShieldMesh" type="MeshInstance3D" parent="ShieldBody" unique_id=609698735]
 mesh = SubResource("ArrayMesh_cpanr")
 skeleton = NodePath("../..")
 
-[node name="ShieldTimer" type="Timer" parent="."]
+[node name="ShieldTimer" type="Timer" parent="." unique_id=484081954]
 wait_time = 5.0
 one_shot = true
 

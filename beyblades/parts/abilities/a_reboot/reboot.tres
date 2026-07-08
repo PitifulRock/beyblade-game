@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AbilityData" load_steps=2 format=3 uid="uid://ba165nfuqqvoo"]
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://ba165nfuqqvoo"]
 
 [ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_vnsfs"]
 
@@ -6,5 +6,5 @@
 script = ExtResource("1_vnsfs")
 ability_name = "Reboot"
 ability_description = "Gain a rapid speed boost"
-ability_scene = "res://beyblades/parts/abilities/a_reboot/reboot.tscn"
+time_charge_speed = 5.0
 metadata/_custom_type_script = "uid://cp3m11krq7y64"

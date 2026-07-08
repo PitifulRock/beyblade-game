@@ -1,0 +1,69 @@
+[gd_scene format=3 uid="uid://bonneqqdh2xxo"]
+
+[ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_5spxi"]
+[ext_resource type="Shader" uid="uid://cmemexd1bmm0g" path="res://shaders/glass.gdshader" id="2_gbc51"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5tkx"]
+render_priority = 0
+shader = ExtResource("2_gbc51")
+shader_parameter/color = Color(0.84174216, 0.7168302, 1, 1)
+shader_parameter/color_coat = 0.08999999798832
+shader_parameter/oilyness = 0.50999998860048
+shader_parameter/rim_amount = 0.38999999128272
+shader_parameter/rim_shape = 5.99999986961332
+shader_parameter/rim_color = Color(0.65898174, 0.95955914, 0.9999997, 1)
+shader_parameter/refraction_strength = 0.5
+shader_parameter/blur_amount = 1.26800005697012
+shader_parameter/roughness_affect = 0.0
+shader_parameter/roughness = 0.0
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lrnxs"]
+points = PackedVector3Array(0, -0.25, -0.34, -0.24042287, -0.25, -0.24042287, 0, 0.205, 0, 0.2403563, -0.25, -0.24042287, -0.34, -0.25, -6.6548586e-05, 0, -0.25, 0.34, 0.2403563, -0.25, 0.2403563, 0.34, -0.25, 0, -0.24042287, -0.25, 0.2403563)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mocwv"]
+height = 0.25
+radius = 0.1171875
+
+[node name="StaminaTip" type="StaticBody3D" unique_id=1099483002]
+script = ExtResource("1_5spxi")
+stamina_mult = 1.7000000000000002
+center_tether = 0.1
+part_name = "Crystal"
+type = 1
+part_weight = 0.03
+metadata/_custom_type_script = "uid://ijpvs5owt5a5"
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="." unique_id=1815304049]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 1.7787633e-08, 0.2034668, 0)
+radius = 0.32666016
+height = 0.4069336
+sides = 12
+cone = true
+material = SubResource("ShaderMaterial_j5tkx")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="." unique_id=1068687313]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+inner_radius = 0.1
+outer_radius = 0.20334359
+ring_sides = 3
+material = SubResource("ShaderMaterial_j5tkx")
+
+[node name="CSGTorus3D2" type="CSGTorus3D" parent="." unique_id=1298015265]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3421221, 0)
+inner_radius = 0.26394737
+outer_radius = 0.3508452
+ring_sides = 3
+material = SubResource("ShaderMaterial_j5tkx")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=321645307]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1163996568]
+transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
+shape = SubResource("ConvexPolygonShape3D_lrnxs")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=585868476]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_mocwv")
+
+[node name="Placement" type="Marker3D" parent="." unique_id=1423636096]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4087067, 0)

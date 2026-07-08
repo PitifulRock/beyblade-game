@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://df7fnm6hxiyhv"]
+[gd_scene format=3 uid="uid://df7fnm6hxiyhv"]
 
 [ext_resource type="Theme" uid="uid://bps6vk6deaxqr" path="res://ui/theme.tres" id="1_g8hds"]
 [ext_resource type="Script" uid="uid://dkp727mi4bl73" path="res://ui/results/results_screen.gd" id="2_gr0du"]
@@ -55,7 +55,7 @@ font_size = 64
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
-[node name="ResultsScreen" type="TabContainer"]
+[node name="ResultsScreen" type="TabContainer" unique_id=868587380]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -69,20 +69,18 @@ clip_tabs = false
 tabs_visible = false
 script = ExtResource("2_gr0du")
 
-[node name="ResultsAnim" type="AnimationPlayer" parent="."]
+[node name="ResultsAnim" type="AnimationPlayer" parent="." unique_id=907664141]
 unique_name_in_owner = true
 root_node = NodePath("../RoundFinish/RoundFinish")
-libraries = {
-&"": SubResource("AnimationLibrary_rky4s")
-}
+libraries/ = SubResource("AnimationLibrary_rky4s")
 
-[node name="RoundFinish" type="Control" parent="."]
+[node name="RoundFinish" type="Control" parent="." unique_id=1162577754]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 0
 
-[node name="RoundFinish" type="Label" parent="RoundFinish"]
+[node name="RoundFinish" type="Label" parent="RoundFinish" unique_id=499679979]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -96,12 +94,12 @@ label_settings = SubResource("LabelSettings_gr0du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Scoring" type="Control" parent="."]
+[node name="Scoring" type="Control" parent="." unique_id=1053147415]
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 1
 
-[node name="ScoresContainer" type="HBoxContainer" parent="Scoring"]
+[node name="ScoresContainer" type="HBoxContainer" parent="Scoring" unique_id=664643571]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_right = 1.0
@@ -111,10 +109,10 @@ grow_vertical = 2
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" parent="Scoring/ScoresContainer" instance=ExtResource("3_68fd2")]
+[node name="Control" parent="Scoring/ScoresContainer" unique_id=886277717 instance=ExtResource("3_68fd2")]
 layout_mode = 2
 
-[node name="ScoringTitle" type="Label" parent="Scoring"]
+[node name="ScoringTitle" type="Label" parent="Scoring" unique_id=848023307]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -128,24 +126,24 @@ label_settings = SubResource("LabelSettings_g8hds")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Winner" type="Control" parent="."]
+[node name="Winner" type="Control" parent="." unique_id=1733662907]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 2
 
-[node name="WinnerContainer" type="HBoxContainer" parent="Winner"]
+[node name="WinnerContainer" type="HBoxContainer" parent="Winner" unique_id=16809033]
 unique_name_in_owner = true
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
 
-[node name="WinnerProfile" parent="Winner/WinnerContainer" instance=ExtResource("4_gr0du")]
+[node name="WinnerProfile" parent="Winner/WinnerContainer" unique_id=1250359547 instance=ExtResource("4_gr0du")]
 layout_mode = 2
 mouse_filter = 1
 
-[node name="WinnerTitle" type="Label" parent="Winner"]
+[node name="WinnerTitle" type="Label" parent="Winner" unique_id=1984562195]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 5
@@ -161,13 +159,13 @@ label_settings = SubResource("LabelSettings_g8hds")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MapReveal" type="Control" parent="."]
+[node name="MapReveal" type="Control" parent="." unique_id=907498771]
 visible = false
 layout_mode = 2
 mouse_filter = 1
 metadata/_tab_index = 3
 
-[node name="MapTitle" type="Label" parent="MapReveal"]
+[node name="MapTitle" type="Label" parent="MapReveal" unique_id=2083305386]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -182,7 +180,7 @@ label_settings = SubResource("LabelSettings_g8hds")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MapName" type="Label" parent="MapReveal"]
+[node name="MapName" type="Label" parent="MapReveal" unique_id=141773323]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -196,6 +194,6 @@ label_settings = SubResource("LabelSettings_gr0du")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1407290446]
 _spawnable_scenes = PackedStringArray("uid://ddqna4jy4mno4")
 spawn_path = NodePath("../Scoring/ScoresContainer")

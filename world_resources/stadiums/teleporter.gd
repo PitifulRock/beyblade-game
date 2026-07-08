@@ -15,7 +15,9 @@ func _on_body_entered(body : Node3D):
 		exit_index -= 1 if exit_index == self_index else 0
 		var exit_tele = get_parent().get_child(exit_index)
 		body.global_position = exit_tele.exit.global_position
-		body.linear_velocity = Vector3.ZERO
+		
+		var new_velocity = body.global_position.direction_to(exit.global_position) * body.linear_velocity.length()
+		body.linear_velocity = new_velocity
 		teleport_fx.rpc()
 
 @rpc("any_peer", "call_local")

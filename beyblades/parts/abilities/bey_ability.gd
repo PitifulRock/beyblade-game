@@ -5,9 +5,9 @@ signal ability_charged
 signal ability_used
 
 @export var ability_data : AbilityData
-@export var charge_multiplier := 1.0
-@export var charge_over_time := false
-@export var charge_time_speed := 1.0
+var charge_multiplier := 0.45
+var charge_over_time := true
+var charge_time_speed := 4.5
 
 var beyblade : BeyBlade
 var current_charge := 0.0:
@@ -30,6 +30,8 @@ func _input(_event: InputEvent) -> void:
 func _setup():
 	if beyblade:
 		set_multiplayer_authority(beyblade.name.to_int())
+		charge_time_speed = ability_data.time_charge_speed
+		charge_multiplier = ability_data.charge_multiplier
 		beyblade.ability_node = self
 
 func _physics_process(delta: float) -> void:

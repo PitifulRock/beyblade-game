@@ -1,0 +1,684 @@
+[gd_scene format=3 uid="uid://blt3jqf0qh5ki"]
+
+[ext_resource type="Texture2D" uid="uid://bdcscf66cirlx" path="res://textures/PROTO/Dark/texture_04.png" id="1_bdc77"]
+[ext_resource type="Material" uid="uid://bd17qqugnkbai" path="res://materials/white.tres" id="2_ifjmq"]
+[ext_resource type="ArrayMesh" uid="uid://bhc861ows4gwf" path="res://beyblades/parts/part_meshes/dm_star.tres" id="3_1elx5"]
+[ext_resource type="Texture2D" uid="uid://ixthtuy7vf8a" path="res://textures/rock.jpg" id="4_1elx5"]
+[ext_resource type="ArrayMesh" uid="uid://chy1yfnwoxc5m" path="res://beyblades/parts/part_meshes/dm_orbit.tres" id="5_25g8t"]
+[ext_resource type="Material" uid="uid://blgp51ggs4pcm" path="res://materials/prototype_red.tres" id="6_x11vd"]
+[ext_resource type="Material" uid="uid://ckrfmd6auaxk" path="res://materials/prototype_grey.tres" id="7_jrmoi"]
+[ext_resource type="ArrayMesh" uid="uid://cudh7ju27f0v6" path="res://beyblades/parts/part_meshes/dm_axe.tres" id="8_if6lu"]
+[ext_resource type="Texture2D" uid="uid://cbcpapjjbvqsx" path="res://textures/PROTO/Green/texture_10.png" id="9_jrmoi"]
+[ext_resource type="Material" uid="uid://d0svm1q5s7khq" path="res://materials/proto_box_white.tres" id="10_if6lu"]
+[ext_resource type="ArrayMesh" uid="uid://cy7c7aa3ejchj" path="res://beyblades/parts/part_meshes/dm_cyclone.tres" id="11_gmhn4"]
+[ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="12_gmhn4"]
+[ext_resource type="ArrayMesh" uid="uid://bpliykuefwv5y" path="res://beyblades/parts/part_meshes/dm_rounded.tres" id="13_aox20"]
+[ext_resource type="Material" uid="uid://cmrbuawgygeo0" path="res://world_resources/environment_models/Niwl-Plants/Material/Mat_tree-b-trunk.tres" id="14_aox20"]
+[ext_resource type="ArrayMesh" uid="uid://cgnfruidwqx55" path="res://beyblades/parts/part_meshes/dm_halo.tres" id="15_qypfo"]
+[ext_resource type="Texture2D" uid="uid://dwkq66nbk3oxj" path="res://textures/PROTO/Orange/texture_05.png" id="16_l00n4"]
+[ext_resource type="Material" uid="uid://1rpv2xab6vif" path="res://materials/prototype_orange.tres" id="17_t66bf"]
+[ext_resource type="ArrayMesh" uid="uid://cg40yb1rqoqg6" path="res://beyblades/parts/part_meshes/dm_flow.tres" id="18_axv10"]
+[ext_resource type="ArrayMesh" uid="uid://wjg0m6fq7612" path="res://beyblades/parts/part_meshes/dm_strike.tres" id="19_t66bf"]
+[ext_resource type="ArrayMesh" uid="uid://csgukjwy6rcwb" path="res://beyblades/parts/part_meshes/dm_sword.tres" id="20_axv10"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ya6vb"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("1_bdc77")
+roughness = 0.0
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f7e05"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_color = Color(0.36005497, 0.3837782, 0.69067895, 1)
+albedo_texture = ExtResource("4_1elx5")
+roughness = 0.0
+uv1_scale = Vector3(0.34, 0.34, 0.34)
+uv1_offset = Vector3(0.285, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i53dn"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.97769564, 0.9678225, 0, 1)
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.9159468, 0.87253296, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a143x"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_texture = ExtResource("9_jrmoi")
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m4lu7"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("16_l00n4")
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u11e5"]
+diffuse_mode = 3
+specular_mode = 2
+albedo_texture = ExtResource("16_l00n4")
+roughness = 0.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bknoy"]
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.85847867, 0.7641516, 0, 1)
+metallic = 0.18
+metallic_specular = 0.1
+roughness = 0.0
+emission_enabled = true
+emission = Color(0.6958968, 0.6305036, 7.70092e-07, 1)
+
+[node name="Modeling" type="Node3D" unique_id=1998496975]
+
+[node name="DISCS" type="Node" parent="." unique_id=38563352]
+
+[node name="Star" type="CSGCombiner3D" parent="DISCS" unique_id=247779203]
+visible = false
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Star" unique_id=1106543299]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.8150827e-08, 0.1398741, 0)
+use_collision = true
+height = 0.1484375
+sides = 16
+material = SubResource("StandardMaterial3D_ya6vb")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Star" unique_id=1716405132]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.12376082, 0)
+use_collision = true
+radius = 0.8
+height = 0.11621094
+material = ExtResource("2_ifjmq")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="DISCS/Star" unique_id=740895449]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.085, 0)
+size = Vector3(1.5, 0.17, 1.5)
+material = SubResource("StandardMaterial3D_ya6vb")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="DISCS/Star" unique_id=63031228]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0, 0.085, 0)
+size = Vector3(1.5, 0.17, 1.5)
+material = SubResource("StandardMaterial3D_ya6vb")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Star" unique_id=870201650]
+mesh = ExtResource("3_1elx5")
+skeleton = NodePath("../..")
+
+[node name="Orbit" type="CSGCombiner3D" parent="DISCS" unique_id=1718561220]
+visible = false
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Orbit" unique_id=1619825750]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.10587999, 0)
+use_collision = true
+radius = 0.9
+height = 0.21
+sides = 12
+material = SubResource("StandardMaterial3D_f7e05")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Orbit/CSGCylinder3D3" unique_id=2121485419]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.27, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+radius = 1.0
+radial_segments = 7
+material = SubResource("StandardMaterial3D_i53dn")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Orbit" unique_id=418995983]
+mesh = ExtResource("5_25g8t")
+skeleton = NodePath("../..")
+
+[node name="Axe" type="CSGCombiner3D" parent="DISCS" unique_id=1034402962]
+visible = false
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="DISCS/Axe" unique_id=1536421379]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.07534248, 0)
+radius = 1.0
+height = 0.19999999
+material = ExtResource("6_x11vd")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Axe/CSGCylinder3D" unique_id=560841669]
+transform = Transform3D(1, 0, 0, 0, 0.10800001, 0, 0, 0, 1, 0, 0.013197146, 0)
+operation = 1
+radius = 1.24
+radial_segments = 14
+rings = 3
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Axe" unique_id=1652892807]
+transform = Transform3D(1.1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15932149, 0)
+radius = 1.1
+height = 0.20908204
+sides = 12
+material = ExtResource("6_x11vd")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Axe/CSGCylinder3D2" unique_id=1578686739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4000001, 0, -5.9604645e-08)
+operation = 1
+radius = 0.90000004
+height = 0.20908204
+sides = 12
+material = ExtResource("6_x11vd")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Axe/CSGCylinder3D2/CSGCylinder3D3" unique_id=58234566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8000002, 0, 0)
+radius = 0.90000004
+height = 0.20908204
+sides = 12
+material = ExtResource("6_x11vd")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="DISCS/Axe/CSGCylinder3D2/CSGCylinder3D3" unique_id=327142928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4000002, 0, -0.90000004)
+operation = 2
+radius = 1.0
+height = 0.20908204
+sides = 12
+material = ExtResource("6_x11vd")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="DISCS/Axe/CSGCylinder3D2/CSGCylinder3D3" unique_id=855036783]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4000002, 0, 0.90000004)
+operation = 2
+radius = 1.0
+height = 0.20908204
+sides = 12
+material = ExtResource("6_x11vd")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="DISCS/Axe" unique_id=421463342]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.10574348, 0)
+inner_radius = 0.855
+outer_radius = 1.2
+ring_sides = 3
+material = ExtResource("2_ifjmq")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="DISCS/Axe/CSGTorus3D" unique_id=494507187]
+transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 1, 0.17999999, 0, 0)
+operation = 2
+radius = 1.005
+sides = 4
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Axe/CSGTorus3D" unique_id=683232433]
+transform = Transform3D(0.9, 0, 0, 0, 1, 0, 0, 0, 1, -0.17999999, 0, 0)
+operation = 2
+radius = 1.005
+sides = 4
+
+[node name="CSGBox3D" type="CSGCylinder3D" parent="DISCS/Axe" unique_id=373798346]
+transform = Transform3D(-0.70710677, 0, -0.7071066, 0, 1, 0, 0.7071066, 0, -0.70710677, 0, 0.19073239, 0)
+radius = 0.68
+height = 0.056
+sides = 4
+material = ExtResource("2_ifjmq")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="DISCS/Axe/CSGBox3D" unique_id=1802866837]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, -0.4242641, 0, -0.42426407)
+operation = 2
+radius = 0.43
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Axe/CSGBox3D" unique_id=763567305]
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, 0.42426413, 0, 0.42426404)
+operation = 2
+radius = 0.43
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Axe/CSGBox3D" unique_id=323056414]
+transform = Transform3D(-5.9604645e-08, 0, -0.9999999, 0, 1, 0, 0.9999999, 0, -5.9604645e-08, 0.4242641, 0, -0.42426407)
+operation = 2
+radius = 0.43
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Axe/CSGBox3D" unique_id=1901132359]
+transform = Transform3D(-5.9604645e-08, 0, -1, 0, 1, 0, 1, 0, -5.9604645e-08, -0.4242641, 0, 0.42426407)
+operation = 2
+radius = 0.43
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Axe" unique_id=790403268]
+mesh = ExtResource("8_if6lu")
+skeleton = NodePath("../..")
+
+[node name="Cyclone" type="CSGCombiner3D" parent="DISCS" unique_id=864169378]
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="DISCS/Cyclone" unique_id=1988010047]
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=1079180761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -0.90000004)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D3" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=907048688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.9)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D4" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=1468132656]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.9, 0.1, 9.537928e-09)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D5" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=945986299]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -0.9, 0.1, -6.914257e-08)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D6" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=406431128]
+transform = Transform3D(0.7000534, 0, -0.5273376, 0, 1, 0, 0.7000534, 0, 0.5273376, 0.51548076, 0.1, -0.51548076)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D7" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=1732158630]
+transform = Transform3D(0.7000534, 0, -0.5273376, 0, 1, 0, 0.7000534, 0, 0.5273376, -0.51548076, 0.1, 0.51548076)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D8" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=70764098]
+transform = Transform3D(-0.70005333, 0, -0.5273376, 0, 1, 0, 0.7000532, 0, -0.5273377, 0.51548076, 0.1, 0.51548076)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D9" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=571051398]
+transform = Transform3D(-0.70005333, 0, -0.5273376, 0, 1, 0, 0.7000532, 0, -0.5273377, -0.51548076, 0.1, -0.51548076)
+radius = 0.3
+radial_segments = 4
+rings = 2
+material = SubResource("StandardMaterial3D_a143x")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCombiner3D" unique_id=1696104615]
+transform = Transform3D(1, 0, 0, 0, 0.14399998, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 1
+radius = 1.3
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Cyclone" unique_id=1786046165]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.10587999, 0)
+use_collision = true
+radius = 1.093
+height = 0.21
+sides = 12
+material = ExtResource("10_if6lu")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Cyclone/CSGCylinder3D3" unique_id=1577907913]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.27, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+radius = 0.9
+material = ExtResource("7_jrmoi")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Cyclone" unique_id=1782987493]
+mesh = ExtResource("11_gmhn4")
+skeleton = NodePath("../..")
+
+[node name="Rounded" type="CSGCombiner3D" parent="DISCS" unique_id=836757917]
+visible = false
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Rounded" unique_id=1197039210]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.8150827e-08, 0.1398741, 0)
+use_collision = true
+height = 0.1484375
+sides = 16
+material = ExtResource("12_gmhn4")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Rounded" unique_id=526463723]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.12376082, 0)
+use_collision = true
+radius = 0.8
+height = 0.11621094
+material = ExtResource("2_ifjmq")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Rounded" unique_id=113751816]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.075, 0)
+use_collision = true
+radius = 0.97314453
+height = 0.15
+sides = 32
+material = ExtResource("12_gmhn4")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Rounded" unique_id=1516355651]
+mesh = ExtResource("13_aox20")
+skeleton = NodePath("../..")
+
+[node name="Halo" type="CSGCombiner3D" parent="DISCS" unique_id=880179590]
+visible = false
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="DISCS/Halo" unique_id=908069558]
+transform = Transform3D(1, 0, 0, 0, 1.5200001, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Halo/CSGCombiner3D" unique_id=800878615]
+transform = Transform3D(1, 1.7484555e-07, 0, -1.7484555e-07, 1, 0, 0, 0, 1, 3.8893106e-08, 0.19195944, 0)
+radius = 0.90000004
+height = 0.269
+sides = 6
+material = ExtResource("14_aox20")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Halo/CSGCombiner3D/CSGCylinder3D3" unique_id=2001639221]
+transform = Transform3D(1.0000001, 0, 0, 0, 0.5, 0, 0, 0, 1, -2.2663937e-08, 0.12962264, 0)
+operation = 2
+radius = 0.9693209
+radial_segments = 10
+material = ExtResource("14_aox20")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Halo" unique_id=1428462941]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.10587999, 0)
+use_collision = true
+radius = 0.851
+height = 0.21
+sides = 12
+material = ExtResource("14_aox20")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Halo/CSGCylinder3D3" unique_id=2108596742]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.27, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+radius = 0.83
+material = ExtResource("7_jrmoi")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Halo" unique_id=503364832]
+mesh = ExtResource("15_qypfo")
+skeleton = NodePath("../..")
+
+[node name="Flow" type="CSGCombiner3D" parent="DISCS" unique_id=956414725]
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Flow" unique_id=1075865704]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.075, 0)
+use_collision = true
+radius = 0.825
+height = 0.15
+smooth_faces = false
+material = SubResource("StandardMaterial3D_m4lu7")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1495869605]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.7, 0, 0, 0)
+use_collision = true
+radius = 0.992
+height = 0.15
+smooth_faces = false
+material = ExtResource("17_t66bf")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4/CSGCylinder3D6" unique_id=1525278385]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.075, 0)
+operation = 2
+use_collision = true
+radius = 0.826
+height = 0.509
+sides = 32
+smooth_faces = false
+material = ExtResource("17_t66bf")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1521705781]
+transform = Transform3D(-4.371138e-08, 8.742278e-08, 0.7, 8.742278e-08, 1, -6.119594e-08, -1, 8.742278e-08, -3.059797e-08, 0, 0, 0)
+use_collision = true
+radius = 0.992
+height = 0.15
+smooth_faces = false
+material = ExtResource("17_t66bf")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4/CSGCylinder3D7" unique_id=883112557]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, 0.075, 0)
+operation = 2
+use_collision = true
+radius = 0.826
+height = 0.509
+sides = 32
+smooth_faces = false
+material = ExtResource("17_t66bf")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1150187062]
+transform = Transform3D(0.8660254, 1.1712423e-08, -0.5, 1.1712423e-08, 1, 4.3711395e-08, 0.5, -4.3711378e-08, 0.8660254, -4.833907e-08, 0.013960049, -2.7617636e-16)
+operation = 2
+use_collision = true
+radius = 0.701
+height = 0.227
+sides = 3
+smooth_faces = false
+material = SubResource("StandardMaterial3D_u11e5")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1944109109]
+transform = Transform3D(0.8660255, 1.171243e-08, 0.5, 1.1712423e-08, 1, -4.3711374e-08, -0.5, 4.37114e-08, 0.8660255, -4.833907e-08, 0.013960049, -2.7617636e-16)
+operation = 2
+use_collision = true
+radius = 0.701
+height = 0.227
+sides = 3
+smooth_faces = false
+material = SubResource("StandardMaterial3D_u11e5")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1304975670]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.19999999, 0, 0, 0, 1, 0, 0, 0)
+operation = 1
+radius = 0.9
+material = ExtResource("2_ifjmq")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="DISCS/Flow/CSGCylinder3D4" unique_id=1402367753]
+transform = Transform3D(0.95105666, 0, 0.30901703, 0, 1, 0, -0.30901703, 0, 0.95105666, -5.0481415e-08, -0.010545507, 0)
+use_collision = true
+radius = 0.6
+height = 0.201
+sides = 12
+smooth_faces = false
+material = ExtResource("2_ifjmq")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Flow" unique_id=128182728]
+mesh = ExtResource("18_axv10")
+skeleton = NodePath("../..")
+
+[node name="Strike" type="CSGCombiner3D" parent="DISCS" unique_id=243837506]
+visible = false
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=572082977]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 4.9559496e-08, 0.14129709, 0)
+use_collision = true
+radius = 0.525
+height = 0.21
+material = ExtResource("10_if6lu")
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=1677313502]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, -0.44999996, 0.12817745, 0)
+use_collision = true
+radius = 0.34
+height = 0.21
+sides = 3
+material = ExtResource("10_if6lu")
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=1064185194]
+transform = Transform3D(1, -8.742278e-08, 8.742278e-08, -8.742278e-08, -1, 0, 8.742278e-08, -7.642742e-15, -1, 0.45, 0.128, 0)
+use_collision = true
+radius = 0.34
+height = 0.21
+sides = 3
+material = ExtResource("10_if6lu")
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=2068049164]
+transform = Transform3D(4.371139e-08, -3.821371e-15, -1, -8.742278e-08, -1, 0, -1, 8.742278e-08, -4.371139e-08, 3.4571286e-08, 0.12817745, -0.45)
+use_collision = true
+radius = 0.34
+height = 0.21
+sides = 3
+material = ExtResource("10_if6lu")
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=570056419]
+transform = Transform3D(-1.3113416e-07, 1.1464113e-14, 1, -8.742278e-08, -1, 0, 1, -8.742278e-08, 1.3113416e-07, -4.768964e-09, 0.128, 0.45)
+use_collision = true
+radius = 0.34
+height = 0.21
+sides = 3
+material = ExtResource("10_if6lu")
+
+[node name="CSGCombiner3D3" type="CSGCombiner3D" parent="DISCS/Strike" unique_id=1474038930]
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Strike/CSGCombiner3D3" unique_id=553412225]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.75, 0.020604953, 0)
+radius = 0.877
+height = 1.07
+sides = 4
+cone = true
+material = ExtResource("10_if6lu")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Strike/CSGCombiner3D3" unique_id=1661880479]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.7500001, 0.020604953, 0)
+radius = 0.877
+height = 1.07
+sides = 4
+cone = true
+material = ExtResource("10_if6lu")
+
+[node name="Box" type="CSGBox3D" parent="DISCS/Strike/CSGCombiner3D3" unique_id=711864170]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 1
+size = Vector3(3.165, 0.21, 1.285)
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCombiner3D4" type="CSGCombiner3D" parent="DISCS/Strike" unique_id=724874617]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0, 0)
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Strike/CSGCombiner3D4" unique_id=789056331]
+transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 0.75, 0.020604953, 0)
+radius = 0.877
+height = 1.07
+sides = 4
+cone = true
+material = ExtResource("12_gmhn4")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Strike/CSGCombiner3D4" unique_id=852944795]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -0.7500001, 0.020604953, 0)
+radius = 0.877
+height = 1.07
+sides = 4
+cone = true
+material = ExtResource("12_gmhn4")
+
+[node name="Box" type="CSGBox3D" parent="DISCS/Strike/CSGCombiner3D4" unique_id=788499257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+operation = 1
+size = Vector3(3.165, 0.21, 1.285)
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=91678094]
+transform = Transform3D(0.68301266, 0.25881904, -0.68301266, -0.35978937, 0.93301266, -0.0062360168, 0.6356455, 0.24999997, 0.7303798, -0.75, 0, -0.75)
+operation = 2
+radius = 0.326
+sides = 5
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=1658147508]
+transform = Transform3D(0.54097563, -0.25, -0.80302256, -0.08709679, 0.9330126, -0.3491438, 0.8365161, 0.258819, 0.48296294, 0.75, 0, -0.75)
+operation = 2
+radius = 0.326
+sides = 5
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D8" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=1839447957]
+transform = Transform3D(-0.63564545, -0.25, 0.7303799, -0.35978934, 0.93301266, 0.0062360573, -0.6830127, -0.25881904, -0.6830126, 0.75, 0, 0.75000006)
+operation = 2
+radius = 0.326
+sides = 5
+material = ExtResource("7_jrmoi")
+
+[node name="CSGCylinder3D9" type="CSGCylinder3D" parent="DISCS/Strike" unique_id=587278506]
+transform = Transform3D(-0.5409755, 0.25, 0.8030225, -0.08709683, 0.9330128, -0.34914386, -0.83651614, -0.258819, -0.48296282, -0.75, 0, 0.74999994)
+operation = 2
+radius = 0.326
+sides = 5
+material = ExtResource("7_jrmoi")
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Strike" unique_id=111512087]
+mesh = ExtResource("19_t66bf")
+skeleton = NodePath("../..")
+
+[node name="Sword" type="CSGCombiner3D" parent="DISCS" unique_id=1066070254]
+visible = false
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="DISCS/Sword" unique_id=1404105669]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 5.152651e-08, 0.118797086, 0)
+use_collision = true
+radius = 0.65
+height = 0.255
+sides = 12
+material = ExtResource("10_if6lu")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="DISCS/Sword/CSGCylinder3D3" unique_id=868601166]
+transform = Transform3D(0.49999997, 4.3711385e-08, 0.8660253, 4.3711392e-08, 1, -7.5710325e-08, -0.8660253, 7.571034e-08, 0.49999997, 2.1316282e-14, 5.2154064e-08, 0)
+size = Vector3(1.2, 0.2, 1.2)
+material = ExtResource("6_x11vd")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="DISCS/Sword/CSGCylinder3D3" unique_id=1406848382]
+transform = Transform3D(0.8660255, 1.1712437e-08, 0.5, 1.171243e-08, 1, -4.3711374e-08, -0.5, 4.371138e-08, 0.8660255, 2.1316282e-14, 5.2154064e-08, 0)
+size = Vector3(1.2, 0.2, 1.2)
+material = ExtResource("6_x11vd")
+
+[node name="CSGSphere3D2" type="CSGSphere3D" parent="DISCS/Sword/CSGCylinder3D3" unique_id=1175952858]
+transform = Transform3D(-1.1, -2.6381986e-08, 0, 1.6609539e-07, -0.17472002, 0, 0, 0, 1.1, 4.8798665e-08, -0.03120292, 0.0075000226)
+operation = 1
+radius = 0.81
+rings = 8
+material = ExtResource("7_jrmoi")
+
+[node name="CSGTorus3D" type="CSGTorus3D" parent="DISCS/Sword/CSGCylinder3D3" unique_id=1761015018]
+transform = Transform3D(1.32, 0, 0, 7.1054274e-15, 1.0878776, 0, 0, 0, 1.32, -4.6916426e-09, -0.05366621, 0)
+inner_radius = 0.409567
+outer_radius = 0.5682743
+material = ExtResource("7_jrmoi")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="DISCS/Sword" unique_id=1973387615]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0.15750003)
+size = Vector3(0.41, 0.22, 1.95)
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="DISCS/Sword/CSGBox3D" unique_id=790651633]
+transform = Transform3D(0.95710677, 0, 0.95710677, 0, 1, 0, -0.95710677, 0, 0.95710677, 0, 0, 0)
+operation = 1
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="DISCS/Sword/CSGBox3D" unique_id=1521831136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1551831, 0, -0.75)
+operation = 2
+size = Vector3(0.12, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="DISCS/Sword/CSGBox3D" unique_id=303569138]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15246671, 0, -0.75)
+operation = 2
+size = Vector3(0.12, 0.3, 0.3)
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="DISCS/Sword/CSGBox3D" unique_id=114057288]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17263046, 0, 0.25000003)
+operation = 2
+size = Vector3(0.075, 0.3, 1.51)
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="DISCS/Sword/CSGBox3D" unique_id=726934245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.17995745, 0, 0.25000003)
+operation = 2
+size = Vector3(0.075, 0.3, 1.51)
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="DISCS/Sword/CSGBox3D" unique_id=1016146248]
+transform = Transform3D(0.2526379, 0, 0, 0, 0.22884732, 0, 0, 0, 2.2, 0, 0, -1.2199203)
+operation = 1
+radius = 1.0
+material = SubResource("StandardMaterial3D_bknoy")
+
+[node name="CSGTorus3D" type="CSGSphere3D" parent="DISCS/Sword/CSGBox3D" unique_id=1244749323]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.16174203)
+operation = 2
+radius = 0.35
+
+[node name="CSGBakedMeshInstance3D" type="MeshInstance3D" parent="DISCS/Sword" unique_id=1806405786]
+mesh = ExtResource("20_axv10")
+skeleton = NodePath("../..")
+
+[node name="CORES" type="Node" parent="." unique_id=943796481]
+
+[node name="TIPS" type="Node" parent="." unique_id=1761261174]

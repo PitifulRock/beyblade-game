@@ -66,6 +66,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = ExtResource("1_u5isb")
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ocy00")
 current_tab = 0
@@ -286,6 +287,7 @@ ignore_time_scale = true
 [node name="PlacementScreen" type="Control" parent="." unique_id=609887081]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 metadata/_tab_index = 1
 
 [node name="PlaceTimerLabel" type="Label" parent="PlacementScreen" unique_id=23450246]

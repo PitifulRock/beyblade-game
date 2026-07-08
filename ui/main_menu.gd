@@ -4,10 +4,7 @@ extends Control
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	Master.avatar_cache.clear()
-	Master.local_player = null
-	Master.player_list.clear()
-	Master.steam_ids.clear()
+	Master.clear_game_cache()
 	
 	Effects.set_sync_music(false, false, menu_music)
 	Settings.gameplay_config = GameplayConfig.new()

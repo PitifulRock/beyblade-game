@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://yna1x1lfrnc2"]
+
+[ext_resource type="Script" uid="uid://fx305niyx3gv" path="res://beyblades/parts/disc_class.gd" id="1_mukhr"]
+[ext_resource type="Resource" uid="uid://dy0e1u8fojrt" path="res://beyblades/parts/abilities/a_flash_counter/flash_counter.tres" id="2_lvlv7"]
+[ext_resource type="ArrayMesh" uid="uid://cudh7ju27f0v6" path="res://beyblades/parts/part_meshes/dm_axe.tres" id="3_mukhr"]
+[ext_resource type="PackedScene" uid="uid://dn2mn15shhlkt" path="res://beyblades/parts/abilities/a_flash_counter/flash_counter.tscn" id="6_y1fjc"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_kdr21"]
+friction = 0.1
+bounce = 0.1
+absorbent = true
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_kdr21"]
+height = 0.27160645
+radius = 1.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_w2d5y"]
+height = 1.2
+radius = 0.2
+
+[node name="AxeDisc" type="StaticBody3D" unique_id=2004746265]
+script = ExtResource("1_mukhr")
+burst_resitance = 0.7999999999999999
+burst_damage = 1.6
+physics_material = SubResource("PhysicsMaterial_kdr21")
+ability_data = ExtResource("2_lvlv7")
+part_name = "Axe"
+type = 3
+part_weight = 0.03
+metadata/_custom_type_script = "uid://fx305niyx3gv"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=164514255]
+mesh = ExtResource("3_mukhr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1040762195]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11419678, 0)
+shape = SubResource("CylinderShape3D_kdr21")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=1727804596]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.0531182, 0.16926123, 0)
+shape = SubResource("CylinderShape3D_w2d5y")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="." unique_id=944838271]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.053, 0.169, 0)
+shape = SubResource("CylinderShape3D_w2d5y")
+
+[node name="FlashCounterAbility" parent="." unique_id=1107356651 instance=ExtResource("6_y1fjc")]

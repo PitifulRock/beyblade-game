@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://nbnibjqpfrnx"]
+
+[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_gyxm6"]
+
+[resource]
+script = ExtResource("1_gyxm6")
+ability_name = "Orbit Strike"
+ability_description = "Speed up the orbiting planet"
+charge_multiplier = 0.4
+time_charge_speed = 6.0
+metadata/_custom_type_script = "uid://cp3m11krq7y64"

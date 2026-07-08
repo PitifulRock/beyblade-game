@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="AbilityData" format=3 uid="uid://dy0e1u8fojrt"]
+
+[ext_resource type="Script" uid="uid://cp3m11krq7y64" path="res://beyblades/parts/abilities/ability_resource.gd" id="1_sl3s5"]
+
+[resource]
+script = ExtResource("1_sl3s5")
+ability_name = "Flash Counter"
+ability_description = "Change your spin direction mid battle"
+charge_multiplier = 0.4
+metadata/_custom_type_script = "uid://cp3m11krq7y64"

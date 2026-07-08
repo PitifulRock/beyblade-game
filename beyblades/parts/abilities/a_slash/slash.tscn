@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://bgisg7lmg3aye" path="res://beyblades/parts/abilities/a_slash/slash.tres" id="2_ig7di"]
 [ext_resource type="Texture2D" uid="uid://6i6xbo5hrnyi" path="res://textures/t_ui/White/1x/star.png" id="4_l22tl"]
 [ext_resource type="AudioStream" uid="uid://di6v0hk1ipdi1" path="res://sounds/clash_big.ogg" id="4_potcc"]
+[ext_resource type="AudioStream" uid="uid://dmp75g1w3xf7b" path="res://sounds/burst_sound.ogg" id="5_potcc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ig7di"]
 transparency = 1
@@ -119,9 +120,7 @@ _data = {
 [node name="Slash" type="Node3D" unique_id=1739611243]
 script = ExtResource("1_xqm7x")
 ability_data = ExtResource("2_ig7di")
-charge_multiplier = 0.5
-charge_over_time = true
-charge_time_speed = 2.0
+charge_time_speed = 6.0
 metadata/_custom_type_script = "uid://oljfchpj8bfx"
 
 [node name="SwordPivot" type="Node3D" parent="." unique_id=279998187]
@@ -175,5 +174,12 @@ update_scale = false
 unique_name_in_owner = true
 stream = ExtResource("4_potcc")
 bus = &"SFX"
+
+[node name="Sound" type="AudioStreamPlayer3D" parent="." unique_id=1263693959]
+unique_name_in_owner = true
+stream = ExtResource("5_potcc")
+pitch_scale = 2.0
+bus = &"SFX"
+parameters/looping = false
 
 [connection signal="body_entered" from="SwordPivot/Pivot2/SwordArea" to="." method="_on_damage_area_entered"]

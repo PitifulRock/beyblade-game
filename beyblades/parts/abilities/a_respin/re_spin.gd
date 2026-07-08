@@ -1,7 +1,7 @@
 extends BeyAbility
 
 @export var weight_mult = 0.75
-@export var spin_gain = 0.35
+@export var spin_gain = 0.4
 
 @rpc("any_peer", "call_local")
 func activate():

@@ -6,7 +6,5 @@
 [node name="CenterBreak" type="Node3D" unique_id=389359189]
 script = ExtResource("1_fxc8d")
 ability_data = ExtResource("2_fxc8d")
-charge_multiplier = 0.6
-charge_over_time = true
-charge_time_speed = 20.0
+charge_multiplier = 1.0
 metadata/_custom_type_script = "uid://oljfchpj8bfx"

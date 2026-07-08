@@ -54,10 +54,8 @@ func add_selection_menu(player_id : int):
 	picker.name = str(player_id)
 	picker.set_multiplayer_authority(player_id)
 	%SelectionContainer.call_deferred("add_child", picker)
-	await picker.ready 
-	
-	var index = %SelectionContainer.get_children().find(picker)
-	picker.bey_assembler.global_position = spawn_positions[index].global_position
+	if !picker.is_node_ready():
+		await picker.ready
 func remove_selection_menu(player_id : int):
 	%SelectionContainer.get_node(str(player_id)).queue_free()
 
@@ -81,7 +79,7 @@ func _on_ready_players_changed():
 		for i in ready_players:
 			%ReadyIcons.get_child(i).show()
 		
-		if ready_players > ready_threshold:
+		if ready_players >= ready_threshold:
 			if %ReadyTimer.is_stopped(): %ReadyTimer.start()
 		if ready_players == Master.player_list.size():
 			%ReadyTimer.stop()

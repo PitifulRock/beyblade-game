@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dlnn34fp632ub"]
+[gd_scene format=3 uid="uid://dlnn34fp632ub"]
 
 [ext_resource type="Script" uid="uid://ijpvs5owt5a5" path="res://beyblades/parts/tip_class.gd" id="1_vlmc4"]
 [ext_resource type="Material" uid="uid://cyt7iijjpb1wm" path="res://materials/prototype_purple.tres" id="2_71n16"]
@@ -49,22 +49,22 @@ _data = {
 &"new_animation": SubResource("Animation_71n16")
 }
 
-[node name="PounceTip" type="StaticBody3D"]
+[node name="PounceTip" type="StaticBody3D" unique_id=1691014744]
 script = ExtResource("1_vlmc4")
 stamina_mult = 0.4
 part_name = "Pounce"
 metadata/_custom_type_script = "uid://ijpvs5owt5a5"
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="." unique_id=1720100375]
 
-[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D"]
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=1391783018]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.3606936, 0)
 radius = 0.34
 height = 0.325
 sides = 10
 material = ExtResource("2_a8ysp")
 
-[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D"]
+[node name="CSGTorus3D" type="CSGTorus3D" parent="CSGCombiner3D" unique_id=1798754136]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.19311747, 0)
 inner_radius = 0.1257292
 outer_radius = 0.22055648
@@ -72,26 +72,24 @@ sides = 12
 ring_sides = 8
 material = ExtResource("3_71n16")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=347828087]
 transform = Transform3D(-1, -8.742278e-08, 0, 8.742278e-08, -1, 0, 0, 0, 1, 2.1855694e-08, 0.25, 0)
 shape = SubResource("ConvexPolygonShape3D_lrnxs")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="." unique_id=232184616 groups=["part visual"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
 shape = SubResource("CylinderShape3D_71n16")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape3D2"]
-libraries = {
-&"": SubResource("AnimationLibrary_qyuba")
-}
-autoplay = "new_animation"
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CollisionShape3D2" unique_id=1609416117]
+libraries/ = SubResource("AnimationLibrary_qyuba")
+autoplay = &"new_animation"
 
-[node name="CSGSphere3D" type="CSGCylinder3D" parent="CollisionShape3D2"]
+[node name="CSGSphere3D" type="CSGCylinder3D" parent="CollisionShape3D2" unique_id=852585667]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.077299275, 0)
 radius = 0.301
 height = 0.15
 sides = 5
 material = ExtResource("2_71n16")
 
-[node name="Placement" type="Marker3D" parent="."]
+[node name="Placement" type="Marker3D" parent="." unique_id=1610431815]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
